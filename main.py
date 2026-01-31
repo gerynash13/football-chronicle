@@ -9,17 +9,22 @@ class Team:
 
 barcelona = Team("FC Barcelona", 85, 83, 78)
 real_madrid = Team("Real Madrid CF", 83, 74, 80)
-girona = Team("Girona FC", 50, 46, 49)
+girona = Team("Girona FC", 72, 68, 70)
 
 def simulate_match(team1, team2):
     base_chances = 28
     midfield_bonus = (team1.midfield + team2.midfield) / 20
     total_chances = base_chances + midfield_bonus + random.randint(-5, 5)
 
+    # Generate random minutes and put them in order
+    chance_minutes = [random.randint(1, 90) for _ in range(int(total_chances))]
+    chance_minutes.sort()
+
+    events = []
     team1_goals = 0
     team2_goals = 0
 
-    for i in range(int(total_chances)):
+    for current_minute in chance_minutes:
         team1_midfield_power = team1.midfield ** 3
         team2_midfield_power = team2.midfield ** 3
         total_power = team1_midfield_power + team2_midfield_power
@@ -30,17 +35,31 @@ def simulate_match(team1, team2):
             scoring_chance = max(5, min(shot_quality / 4, 25))
             team_quality_bonus = team1.attack / 40
             scoring_chance = min(scoring_chance + team_quality_bonus, 28)
+
             if random.randint(1, 100) < scoring_chance:
                 team1_goals += 1
+                events.append({
+                    "minute": current_minute,
+                    "team": team1.name,
+                    "type": "goal"
+                })
 
         else:
             shot_quality = team2.attack - team1.defense
             scoring_chance = max(5, min(shot_quality /4, 25))
             team_quality_bonus = team2.attack / 40
             scoring_chance = min(scoring_chance + team_quality_bonus, 28)
+
             if random.randint(1, 100) < scoring_chance:
                 team2_goals += 1
+                events.append({
+                    "minute": current_minute,
+                    "team": team2.name,
+                    "type": "goal"
+                })
 
+    for event in events:
+        print(f"{event['minute']}' - GOAL! {event['team']} scores!")
     return team1_goals, team2_goals
 
 
