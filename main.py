@@ -41,7 +41,24 @@ def simulate_match(team1, team2):
                 events.append({
                     "minute": current_minute,
                     "team": team1.name,
-                    "type": "goal"
+                    "type": "goal",
+                    "player": None
+                })
+
+            else:
+                # Give accuracy depending on the team level
+                accuracy = 20 + (team1.attack / 5)
+
+                if random.randint(1, 100) < accuracy:
+                    event_type = "shot_on_target"
+                else:
+                    event_type = "shot_off_target"
+
+                events.append({
+                    "minute": current_minute,
+                    "team": team1.name,
+                    "type": event_type,
+                    "player": None
                 })
 
         else:
@@ -55,11 +72,40 @@ def simulate_match(team1, team2):
                 events.append({
                     "minute": current_minute,
                     "team": team2.name,
-                    "type": "goal"
+                    "type": "goal",
+                    "player": None
+                })
+
+            else:
+                # Give accuracy depending on the team level
+                accuracy = 20 + (team2.attack / 5)
+
+                if random.randint(1, 100) < accuracy:
+                    event_type = "shot_on_target"
+                else:
+                    event_type = "shot_off_target"
+
+                events.append({
+                    "minute": current_minute,
+                    "team": team2.name,
+                    "type": event_type,
+                    "player": None
                 })
 
     for event in events:
-        print(f"{event['minute']}' - GOAL! {event['team']} scores!")
+        if event['type'] == "goal":
+            print(f"{event['minute']}' - GOAL! {event['team']} scores!")
+
+    team1_shots_on = sum(1 for e in events if e['team'] == team1.name and e['type'] == "shot_on_target")
+    team1_shots_off = sum(1 for e in events if e['team'] == team1.name and e['type'] == "shot_off_target")
+
+    team2_shots_on = sum(1 for e in events if e['team'] == team2.name and e['type'] == "shot_on_target")
+    team2_shots_off = sum(1 for e in events if e['team'] == team2.name and e['type'] == "shot_off_target")
+
+    print(f"\n{team1.name} Stats:\nShots on target: {team1_shots_on}\nShots off target: {team1_shots_off}\n")        
+    print(f"{team2.name} Stats:\nShots on target: {team2_shots_on}\nShots off target: {team2_shots_off}\n")
+    
+    
     return team1_goals, team2_goals
 
 
