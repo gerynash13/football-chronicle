@@ -1,114 +1,130 @@
 import random
+import json
+from classes import Team, Player
+from simulation import simulate_match
 
-class Team:
-    def __init__(self, name, attack, midfield, defense):
-        self.name = name
-        self.attack = attack
-        self.midfield = midfield
-        self.defense = defense
+sulhavon = Team("Kluba Sulhavonos", 64, 58, 57)
+maritima_thesia = Team("Kluba Maritima Thesias", 62, 61, 64)
+mercaria = Team("Mercaria Kluba", 60, 64, 62)
+portavar = Team("Portavar Kluba", 60, 58, 59)
+esalum = Team("Kluba Sportika Esalumou", 56, 58, 57)
+mileius = Team("Kluba Sportika Mileiu", 58, 56, 59)
+galvonon = Team("Kluba Sportika Galvononos", 63, 65, 60)
+pk_galvonon = Team("Populara Kluba Galvononos", 61, 60, 61)
+gedium = Team("Kluba Sportika Gedimou", 58, 59, 61)
+soleium = Team("Kluba Sportika Soleiu", 57, 60, 58)
+metia = Team("Kluba Maritima Metia", 55, 55, 56)
+alentum = Team("Kluba Sportika Alentumou", 59, 61, 60)
 
-barcelona = Team("FC Barcelona", 85, 83, 78)
-real_madrid = Team("Real Madrid CF", 83, 74, 80)
-girona = Team("Girona FC", 72, 68, 70)
+south_thesia = Team("Kluba Notias Thesias", 48, 50, 49)
+burium = Team("Kluba Sportika Buriou", 43, 45, 44)
+sufelhar = Team("Kluba Sportika Sufelharos", 40, 41, 42)
+eleica = Team("Kluba Sportika Eleicas", 44, 43, 45)
+drosvon = Team("Kluba Potamia Drosvon", 40, 42, 41)
+ancivon = Team("Kluba Sportika Ancivonos", 39, 40, 38)
+nalhavon = Team("Brakika Kluba Nalhavonos", 41, 38, 39)
+malia = Team("Kluba Pyron Malias", 40, 41, 43)
+novius = Team("Kluba Sportika Noviou", 40, 42, 41)
+lunara = Team("Kluba Sportika Lunaras", 38, 39, 38)
+amana = Team("Kluba Emvaria Amanas", 38, 40, 39)
+ircenta = Team("Kluba Sportika Ircentas", 37, 38, 36)
+skriptavon = Team("Kluba tou Skriptavonos", 41, 44, 40)
+coraerum = Team("Kluba Sportika Coraerou", 40, 41, 40)
 
-def simulate_match(team1, team2):
-    base_chances = 28
-    midfield_bonus = (team1.midfield + team2.midfield) / 20
-    total_chances = base_chances + midfield_bonus + random.randint(-5, 5)
+veldhavon = Team("Kluba Veldhavonos", 39, 38, 40)
 
-    # Generate random minutes and put them in order
-    chance_minutes = [random.randint(1, 90) for _ in range(int(total_chances))]
-    chance_minutes.sort()
+teams = []
 
-    events = []
-    team1_goals = 0
-    team2_goals = 0
+standings = {}
+match_results = []
 
-    for current_minute in chance_minutes:
-        team1_midfield_power = team1.midfield ** 3
-        team2_midfield_power = team2.midfield ** 3
-        total_power = team1_midfield_power + team2_midfield_power
-        team1_chance = team1_midfield_power / total_power
+for team in teams:
+    standings[team.name] = {
+        "played": 0,
+        "wins": 0,
+        "draws": 0,
+        "losses": 0,
+        "goals_for": 0,
+        "goals_against": 0,
+        "goal_difference": 0,
+        "points": 0
+    }
 
-        if random.random() < team1_chance:
-            shot_quality = team1.attack - team2.defense
-            scoring_chance = max(5, min(shot_quality / 4, 25))
-            team_quality_bonus = team1.attack / 40
-            scoring_chance = min(scoring_chance + team_quality_bonus, 28)
+for home_team in teams:
+    for away_team in teams:
+        if home_team != away_team:
+            home_goals, away_goals = simulate_match(home_team, away_team)
 
-            if random.randint(1, 100) < scoring_chance:
-                team1_goals += 1
-                events.append({
-                    "minute": current_minute,
-                    "team": team1.name,
-                    "type": "goal",
-                    "player": None
-                })
+            match_results.append({
+                "home_team": home_team.name,
+                "away_team": away_team.name,
+                "home_goals": home_goals,
+                "away_goals": away_goals
+            })
 
+            # Update standings for both teams
+            standings[home_team.name]["played"] += 1
+            standings[away_team.name]["played"] += 1
+
+            standings[home_team.name]["goals_for"] += home_goals
+            standings[home_team.name]["goals_against"] += away_goals
+            standings[home_team.name]["goal_difference"] = standings[home_team.name]["goals_for"] - standings[home_team.name]["goals_against"]
+
+            standings[away_team.name]["goals_for"] += away_goals
+            standings[away_team.name]["goals_against"] += home_goals
+            standings[away_team.name]["goal_difference"] = standings[away_team.name]["goals_for"] - standings[away_team.name]["goals_against"]
+
+            # Determine points and W-D-L record
+            if home_goals > away_goals:
+                standings[home_team.name]["wins"] += 1
+                standings[home_team.name]["points"] += 3
+                standings[away_team.name]["losses"] += 1
+            elif away_goals > home_goals:
+                standings[away_team.name]["wins"] += 1
+                standings[away_team.name]["points"] += 3
+                standings[home_team.name]["losses"] += 1
             else:
-                # Give accuracy depending on the team level
-                accuracy = 20 + (team1.attack / 5)
+                standings[home_team.name]["draws"] += 1
+                standings[home_team.name]["points"] += 1
+                standings[away_team.name]["draws"] += 1
+                standings[away_team.name]["points"] += 1
 
-                if random.randint(1, 100) < accuracy:
-                    event_type = "shot_on_target"
-                else:
-                    event_type = "shot_off_target"
+            print(f"{home_team.name} {home_goals} - {away_goals} {away_team.name}")
+            print("="*50)
 
-                events.append({
-                    "minute": current_minute,
-                    "team": team1.name,
-                    "type": event_type,
-                    "player": None
-                })
+sorted_standings = sorted(standings.items(), key=lambda x: x[1]["points"], reverse=True)
 
-        else:
-            shot_quality = team2.attack - team1.defense
-            scoring_chance = max(5, min(shot_quality /4, 25))
-            team_quality_bonus = team2.attack / 40
-            scoring_chance = min(scoring_chance + team_quality_bonus, 28)
+print("\n" + "="*80)
+print("LEAGUE TABLE")
+print("="*80)
+print(f"{'Pos':<5} {'Team':<30} {'GP':<5} {'W':<5} {'D':<5} {'L':<5} {'GF':<5} {'GA':<5} {'GD':<5} {'Pts':<5}")
+print("-"*80)
 
-            if random.randint(1, 100) < scoring_chance:
-                team2_goals += 1
-                events.append({
-                    "minute": current_minute,
-                    "team": team2.name,
-                    "type": "goal",
-                    "player": None
-                })
+position = 1
+for team_name, stats in sorted_standings:
+    print(f"{position:<5} {team_name:<30} {stats['played']:<5} {stats['wins']:<5} {stats['draws']:<5} {stats['losses']:<5} {stats['goals_for']:<5} {stats['goals_against']:<5} {stats['goal_difference']:<5} {stats['points']:<5}")
+    position += 1
 
-            else:
-                # Give accuracy depending on the team level
-                accuracy = 20 + (team2.attack / 5)
+print("="*80)
 
-                if random.randint(1, 100) < accuracy:
-                    event_type = "shot_on_target"
-                else:
-                    event_type = "shot_off_target"
-
-                events.append({
-                    "minute": current_minute,
-                    "team": team2.name,
-                    "type": event_type,
-                    "player": None
-                })
-
-    for event in events:
-        if event['type'] == "goal":
-            print(f"{event['minute']}' - GOAL! {event['team']} scores!")
-
-    team1_shots_on = sum(1 for e in events if e['team'] == team1.name and e['type'] == "shot_on_target")
-    team1_shots_off = sum(1 for e in events if e['team'] == team1.name and e['type'] == "shot_off_target")
-
-    team2_shots_on = sum(1 for e in events if e['team'] == team2.name and e['type'] == "shot_on_target")
-    team2_shots_off = sum(1 for e in events if e['team'] == team2.name and e['type'] == "shot_off_target")
-
-    print(f"\n{team1.name} Stats:\nShots on target: {team1_shots_on}\nShots off target: {team1_shots_off}\n")        
-    print(f"{team2.name} Stats:\nShots on target: {team2_shots_on}\nShots off target: {team2_shots_off}\n")
+# Save standings
+with open("league_table.txt", "w", encoding="utf-8") as f:
+    f.write("="*80 + "\n")
+    f.write("LEAGUE TABLE\n")
+    f.write("="*80 + "\n")
+    f.write(f"{'Pos':<5} {'Team':<30} {'P':<5} {'W':<5} {'D':<5} {'L':<5} {'GF':<5} {'GA':<5} {'GD':<5} {'Pts':<5}\n")
+    f.write("-"*80 + "\n")
     
+    position = 1
+    for team_name, stats in sorted_standings:
+        f.write(f"{position:<5} {team_name:<30} {stats['played']:<5} {stats['wins']:<5} {stats['draws']:<5} {stats['losses']:<5} {stats['goals_for']:<5} {stats['goals_against']:<5} {stats['goal_difference']:<5} {stats['points']:<5}\n")
+        position += 1
     
-    return team1_goals, team2_goals
+    f.write("="*80 + "\n")
 
+print("League table saved to league_table.txt")
 
-barcelona_goals, girona_goals = simulate_match(barcelona, girona)
+with open("match_results.json", "w", encoding="utf-8") as f:
+    json.dump(match_results, f, indent=2, ensure_ascii=False)
 
-print(f"{barcelona.name} {barcelona_goals} - {girona_goals} {girona.name}")
+print("Match results saved to match_results.json")
