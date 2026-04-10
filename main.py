@@ -2,6 +2,7 @@ import random
 import json
 from classes import Team, Player
 from simulation import simulate_match
+from name_generator import generate_myrian_name, generate_squad
 
 sulhavon = Team("Kluba Sulhavonos", 64, 58, 57)
 maritima_thesia = Team("Kluba Maritima Thesias", 62, 61, 64)
@@ -128,3 +129,5 @@ with open("match_results.json", "w", encoding="utf-8") as f:
     json.dump(match_results, f, indent=2, ensure_ascii=False)
 
 print("Match results saved to match_results.json")
+
+sulhavon.squad = generate_squad(sulhavon.name, average_ca=61)
