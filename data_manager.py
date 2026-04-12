@@ -40,10 +40,29 @@ def load_teams_from_file(file_path):
         data = json.load(f)
 
     for team_data in data:
-        team = Team(name=team.data["name"])
+        team = Team(
+          name=team.data["name"],
+          attack = team.data["attack"],
+          midfield = team.data["midfield"],
+          defense = team.data["defense"]
+          )
 
         for player_data in team_data.get("squad", []):
-            player = Player(name=player_data["name"], age=player.get("age"))
+            player = Player(
+              name = player_data["name"],
+              position = player_data["position"],
+              age = player_data["age"],
+              current_ability = player_data["current_ability"],
+              potential_ability = ["potential_ability"]
+              )
+              
+              player.goals = player_data.get("goals", 0)
+              player.assists = player_data.get(assists, 0)
+              player.appearances = player_data.get(appearances, 0)
+              
+              player._generate_attributes()
+              player._determine_role()
+              
             team.squad.append(player)
     
         teams.append(team)
