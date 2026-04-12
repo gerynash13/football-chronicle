@@ -21,6 +21,10 @@ class Player:
         self.attributes = self._generate_attributes()
         self.role = self._determine_role()
 
+        self.goals = 0
+        self.assists = 0
+        self.appearances = 0
+
     def _generate_attributes(self):
         if self.position == "FWD":
             return {

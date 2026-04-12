@@ -1,3 +1,4 @@
+from classes import Player
 import random
 
 MYRIAN_NAMES = [
@@ -58,7 +59,7 @@ MYRIAN_SURNAMES = [
 ]
 
 def generate_myrian_name():
-  return(f"{random.choice(MYRIAN_NAMES} {random.choice(MYRIAN_SURNAMES)})")
+  return(f"{random.choice(MYRIAN_NAMES)} {random.choice(MYRIAN_SURNAMES)}")
   
 def generate_squad(team_name, average_ca=70):
   squad = []

@@ -3,24 +3,16 @@ LEAGUE TABLE
 ================================================================================
 Pos   Team                           P     W     D     L     GF    GA    GD    Pts  
 --------------------------------------------------------------------------------
-1     FC Barcelona                   38    28    5     5     94    21    73    89   
-2     Real Madrid CF                 38    27    8     3     85    20    65    89   
-3     Atlético de Madrid             38    24    10    4     65    32    33    82   
-4     Villarreal CF                  38    18    9     11    49    35    14    63   
-5     Celta de Vigo                  38    17    11    10    52    39    13    62   
-6     Real Betis CF                  38    18    7     13    42    34    8     61   
-7     Real Sociedad                  38    17    10    11    53    38    15    61   
-8     Girona FC                      38    15    14    9     46    39    7     59   
-9     Osasuna CF                     38    13    17    8     45    40    5     56   
-10    Athletic Club de Bilbao        38    15    8     15    41    40    1     53   
-11    RCD Espanyol                   38    14    9     15    40    48    -8    51   
-12    Sevilla CF                     38    14    9     15    40    42    -2    51   
-13    Valencia CF                    38    12    9     17    42    56    -14   45   
-14    Getafe CF                      38    11    9     18    36    57    -21   42   
-15    Rayo Vallecano                 38    10    8     20    36    52    -16   38   
-16    Alavés CF                      38    8     14    16    33    50    -17   38   
-17    Elche CF                       38    6     9     23    24    64    -40   27   
-18    Levante CF                     38    5     12    21    29    59    -30   27   
-19    RCD Mallorca                   38    3     13    22    24    64    -40   22   
-20    Real Oviedo CF                 38    3     13    22    32    78    -46   22   
+1     Kluba Sportika Soleiu          22    13    3     6     29    18    11    42   
+2     Mercaria Kluba                 22    10    5     7     20    18    2     35   
+3     Kluba Sportika Alentumou       22    9     8     5     21    16    5     35   
+4     Kluba Maritima Thesias         22    9     6     7     27    19    8     33   
+5     Portavar Kluba                 22    9     4     9     25    25    0     31   
+6     Kluba Sportika Mileiu          22    9     3     10    26    27    -1    30   
+7     Kluba Sportika Esalumou        22    7     7     8     26    29    -3    28   
+8     Kluba Sportika Galvononos      22    7     7     8     21    22    -1    28   
+9     Kluba Sulhavonos               22    6     8     8     14    23    -9    26   
+10    Populara Kluba Galvononos      22    6     7     9     28    34    -6    25   
+11    Kluba Maritima Metia           22    6     7     9     22    27    -5    25   
+12    Kluba Sportika Gedimou         22    4     9     9     24    25    -1    21   
 ================================================================================

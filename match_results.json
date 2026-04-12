@@ -1,2282 +1,794 @@
 [
   {
-    "home_team": "FC Barcelona",
-    "away_team": "Real Madrid CF",
+    "home_team": "Kluba Sulhavonos",
+    "away_team": "Kluba Maritima Thesias",
     "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Sulhavonos",
+    "away_team": "Mercaria Kluba",
+    "home_goals": 0,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Sulhavonos",
+    "away_team": "Portavar Kluba",
+    "home_goals": 0,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Sulhavonos",
+    "away_team": "Kluba Sportika Esalumou",
+    "home_goals": 2,
     "away_goals": 1
   },
   {
-    "home_team": "FC Barcelona",
-    "away_team": "Atlético de Madrid",
+    "home_team": "Kluba Sulhavonos",
+    "away_team": "Kluba Sportika Mileiu",
     "home_goals": 0,
     "away_goals": 2
   },
   {
-    "home_team": "FC Barcelona",
-    "away_team": "Villarreal CF",
-    "home_goals": 3,
-    "away_goals": 1
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "Real Betis CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "Celta de Vigo",
-    "home_goals": 3,
-    "away_goals": 0
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "Real Sociedad",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "RCD Espanyol",
+    "home_team": "Kluba Sulhavonos",
+    "away_team": "Kluba Sportika Galvononos",
     "home_goals": 1,
     "away_goals": 0
   },
   {
-    "home_team": "FC Barcelona",
-    "away_team": "Girona FC",
+    "home_team": "Kluba Sulhavonos",
+    "away_team": "Populara Kluba Galvononos",
     "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sulhavonos",
+    "away_team": "Kluba Sportika Gedimou",
+    "home_goals": 0,
     "away_goals": 4
   },
   {
-    "home_team": "FC Barcelona",
-    "away_team": "Sevilla CF",
+    "home_team": "Kluba Sulhavonos",
+    "away_team": "Kluba Sportika Soleiu",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sulhavonos",
+    "away_team": "Kluba Maritima Metia",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sulhavonos",
+    "away_team": "Kluba Sportika Alentumou",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Maritima Thesias",
+    "away_team": "Kluba Sulhavonos",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Maritima Thesias",
+    "away_team": "Mercaria Kluba",
+    "home_goals": 0,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Maritima Thesias",
+    "away_team": "Portavar Kluba",
     "home_goals": 3,
     "away_goals": 0
   },
   {
-    "home_team": "FC Barcelona",
-    "away_team": "Osasuna CF",
-    "home_goals": 6,
+    "home_team": "Kluba Maritima Thesias",
+    "away_team": "Kluba Sportika Esalumou",
+    "home_goals": 3,
     "away_goals": 0
   },
   {
-    "home_team": "FC Barcelona",
-    "away_team": "Getafe CF",
+    "home_team": "Kluba Maritima Thesias",
+    "away_team": "Kluba Sportika Mileiu",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Maritima Thesias",
+    "away_team": "Kluba Sportika Galvononos",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Maritima Thesias",
+    "away_team": "Populara Kluba Galvononos",
+    "home_goals": 2,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Kluba Maritima Thesias",
+    "away_team": "Kluba Sportika Gedimou",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Maritima Thesias",
+    "away_team": "Kluba Sportika Soleiu",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Maritima Thesias",
+    "away_team": "Kluba Maritima Metia",
+    "home_goals": 2,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Maritima Thesias",
+    "away_team": "Kluba Sportika Alentumou",
+    "home_goals": 1,
+    "away_goals": 3
+  },
+  {
+    "home_team": "Mercaria Kluba",
+    "away_team": "Kluba Sulhavonos",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Mercaria Kluba",
+    "away_team": "Kluba Maritima Thesias",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Mercaria Kluba",
+    "away_team": "Portavar Kluba",
+    "home_goals": 1,
+    "away_goals": 3
+  },
+  {
+    "home_team": "Mercaria Kluba",
+    "away_team": "Kluba Sportika Esalumou",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Mercaria Kluba",
+    "away_team": "Kluba Sportika Mileiu",
+    "home_goals": 0,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Mercaria Kluba",
+    "away_team": "Kluba Sportika Galvononos",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Mercaria Kluba",
+    "away_team": "Populara Kluba Galvononos",
+    "home_goals": 2,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Mercaria Kluba",
+    "away_team": "Kluba Sportika Gedimou",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Mercaria Kluba",
+    "away_team": "Kluba Sportika Soleiu",
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Mercaria Kluba",
+    "away_team": "Kluba Maritima Metia",
+    "home_goals": 0,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Mercaria Kluba",
+    "away_team": "Kluba Sportika Alentumou",
+    "home_goals": 0,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Portavar Kluba",
+    "away_team": "Kluba Sulhavonos",
+    "home_goals": 2,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Portavar Kluba",
+    "away_team": "Kluba Maritima Thesias",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Portavar Kluba",
+    "away_team": "Mercaria Kluba",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Portavar Kluba",
+    "away_team": "Kluba Sportika Esalumou",
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Portavar Kluba",
+    "away_team": "Kluba Sportika Mileiu",
+    "home_goals": 2,
+    "away_goals": 4
+  },
+  {
+    "home_team": "Portavar Kluba",
+    "away_team": "Kluba Sportika Galvononos",
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Portavar Kluba",
+    "away_team": "Populara Kluba Galvononos",
+    "home_goals": 2,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Portavar Kluba",
+    "away_team": "Kluba Sportika Gedimou",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Portavar Kluba",
+    "away_team": "Kluba Sportika Soleiu",
+    "home_goals": 0,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Portavar Kluba",
+    "away_team": "Kluba Maritima Metia",
+    "home_goals": 3,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Portavar Kluba",
+    "away_team": "Kluba Sportika Alentumou",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Sportika Esalumou",
+    "away_team": "Kluba Sulhavonos",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Esalumou",
+    "away_team": "Kluba Maritima Thesias",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Sportika Esalumou",
+    "away_team": "Mercaria Kluba",
+    "home_goals": 2,
+    "away_goals": 4
+  },
+  {
+    "home_team": "Kluba Sportika Esalumou",
+    "away_team": "Portavar Kluba",
+    "home_goals": 0,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Kluba Sportika Esalumou",
+    "away_team": "Kluba Sportika Mileiu",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Sportika Esalumou",
+    "away_team": "Kluba Sportika Galvononos",
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Esalumou",
+    "away_team": "Populara Kluba Galvononos",
     "home_goals": 5,
-    "away_goals": 1
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 3,
-    "away_goals": 2
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "Valencia CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "Alavés CF",
-    "home_goals": 4,
-    "away_goals": 0
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "Elche CF",
-    "home_goals": 6,
-    "away_goals": 0
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "RCD Mallorca",
-    "home_goals": 4,
-    "away_goals": 0
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "Levante CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "FC Barcelona",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 4,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "FC Barcelona",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Villarreal CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Real Betis CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Celta de Vigo",
-    "home_goals": 4,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Real Sociedad",
-    "home_goals": 3,
-    "away_goals": 5
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "RCD Espanyol",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Girona FC",
-    "home_goals": 3,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Sevilla CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Osasuna CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Getafe CF",
-    "home_goals": 4,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 3,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Valencia CF",
-    "home_goals": 4,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Alavés CF",
-    "home_goals": 3,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Elche CF",
-    "home_goals": 3,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "RCD Mallorca",
-    "home_goals": 3,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Levante CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Madrid CF",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 6,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "FC Barcelona",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Real Madrid CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Villarreal CF",
-    "home_goals": 5,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Real Betis CF",
-    "home_goals": 3,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Celta de Vigo",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Real Sociedad",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 4,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "RCD Espanyol",
-    "home_goals": 0,
     "away_goals": 3
   },
   {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Girona FC",
+    "home_team": "Kluba Sportika Esalumou",
+    "away_team": "Kluba Sportika Gedimou",
     "home_goals": 1,
     "away_goals": 0
   },
   {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Sevilla CF",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Osasuna CF",
-    "home_goals": 1,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Getafe CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Valencia CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Alavés CF",
-    "home_goals": 3,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Elche CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "RCD Mallorca",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Levante CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Atlético de Madrid",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "FC Barcelona",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "Real Madrid CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "Atlético de Madrid",
+    "home_team": "Kluba Sportika Esalumou",
+    "away_team": "Kluba Sportika Soleiu",
     "home_goals": 1,
     "away_goals": 2
   },
   {
-    "home_team": "Villarreal CF",
-    "away_team": "Real Betis CF",
+    "home_team": "Kluba Sportika Esalumou",
+    "away_team": "Kluba Maritima Metia",
     "home_goals": 1,
     "away_goals": 1
   },
   {
-    "home_team": "Villarreal CF",
-    "away_team": "Celta de Vigo",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "Real Sociedad",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "Athletic Club de Bilbao",
+    "home_team": "Kluba Sportika Esalumou",
+    "away_team": "Kluba Sportika Alentumou",
     "home_goals": 0,
     "away_goals": 1
   },
   {
-    "home_team": "Villarreal CF",
-    "away_team": "RCD Espanyol",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "Girona FC",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "Sevilla CF",
-    "home_goals": 3,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "Osasuna CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "Getafe CF",
+    "home_team": "Kluba Sportika Mileiu",
+    "away_team": "Kluba Sulhavonos",
     "home_goals": 2,
     "away_goals": 1
   },
   {
-    "home_team": "Villarreal CF",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 3,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "Valencia CF",
-    "home_goals": 1,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "Alavés CF",
-    "home_goals": 1,
+    "home_team": "Kluba Sportika Mileiu",
+    "away_team": "Kluba Maritima Thesias",
+    "home_goals": 2,
     "away_goals": 1
   },
   {
-    "home_team": "Villarreal CF",
-    "away_team": "Elche CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "RCD Mallorca",
+    "home_team": "Kluba Sportika Mileiu",
+    "away_team": "Mercaria Kluba",
     "home_goals": 0,
     "away_goals": 0
   },
   {
-    "home_team": "Villarreal CF",
-    "away_team": "Levante CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Villarreal CF",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 4,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "FC Barcelona",
+    "home_team": "Kluba Sportika Mileiu",
+    "away_team": "Portavar Kluba",
     "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Real Madrid CF",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Villarreal CF",
-    "home_goals": 1,
     "away_goals": 0
   },
   {
-    "home_team": "Real Betis CF",
-    "away_team": "Celta de Vigo",
+    "home_team": "Kluba Sportika Mileiu",
+    "away_team": "Kluba Sportika Esalumou",
     "home_goals": 1,
     "away_goals": 1
   },
   {
-    "home_team": "Real Betis CF",
-    "away_team": "Real Sociedad",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Athletic Club de Bilbao",
+    "home_team": "Kluba Sportika Mileiu",
+    "away_team": "Kluba Sportika Galvononos",
     "home_goals": 0,
     "away_goals": 1
   },
   {
-    "home_team": "Real Betis CF",
-    "away_team": "RCD Espanyol",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Girona FC",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Sevilla CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Osasuna CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Getafe CF",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Valencia CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Alavés CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Elche CF",
-    "home_goals": 5,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "RCD Mallorca",
-    "home_goals": 3,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Levante CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Betis CF",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "FC Barcelona",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Real Madrid CF",
+    "home_team": "Kluba Sportika Mileiu",
+    "away_team": "Populara Kluba Galvononos",
     "home_goals": 0,
     "away_goals": 1
   },
   {
-    "home_team": "Celta de Vigo",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Villarreal CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Real Betis CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Real Sociedad",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "RCD Espanyol",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Girona FC",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Sevilla CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Osasuna CF",
-    "home_goals": 3,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Getafe CF",
-    "home_goals": 3,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Valencia CF",
-    "home_goals": 3,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Alavés CF",
-    "home_goals": 3,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Elche CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "RCD Mallorca",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Levante CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Celta de Vigo",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "FC Barcelona",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Real Madrid CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Villarreal CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Real Betis CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Celta de Vigo",
-    "home_goals": 2,
-    "away_goals": 4
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "RCD Espanyol",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Girona FC",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Sevilla CF",
-    "home_goals": 5,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Osasuna CF",
-    "home_goals": 1,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Getafe CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Valencia CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Alavés CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Elche CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "RCD Mallorca",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Levante CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Sociedad",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "FC Barcelona",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Real Madrid CF",
+    "home_team": "Kluba Sportika Mileiu",
+    "away_team": "Kluba Sportika Gedimou",
     "home_goals": 1,
     "away_goals": 4
   },
   {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Villarreal CF",
+    "home_team": "Kluba Sportika Mileiu",
+    "away_team": "Kluba Sportika Soleiu",
     "home_goals": 1,
     "away_goals": 2
   },
   {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Real Betis CF",
+    "home_team": "Kluba Sportika Mileiu",
+    "away_team": "Kluba Maritima Metia",
+    "home_goals": 1,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Kluba Sportika Mileiu",
+    "away_team": "Kluba Sportika Alentumou",
+    "home_goals": 0,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Kluba Sportika Galvononos",
+    "away_team": "Kluba Sulhavonos",
     "home_goals": 0,
     "away_goals": 1
   },
   {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Celta de Vigo",
+    "home_team": "Kluba Sportika Galvononos",
+    "away_team": "Kluba Maritima Thesias",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Galvononos",
+    "away_team": "Mercaria Kluba",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Sportika Galvononos",
+    "away_team": "Portavar Kluba",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Sportika Galvononos",
+    "away_team": "Kluba Sportika Esalumou",
+    "home_goals": 0,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Kluba Sportika Galvononos",
+    "away_team": "Kluba Sportika Mileiu",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Sportika Galvononos",
+    "away_team": "Populara Kluba Galvononos",
     "home_goals": 2,
     "away_goals": 2
   },
   {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Real Sociedad",
+    "home_team": "Kluba Sportika Galvononos",
+    "away_team": "Kluba Sportika Gedimou",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Galvononos",
+    "away_team": "Kluba Sportika Soleiu",
+    "home_goals": 3,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Galvononos",
+    "away_team": "Kluba Maritima Metia",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Galvononos",
+    "away_team": "Kluba Sportika Alentumou",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Populara Kluba Galvononos",
+    "away_team": "Kluba Sulhavonos",
+    "home_goals": 0,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Populara Kluba Galvononos",
+    "away_team": "Kluba Maritima Thesias",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Populara Kluba Galvononos",
+    "away_team": "Mercaria Kluba",
+    "home_goals": 1,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Populara Kluba Galvononos",
+    "away_team": "Portavar Kluba",
     "home_goals": 2,
     "away_goals": 1
   },
   {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "RCD Espanyol",
-    "home_goals": 0,
+    "home_team": "Populara Kluba Galvononos",
+    "away_team": "Kluba Sportika Esalumou",
+    "home_goals": 2,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Populara Kluba Galvononos",
+    "away_team": "Kluba Sportika Mileiu",
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Populara Kluba Galvononos",
+    "away_team": "Kluba Sportika Galvononos",
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Populara Kluba Galvononos",
+    "away_team": "Kluba Sportika Gedimou",
+    "home_goals": 1,
     "away_goals": 3
   },
   {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Girona FC",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Sevilla CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Osasuna CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Getafe CF",
+    "home_team": "Populara Kluba Galvononos",
+    "away_team": "Kluba Sportika Soleiu",
     "home_goals": 0,
     "away_goals": 1
   },
   {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Valencia CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Alavés CF",
+    "home_team": "Populara Kluba Galvononos",
+    "away_team": "Kluba Maritima Metia",
     "home_goals": 1,
     "away_goals": 1
   },
   {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Elche CF",
+    "home_team": "Populara Kluba Galvononos",
+    "away_team": "Kluba Sportika Alentumou",
     "home_goals": 0,
     "away_goals": 1
   },
   {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "RCD Mallorca",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Levante CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Athletic Club de Bilbao",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "FC Barcelona",
-    "home_goals": 0,
-    "away_goals": 6
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Real Madrid CF",
-    "home_goals": 0,
-    "away_goals": 4
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Villarreal CF",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Real Betis CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Celta de Vigo",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Real Sociedad",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Girona FC",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Sevilla CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Osasuna CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Getafe CF",
-    "home_goals": 0,
-    "away_goals": 4
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Rayo Vallecano",
+    "home_team": "Kluba Sportika Gedimou",
+    "away_team": "Kluba Sulhavonos",
     "home_goals": 0,
     "away_goals": 0
   },
   {
-    "home_team": "RCD Espanyol",
-    "away_team": "Valencia CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Alavés CF",
+    "home_team": "Kluba Sportika Gedimou",
+    "away_team": "Kluba Maritima Thesias",
     "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Elche CF",
-    "home_goals": 3,
-    "away_goals": 2
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "RCD Mallorca",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Levante CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "RCD Espanyol",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "FC Barcelona",
-    "home_goals": 1,
-    "away_goals": 4
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Real Madrid CF",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Villarreal CF",
-    "home_goals": 0,
     "away_goals": 3
   },
   {
-    "home_team": "Girona FC",
-    "away_team": "Real Betis CF",
-    "home_goals": 3,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Celta de Vigo",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Real Sociedad",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "RCD Espanyol",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Sevilla CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Osasuna CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Getafe CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Valencia CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Alavés CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "Elche CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Girona FC",
-    "away_team": "RCD Mallorca",
+    "home_team": "Kluba Sportika Gedimou",
+    "away_team": "Mercaria Kluba",
     "home_goals": 3,
     "away_goals": 2
   },
   {
-    "home_team": "Girona FC",
-    "away_team": "Levante CF",
-    "home_goals": 1,
-    "away_goals": 0
+    "home_team": "Kluba Sportika Gedimou",
+    "away_team": "Portavar Kluba",
+    "home_goals": 2,
+    "away_goals": 2
   },
   {
-    "home_team": "Girona FC",
-    "away_team": "Real Oviedo CF",
+    "home_team": "Kluba Sportika Gedimou",
+    "away_team": "Kluba Sportika Esalumou",
     "home_goals": 1,
     "away_goals": 1
   },
   {
-    "home_team": "Sevilla CF",
-    "away_team": "FC Barcelona",
-    "home_goals": 0,
+    "home_team": "Kluba Sportika Gedimou",
+    "away_team": "Kluba Sportika Mileiu",
+    "home_goals": 2,
     "away_goals": 2
   },
   {
-    "home_team": "Sevilla CF",
-    "away_team": "Real Madrid CF",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Sevilla CF",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Sevilla CF",
-    "away_team": "Villarreal CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Sevilla CF",
-    "away_team": "Real Betis CF",
+    "home_team": "Kluba Sportika Gedimou",
+    "away_team": "Kluba Sportika Galvononos",
     "home_goals": 0,
     "away_goals": 1
   },
   {
-    "home_team": "Sevilla CF",
-    "away_team": "Celta de Vigo",
+    "home_team": "Kluba Sportika Gedimou",
+    "away_team": "Populara Kluba Galvononos",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Gedimou",
+    "away_team": "Kluba Sportika Soleiu",
     "home_goals": 0,
     "away_goals": 2
   },
   {
-    "home_team": "Sevilla CF",
-    "away_team": "Real Sociedad",
+    "home_team": "Kluba Sportika Gedimou",
+    "away_team": "Kluba Maritima Metia",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Gedimou",
+    "away_team": "Kluba Sportika Alentumou",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Soleiu",
+    "away_team": "Kluba Sulhavonos",
+    "home_goals": 2,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Sportika Soleiu",
+    "away_team": "Kluba Maritima Thesias",
+    "home_goals": 1,
+    "away_goals": 3
+  },
+  {
+    "home_team": "Kluba Sportika Soleiu",
+    "away_team": "Mercaria Kluba",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Soleiu",
+    "away_team": "Portavar Kluba",
     "home_goals": 1,
     "away_goals": 0
   },
   {
-    "home_team": "Sevilla CF",
-    "away_team": "Athletic Club de Bilbao",
+    "home_team": "Kluba Sportika Soleiu",
+    "away_team": "Kluba Sportika Esalumou",
     "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Soleiu",
+    "away_team": "Kluba Sportika Mileiu",
+    "home_goals": 1,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Kluba Sportika Soleiu",
+    "away_team": "Kluba Sportika Galvononos",
+    "home_goals": 0,
     "away_goals": 0
   },
   {
-    "home_team": "Sevilla CF",
-    "away_team": "RCD Espanyol",
+    "home_team": "Kluba Sportika Soleiu",
+    "away_team": "Populara Kluba Galvononos",
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Soleiu",
+    "away_team": "Kluba Sportika Gedimou",
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Soleiu",
+    "away_team": "Kluba Maritima Metia",
     "home_goals": 3,
     "away_goals": 0
   },
   {
-    "home_team": "Sevilla CF",
-    "away_team": "Girona FC",
-    "home_goals": 1,
+    "home_team": "Kluba Sportika Soleiu",
+    "away_team": "Kluba Sportika Alentumou",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Maritima Metia",
+    "away_team": "Kluba Sulhavonos",
+    "home_goals": 3,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Maritima Metia",
+    "away_team": "Kluba Maritima Thesias",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Maritima Metia",
+    "away_team": "Mercaria Kluba",
+    "home_goals": 2,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Maritima Metia",
+    "away_team": "Portavar Kluba",
+    "home_goals": 0,
     "away_goals": 2
   },
   {
-    "home_team": "Sevilla CF",
-    "away_team": "Osasuna CF",
+    "home_team": "Kluba Maritima Metia",
+    "away_team": "Kluba Sportika Esalumou",
     "home_goals": 1,
     "away_goals": 1
   },
   {
-    "home_team": "Sevilla CF",
-    "away_team": "Getafe CF",
+    "home_team": "Kluba Maritima Metia",
+    "away_team": "Kluba Sportika Mileiu",
     "home_goals": 4,
     "away_goals": 0
   },
   {
-    "home_team": "Sevilla CF",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Sevilla CF",
-    "away_team": "Valencia CF",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Sevilla CF",
-    "away_team": "Alavés CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Sevilla CF",
-    "away_team": "Elche CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Sevilla CF",
-    "away_team": "RCD Mallorca",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Sevilla CF",
-    "away_team": "Levante CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Sevilla CF",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "FC Barcelona",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Real Madrid CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Villarreal CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Real Betis CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Celta de Vigo",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Real Sociedad",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "RCD Espanyol",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Girona FC",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Sevilla CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Getafe CF",
-    "home_goals": 3,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Valencia CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Alavés CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Elche CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "RCD Mallorca",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Levante CF",
-    "home_goals": 4,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Osasuna CF",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "FC Barcelona",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Real Madrid CF",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Villarreal CF",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Real Betis CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Celta de Vigo",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Real Sociedad",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "RCD Espanyol",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Girona FC",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Sevilla CF",
-    "home_goals": 1,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Osasuna CF",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Valencia CF",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Alavés CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Elche CF",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "RCD Mallorca",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Levante CF",
-    "home_goals": 3,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Getafe CF",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "FC Barcelona",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Real Madrid CF",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Villarreal CF",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Real Betis CF",
-    "home_goals": 1,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Celta de Vigo",
-    "home_goals": 3,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Real Sociedad",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "RCD Espanyol",
-    "home_goals": 1,
-    "away_goals": 4
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Girona FC",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Sevilla CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Osasuna CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Getafe CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Valencia CF",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Alavés CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Elche CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "RCD Mallorca",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Levante CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Rayo Vallecano",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "FC Barcelona",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Real Madrid CF",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Villarreal CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Real Betis CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Celta de Vigo",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Real Sociedad",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "RCD Espanyol",
-    "home_goals": 1,
-    "away_goals": 4
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Girona FC",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Sevilla CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Osasuna CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Getafe CF",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Alavés CF",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Elche CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "RCD Mallorca",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Levante CF",
-    "home_goals": 4,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Valencia CF",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "FC Barcelona",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Real Madrid CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Villarreal CF",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Real Betis CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Celta de Vigo",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Real Sociedad",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "RCD Espanyol",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Girona FC",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Sevilla CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Osasuna CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Getafe CF",
+    "home_team": "Kluba Maritima Metia",
+    "away_team": "Kluba Sportika Galvononos",
     "home_goals": 3,
     "away_goals": 2
   },
   {
-    "home_team": "Alavés CF",
-    "away_team": "Rayo Vallecano",
+    "home_team": "Kluba Maritima Metia",
+    "away_team": "Populara Kluba Galvononos",
     "home_goals": 1,
     "away_goals": 3
   },
   {
-    "home_team": "Alavés CF",
-    "away_team": "Valencia CF",
-    "home_goals": 1,
+    "home_team": "Kluba Maritima Metia",
+    "away_team": "Kluba Sportika Gedimou",
+    "home_goals": 0,
     "away_goals": 0
   },
   {
-    "home_team": "Alavés CF",
-    "away_team": "Elche CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "RCD Mallorca",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Levante CF",
-    "home_goals": 4,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Alavés CF",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "FC Barcelona",
+    "home_team": "Kluba Maritima Metia",
+    "away_team": "Kluba Sportika Soleiu",
     "home_goals": 0,
     "away_goals": 2
   },
   {
-    "home_team": "Elche CF",
-    "away_team": "Real Madrid CF",
+    "home_team": "Kluba Maritima Metia",
+    "away_team": "Kluba Sportika Alentumou",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Alentumou",
+    "away_team": "Kluba Sulhavonos",
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Alentumou",
+    "away_team": "Kluba Maritima Thesias",
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Alentumou",
+    "away_team": "Mercaria Kluba",
+    "home_goals": 1,
+    "away_goals": 2
+  },
+  {
+    "home_team": "Kluba Sportika Alentumou",
+    "away_team": "Portavar Kluba",
+    "home_goals": 0,
+    "away_goals": 0
+  },
+  {
+    "home_team": "Kluba Sportika Alentumou",
+    "away_team": "Kluba Sportika Esalumou",
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "home_team": "Kluba Sportika Alentumou",
+    "away_team": "Kluba Sportika Mileiu",
     "home_goals": 0,
     "away_goals": 3
   },
   {
-    "home_team": "Elche CF",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Villarreal CF",
+    "home_team": "Kluba Sportika Alentumou",
+    "away_team": "Kluba Sportika Galvononos",
     "home_goals": 1,
     "away_goals": 1
   },
   {
-    "home_team": "Elche CF",
-    "away_team": "Real Betis CF",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Celta de Vigo",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Real Sociedad",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "RCD Espanyol",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Girona FC",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Sevilla CF",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Osasuna CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Getafe CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Valencia CF",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Alavés CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "RCD Mallorca",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Levante CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Elche CF",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "FC Barcelona",
-    "home_goals": 0,
-    "away_goals": 4
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Real Madrid CF",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Villarreal CF",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Real Betis CF",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Celta de Vigo",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Real Sociedad",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 0,
-    "away_goals": 6
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "RCD Espanyol",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Girona FC",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Sevilla CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Osasuna CF",
-    "home_goals": 2,
-    "away_goals": 4
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Getafe CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Valencia CF",
+    "home_team": "Kluba Sportika Alentumou",
+    "away_team": "Populara Kluba Galvononos",
     "home_goals": 3,
-    "away_goals": 3
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Alavés CF",
-    "home_goals": 1,
     "away_goals": 1
   },
   {
-    "home_team": "RCD Mallorca",
-    "away_team": "Elche CF",
-    "home_goals": 1,
-    "away_goals": 4
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Levante CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "RCD Mallorca",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "FC Barcelona",
-    "home_goals": 1,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Real Madrid CF",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 2,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Villarreal CF",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Real Betis CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Celta de Vigo",
-    "home_goals": 1,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Real Sociedad",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "RCD Espanyol",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Girona FC",
-    "home_goals": 0,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Sevilla CF",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Osasuna CF",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Getafe CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 1,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Valencia CF",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Alavés CF",
+    "home_team": "Kluba Sportika Alentumou",
+    "away_team": "Kluba Sportika Gedimou",
     "home_goals": 0,
     "away_goals": 0
   },
   {
-    "home_team": "Levante CF",
-    "away_team": "Elche CF",
+    "home_team": "Kluba Sportika Alentumou",
+    "away_team": "Kluba Sportika Soleiu",
     "home_goals": 0,
     "away_goals": 1
   },
   {
-    "home_team": "Levante CF",
-    "away_team": "RCD Mallorca",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Levante CF",
-    "away_team": "Real Oviedo CF",
-    "home_goals": 2,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "FC Barcelona",
-    "home_goals": 0,
-    "away_goals": 4
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Real Madrid CF",
-    "home_goals": 1,
-    "away_goals": 6
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Atlético de Madrid",
-    "home_goals": 1,
-    "away_goals": 5
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Villarreal CF",
-    "home_goals": 1,
-    "away_goals": 5
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Real Betis CF",
-    "home_goals": 0,
-    "away_goals": 3
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Celta de Vigo",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Real Sociedad",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Athletic Club de Bilbao",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "RCD Espanyol",
-    "home_goals": 1,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Girona FC",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Sevilla CF",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Osasuna CF",
-    "home_goals": 1,
-    "away_goals": 1
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Getafe CF",
-    "home_goals": 3,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Rayo Vallecano",
-    "home_goals": 0,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Valencia CF",
-    "home_goals": 2,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Alavés CF",
-    "home_goals": 0,
-    "away_goals": 0
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Elche CF",
+    "home_team": "Kluba Sportika Alentumou",
+    "away_team": "Kluba Maritima Metia",
     "home_goals": 1,
     "away_goals": 0
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "RCD Mallorca",
-    "home_goals": 2,
-    "away_goals": 2
-  },
-  {
-    "home_team": "Real Oviedo CF",
-    "away_team": "Levante CF",
-    "home_goals": 3,
-    "away_goals": 3
   }
 ]

@@ -34,12 +34,12 @@ coraerum = Team("Kluba Sportika Coraerou", 40, 41, 40)
 
 veldhavon = Team("Kluba Veldhavonos", 39, 38, 40)
 
-teams = []
+teams = [sulhavon, maritima_thesia, mercaria, portavar, esalum, mileius, galvonon, pk_galvonon, gedium, soleium, metia, alentum]
 
 standings = {}
 match_results = []
 
-for team in teams:
+""" for team in teams:
     standings[team.name] = {
         "played": 0,
         "wins": 0,
@@ -63,7 +63,7 @@ for home_team in teams:
                 "away_goals": away_goals
             })
 
-            # Update standings for both teams
+            Update standings for both teams
             standings[home_team.name]["played"] += 1
             standings[away_team.name]["played"] += 1
 
@@ -75,7 +75,7 @@ for home_team in teams:
             standings[away_team.name]["goals_against"] += home_goals
             standings[away_team.name]["goal_difference"] = standings[away_team.name]["goals_for"] - standings[away_team.name]["goals_against"]
 
-            # Determine points and W-D-L record
+            Determine points and W-D-L record
             if home_goals > away_goals:
                 standings[home_team.name]["wins"] += 1
                 standings[home_team.name]["points"] += 3
@@ -108,7 +108,7 @@ for team_name, stats in sorted_standings:
 
 print("="*80)
 
-# Save standings
+Save standings
 with open("league_table.txt", "w", encoding="utf-8") as f:
     f.write("="*80 + "\n")
     f.write("LEAGUE TABLE\n")
@@ -128,6 +128,31 @@ print("League table saved to league_table.txt")
 with open("match_results.json", "w", encoding="utf-8") as f:
     json.dump(match_results, f, indent=2, ensure_ascii=False)
 
-print("Match results saved to match_results.json")
+print("Match results saved to match_results.json") """
 
-sulhavon.squad = generate_squad(sulhavon.name, average_ca=61)
+""" for team in teams:
+    avg_ca = (team.attack + team.midfield + team.defense) / 3
+    team_squad = generate_squad(team.name, average_ca=avg_ca)
+    print(f"Generated squad for {team.name} (avg CA: {avg_ca})") """
+
+galvonon.squad = generate_squad(galvonon.name, average_ca=63)
+maritima_thesia.squad = generate_squad(maritima_thesia.name, average_ca=62)
+
+home_goals, away_goals = simulate_match(galvonon, maritima_thesia)
+print(f"\n{galvonon.name} {home_goals} - {away_goals} {maritima_thesia.name}\n")
+
+for player in galvonon.squad:
+    if player.goals > 0:
+        print(f"{player.name}: {player.goals} goals")
+
+for player in galvonon.squad:
+    if player.assists > 0:
+        print(f"{player.name}: {player.assists} assists")
+
+for player in maritima_thesia.squad:
+    if player.goals > 0:
+        print(f"{player.name}: {player.goals} goals")
+
+for player in maritima_thesia.squad:
+    if player.assists > 0:
+        print(f"{player.name}: {player.assists} assists")
