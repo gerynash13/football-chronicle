@@ -63,7 +63,7 @@ def load_teams_from_file(file_path):
               player._generate_attributes()
               player._determine_role()
               
-            team.squad.append(player)
+            team.squad.add_player(player)
     
         teams.append(team)
     
