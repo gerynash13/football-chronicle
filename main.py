@@ -3,6 +3,7 @@ import json
 from classes import Team, Player
 from simulation import simulate_match
 from name_generator import generate_myrian_name, generate_squad
+from data_manager import save_teams_to_file, load_teams_from_file
 
 sulhavon = Team("Kluba Sulhavonos", 64, 58, 57)
 maritima_thesia = Team("Kluba Maritima Thesias", 62, 61, 64)
@@ -138,6 +139,8 @@ print("Match results saved to match_results.json") """
 galvonon.squad = generate_squad(galvonon.name, average_ca=63)
 maritima_thesia.squad = generate_squad(maritima_thesia.name, average_ca=62)
 
+save_teams_to_file(teams)
+
 home_goals, away_goals = simulate_match(galvonon, maritima_thesia)
 print(f"\n{galvonon.name} {home_goals} - {away_goals} {maritima_thesia.name}\n")
 
@@ -156,3 +159,7 @@ for player in maritima_thesia.squad:
 for player in maritima_thesia.squad:
     if player.assists > 0:
         print(f"{player.name}: {player.assists} assists")
+        
+loaded_teams = load_teams_from_file("teams_data.json")
+print(f"Loaded {len(loaded_teams)} teams")
+print(f"First team: {loaded_teams[0].name}, squad size: {len(loaded_teams[0].squad)}")
