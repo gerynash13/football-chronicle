@@ -3,6 +3,7 @@ import json
 from classes import Team, Player
 from simulation import simulate_match
 from name_generator import generate_myrian_name, generate_squad
+from data_manager import save_teams_to_file, load_teams_from_file
 
 sulhavon = Team("Kluba Sulhavonos", 64, 58, 57)
 maritima_thesia = Team("Kluba Maritima Thesias", 62, 61, 64)
@@ -63,19 +64,20 @@ for home_team in teams:
                 "away_goals": away_goals
             })
 
-            Update standings for both teams
+            # Update standings for both teams
             standings[home_team.name]["played"] += 1
             standings[away_team.name]["played"] += 1
 
             standings[home_team.name]["goals_for"] += home_goals
-            standings[home_team.name]["goals_against"] += away_goals
-            standings[home_team.name]["goal_difference"] = standings[home_team.name]["goals_for"] - standings[home_team.name]["goals_against"]
-
             standings[away_team.name]["goals_for"] += away_goals
+
+            standings[home_team.name]["goals_against"] += away_goals
             standings[away_team.name]["goals_against"] += home_goals
+
+            standings[home_team.name]["goal_difference"] = standings[home_team.name]["goals_for"] - standings[home_team.name]["goals_against"]
             standings[away_team.name]["goal_difference"] = standings[away_team.name]["goals_for"] - standings[away_team.name]["goals_against"]
 
-            Determine points and W-D-L record
+            # Determine points and W-D-L record
             if home_goals > away_goals:
                 standings[home_team.name]["wins"] += 1
                 standings[home_team.name]["points"] += 3
@@ -93,9 +95,9 @@ for home_team in teams:
             print(f"{home_team.name} {home_goals} - {away_goals} {away_team.name}")
             print("="*50)
 
-sorted_standings = sorted(standings.items(), key=lambda x: x[1]["points"], reverse=True)
+sorted_standings = sorted(standings.items(), key=lambda x: x[1]["points"], reverse=True) """
 
-print("\n" + "="*80)
+""" print("\n" + "="*80)
 print("LEAGUE TABLE")
 print("="*80)
 print(f"{'Pos':<5} {'Team':<30} {'GP':<5} {'W':<5} {'D':<5} {'L':<5} {'GF':<5} {'GA':<5} {'GD':<5} {'Pts':<5}")
@@ -108,7 +110,7 @@ for team_name, stats in sorted_standings:
 
 print("="*80)
 
-Save standings
+# Save standings
 with open("league_table.txt", "w", encoding="utf-8") as f:
     f.write("="*80 + "\n")
     f.write("LEAGUE TABLE\n")
@@ -128,15 +130,17 @@ print("League table saved to league_table.txt")
 with open("match_results.json", "w", encoding="utf-8") as f:
     json.dump(match_results, f, indent=2, ensure_ascii=False)
 
-print("Match results saved to match_results.json") """
+print("Match results saved to match_results.json")
 
-""" for team in teams:
+for team in teams:
     avg_ca = (team.attack + team.midfield + team.defense) / 3
     team_squad = generate_squad(team.name, average_ca=avg_ca)
     print(f"Generated squad for {team.name} (avg CA: {avg_ca})") """
 
 galvonon.squad = generate_squad(galvonon.name, average_ca=63)
 maritima_thesia.squad = generate_squad(maritima_thesia.name, average_ca=62)
+
+save_teams_to_file(teams)
 
 home_goals, away_goals = simulate_match(galvonon, maritima_thesia)
 print(f"\n{galvonon.name} {home_goals} - {away_goals} {maritima_thesia.name}\n")
@@ -156,3 +160,7 @@ for player in maritima_thesia.squad:
 for player in maritima_thesia.squad:
     if player.assists > 0:
         print(f"{player.name}: {player.assists} assists")
+
+loaded_teams = load_teams_from_file("teams_data.json")
+print(f"Loaded {len(loaded_teams)} teams.")
+print(f"First team: {loaded_teams[1].name}, squad size: {len(loaded_teams[1].squad)}")

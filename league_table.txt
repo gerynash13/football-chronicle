@@ -3,16 +3,3 @@ LEAGUE TABLE
 ================================================================================
 Pos   Team                           P     W     D     L     GF    GA    GD    Pts  
 --------------------------------------------------------------------------------
-1     Kluba Sportika Soleiu          22    13    3     6     29    18    11    42   
-2     Mercaria Kluba                 22    10    5     7     20    18    2     35   
-3     Kluba Sportika Alentumou       22    9     8     5     21    16    5     35   
-4     Kluba Maritima Thesias         22    9     6     7     27    19    8     33   
-5     Portavar Kluba                 22    9     4     9     25    25    0     31   
-6     Kluba Sportika Mileiu          22    9     3     10    26    27    -1    30   
-7     Kluba Sportika Esalumou        22    7     7     8     26    29    -3    28   
-8     Kluba Sportika Galvononos      22    7     7     8     21    22    -1    28   
-9     Kluba Sulhavonos               22    6     8     8     14    23    -9    26   
-10    Populara Kluba Galvononos      22    6     7     9     28    34    -6    25   
-11    Kluba Maritima Metia           22    6     7     9     22    27    -5    25   
-12    Kluba Sportika Gedimou         22    4     9     9     24    25    -1    21   
-================================================================================
