@@ -80,12 +80,12 @@ def simulate_match(team1, team2):
                 team1_goals += 1
                 scorer = pick_player_for_chance(team1)
                 scorer.goals += 1
-                print(f"{scorer.name} scores a goal! (scorer.goals: {scorer.goals})")
+                print(f"{scorer.name} scores a goal! (Season Goals: {scorer.goals})")
 
                 assister = pick_assister(team1, scorer)
                 if assister:
                     assister.assists += 1
-                    print(f"{assister.name} assists! (assister.assists: {assister.assists})")
+                    print(f"{assister.name} assists! (Season Assists: {assister.assists})")
 
                 events.append({
                     "minute": current_minute,
@@ -123,12 +123,12 @@ def simulate_match(team1, team2):
                 team2_goals += 1
                 scorer = pick_player_for_chance(team2)
                 scorer.goals += 1
-                print(f"{scorer.name} scores a goal! (scorer.goals: {scorer.goals})")
+                print(f"{scorer.name} scores a goal! (Season Goals: {scorer.goals})")
 
                 assister = pick_assister(team2, scorer)
                 if assister:
                     assister.assists += 1
-                    print(f"{assister.name} assists! (assister.assists: {assister.assists})")
+                    print(f"{assister.name} assists! (Season Assists: {assister.assists})")
 
                 events.append({
                     "minute": current_minute,

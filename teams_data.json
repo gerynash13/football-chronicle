@@ -4,7 +4,238 @@
     "attack": 64,
     "midfield": 58,
     "defense": 57,
-    "squad": []
+    "squad": [
+      {
+        "name": "Brakhor Mikranos",
+        "position": "GK",
+        "age": 38,
+        "current_ability": 49,
+        "potential_ability": 55,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Santhon Oleiavar",
+        "position": "GK",
+        "age": 19,
+        "current_ability": 67,
+        "potential_ability": 78,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Pelhon Campavar",
+        "position": "GK",
+        "age": 25,
+        "current_ability": 51,
+        "potential_ability": 57,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Valentinos Boteravar",
+        "position": "DEF",
+        "age": 17,
+        "current_ability": 63,
+        "potential_ability": 70,
+        "goals": 1,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Efraim Carnavar",
+        "position": "DEF",
+        "age": 34,
+        "current_ability": 53,
+        "potential_ability": 59,
+        "goals": 1,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Haim Thalassikos",
+        "position": "DEF",
+        "age": 28,
+        "current_ability": 55,
+        "potential_ability": 59,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Christofalhos Boteravar",
+        "position": "DEF",
+        "age": 33,
+        "current_ability": 53,
+        "potential_ability": 73,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Karmelos Arnheiros",
+        "position": "DEF",
+        "age": 31,
+        "current_ability": 61,
+        "potential_ability": 73,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Peros Murnanos",
+        "position": "DEF",
+        "age": 33,
+        "current_ability": 53,
+        "potential_ability": 69,
+        "goals": 1,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Pelhon Pelheiros",
+        "position": "DEF",
+        "age": 36,
+        "current_ability": 51,
+        "potential_ability": 57,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Bernalhos Salavar",
+        "position": "DEF",
+        "age": 26,
+        "current_ability": 52,
+        "potential_ability": 67,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Orlhon Arnhelos",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 60,
+        "potential_ability": 68,
+        "goals": 0,
+        "assists": 1,
+        "appearances": 4
+      },
+      {
+        "name": "Drosvon Kalvanos",
+        "position": "MID",
+        "age": 26,
+        "current_ability": 69,
+        "potential_ability": 74,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Ramhona Emvarikos",
+        "position": "MID",
+        "age": 34,
+        "current_ability": 67,
+        "potential_ability": 87,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Adrianos Drosvhalhos",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 65,
+        "potential_ability": 85,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Tornalh Lucivar",
+        "position": "MID",
+        "age": 38,
+        "current_ability": 51,
+        "potential_ability": 61,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Silvaros Brakavar",
+        "position": "MID",
+        "age": 17,
+        "current_ability": 56,
+        "potential_ability": 71,
+        "goals": 0,
+        "assists": 1,
+        "appearances": 4
+      },
+      {
+        "name": "Eliyahu Fontavar",
+        "position": "MID",
+        "age": 29,
+        "current_ability": 51,
+        "potential_ability": 54,
+        "goals": 0,
+        "assists": 2,
+        "appearances": 4
+      },
+      {
+        "name": "Benedettohos Salavar",
+        "position": "MID",
+        "age": 20,
+        "current_ability": 60,
+        "potential_ability": 71,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Valentinos Sulhikos",
+        "position": "FWD",
+        "age": 25,
+        "current_ability": 67,
+        "potential_ability": 70,
+        "goals": 1,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Kiriakhos Teixavar",
+        "position": "FWD",
+        "age": 30,
+        "current_ability": 68,
+        "potential_ability": 73,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Kyrialhos Sylvavar",
+        "position": "FWD",
+        "age": 20,
+        "current_ability": 61,
+        "potential_ability": 62,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      },
+      {
+        "name": "Miquehos Insulavar",
+        "position": "FWD",
+        "age": 25,
+        "current_ability": 64,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 4
+      }
+    ]
   },
   {
     "name": "Kluba Maritima Thesias",
@@ -13,234 +244,234 @@
     "defense": 64,
     "squad": [
       {
-        "name": "Konstantalhos Tolvheiros",
+        "name": "Avraham Sulhikos",
         "position": "GK",
-        "age": 20,
-        "current_ability": 58,
-        "potential_ability": 62,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Shimon Galvōdēs",
-        "position": "GK",
-        "age": 18,
-        "current_ability": 52,
-        "potential_ability": 64,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Bernatvar Sankavar",
-        "position": "GK",
-        "age": 32,
-        "current_ability": 54,
-        "potential_ability": 72,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Vitaros Talvanos",
-        "position": "DEF",
-        "age": 21,
-        "current_ability": 69,
-        "potential_ability": 75,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Adrianos Vidravar",
-        "position": "DEF",
-        "age": 38,
-        "current_ability": 58,
-        "potential_ability": 66,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Alhvan Galvōdēs",
-        "position": "DEF",
-        "age": 36,
-        "current_ability": 67,
-        "potential_ability": 85,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Dalmauhos Pethanos",
-        "position": "DEF",
-        "age": 19,
+        "age": 17,
         "current_ability": 56,
-        "potential_ability": 68,
+        "potential_ability": 59,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 5
       },
       {
-        "name": "Laurentinhos Angelidvar",
-        "position": "DEF",
-        "age": 20,
-        "current_ability": 55,
+        "name": "Fortunatos Arnhelos",
+        "position": "GK",
+        "age": 17,
+        "current_ability": 54,
         "potential_ability": 60,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 5
       },
       {
-        "name": "Levi Brakhos",
-        "position": "DEF",
-        "age": 20,
-        "current_ability": 68,
-        "potential_ability": 73,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Karmelos Tolvheiros",
-        "position": "DEF",
-        "age": 32,
-        "current_ability": 71,
-        "potential_ability": 81,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Protopalhos Protokolavar",
-        "position": "DEF",
-        "age": 31,
-        "current_ability": 67,
-        "potential_ability": 73,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Bernatvar Emvarios",
-        "position": "MID",
-        "age": 24,
+        "name": "Ramhos Santhavar",
+        "position": "GK",
+        "age": 23,
         "current_ability": 64,
-        "potential_ability": 70,
+        "potential_ability": 64,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 5
       },
       {
-        "name": "Murnon Pethalhos",
-        "position": "MID",
-        "age": 20,
+        "name": "Renzohos Vinavar",
+        "position": "DEF",
+        "age": 37,
         "current_ability": 64,
-        "potential_ability": 74,
+        "potential_ability": 68,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 5
       },
       {
-        "name": "Shaul Angelidvar",
-        "position": "MID",
-        "age": 34,
-        "current_ability": 60,
-        "potential_ability": 80,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Markelhos Pelhavar",
-        "position": "MID",
-        "age": 20,
-        "current_ability": 70,
-        "potential_ability": 76,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Filipalhos Veldhikos",
-        "position": "MID",
-        "age": 38,
-        "current_ability": 54,
+        "name": "Placidos Caldavar",
+        "position": "DEF",
+        "age": 37,
+        "current_ability": 63,
         "potential_ability": 63,
-        "goals": 0,
+        "goals": 1,
         "assists": 0,
-        "appearances": 0
+        "appearances": 5
       },
       {
-        "name": "Arnhon Pedraavar",
-        "position": "MID",
-        "age": 35,
-        "current_ability": 68,
+        "name": "Kiriakhos Petalhos",
+        "position": "DEF",
+        "age": 25,
+        "current_ability": 58,
         "potential_ability": 77,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 5
       },
       {
-        "name": "Marcellinhos Juravar",
-        "position": "MID",
-        "age": 35,
-        "current_ability": 66,
-        "potential_ability": 84,
+        "name": "Christofalhos Fustaveira",
+        "position": "DEF",
+        "age": 33,
+        "current_ability": 68,
+        "potential_ability": 79,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 5
       },
       {
-        "name": "Celestinos Korinthios",
-        "position": "MID",
-        "age": 29,
-        "current_ability": 61,
-        "potential_ability": 69,
+        "name": "Franseschos Talvōdēs",
+        "position": "DEF",
+        "age": 27,
+        "current_ability": 71,
+        "potential_ability": 71,
+        "goals": 1,
+        "assists": 0,
+        "appearances": 5
+      },
+      {
+        "name": "Lucivar Terravar",
+        "position": "DEF",
+        "age": 25,
+        "current_ability": 70,
+        "potential_ability": 79,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 5
       },
       {
-        "name": "Vasilhos Emvarikos",
-        "position": "FWD",
-        "age": 35,
-        "current_ability": 67,
-        "potential_ability": 73,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Pelhvar Megistos",
-        "position": "FWD",
-        "age": 28,
-        "current_ability": 58,
-        "potential_ability": 62,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "David Drosvhalhos",
-        "position": "FWD",
-        "age": 38,
-        "current_ability": 55,
-        "potential_ability": 70,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Demetralhos Sulhonhos",
-        "position": "FWD",
-        "age": 31,
+        "name": "Arnhelh Pintavar",
+        "position": "DEF",
+        "age": 22,
         "current_ability": 53,
         "potential_ability": 59,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 5
+      },
+      {
+        "name": "Placidos Mercelhar",
+        "position": "DEF",
+        "age": 22,
+        "current_ability": 53,
+        "potential_ability": 58,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 5
+      },
+      {
+        "name": "Guerauhos Nalhikos",
+        "position": "MID",
+        "age": 26,
+        "current_ability": 66,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 1,
+        "appearances": 5
+      },
+      {
+        "name": "Barukh Lunivar",
+        "position": "MID",
+        "age": 23,
+        "current_ability": 56,
+        "potential_ability": 65,
+        "goals": 1,
+        "assists": 1,
+        "appearances": 5
+      },
+      {
+        "name": "Blailhos Drosvanos",
+        "position": "MID",
+        "age": 18,
+        "current_ability": 54,
+        "potential_ability": 73,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 5
+      },
+      {
+        "name": "Enricohos Pedraavar",
+        "position": "MID",
+        "age": 29,
+        "current_ability": 53,
+        "potential_ability": 53,
+        "goals": 1,
+        "assists": 0,
+        "appearances": 5
+      },
+      {
+        "name": "Kiriakhos Sulhanos",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 53,
+        "potential_ability": 61,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 5
+      },
+      {
+        "name": "Mateuhos Konsulavar",
+        "position": "MID",
+        "age": 35,
+        "current_ability": 61,
+        "potential_ability": 70,
+        "goals": 1,
+        "assists": 0,
+        "appearances": 5
+      },
+      {
+        "name": "Filipalhos Teravar",
+        "position": "MID",
+        "age": 19,
+        "current_ability": 52,
+        "potential_ability": 60,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 5
+      },
+      {
+        "name": "Stefanhos Kancilavar",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 66,
+        "potential_ability": 74,
+        "goals": 1,
+        "assists": 1,
+        "appearances": 5
+      },
+      {
+        "name": "Ramhona Veldhōdēs",
+        "position": "FWD",
+        "age": 31,
+        "current_ability": 56,
+        "potential_ability": 71,
+        "goals": 0,
+        "assists": 1,
+        "appearances": 5
+      },
+      {
+        "name": "Veldhir Veldhanos",
+        "position": "FWD",
+        "age": 35,
+        "current_ability": 70,
+        "potential_ability": 70,
+        "goals": 1,
+        "assists": 1,
+        "appearances": 5
+      },
+      {
+        "name": "Aristalhos Senhoravar",
+        "position": "FWD",
+        "age": 38,
+        "current_ability": 57,
+        "potential_ability": 70,
+        "goals": 1,
+        "assists": 2,
+        "appearances": 5
+      },
+      {
+        "name": "Evaggelhos Kancilavar",
+        "position": "FWD",
+        "age": 33,
+        "current_ability": 66,
+        "potential_ability": 86,
+        "goals": 2,
+        "assists": 1,
+        "appearances": 5
       }
     ]
   },
@@ -249,28 +480,952 @@
     "attack": 60,
     "midfield": 64,
     "defense": 62,
-    "squad": []
+    "squad": [
+      {
+        "name": "Donatos Mercelhar",
+        "position": "GK",
+        "age": 22,
+        "current_ability": 68,
+        "potential_ability": 82,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Santhon Emvarikos",
+        "position": "GK",
+        "age": 18,
+        "current_ability": 56,
+        "potential_ability": 63,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Arnhelh Toranos",
+        "position": "GK",
+        "age": 27,
+        "current_ability": 58,
+        "potential_ability": 78,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Aleksalhos Bouleutar",
+        "position": "DEF",
+        "age": 23,
+        "current_ability": 70,
+        "potential_ability": 71,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Vitaros Panagiotopalhos",
+        "position": "DEF",
+        "age": 25,
+        "current_ability": 58,
+        "potential_ability": 58,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Shimon Drosvikos",
+        "position": "DEF",
+        "age": 22,
+        "current_ability": 57,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Benedettohos Toranos",
+        "position": "DEF",
+        "age": 25,
+        "current_ability": 60,
+        "potential_ability": 61,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Shimon Thalassikos",
+        "position": "DEF",
+        "age": 21,
+        "current_ability": 70,
+        "potential_ability": 72,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Avraham Brakavar",
+        "position": "DEF",
+        "age": 18,
+        "current_ability": 52,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Andrevos Insulavar",
+        "position": "DEF",
+        "age": 18,
+        "current_ability": 53,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Sulhon Emvhalikos",
+        "position": "DEF",
+        "age": 17,
+        "current_ability": 62,
+        "potential_ability": 63,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Markelhos Lunivar",
+        "position": "MID",
+        "age": 19,
+        "current_ability": 55,
+        "potential_ability": 59,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Jaumelhos Rioavar",
+        "position": "MID",
+        "age": 17,
+        "current_ability": 58,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Franseschos Belavar",
+        "position": "MID",
+        "age": 27,
+        "current_ability": 52,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Placidos Vinavar",
+        "position": "MID",
+        "age": 22,
+        "current_ability": 65,
+        "potential_ability": 67,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Binyamin Nalhikos",
+        "position": "MID",
+        "age": 29,
+        "current_ability": 63,
+        "potential_ability": 79,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Ramhona Molnavar",
+        "position": "MID",
+        "age": 30,
+        "current_ability": 69,
+        "potential_ability": 89,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Dominalhos Notaravar",
+        "position": "MID",
+        "age": 33,
+        "current_ability": 53,
+        "potential_ability": 54,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Shaul Arnhōdēs",
+        "position": "MID",
+        "age": 38,
+        "current_ability": 71,
+        "potential_ability": 88,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Blailhos Campavar",
+        "position": "FWD",
+        "age": 26,
+        "current_ability": 60,
+        "potential_ability": 61,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Shaul Portavar",
+        "position": "FWD",
+        "age": 34,
+        "current_ability": 63,
+        "potential_ability": 64,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Adrianos Petroikos",
+        "position": "FWD",
+        "age": 23,
+        "current_ability": 72,
+        "potential_ability": 76,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Liberatos Nalhavar",
+        "position": "FWD",
+        "age": 34,
+        "current_ability": 57,
+        "potential_ability": 77,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      }
+    ]
   },
   {
     "name": "Portavar Kluba",
     "attack": 60,
     "midfield": 58,
     "defense": 59,
-    "squad": []
+    "squad": [
+      {
+        "name": "Manolhos Teixavar",
+        "position": "GK",
+        "age": 36,
+        "current_ability": 57,
+        "potential_ability": 59,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Valerianhos Galveiros",
+        "position": "GK",
+        "age": 20,
+        "current_ability": 59,
+        "potential_ability": 67,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Dalmauhos Arcavar",
+        "position": "GK",
+        "age": 36,
+        "current_ability": 61,
+        "potential_ability": 62,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Bertavar Sulhonhos",
+        "position": "DEF",
+        "age": 38,
+        "current_ability": 66,
+        "potential_ability": 71,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Konstantvar Athinaios",
+        "position": "DEF",
+        "age": 20,
+        "current_ability": 64,
+        "potential_ability": 68,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Jaumelhos Mielavar",
+        "position": "DEF",
+        "age": 24,
+        "current_ability": 55,
+        "potential_ability": 55,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Benedettohos Veldhōdēs",
+        "position": "DEF",
+        "age": 19,
+        "current_ability": 63,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Olivar Montalvar",
+        "position": "DEF",
+        "age": 34,
+        "current_ability": 68,
+        "potential_ability": 87,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Mordekhai Veldheiros",
+        "position": "DEF",
+        "age": 33,
+        "current_ability": 61,
+        "potential_ability": 61,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Aurelvar Emvarikos",
+        "position": "DEF",
+        "age": 33,
+        "current_ability": 54,
+        "potential_ability": 71,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Shlomo Dominalhar",
+        "position": "DEF",
+        "age": 21,
+        "current_ability": 54,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Victorvar Canaavar",
+        "position": "MID",
+        "age": 31,
+        "current_ability": 53,
+        "potential_ability": 67,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Gilaberthos Pelhavar",
+        "position": "MID",
+        "age": 30,
+        "current_ability": 52,
+        "potential_ability": 54,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Marcalhos Emvarikos",
+        "position": "MID",
+        "age": 30,
+        "current_ability": 64,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Alhvan Synedriavar",
+        "position": "MID",
+        "age": 34,
+        "current_ability": 58,
+        "potential_ability": 73,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Albertohos Lucivar",
+        "position": "MID",
+        "age": 22,
+        "current_ability": 59,
+        "potential_ability": 62,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Moshe Brakikos",
+        "position": "MID",
+        "age": 23,
+        "current_ability": 59,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Shimon Grammatavar",
+        "position": "MID",
+        "age": 21,
+        "current_ability": 53,
+        "potential_ability": 58,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Panaghos Pintavar",
+        "position": "MID",
+        "age": 34,
+        "current_ability": 67,
+        "potential_ability": 81,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Brunavar Arcavar",
+        "position": "FWD",
+        "age": 38,
+        "current_ability": 66,
+        "potential_ability": 85,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Eustrathos Pethalhos",
+        "position": "FWD",
+        "age": 31,
+        "current_ability": 54,
+        "potential_ability": 61,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Nikoforvar Caldavar",
+        "position": "FWD",
+        "age": 18,
+        "current_ability": 65,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Llorenhos Ioannidvar",
+        "position": "FWD",
+        "age": 20,
+        "current_ability": 57,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      }
+    ]
   },
   {
     "name": "Kluba Sportika Esalumou",
     "attack": 56,
     "midfield": 58,
     "defense": 57,
-    "squad": []
+    "squad": [
+      {
+        "name": "Yitzhak Carnavar",
+        "position": "GK",
+        "age": 25,
+        "current_ability": 56,
+        "potential_ability": 63,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Grigoralhos Grammatavar",
+        "position": "GK",
+        "age": 32,
+        "current_ability": 65,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Jordavar Notaravar",
+        "position": "GK",
+        "age": 33,
+        "current_ability": 56,
+        "potential_ability": 68,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Sivanos Drosveira",
+        "position": "DEF",
+        "age": 29,
+        "current_ability": 66,
+        "potential_ability": 67,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Kyrialhos Nomikavar",
+        "position": "DEF",
+        "age": 21,
+        "current_ability": 67,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Lucivar Santhavar",
+        "position": "DEF",
+        "age": 22,
+        "current_ability": 64,
+        "potential_ability": 79,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Ioannalhos Molnavar",
+        "position": "DEF",
+        "age": 31,
+        "current_ability": 56,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Aron Ioannidvar",
+        "position": "DEF",
+        "age": 28,
+        "current_ability": 64,
+        "potential_ability": 73,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Nalhon Lunivar",
+        "position": "DEF",
+        "age": 24,
+        "current_ability": 64,
+        "potential_ability": 64,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Victorinhos Jurikavar",
+        "position": "DEF",
+        "age": 21,
+        "current_ability": 64,
+        "potential_ability": 81,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Nikolvar Konsulavar",
+        "position": "DEF",
+        "age": 17,
+        "current_ability": 64,
+        "potential_ability": 72,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Anastasvar Veldhikos",
+        "position": "MID",
+        "age": 34,
+        "current_ability": 49,
+        "potential_ability": 64,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Huguelhos Galvhalhos",
+        "position": "MID",
+        "age": 25,
+        "current_ability": 63,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Spyrolhos Tralvanos",
+        "position": "MID",
+        "age": 38,
+        "current_ability": 62,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Moshe Vidravar",
+        "position": "MID",
+        "age": 25,
+        "current_ability": 62,
+        "potential_ability": 76,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Anastasvar Vitavar",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 67,
+        "potential_ability": 81,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Kiriakhos Montalvar",
+        "position": "MID",
+        "age": 23,
+        "current_ability": 50,
+        "potential_ability": 67,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Gilaberthos Athinaios",
+        "position": "MID",
+        "age": 17,
+        "current_ability": 56,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Peros Talvikos",
+        "position": "MID",
+        "age": 19,
+        "current_ability": 57,
+        "potential_ability": 74,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Marcalhos Drosvhalhos",
+        "position": "FWD",
+        "age": 28,
+        "current_ability": 53,
+        "potential_ability": 56,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Brunavar Brakhalhos",
+        "position": "FWD",
+        "age": 25,
+        "current_ability": 48,
+        "potential_ability": 57,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Vicenthos Carnavar",
+        "position": "FWD",
+        "age": 31,
+        "current_ability": 55,
+        "potential_ability": 73,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Moshe Drosvanos",
+        "position": "FWD",
+        "age": 17,
+        "current_ability": 47,
+        "potential_ability": 56,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      }
+    ]
   },
   {
     "name": "Kluba Sportika Mileiu",
     "attack": 58,
     "midfield": 56,
     "defense": 59,
-    "squad": []
+    "squad": [
+      {
+        "name": "Natan Orlhanos",
+        "position": "GK",
+        "age": 21,
+        "current_ability": 48,
+        "potential_ability": 64,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Albertohos Angelidvar",
+        "position": "GK",
+        "age": 18,
+        "current_ability": 54,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Veldhor Vitavar",
+        "position": "GK",
+        "age": 26,
+        "current_ability": 47,
+        "potential_ability": 52,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Franseschos Kalvōdēs",
+        "position": "DEF",
+        "age": 29,
+        "current_ability": 62,
+        "potential_ability": 82,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Meir Arcavar",
+        "position": "DEF",
+        "age": 18,
+        "current_ability": 58,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Arnhelh Stratigavar",
+        "position": "DEF",
+        "age": 17,
+        "current_ability": 57,
+        "potential_ability": 67,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Talvon Athinaios",
+        "position": "DEF",
+        "age": 25,
+        "current_ability": 65,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Bertavar Galvhalhos",
+        "position": "DEF",
+        "age": 27,
+        "current_ability": 51,
+        "potential_ability": 58,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Timotealhos Marivavar",
+        "position": "DEF",
+        "age": 38,
+        "current_ability": 52,
+        "potential_ability": 55,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Yaakov Pethalhos",
+        "position": "DEF",
+        "age": 32,
+        "current_ability": 55,
+        "potential_ability": 72,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Mundilhos Salavar",
+        "position": "DEF",
+        "age": 25,
+        "current_ability": 55,
+        "potential_ability": 68,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Vasilhos Pastavar",
+        "position": "MID",
+        "age": 28,
+        "current_ability": 64,
+        "potential_ability": 71,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Mundilhos Angelidvar",
+        "position": "MID",
+        "age": 31,
+        "current_ability": 55,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Shlomo Vitavar",
+        "position": "MID",
+        "age": 17,
+        "current_ability": 51,
+        "potential_ability": 59,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Vicenthos Fustavar",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 47,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Mundilhos Pelhavar",
+        "position": "MID",
+        "age": 33,
+        "current_ability": 64,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Shimon Galvikos",
+        "position": "MID",
+        "age": 23,
+        "current_ability": 47,
+        "potential_ability": 47,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Llorenhos Megistos",
+        "position": "MID",
+        "age": 37,
+        "current_ability": 61,
+        "potential_ability": 74,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Drosvhar Montalvar",
+        "position": "MID",
+        "age": 36,
+        "current_ability": 67,
+        "potential_ability": 87,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Tralvon Juravar",
+        "position": "FWD",
+        "age": 23,
+        "current_ability": 52,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Tolvhan Arcavar",
+        "position": "FWD",
+        "age": 18,
+        "current_ability": 65,
+        "potential_ability": 68,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Fortunatos Bouleutar",
+        "position": "FWD",
+        "age": 30,
+        "current_ability": 54,
+        "potential_ability": 62,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Natan Canaavar",
+        "position": "FWD",
+        "age": 21,
+        "current_ability": 58,
+        "potential_ability": 63,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      }
+    ]
   },
   {
     "name": "Kluba Sportika Galvononos",
@@ -279,234 +1434,234 @@
     "defense": 60,
     "squad": [
       {
-        "name": "Kiriakhos Drosveira",
+        "name": "Tralvon Vasiliadvar",
         "position": "GK",
-        "age": 21,
-        "current_ability": 56,
-        "potential_ability": 70,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Stavralhos Toranos",
-        "position": "GK",
-        "age": 17,
-        "current_ability": 58,
-        "potential_ability": 78,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Bernalhos Sulhanos",
-        "position": "GK",
-        "age": 25,
-        "current_ability": 71,
-        "potential_ability": 81,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Cesarhos Sulhonhos",
-        "position": "DEF",
-        "age": 37,
-        "current_ability": 67,
-        "potential_ability": 87,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Ioannalhos Mikranos",
-        "position": "DEF",
-        "age": 35,
-        "current_ability": 60,
-        "potential_ability": 79,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Shlomo Drosveira",
-        "position": "DEF",
-        "age": 37,
-        "current_ability": 63,
-        "potential_ability": 68,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Teodvar Lacavar",
-        "position": "DEF",
-        "age": 26,
-        "current_ability": 53,
-        "potential_ability": 72,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Aristalhos Mercavar",
-        "position": "DEF",
-        "age": 31,
-        "current_ability": 54,
-        "potential_ability": 65,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Aristalhos Jurikavar",
-        "position": "DEF",
-        "age": 24,
-        "current_ability": 61,
-        "potential_ability": 79,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Nikoforvar Nalhanos",
-        "position": "DEF",
-        "age": 31,
-        "current_ability": 66,
-        "potential_ability": 81,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Theophihos Templarhos",
-        "position": "DEF",
-        "age": 23,
-        "current_ability": 57,
-        "potential_ability": 67,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Giacomohos Campavar",
-        "position": "MID",
-        "age": 27,
-        "current_ability": 66,
-        "potential_ability": 73,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Orlhon Juravar",
-        "position": "MID",
-        "age": 21,
-        "current_ability": 65,
-        "potential_ability": 66,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Orlhon Stratigavar",
-        "position": "MID",
-        "age": 21,
-        "current_ability": 64,
-        "potential_ability": 74,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Brakhor Canaavar",
-        "position": "MID",
-        "age": 17,
+        "age": 19,
         "current_ability": 69,
-        "potential_ability": 69,
+        "potential_ability": 89,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 1
       },
       {
-        "name": "Eustrathos Juravar",
-        "position": "MID",
-        "age": 29,
-        "current_ability": 54,
+        "name": "Galvon Emvhalhos",
+        "position": "GK",
+        "age": 31,
+        "current_ability": 56,
         "potential_ability": 56,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 1
       },
       {
-        "name": "Jaumelhos Murnelos",
-        "position": "MID",
-        "age": 23,
-        "current_ability": 61,
-        "potential_ability": 62,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Bralhor Sylvavar",
-        "position": "MID",
-        "age": 29,
-        "current_ability": 65,
-        "potential_ability": 68,
-        "goals": 0,
-        "assists": 0,
-        "appearances": 0
-      },
-      {
-        "name": "Shlomo Panagiotopalhos",
-        "position": "MID",
-        "age": 34,
+        "name": "Filipalhos Emvaravar",
+        "position": "GK",
+        "age": 37,
         "current_ability": 70,
-        "potential_ability": 87,
+        "potential_ability": 78,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 1
       },
       {
-        "name": "Leonardhos Galvikos",
-        "position": "FWD",
-        "age": 23,
+        "name": "Franseschos Oleiavar",
+        "position": "DEF",
+        "age": 31,
+        "current_ability": 72,
+        "potential_ability": 81,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Eustrathos Fornavar",
+        "position": "DEF",
+        "age": 28,
+        "current_ability": 62,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Teodvar Angelidvar",
+        "position": "DEF",
+        "age": 22,
+        "current_ability": 59,
+        "potential_ability": 59,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Reuven Petroikos",
+        "position": "DEF",
+        "age": 28,
+        "current_ability": 66,
+        "potential_ability": 74,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Franseschos Mercelhar",
+        "position": "DEF",
+        "age": 19,
+        "current_ability": 65,
+        "potential_ability": 84,
+        "goals": 1,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Vicenthos Korinthios",
+        "position": "DEF",
+        "age": 28,
+        "current_ability": 52,
+        "potential_ability": 53,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Eustrathos Nalhavar",
+        "position": "DEF",
+        "age": 18,
         "current_ability": 69,
+        "potential_ability": 83,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Eliyahu Montalvar",
+        "position": "DEF",
+        "age": 36,
+        "current_ability": 71,
+        "potential_ability": 82,
+        "goals": 0,
+        "assists": 1,
+        "appearances": 1
+      },
+      {
+        "name": "Tornalh Archavar",
+        "position": "MID",
+        "age": 25,
+        "current_ability": 58,
         "potential_ability": 75,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 1
       },
       {
-        "name": "Ramhona Teixavar",
-        "position": "FWD",
-        "age": 23,
-        "current_ability": 62,
-        "potential_ability": 71,
+        "name": "Shimon Portavar",
+        "position": "MID",
+        "age": 33,
+        "current_ability": 55,
+        "potential_ability": 74,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 1
       },
       {
-        "name": "Stefanhos Emvhalhos",
-        "position": "FWD",
-        "age": 24,
-        "current_ability": 72,
-        "potential_ability": 85,
+        "name": "Teodvar Talvanos",
+        "position": "MID",
+        "age": 19,
+        "current_ability": 64,
+        "potential_ability": 64,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 1
       },
       {
-        "name": "Drosvon Pethalhos",
-        "position": "FWD",
-        "age": 26,
-        "current_ability": 54,
+        "name": "Felicianos Goruvikos",
+        "position": "MID",
+        "age": 19,
+        "current_ability": 61,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Fortunatos Argentavar",
+        "position": "MID",
+        "age": 29,
+        "current_ability": 55,
+        "potential_ability": 56,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Drosvhar Terranos",
+        "position": "MID",
+        "age": 31,
+        "current_ability": 55,
         "potential_ability": 70,
         "goals": 0,
         "assists": 0,
-        "appearances": 0
+        "appearances": 1
+      },
+      {
+        "name": "Nikolvar Caldavar",
+        "position": "MID",
+        "age": 25,
+        "current_ability": 68,
+        "potential_ability": 83,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Haim Kalvōdēs",
+        "position": "MID",
+        "age": 25,
+        "current_ability": 58,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Galvhor Veldheiros",
+        "position": "FWD",
+        "age": 33,
+        "current_ability": 60,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Teodvar Megistos",
+        "position": "FWD",
+        "age": 33,
+        "current_ability": 67,
+        "potential_ability": 76,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Andrevos Kalvanos",
+        "position": "FWD",
+        "age": 17,
+        "current_ability": 58,
+        "potential_ability": 76,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
+      },
+      {
+        "name": "Kyrialhos Dominalhar",
+        "position": "FWD",
+        "age": 33,
+        "current_ability": 55,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 1
       }
     ]
   },
@@ -515,34 +1670,1189 @@
     "attack": 61,
     "midfield": 60,
     "defense": 61,
-    "squad": []
+    "squad": [
+      {
+        "name": "Nikolvar Mercavar",
+        "position": "GK",
+        "age": 24,
+        "current_ability": 50,
+        "potential_ability": 54,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Teodvar Pelhavar",
+        "position": "GK",
+        "age": 22,
+        "current_ability": 64,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Lucivar Pastavar",
+        "position": "GK",
+        "age": 18,
+        "current_ability": 67,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Giovanavar Teravar",
+        "position": "DEF",
+        "age": 33,
+        "current_ability": 69,
+        "potential_ability": 82,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Anastasvar Brakavar",
+        "position": "DEF",
+        "age": 28,
+        "current_ability": 58,
+        "potential_ability": 68,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Klaudvar Campavar",
+        "position": "DEF",
+        "age": 27,
+        "current_ability": 51,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Galvhor Mikranos",
+        "position": "DEF",
+        "age": 21,
+        "current_ability": 57,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Andrevos Fontavar",
+        "position": "DEF",
+        "age": 17,
+        "current_ability": 61,
+        "potential_ability": 77,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Protopalhos Athinaios",
+        "position": "DEF",
+        "age": 31,
+        "current_ability": 51,
+        "potential_ability": 56,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Drosvon Mercelhar",
+        "position": "DEF",
+        "age": 27,
+        "current_ability": 62,
+        "potential_ability": 79,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Dominalhos Drosvikos",
+        "position": "DEF",
+        "age": 22,
+        "current_ability": 60,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Timotealhos Tornhikos",
+        "position": "MID",
+        "age": 19,
+        "current_ability": 67,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Athanasvar Murnanos",
+        "position": "MID",
+        "age": 26,
+        "current_ability": 50,
+        "potential_ability": 56,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Dominalhos Veldhōdēs",
+        "position": "MID",
+        "age": 34,
+        "current_ability": 70,
+        "potential_ability": 83,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Evaggelhos Orhlhikos",
+        "position": "MID",
+        "age": 17,
+        "current_ability": 68,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Giacomohos Korinthios",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 64,
+        "potential_ability": 81,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Placidos Talvanos",
+        "position": "MID",
+        "age": 36,
+        "current_ability": 58,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Timotealhos Orhlhikos",
+        "position": "MID",
+        "age": 37,
+        "current_ability": 67,
+        "potential_ability": 68,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Matteohos Sartravar",
+        "position": "MID",
+        "age": 31,
+        "current_ability": 60,
+        "potential_ability": 64,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Renzohos Jurikavar",
+        "position": "FWD",
+        "age": 25,
+        "current_ability": 57,
+        "potential_ability": 63,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Valerianhos Pelhavar",
+        "position": "FWD",
+        "age": 27,
+        "current_ability": 62,
+        "potential_ability": 64,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Matteohos Mercavar",
+        "position": "FWD",
+        "age": 20,
+        "current_ability": 52,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Aurelvar Angelidvar",
+        "position": "FWD",
+        "age": 23,
+        "current_ability": 62,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      }
+    ]
   },
   {
     "name": "Kluba Sportika Gedimou",
     "attack": 58,
     "midfield": 59,
     "defense": 61,
-    "squad": []
+    "squad": [
+      {
+        "name": "Mundilhos Dravanos",
+        "position": "GK",
+        "age": 19,
+        "current_ability": 58,
+        "potential_ability": 71,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Gaietahos Kalveira",
+        "position": "GK",
+        "age": 32,
+        "current_ability": 65,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Drosvon Orlhanos",
+        "position": "GK",
+        "age": 30,
+        "current_ability": 69,
+        "potential_ability": 86,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Benidiktos Sartravar",
+        "position": "DEF",
+        "age": 35,
+        "current_ability": 56,
+        "potential_ability": 63,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Luigivar Drosvhalhos",
+        "position": "DEF",
+        "age": 17,
+        "current_ability": 49,
+        "potential_ability": 59,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Sivanos Emvhalhos",
+        "position": "DEF",
+        "age": 32,
+        "current_ability": 66,
+        "potential_ability": 83,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Nikolvar Belavar",
+        "position": "DEF",
+        "age": 17,
+        "current_ability": 50,
+        "potential_ability": 61,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Aron Kancilavar",
+        "position": "DEF",
+        "age": 24,
+        "current_ability": 60,
+        "potential_ability": 63,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Fortunatos Murnanos",
+        "position": "DEF",
+        "age": 18,
+        "current_ability": 68,
+        "potential_ability": 84,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Tolvhan Eforavar",
+        "position": "DEF",
+        "age": 24,
+        "current_ability": 50,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Jordavar Pastavar",
+        "position": "DEF",
+        "age": 22,
+        "current_ability": 52,
+        "potential_ability": 72,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Demetralhos Canaavar",
+        "position": "MID",
+        "age": 24,
+        "current_ability": 58,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Peros Mercavar",
+        "position": "MID",
+        "age": 34,
+        "current_ability": 63,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Manolhos Sulheiros",
+        "position": "MID",
+        "age": 30,
+        "current_ability": 67,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Julalhos Drosvhalhos",
+        "position": "MID",
+        "age": 21,
+        "current_ability": 60,
+        "potential_ability": 71,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Natan Petroikos",
+        "position": "MID",
+        "age": 33,
+        "current_ability": 65,
+        "potential_ability": 79,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Leonardhos Boteravar",
+        "position": "MID",
+        "age": 24,
+        "current_ability": 53,
+        "potential_ability": 57,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Pirnalh Talvikos",
+        "position": "MID",
+        "age": 35,
+        "current_ability": 51,
+        "potential_ability": 52,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Benedettohos Tameiavar",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 66,
+        "potential_ability": 86,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Teodvar Emvaravar",
+        "position": "FWD",
+        "age": 17,
+        "current_ability": 67,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Markelhos Emvaravar",
+        "position": "FWD",
+        "age": 33,
+        "current_ability": 61,
+        "potential_ability": 73,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Brunavar Talvikos",
+        "position": "FWD",
+        "age": 30,
+        "current_ability": 60,
+        "potential_ability": 80,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Mundilhos Vitavar",
+        "position": "FWD",
+        "age": 37,
+        "current_ability": 67,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      }
+    ]
   },
   {
     "name": "Kluba Sportika Soleiu",
     "attack": 57,
     "midfield": 60,
     "defense": 58,
-    "squad": []
+    "squad": [
+      {
+        "name": "Yaakov Oleiavar",
+        "position": "GK",
+        "age": 20,
+        "current_ability": 62,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Klementos Vidravar",
+        "position": "GK",
+        "age": 17,
+        "current_ability": 54,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Llorenhos Glykanos",
+        "position": "GK",
+        "age": 29,
+        "current_ability": 56,
+        "potential_ability": 57,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Georgalhos Konsulavar",
+        "position": "DEF",
+        "age": 33,
+        "current_ability": 66,
+        "potential_ability": 79,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Avraham Templarhos",
+        "position": "DEF",
+        "age": 23,
+        "current_ability": 56,
+        "potential_ability": 59,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Haim Brakikos",
+        "position": "DEF",
+        "age": 22,
+        "current_ability": 67,
+        "potential_ability": 79,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Ioannalhos Pelheiros",
+        "position": "DEF",
+        "age": 18,
+        "current_ability": 61,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Vicenthos Boteravar",
+        "position": "DEF",
+        "age": 18,
+        "current_ability": 56,
+        "potential_ability": 76,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Yaakov Orlhanos",
+        "position": "DEF",
+        "age": 35,
+        "current_ability": 68,
+        "potential_ability": 78,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Grigoralhos Orlhanos",
+        "position": "DEF",
+        "age": 31,
+        "current_ability": 64,
+        "potential_ability": 80,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Kostanvar Arnhōdēs",
+        "position": "DEF",
+        "age": 24,
+        "current_ability": 65,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Murnon Fustaveira",
+        "position": "MID",
+        "age": 38,
+        "current_ability": 50,
+        "potential_ability": 55,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Vicenthos Talvanos",
+        "position": "MID",
+        "age": 34,
+        "current_ability": 68,
+        "potential_ability": 86,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Giovanavar Boteravar",
+        "position": "MID",
+        "age": 38,
+        "current_ability": 67,
+        "potential_ability": 72,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Jaumelhos Sulhanos",
+        "position": "MID",
+        "age": 24,
+        "current_ability": 64,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Grigoralhos Teixavar",
+        "position": "MID",
+        "age": 25,
+        "current_ability": 63,
+        "potential_ability": 73,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Mundilhos Glykanos",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 61,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Blailhos Ferraavar",
+        "position": "MID",
+        "age": 34,
+        "current_ability": 56,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Tolvhan Pelheiros",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 67,
+        "potential_ability": 73,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Ponselhos Papadopalhos",
+        "position": "FWD",
+        "age": 23,
+        "current_ability": 53,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Yitzhak Pethanos",
+        "position": "FWD",
+        "age": 38,
+        "current_ability": 50,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Giovanavar Drosveira",
+        "position": "FWD",
+        "age": 33,
+        "current_ability": 65,
+        "potential_ability": 68,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Justinianhos Sartravar",
+        "position": "FWD",
+        "age": 17,
+        "current_ability": 65,
+        "potential_ability": 84,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      }
+    ]
   },
   {
     "name": "Kluba Maritima Metia",
     "attack": 55,
     "midfield": 55,
     "defense": 56,
-    "squad": []
+    "squad": [
+      {
+        "name": "Mordekhai Pethanos",
+        "position": "GK",
+        "age": 29,
+        "current_ability": 54,
+        "potential_ability": 58,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Gorulh Jurikavar",
+        "position": "GK",
+        "age": 32,
+        "current_ability": 62,
+        "potential_ability": 72,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Stefanhos Veldheiros",
+        "position": "GK",
+        "age": 29,
+        "current_ability": 47,
+        "potential_ability": 56,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Sergivar Montalvar",
+        "position": "DEF",
+        "age": 32,
+        "current_ability": 48,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Dimitriadvar Pedraavar",
+        "position": "DEF",
+        "age": 18,
+        "current_ability": 63,
+        "potential_ability": 67,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Veldhor Vidravar",
+        "position": "DEF",
+        "age": 38,
+        "current_ability": 51,
+        "potential_ability": 61,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Levi Vitavar",
+        "position": "DEF",
+        "age": 25,
+        "current_ability": 56,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Franseschos Brakeiros",
+        "position": "DEF",
+        "age": 30,
+        "current_ability": 49,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Bertavar Terravar",
+        "position": "DEF",
+        "age": 31,
+        "current_ability": 54,
+        "potential_ability": 74,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Eliyahu Nomikavar",
+        "position": "DEF",
+        "age": 24,
+        "current_ability": 45,
+        "potential_ability": 57,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Evaggelhos Goruveira",
+        "position": "DEF",
+        "age": 19,
+        "current_ability": 50,
+        "potential_ability": 59,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Bertavar Portavar",
+        "position": "MID",
+        "age": 21,
+        "current_ability": 56,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Llorenhos Murnelos",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 47,
+        "potential_ability": 53,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Talvon Terravar",
+        "position": "MID",
+        "age": 33,
+        "current_ability": 50,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Nalhon Drosvikos",
+        "position": "MID",
+        "age": 19,
+        "current_ability": 63,
+        "potential_ability": 74,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Mateuhos Murnikos",
+        "position": "MID",
+        "age": 34,
+        "current_ability": 65,
+        "potential_ability": 84,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Pantazalhos Vitavar",
+        "position": "MID",
+        "age": 26,
+        "current_ability": 59,
+        "potential_ability": 77,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Aleksalhos Goruveira",
+        "position": "MID",
+        "age": 26,
+        "current_ability": 59,
+        "potential_ability": 60,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Haim Emvarios",
+        "position": "MID",
+        "age": 35,
+        "current_ability": 56,
+        "potential_ability": 63,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Gaietahos Sylvavar",
+        "position": "FWD",
+        "age": 19,
+        "current_ability": 53,
+        "potential_ability": 64,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Dalmauhos Rioavar",
+        "position": "FWD",
+        "age": 38,
+        "current_ability": 54,
+        "potential_ability": 63,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Felicianos Salavar",
+        "position": "FWD",
+        "age": 28,
+        "current_ability": 51,
+        "potential_ability": 59,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Pirnalh Galveiros",
+        "position": "FWD",
+        "age": 25,
+        "current_ability": 52,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      }
+    ]
   },
   {
     "name": "Kluba Sportika Alentumou",
     "attack": 59,
     "midfield": 61,
     "defense": 60,
-    "squad": []
+    "squad": [
+      {
+        "name": "Kallistratos Grammatavar",
+        "position": "GK",
+        "age": 31,
+        "current_ability": 70,
+        "potential_ability": 89,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Ambrosvar Bouleutar",
+        "position": "GK",
+        "age": 26,
+        "current_ability": 66,
+        "potential_ability": 67,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Giovanavar Nalhanos",
+        "position": "GK",
+        "age": 23,
+        "current_ability": 55,
+        "potential_ability": 70,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Filippalhos Maragavar",
+        "position": "DEF",
+        "age": 28,
+        "current_ability": 60,
+        "potential_ability": 74,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Drosvhar Fustavar",
+        "position": "DEF",
+        "age": 28,
+        "current_ability": 52,
+        "potential_ability": 55,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Shimon Panagiotopalhos",
+        "position": "DEF",
+        "age": 29,
+        "current_ability": 67,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Peros Veldhalhos",
+        "position": "DEF",
+        "age": 23,
+        "current_ability": 60,
+        "potential_ability": 74,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Kallistratos Insulavar",
+        "position": "DEF",
+        "age": 34,
+        "current_ability": 62,
+        "potential_ability": 71,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Manolhos Orlhanos",
+        "position": "DEF",
+        "age": 28,
+        "current_ability": 67,
+        "potential_ability": 72,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Anastasvar Orlhanos",
+        "position": "DEF",
+        "age": 33,
+        "current_ability": 50,
+        "potential_ability": 66,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Spyrolhos Athinaios",
+        "position": "DEF",
+        "age": 28,
+        "current_ability": 53,
+        "potential_ability": 55,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Kiriakhos Terranos",
+        "position": "MID",
+        "age": 32,
+        "current_ability": 53,
+        "potential_ability": 54,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Dolvhan Carnavar",
+        "position": "MID",
+        "age": 36,
+        "current_ability": 51,
+        "potential_ability": 65,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Enricohos Nalhikos",
+        "position": "MID",
+        "age": 34,
+        "current_ability": 62,
+        "potential_ability": 74,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Karmelos Mercelhar",
+        "position": "MID",
+        "age": 18,
+        "current_ability": 66,
+        "potential_ability": 67,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Florivos Galvikos",
+        "position": "MID",
+        "age": 33,
+        "current_ability": 52,
+        "potential_ability": 58,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Sergivar Emvhalhos",
+        "position": "MID",
+        "age": 20,
+        "current_ability": 67,
+        "potential_ability": 80,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Manolhos Montalvar",
+        "position": "MID",
+        "age": 22,
+        "current_ability": 51,
+        "potential_ability": 69,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Georgalhos Templarhos",
+        "position": "MID",
+        "age": 22,
+        "current_ability": 69,
+        "potential_ability": 87,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Vasilhos Solivar",
+        "position": "FWD",
+        "age": 21,
+        "current_ability": 70,
+        "potential_ability": 72,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Barukh Veldhanos",
+        "position": "FWD",
+        "age": 28,
+        "current_ability": 66,
+        "potential_ability": 67,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Andrevos Vitavar",
+        "position": "FWD",
+        "age": 28,
+        "current_ability": 70,
+        "potential_ability": 79,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      },
+      {
+        "name": "Franseschos Mikranos",
+        "position": "FWD",
+        "age": 38,
+        "current_ability": 62,
+        "potential_ability": 75,
+        "goals": 0,
+        "assists": 0,
+        "appearances": 0
+      }
+    ]
   }
 ]

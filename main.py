@@ -1,5 +1,6 @@
 import random
 import json
+import os
 from classes import Team, Player
 from simulation import simulate_match
 from name_generator import generate_myrian_name, generate_squad
@@ -36,6 +37,17 @@ coraerum = Team("Kluba Sportika Coraerou", 40, 41, 40)
 veldhavon = Team("Kluba Veldhavonos", 39, 38, 40)
 
 teams = [sulhavon, maritima_thesia, mercaria, portavar, esalum, mileius, galvonon, pk_galvonon, gedium, soleium, metia, alentum]
+
+if os.path.exists("teams_data.json"):
+    teams = load_teams_from_file("teams_data.json")
+else:
+    print("No teams data found. Generating new teams...")
+    for team in teams:
+        avg_ca = int((team.attack + team.midfield + team.defense) / 3)
+        team.squad = generate_squad(team.name, average_ca=avg_ca)
+
+    save_teams_to_file(teams)
+
 
 standings = {}
 match_results = []
@@ -137,29 +149,27 @@ for team in teams:
     team_squad = generate_squad(team.name, average_ca=avg_ca)
     print(f"Generated squad for {team.name} (avg CA: {avg_ca})") """
 
-galvonon.squad = generate_squad(galvonon.name, average_ca=63)
-maritima_thesia.squad = generate_squad(maritima_thesia.name, average_ca=62)
+home_goals, away_goals = simulate_match(teams[0], teams[1])
+print(f"\n{teams[0].name} {home_goals} - {away_goals} {teams[1].name}\n")
+
+for player in galvonon.squad:
+    if player.goals > 0:
+        print(f"{player.name}: {player.goals} goals")
+
+for player in galvonon.squad:
+    if player.assists > 0:
+        print(f"{player.name}: {player.assists} assists")
+
+for player in maritima_thesia.squad:
+    if player.goals > 0:
+        print(f"{player.name}: {player.goals} goals")
+
+for player in maritima_thesia.squad:
+    if player.assists > 0:
+        print(f"{player.name}: {player.assists} assists")
 
 save_teams_to_file(teams)
-
-home_goals, away_goals = simulate_match(galvonon, maritima_thesia)
-print(f"\n{galvonon.name} {home_goals} - {away_goals} {maritima_thesia.name}\n")
-
-for player in galvonon.squad:
-    if player.goals > 0:
-        print(f"{player.name}: {player.goals} goals")
-
-for player in galvonon.squad:
-    if player.assists > 0:
-        print(f"{player.name}: {player.assists} assists")
-
-for player in maritima_thesia.squad:
-    if player.goals > 0:
-        print(f"{player.name}: {player.goals} goals")
-
-for player in maritima_thesia.squad:
-    if player.assists > 0:
-        print(f"{player.name}: {player.assists} assists")
+print("Teams data saved to teams_data.json")
 
 loaded_teams = load_teams_from_file("teams_data.json")
 print(f"Loaded {len(loaded_teams)} teams.")
