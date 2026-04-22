@@ -52,7 +52,7 @@ else:
 standings = {}
 match_results = []
 
-""" for team in teams:
+for team in teams:
     standings[team.name] = {
         "played": 0,
         "wins": 0,
@@ -104,12 +104,12 @@ for home_team in teams:
                 standings[away_team.name]["draws"] += 1
                 standings[away_team.name]["points"] += 1
 
-            print(f"{home_team.name} {home_goals} - {away_goals} {away_team.name}")
+            print(f"\n{home_team.name} {home_goals} - {away_goals} {away_team.name}")
             print("="*50)
 
-sorted_standings = sorted(standings.items(), key=lambda x: x[1]["points"], reverse=True) """
+sorted_standings = sorted(standings.items(), key=lambda x: x[1]["points"], reverse=True)
 
-""" print("\n" + "="*80)
+print("\n" + "="*80)
 print("LEAGUE TABLE")
 print("="*80)
 print(f"{'Pos':<5} {'Team':<30} {'GP':<5} {'W':<5} {'D':<5} {'L':<5} {'GF':<5} {'GA':<5} {'GD':<5} {'Pts':<5}")
@@ -136,6 +136,38 @@ with open("league_table.txt", "w", encoding="utf-8") as f:
         position += 1
     
     f.write("="*80 + "\n")
+    
+all_players = []
+for team in teams:
+    all_players.extend(team.squad)
+
+top_scorers = sorted(all_players, key=lambda p: p.goals, reverse=True)[:10]
+top_assisters = sorted(all_players, key=lambda p: p.assists, reverse=True)[:10]
+
+# Display
+print("\n" + "="*80)
+print("TOP 10 SCORERS")
+print("="*80)
+print(f"{'Rank':<5} {'Name':<30} {'Team':<30} {'Goals':<5}")
+print("-"*80)
+
+for i, player in enumerate(top_scorers, 1):
+    player_team = next(t.name for t in teams if player in t.squad)
+    print(f"{i:<5} {player.name:<30} {player_team:<30} {player.goals:<5}")
+
+print("="*80)
+
+print("\n" + "="*80)
+print("TOP 10 ASSISTERS")
+print("="*80)
+print(f"{'Rank':<5} {'Name':<30} {'Team':<30} {'Assists':<5}")
+print("-"*80)
+
+for i, player in enumerate(top_assisters, 1):
+    player_team = next(t.name for t in teams if player in t.squad)
+    print(f"{i:<5} {player.name:<30} {player_team:<30} {player.assists:<5}")
+
+print("="*80)
 
 print("League table saved to league_table.txt")
 
@@ -147,30 +179,9 @@ print("Match results saved to match_results.json")
 for team in teams:
     avg_ca = (team.attack + team.midfield + team.defense) / 3
     team_squad = generate_squad(team.name, average_ca=avg_ca)
-    print(f"Generated squad for {team.name} (avg CA: {avg_ca})") """
-
-home_goals, away_goals = simulate_match(teams[0], teams[1])
-print(f"\n{teams[0].name} {home_goals} - {away_goals} {teams[1].name}\n")
-
-for player in galvonon.squad:
-    if player.goals > 0:
-        print(f"{player.name}: {player.goals} goals")
-
-for player in galvonon.squad:
-    if player.assists > 0:
-        print(f"{player.name}: {player.assists} assists")
-
-for player in maritima_thesia.squad:
-    if player.goals > 0:
-        print(f"{player.name}: {player.goals} goals")
-
-for player in maritima_thesia.squad:
-    if player.assists > 0:
-        print(f"{player.name}: {player.assists} assists")
+    print(f"Generated squad for {team.name} (avg CA: {round(avg_ca)})") 
 
 save_teams_to_file(teams)
 print("Teams data saved to teams_data.json")
 
 loaded_teams = load_teams_from_file("teams_data.json")
-print(f"Loaded {len(loaded_teams)} teams.")
-print(f"First team: {loaded_teams[1].name}, squad size: {len(loaded_teams[1].squad)}")

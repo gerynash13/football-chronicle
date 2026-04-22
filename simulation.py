@@ -45,10 +45,13 @@ def pick_assister(team, scorer):
     chosen = random.choice(weighted_players)
     return chosen
 
-def simulate_match(team1, team2):
+def simulate_match(team1, team2, is_home_game=True):
+    
+    if is_home_game:
+        home_boost = 2
 
     base_chances = 28
-    midfield_bonus = (team1.midfield + team2.midfield) / 20
+    midfield_bonus = ((team1.midfield + home_boost) + team2.midfield) / 20
     total_chances = base_chances + midfield_bonus + random.randint(-5, 5)
 
     for player in team1.squad:
@@ -65,13 +68,13 @@ def simulate_match(team1, team2):
     team2_goals = 0
 
     for current_minute in chance_minutes:
-        team1_midfield_power = team1.midfield ** 3
+        team1_midfield_power = (team1.midfield + home_boost) ** 3
         team2_midfield_power = team2.midfield ** 3
         total_power = team1_midfield_power + team2_midfield_power
         team1_chance = team1_midfield_power / total_power
 
         if random.random() < team1_chance:
-            shot_quality = team1.attack - team2.defense
+            shot_quality = (team1.attack + home_boost) - team2.defense
             scoring_chance = max(5, min(shot_quality / 4, 25))
             team_quality_bonus = team1.attack / 40
             scoring_chance = min(scoring_chance + team_quality_bonus, 28)
@@ -80,12 +83,10 @@ def simulate_match(team1, team2):
                 team1_goals += 1
                 scorer = pick_player_for_chance(team1)
                 scorer.goals += 1
-                print(f"{scorer.name} scores a goal! (Season Goals: {scorer.goals})")
 
                 assister = pick_assister(team1, scorer)
                 if assister:
                     assister.assists += 1
-                    print(f"{assister.name} assists! (Season Assists: {assister.assists})")
 
                 events.append({
                     "minute": current_minute,
@@ -123,12 +124,10 @@ def simulate_match(team1, team2):
                 team2_goals += 1
                 scorer = pick_player_for_chance(team2)
                 scorer.goals += 1
-                print(f"{scorer.name} scores a goal! (Season Goals: {scorer.goals})")
 
                 assister = pick_assister(team2, scorer)
                 if assister:
                     assister.assists += 1
-                    print(f"{assister.name} assists! (Season Assists: {assister.assists})")
 
                 events.append({
                     "minute": current_minute,
