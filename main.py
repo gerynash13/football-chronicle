@@ -1,7 +1,9 @@
 import random
 import json
 import os
-from classes import Team, Player
+from classes.team import Team
+from classes.player import Player
+from classes.competition import Competition
 from simulation import simulate_match
 from name_generator import generate_myrian_name, generate_squad
 from data_manager import save_teams_to_file, load_teams_from_file
