@@ -6,7 +6,7 @@ class Competition:
         self.name = name
         self.teams = teams
         self.type = competition_type
-        self.current_matchday = 0
+        self.current_matchday = 1
         self.fixtures = []
         self.results = []
         self.standings = self.initialize_standings()
@@ -66,8 +66,8 @@ class Competition:
             })
             
 
-    def get_current_fixture(self):
-        return self.fixtures[self.current_matchday]
+    def get_current_fixtures(self):
+        return [f for f in self.fixtures if f["matchday"] == self.current_matchday]
     
     
     def simulate_matchday(self):
@@ -85,7 +85,37 @@ class Competition:
                     "away_goals": away_goals
                 })
                 
+                # Update standings
+                self.standings[home_team.name]["played"] += 1
+                self.standings[away_team.name]["played"] += 1
+
+                self.standings[home_team.name]["goals_for"] += home_goals
+                self.standings[home_team.name]["goals_against"] += away_goals
+                self.standings[home_team.name]["goal_difference"] = \
+                    self.standings[home_team.name]["goals_for"] - self.standings[home_team.name]["goals_against"]
+
+                self.standings[away_team.name]["goals_for"] += away_goals
+                self.standings[away_team.name]["goals_against"] += home_goals
+                self.standings[away_team.name]["goal_difference"] = \
+                    self.standings[away_team.name]["goals_for"] - self.standings[away_team.name]["goals_against"]
+
+                # Determine result
+                if home_goals > away_goals:
+                    self.standings[home_team.name]["wins"] += 1
+                    self.standings[home_team.name]["points"] += 3
+                    self.standings[away_team.name]["losses"] += 1
+                elif away_goals > home_goals:
+                    self.standings[away_team.name]["wins"] += 1
+                    self.standings[away_team.name]["points"] += 3
+                    self.standings[home_team.name]["losses"] += 1
+                else:
+                    self.standings[home_team.name]["draws"] += 1
+                    self.standings[home_team.name]["points"] += 1
+                    self.standings[away_team.name]["draws"] += 1
+                    self.standings[away_team.name]["points"] += 1
+                
     def advance_matchday(self):
+        input("Do you want to advance to the next matchday? (Press Enter)")
         self.current_matchday += 1
         
     

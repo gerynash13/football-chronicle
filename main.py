@@ -52,7 +52,7 @@ else:
 standings = {}
 match_results = []
 
-for team in teams:
+""" for team in teams:
     standings[team.name] = {
         "played": 0,
         "wins": 0,
@@ -105,9 +105,9 @@ for home_team in teams:
                 standings[away_team.name]["points"] += 1
 
             print(f"\n{home_team.name} {home_goals} - {away_goals} {away_team.name}")
-            print("="*50)
+            print("="*50) """
 
-sorted_standings = sorted(standings.items(), key=lambda x: x[1]["points"], reverse=True)
+""" sorted_standings = sorted(standings.items(), key=lambda x: x[1]["points"], reverse=True)
 
 print("\n" + "="*80)
 print("LEAGUE TABLE")
@@ -135,7 +135,7 @@ with open("league_table.txt", "w", encoding="utf-8") as f:
         f.write(f"{position:<5} {team_name:<30} {stats['played']:<5} {stats['wins']:<5} {stats['draws']:<5} {stats['losses']:<5} {stats['goals_for']:<5} {stats['goals_against']:<5} {stats['goal_difference']:<5} {stats['points']:<5}\n")
         position += 1
     
-    f.write("="*80 + "\n")
+    f.write("="*80 + "\n") """
     
 all_players = []
 for team in teams:
@@ -188,5 +188,8 @@ loaded_teams = load_teams_from_file("teams_data.json")
 
 comp = Competition("Prote Kategorias", teams)
 comp.generate_fixtures()
-print(f"Total fixtures: {len(comp.fixtures)}")
-print(f"Matchdays: {max(f['matchday'] for f in comp.fixtures)}")
+comp.simulate_matchday()
+print(comp.get_current_fixtures())
+print(comp.get_standings())
+comp.advance_matchday()
+comp.simulate_matchday()
