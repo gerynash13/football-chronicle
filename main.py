@@ -1,9 +1,7 @@
 import random
 import json
 import os
-from classes.team import Team
-from classes.player import Player
-from classes.competition import Competition
+from classes import Team, Player, Competition
 from simulation import simulate_match
 from name_generator import generate_myrian_name, generate_squad
 from data_manager import save_teams_to_file, load_teams_from_file
@@ -187,3 +185,8 @@ save_teams_to_file(teams)
 print("Teams data saved to teams_data.json")
 
 loaded_teams = load_teams_from_file("teams_data.json")
+
+comp = Competition("Prote Kategorias", teams)
+comp.generate_fixtures()
+print(f"Total fixtures: {len(comp.fixtures)}")
+print(f"Matchdays: {max(f['matchday'] for f in comp.fixtures)}")

@@ -3,16 +3,16 @@ LEAGUE TABLE
 ================================================================================
 Pos   Team                           P     W     D     L     GF    GA    GD    Pts  
 --------------------------------------------------------------------------------
-1     Kluba Maritima Thesias         22    12    6     4     30    16    14    42   
-2     Kluba Sportika Soleiu          22    11    7     4     33    19    14    40   
-3     Portavar Kluba                 22    9     7     6     21    17    4     34   
-4     Kluba Sportika Mileiu          22    8     7     7     19    17    2     31   
-5     Kluba Sulhavonos               22    8     5     9     16    20    -4    29   
-6     Kluba Sportika Alentumou       22    7     8     7     20    24    -4    29   
-7     Kluba Maritima Metia           22    6     8     8     20    24    -4    26   
-8     Kluba Sportika Galvononos      22    5     10    7     18    21    -3    25   
-9     Kluba Sportika Gedimou         22    6     7     9     21    25    -4    25   
-10    Mercaria Kluba                 22    5     9     8     22    20    2     24   
-11    Kluba Sportika Esalumou        22    6     6     10    10    21    -11   24   
-12    Populara Kluba Galvononos      22    6     6     10    17    23    -6    24   
+1     Mercaria Kluba                 22    10    8     4     26    21    5     38   
+2     Kluba Sulhavonos               22    9     9     4     23    15    8     36   
+3     Portavar Kluba                 22    10    5     7     32    22    10    35   
+4     Kluba Sportika Alentumou       22    9     8     5     24    19    5     35   
+5     Kluba Maritima Thesias         22    8     10    4     26    17    9     34   
+6     Kluba Sportika Galvononos      22    8     8     6     20    15    5     32   
+7     Kluba Sportika Soleiu          22    9     5     8     22    17    5     32   
+8     Kluba Sportika Gedimou         22    8     3     11    20    24    -4    27   
+9     Populara Kluba Galvononos      22    6     8     8     15    21    -6    26   
+10    Kluba Sportika Esalumou        22    6     6     10    22    26    -4    24   
+11    Kluba Sportika Mileiu          22    4     7     11    11    26    -15   19   
+12    Kluba Maritima Metia           22    4     5     13    12    30    -18   17   
 ================================================================================
