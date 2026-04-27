@@ -2,8 +2,7 @@ import random
 import json
 import os
 from classes import Team, Player, Competition
-from simulation import simulate_match
-from name_generator import generate_myrian_name, generate_squad
+from name_generator import generate_squad
 from data_manager import save_teams_to_file, load_teams_from_file
 
 sulhavon = Team("Kluba Sulhavonos", 64, 58, 57)
@@ -41,160 +40,92 @@ teams = [sulhavon, maritima_thesia, mercaria, portavar, esalum, mileius, galvono
 if os.path.exists("teams_data.json"):
     teams = load_teams_from_file("teams_data.json")
 else:
-    print("No teams data found. Generating new teams...")
+    print("No teams data found. Generating new squads...")
     for team in teams:
         avg_ca = int((team.attack + team.midfield + team.defense) / 3)
         team.squad = generate_squad(team.name, average_ca=avg_ca)
 
     save_teams_to_file(teams)
-
-
-standings = {}
-match_results = []
-
-""" for team in teams:
-    standings[team.name] = {
-        "played": 0,
-        "wins": 0,
-        "draws": 0,
-        "losses": 0,
-        "goals_for": 0,
-        "goals_against": 0,
-        "goal_difference": 0,
-        "points": 0
-    }
-
-for home_team in teams:
-    for away_team in teams:
-        if home_team != away_team:
-            home_goals, away_goals = simulate_match(home_team, away_team)
-
-            match_results.append({
-                "home_team": home_team.name,
-                "away_team": away_team.name,
-                "home_goals": home_goals,
-                "away_goals": away_goals
-            })
-
-            # Update standings for both teams
-            standings[home_team.name]["played"] += 1
-            standings[away_team.name]["played"] += 1
-
-            standings[home_team.name]["goals_for"] += home_goals
-            standings[away_team.name]["goals_for"] += away_goals
-
-            standings[home_team.name]["goals_against"] += away_goals
-            standings[away_team.name]["goals_against"] += home_goals
-
-            standings[home_team.name]["goal_difference"] = standings[home_team.name]["goals_for"] - standings[home_team.name]["goals_against"]
-            standings[away_team.name]["goal_difference"] = standings[away_team.name]["goals_for"] - standings[away_team.name]["goals_against"]
-
-            # Determine points and W-D-L record
-            if home_goals > away_goals:
-                standings[home_team.name]["wins"] += 1
-                standings[home_team.name]["points"] += 3
-                standings[away_team.name]["losses"] += 1
-            elif away_goals > home_goals:
-                standings[away_team.name]["wins"] += 1
-                standings[away_team.name]["points"] += 3
-                standings[home_team.name]["losses"] += 1
-            else:
-                standings[home_team.name]["draws"] += 1
-                standings[home_team.name]["points"] += 1
-                standings[away_team.name]["draws"] += 1
-                standings[away_team.name]["points"] += 1
-
-            print(f"\n{home_team.name} {home_goals} - {away_goals} {away_team.name}")
-            print("="*50) """
-
-""" sorted_standings = sorted(standings.items(), key=lambda x: x[1]["points"], reverse=True)
-
-print("\n" + "="*80)
-print("LEAGUE TABLE")
-print("="*80)
-print(f"{'Pos':<5} {'Team':<30} {'GP':<5} {'W':<5} {'D':<5} {'L':<5} {'GF':<5} {'GA':<5} {'GD':<5} {'Pts':<5}")
-print("-"*80)
-
-position = 1
-for team_name, stats in sorted_standings:
-    print(f"{position:<5} {team_name:<30} {stats['played']:<5} {stats['wins']:<5} {stats['draws']:<5} {stats['losses']:<5} {stats['goals_for']:<5} {stats['goals_against']:<5} {stats['goal_difference']:<5} {stats['points']:<5}")
-    position += 1
-
-print("="*80)
-
-# Save standings
-with open("league_table.txt", "w", encoding="utf-8") as f:
-    f.write("="*80 + "\n")
-    f.write("LEAGUE TABLE\n")
-    f.write("="*80 + "\n")
-    f.write(f"{'Pos':<5} {'Team':<30} {'P':<5} {'W':<5} {'D':<5} {'L':<5} {'GF':<5} {'GA':<5} {'GD':<5} {'Pts':<5}\n")
-    f.write("-"*80 + "\n")
     
-    position = 1
-    for team_name, stats in sorted_standings:
-        f.write(f"{position:<5} {team_name:<30} {stats['played']:<5} {stats['wins']:<5} {stats['draws']:<5} {stats['losses']:<5} {stats['goals_for']:<5} {stats['goals_against']:<5} {stats['goal_difference']:<5} {stats['points']:<5}\n")
-        position += 1
+# Create competition
+comp = Competition("Prote Kategorias", teams)
+comp.generate_fixtures()
+
+# Simulate season (matchday by matchday)
+while comp.current_matchday <= len(comp.fixtures):
+    print(f"\n{'='*80}")
+    print(f"Matchday {comp.current_matchday}")
+    print(f"{'='*80}\n")
     
-    f.write("="*80 + "\n") """
+    # Show fixtures
+    fixtures = comp.get_current_fixtures()
+    for fixture in fixtures:
+        print(f"{fixture['home_team'].name} vs {fixture['away_team'].name}")
+        
+    # Simulate matchday
+    comp.simulate_matchday()
     
+    # Display standings after matchday
+    sorted_standings = sorted(comp.standings.items(), key=lambda x: x[1]["points"], reverse=True)
+    
+    print(f"\n{'='*80}")
+    print(f"Standings after Matchday {comp.current_matchday}")
+    print(f"{'='*80}\n")
+    print(f"{'Pos':<6}{'Team':<30}{'GP':<5}{'W':<5}{'D':<5}{'L':<5}{'GF':<5}{'GA':<5}{'GD':<5}{'Pts':<5}")
+    print(f"{'-'*80}")
+    
+    for i, (team_name, stats) in enumerate(sorted_standings, 1):
+        print(f"{i:<5} {team_name:<30} {stats['played']:<4} {stats['wins']:<4} {stats['draws']:<4} {stats['losses']:<4} {stats['goals_for']:<4} {stats['goals_against']:<4} {stats['goal_difference']:<4} {stats['points']:<4}")
+        
+    print(f"\n{'='*80}\n")
+    
+    # Advance to next matchday
+    if comp.current_matchday < len(comp.fixtures):
+        comp.advance_matchday()
+    else:
+        break
+    
+# Season completed - show final stats
+print(f"\n{'='*80}")
+print(f"Final Standings")
+print(f"{'='*80}\n")
+
+# Champion
+champion = sorted(comp.standings.items(), key=lambda x: x[1]["points"], reverse=True)[0]
+print(f"🏆 Champion: {champion[0]} - {champion[1]['points']} pts")
+
+# Top scorers and assisters
 all_players = []
 for team in teams:
     all_players.extend(team.squad)
-
+    
 top_scorers = sorted(all_players, key=lambda p: p.goals, reverse=True)[:10]
 top_assisters = sorted(all_players, key=lambda p: p.assists, reverse=True)[:10]
 
-# Display
-print("\n" + "="*80)
-print("TOP 10 SCORERS")
-print("="*80)
-print(f"{'Rank':<5} {'Name':<30} {'Team':<30} {'Goals':<5}")
-print("-"*80)
+print(f"\n{'='*80}")
+print(f"Top Scorers")
+print(f"{'='*80}\n")
+print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Goals':<4}")
+print(f"{'-'*80}")
 
 for i, player in enumerate(top_scorers, 1):
-    player_team = next(t.name for t in teams if player in t.squad)
-    print(f"{i:<5} {player.name:<30} {player_team:<30} {player.goals:<5}")
+    player_team = next(t for t in teams if player in t.squad)
+    print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.goals:<4}")
+    
+print(f"\n{'='*80}")
 
-print("="*80)
-
-print("\n" + "="*80)
-print("TOP 10 ASSISTERS")
-print("="*80)
-print(f"{'Rank':<5} {'Name':<30} {'Team':<30} {'Assists':<5}")
-print("-"*80)
+print(f"\n" + "="*80)
+print(f"Top Assisters")
+print(f"{'='*80}\n")
+print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Assists':<4}")
+print(f"{'-'*80}")
 
 for i, player in enumerate(top_assisters, 1):
-    player_team = next(t.name for t in teams if player in t.squad)
-    print(f"{i:<5} {player.name:<30} {player_team:<30} {player.assists:<5}")
-
-print("="*80)
-
-print("League table saved to league_table.txt")
-
-with open("match_results.json", "w", encoding="utf-8") as f:
-    json.dump(match_results, f, indent=2, ensure_ascii=False)
-
-print("Match results saved to match_results.json")
-
-save_teams_to_file(teams)
-print("Teams data saved to teams_data.json")
-
-loaded_teams = load_teams_from_file("teams_data.json")
-
-comp = Competition("Prote Kategorias", teams)
-
-comp.generate_fixtures()
-# Print matchday 1 fixtures
-md1 = [f for f in comp.fixtures if f["matchday"] == 1]
-for f in md1:
-    print(f"{f['home_team'].name} vs {f['away_team'].name} (Matchday {f['matchday']})")
-
-comp.simulate_matchday()
-
-fixtures = comp.get_current_fixtures()
-for fixture in fixtures:
-    print(f"{fixture['home_team'].name} vs {fixture['away_team'].name} (Matchday {fixture['matchday']})")
+    player_team = next(t for t in teams if player in t.squad)
+    print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.assists:<4}")
     
-print(comp.get_standings())
-comp.advance_matchday()
-comp.simulate_matchday()
+print(f"\n{'='*80}")
+
+# Save final state
+save_teams_to_file(teams)
+print("\nSeason completed. Data saved to teams_data.json")
