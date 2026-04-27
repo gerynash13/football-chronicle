@@ -176,20 +176,25 @@ with open("match_results.json", "w", encoding="utf-8") as f:
 
 print("Match results saved to match_results.json")
 
-for team in teams:
-    avg_ca = (team.attack + team.midfield + team.defense) / 3
-    team_squad = generate_squad(team.name, average_ca=avg_ca)
-    print(f"Generated squad for {team.name} (avg CA: {round(avg_ca)})") 
-
 save_teams_to_file(teams)
 print("Teams data saved to teams_data.json")
 
 loaded_teams = load_teams_from_file("teams_data.json")
 
 comp = Competition("Prote Kategorias", teams)
+
 comp.generate_fixtures()
+# Print matchday 1 fixtures
+md1 = [f for f in comp.fixtures if f["matchday"] == 1]
+for f in md1:
+    print(f"{f['home_team'].name} vs {f['away_team'].name} (Matchday {f['matchday']})")
+
 comp.simulate_matchday()
-print(comp.get_current_fixtures())
+
+fixtures = comp.get_current_fixtures()
+for fixture in fixtures:
+    print(f"{fixture['home_team'].name} vs {fixture['away_team'].name} (Matchday {fixture['matchday']})")
+    
 print(comp.get_standings())
 comp.advance_matchday()
 comp.simulate_matchday()

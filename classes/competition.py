@@ -27,44 +27,44 @@ class Competition:
         return standings
     
     def generate_fixtures(self):
-        fixtures_first_half = []
+        n = len(self.teams)
         
-        for i, home_team in enumerate(self.teams):
-            for away_team in self.teams[i+1:]:
-                fixtures_first_half.append({
-                    "home_team": home_team,
-                    "away_team": away_team
-                })
-                
-        # Distribute across matchdays (6 matches per matchday for 12 teams)
-        matches_per_matchday = len(self.teams) // 2
-        matchday = 1
+        # For round-robin, we need an even amount of teams
+        # If not even, add a bye (None)
+        teams = self.teams.copy()
+        if n % 2 == 1:
+            teams.append(None)
+            n += 1
+            
+        fixtures = []
         
-        for i, fixture in enumerate(fixtures_first_half):
-            if i > 0 and i % matches_per_matchday == 0:
-                matchday += 1
+        # Generate first half of the season
+        for round_num in range(n - 1):
+            for i in range(n // 2):
+                home = teams[i]
+                away = teams[n - 1 - i]
                 
+                if home is not None and away is not None:
+                    fixtures.append({
+                        "matchday": round_num + 1,
+                        "home_team": home,
+                        "away_team": away
+                    })
+                
+            # Rotate teams (keep first team fixed)
+            teams = [teams[0]] + [teams[-1]] + teams[1:-1]
+    
+        # Store first half of fixtures
+        self.fixtures = fixtures.copy()
+        
+        # Generate second half of fixtures
+        last_matchday = n - 1
+        for fixture in fixtures:
             self.fixtures.append({
-                "home_team": fixture["home_team"],
-                "away_team": fixture["away_team"],
-                "matchday": matchday
+                "matchday": fixture["matchday"] + last_matchday,
+                "home_team": fixture["away_team"],
+                "away_team": fixture["home_team"]
             })
-        
-        # Second half    
-        first_half_count = len(fixtures_first_half)
-        last_matchday_first_half = matchday
-                
-        for i in range(first_half_count):
-            original_fixture = self.fixtures[i]
-            
-            second_half_matchday = original_fixture["matchday"] + last_matchday_first_half
-            
-            self.fixtures.append({
-                "home_team": original_fixture["away_team"],
-                "away_team": original_fixture["home_team"],
-                "matchday": second_half_matchday
-            })
-            
 
     def get_current_fixtures(self):
         return [f for f in self.fixtures if f["matchday"] == self.current_matchday]
