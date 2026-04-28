@@ -1,3 +1,9 @@
+# Save files
+teams_data.json
+competition_data.json
+league_table.txt
+match_results.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

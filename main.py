@@ -8,7 +8,7 @@ from data_manager import save_teams_to_file, load_teams_from_file, save_competit
 # Display standings after matchday
 def print_standings(standings, title="STANDINGS"):
     "Print formatted league table"
-    sorted_standings = sorted(standings.items(), key=lambda x: x[1]["points"], reverse=True)
+    sorted_standings = sort_standings(standings)
     
     print(f"\n{'='*80}")
     print(title)
@@ -56,7 +56,19 @@ def print_match_result(result):
     print("\n📊 MATCH STATS:")
     print(f"  Shots on target: {home_shots_on} - {away_shots_on}")
     print(f"  Shots off target: {home_shots_off} - {away_shots_off}")
-    print(f"{'='*60}\n")
+    
+    
+def sort_standings(standings):
+    """Sort standings with proper tiebreakers"""
+    return sorted(
+        standings.items(),
+        key=lambda x: (
+            -x[1]["points"],
+            -x[1]["goal_difference"],
+            -x[1]["goals_for"],
+            x[0]
+        )        
+    )
 
 sulhavon = Team("Kluba Sulhavonos", 64, 58, 57)
 maritima_thesia = Team("Kluba Maritima Thesias", 62, 61, 64)
@@ -156,7 +168,7 @@ print(f"Final Standings")
 print(f"{'='*80}\n")
 
 # Champion
-champion = sorted(comp.standings.items(), key=lambda x: x[1]["points"], reverse=True)[0]
+champion = sort_standings(comp.standings)[0]
 print(f"🏆 Champion: {champion[0]} - {champion[1]['points']} pts")
 
 # Top scorers and assisters
