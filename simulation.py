@@ -155,14 +155,10 @@ def simulate_match(team1, team2, is_home_game=True):
                     "player": shooter.name
                 })
 
-    for event in events:
-        if event['type'] == "goal":
-            print(f"\n{event['minute']}' - {event['player']} GOAL! {event['team']} scores!")
-
     team1_shots_on = sum(1 for e in events if e['team'] == team1.name and e['type'] == "shot_on_target")
     team1_shots_off = sum(1 for e in events if e['team'] == team1.name and e['type'] == "shot_off_target")
 
     team2_shots_on = sum(1 for e in events if e['team'] == team2.name and e['type'] == "shot_on_target")
     team2_shots_off = sum(1 for e in events if e['team'] == team2.name and e['type'] == "shot_off_target")
     
-    return team1_goals, team2_goals
+    return team1_goals, team2_goals, events

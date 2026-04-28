@@ -10,6 +10,7 @@ class Competition:
         self.fixtures = []
         self.results = []
         self.standings = self.initialize_standings()
+        self.completed_matchdays = set()
         
     def initialize_standings(self):
         standings = {}
@@ -71,18 +72,24 @@ class Competition:
     
     
     def simulate_matchday(self):
+        # Check if matchday has already been simulated
+        if self.current_matchday in self.completed_matchdays:
+            return
+        
+        # Simulate matches
         for fixture in self.fixtures:
             if fixture["matchday"] == self.current_matchday:
                 home_team = fixture["home_team"]
                 away_team = fixture["away_team"]
                 
-                home_goals, away_goals = simulate_match(home_team, away_team)
+                home_goals, away_goals, events = simulate_match(home_team, away_team)
                 
                 self.results.append({
-                    "home_team": home_team,
-                    "away_team": away_team,
+                    "home_team": home_team.name,
+                    "away_team": away_team.name,
                     "home_goals": home_goals,
-                    "away_goals": away_goals
+                    "away_goals": away_goals,
+                    "events": events
                 })
                 
                 # Update standings
@@ -113,6 +120,9 @@ class Competition:
                     self.standings[home_team.name]["points"] += 1
                     self.standings[away_team.name]["draws"] += 1
                     self.standings[away_team.name]["points"] += 1
+        
+        # Mark matchday as completed            
+        self.completed_matchdays.add(self.current_matchday)
                 
     def advance_matchday(self):
         input("Do you want to advance to the next matchday? (Press Enter)")
@@ -121,3 +131,10 @@ class Competition:
     
     def get_standings(self):
         return self.standings
+    
+    @property
+    def total_rounds(self):
+        """Total rounds/matchdays in the competition"""
+        if not self.fixtures:
+            return 0
+        return max(f["matchday"] for f in self.fixtures)

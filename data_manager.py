@@ -65,3 +65,47 @@ def load_teams_from_file(file_path):
         teams.append(team)
     
     return teams
+
+def save_competition_to_file(competition, filename="competition_data.json"):
+    """Save competition to resume later"""
+    
+    # Convert results to JSON-friendly format
+    serializable_results = []
+    for result in competition.results:
+        serializable_result = {
+            "home_team": result["home_team"],
+            "away_team": result["away_team"],
+            "home_goals": result["home_goals"],
+            "away_goals": result["away_goals"],
+            "events": result.get("events", [])
+        }
+        serializable_results.append(serializable_result)
+        
+    comp_data = {
+        "name": competition.name,
+        "type": competition.type,
+        "current_matchday": competition.current_matchday,
+        "standings": competition.standings,
+        "results": serializable_results,
+        "completed_matchdays": list(competition.completed_matchdays)
+    }
+        
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(comp_data, f, indent=2, ensure_ascii=False)
+
+    print(f"Saved competition to {filename}")
+    
+    
+def load_competition_data(competition, filename="competition_data.json"):
+    """Load saved competition state into a competition object"""
+    with open(filename, "r", encoding="utf-8") as f:
+        comp_data = json.load(f)
+        
+    competition.current_matchday = comp_data["current_matchday"]
+    competition.standings = comp_data["standings"]
+    
+    competition.results = comp_data["results"]
+    competition.completed_matchdays = set(comp_data.get("completed_matchdays", []))
+    
+    print(f"Loaded competition state from {filename}")
+    return competition
