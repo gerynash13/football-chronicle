@@ -5,6 +5,13 @@ from classes import Team, Player, Competition
 from name_generator import generate_squad
 from data_manager import save_teams_to_file, load_teams_from_file, save_competition_to_file, load_competition_data
 
+FORMATION = {
+    "GK": 1,
+    "DEF": 2,
+    "MID": 3,
+    "FWD": 5
+}
+
 # Display standings after matchday
 def print_standings(standings, title="STANDINGS"):
     "Print formatted league table"

@@ -64,7 +64,7 @@ def generate_myrian_name():
 def generate_squad(team_name, average_ca=70):
   squad = []
   
-  # Generate 3 goalkeepers
+  # Generate 2 goalkeepers
   for i in range(3):
     name = generate_myrian_name()
     age = random.randint(17, 38)
@@ -72,24 +72,24 @@ def generate_squad(team_name, average_ca=70):
     pa = ca + random.randint(0, 20)
     squad.append(Player(name, "GK", age, ca, pa))
     
-  # Generate 8 defenders
-  for i in range(8):
+  # Generate 4 defenders
+  for i in range(4):
     name = generate_myrian_name()
     age = random.randint(17,38)
     ca = average_ca + random.randint(-10, 10)
     pa = ca + random.randint(0,20)
     squad.append(Player(name, "DEF", age, ca, pa))
     
-  # Generate 8 midfielders
-  for i in range(8):
+  # Generate 4 midfielders
+  for i in range(4):
     name = generate_myrian_name()
     age = random.randint(17, 38)
     ca = average_ca + random.randint(-10, 10)
     pa = ca + random.randint(0, 20)
     squad.append(Player(name, "MID", age, ca, pa))
     
-  # Generate 4 forwards
-  for i in range(4):
+  # Generate 6 forwards
+  for i in range(6):
     name = generate_myrian_name()
     age = random.randint(17, 38)
     ca = average_ca + random.randint(-10, 10)

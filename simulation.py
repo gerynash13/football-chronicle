@@ -1,6 +1,6 @@
 import random
 
-def pick_player_for_chance(team):
+def pick_player_for_chance(starting_xi):
     """Pick a player from the team's squad weighted by position"""
     position_weights = {
         "FWD": 65,
@@ -11,13 +11,13 @@ def pick_player_for_chance(team):
 
     # Filter players by position and create weighted list
     weighted_players = []
-    for player in team.squad:
+    for player in starting_xi:
         weight = position_weights.get(player.position, 0)
         weighted_players.extend([player] * weight)
 
     return random.choice(weighted_players)
 
-def pick_assister(team, scorer):
+def pick_assister(starting_xi, scorer):
     """Pick a player to credit with an assist (70% chance of assist)"""
     roll = random.randint(1, 100)
     
@@ -34,7 +34,7 @@ def pick_assister(team, scorer):
     }
 
     weighted_players = []
-    for player in team.squad:
+    for player in starting_xi:
         if player != scorer:
             weight = position_weights.get(player.position, 0)
             weighted_players.extend([player] * weight)
@@ -46,18 +46,23 @@ def pick_assister(team, scorer):
     return chosen
 
 def simulate_match(team1, team2, is_home_game=True):
+    # Select starting XI
+    team1_xi = team1.select_starting_xi(opponent_strength=team2.get_strength())
+    team2_xi = team2.select_starting_xi(opponent_strength=team1.get_strength())
+
+    for player in team1_xi:
+        player.appearances += 1
+    for player in team2_xi:
+        player.appearances += 1
     
     if is_home_game:
         home_boost = 2
+    else:
+        home_boost = 0
 
     base_chances = 28
     midfield_bonus = ((team1.midfield + home_boost) + team2.midfield) / 20
     total_chances = base_chances + midfield_bonus + random.randint(-5, 5)
-
-    for player in team1.squad:
-        player.appearances += 1
-    for player in team2.squad:
-        player.appearances += 1
 
     # Generate random minutes and put them in order
     chance_minutes = [random.randint(1, 90) for _ in range(int(total_chances))]
@@ -81,10 +86,10 @@ def simulate_match(team1, team2, is_home_game=True):
 
             if random.randint(1, 100) < scoring_chance:
                 team1_goals += 1
-                scorer = pick_player_for_chance(team1)
+                scorer = pick_player_for_chance(team1_xi)
                 scorer.goals += 1
 
-                assister = pick_assister(team1, scorer)
+                assister = pick_assister(team1_xi, scorer)
                 if assister:
                     assister.assists += 1
 
@@ -97,7 +102,7 @@ def simulate_match(team1, team2, is_home_game=True):
                 })
 
             else:
-                shooter = pick_player_for_chance(team1)
+                shooter = pick_player_for_chance(team1_xi)
 
                 # Give accuracy depending on the team level
                 accuracy = 20 + (team1.attack / 5)
@@ -122,10 +127,10 @@ def simulate_match(team1, team2, is_home_game=True):
 
             if random.randint(1, 100) < scoring_chance:
                 team2_goals += 1
-                scorer = pick_player_for_chance(team2)
+                scorer = pick_player_for_chance(team2_xi)
                 scorer.goals += 1
 
-                assister = pick_assister(team2, scorer)
+                assister = pick_assister(team2_xi, scorer)
                 if assister:
                     assister.assists += 1
 
@@ -138,7 +143,7 @@ def simulate_match(team1, team2, is_home_game=True):
                 })
 
             else:
-                shooter = pick_player_for_chance(team2)
+                shooter = pick_player_for_chance(team2_xi)
 
                 # Give accuracy depending on the team level
                 accuracy = 20 + (team2.attack / 5)
