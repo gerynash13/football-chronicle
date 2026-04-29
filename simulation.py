@@ -60,7 +60,7 @@ def simulate_match(team1, team2, is_home_game=True):
     else:
         home_boost = 0
 
-    base_chances = 28
+    base_chances = 32
     midfield_bonus = ((team1.midfield + home_boost) + team2.midfield) / 20
     total_chances = base_chances + midfield_bonus + random.randint(-5, 5)
 
@@ -73,16 +73,16 @@ def simulate_match(team1, team2, is_home_game=True):
     team2_goals = 0
 
     for current_minute in chance_minutes:
-        team1_midfield_power = (team1.midfield + home_boost) ** 3
-        team2_midfield_power = team2.midfield ** 3
+        team1_midfield_power = (team1.midfield + home_boost) ** 4
+        team2_midfield_power = team2.midfield ** 4
         total_power = team1_midfield_power + team2_midfield_power
         team1_chance = team1_midfield_power / total_power
 
         if random.random() < team1_chance:
             shot_quality = (team1.attack + home_boost) - team2.defense
-            scoring_chance = max(5, min(shot_quality / 4, 25))
-            team_quality_bonus = team1.attack / 40
-            scoring_chance = min(scoring_chance + team_quality_bonus, 28)
+            scoring_chance = max(8, min(shot_quality / 2, 40))
+            team_quality_bonus = team1.attack / 30
+            scoring_chance = min(scoring_chance + team_quality_bonus, 45)
 
             if random.randint(1, 100) < scoring_chance:
                 team1_goals += 1
@@ -99,6 +99,13 @@ def simulate_match(team1, team2, is_home_game=True):
                     "type": "goal",
                     "player": scorer.name,
                     "assister": assister.name if assister else None
+                })
+                
+                events.append({
+                    "minute": current_minute,
+                    "team": team1.name,
+                    "type": "shot_on_target",
+                    "player": scorer.name
                 })
 
             else:
@@ -121,9 +128,9 @@ def simulate_match(team1, team2, is_home_game=True):
 
         else:
             shot_quality = team2.attack - team1.defense
-            scoring_chance = max(5, min(shot_quality /4, 25))
-            team_quality_bonus = team2.attack / 40
-            scoring_chance = min(scoring_chance + team_quality_bonus, 28)
+            scoring_chance = max(8, min(shot_quality /2, 40))
+            team_quality_bonus = team2.attack / 30
+            scoring_chance = min(scoring_chance + team_quality_bonus, 45)
 
             if random.randint(1, 100) < scoring_chance:
                 team2_goals += 1
@@ -140,6 +147,13 @@ def simulate_match(team1, team2, is_home_game=True):
                     "type": "goal",
                     "player": scorer.name,
                     "assister": assister.name if assister else None
+                })
+                
+                events.append({
+                    "minute": current_minute,
+                    "team": team2.name,
+                    "type": "shot_on_target",
+                    "player": scorer.name
                 })
 
             else:

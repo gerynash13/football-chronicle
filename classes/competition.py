@@ -109,11 +109,11 @@ class Competition:
                 # Determine result
                 if home_goals > away_goals:
                     self.standings[home_team.name]["wins"] += 1
-                    self.standings[home_team.name]["points"] += 3
+                    self.standings[home_team.name]["points"] += 2
                     self.standings[away_team.name]["losses"] += 1
                 elif away_goals > home_goals:
                     self.standings[away_team.name]["wins"] += 1
-                    self.standings[away_team.name]["points"] += 3
+                    self.standings[away_team.name]["points"] += 2
                     self.standings[home_team.name]["losses"] += 1
                 else:
                     self.standings[home_team.name]["draws"] += 1
