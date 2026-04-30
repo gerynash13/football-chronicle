@@ -10,9 +10,18 @@ class Player:
         self.attributes = self._generate_attributes()
         self.role = self._determine_role()
 
+        # Season stats (reset each season)
         self.goals = 0
         self.assists = 0
         self.appearances = 0
+        
+        # Career stats (cumulative)
+        self.career_goals = 0
+        self.career_assists = 0
+        self.career_appearances = 0
+        
+        # Career history (list of season records)
+        self.career_history = []
 
     def _generate_attributes(self):
         if self.position == "FWD":
@@ -78,3 +87,35 @@ class Player:
         
         elif self.position == "GK":
             return "GK"
+        
+    def end_season(self):
+        """
+        We use this function at the end of the season to:
+        1. Add season state to career totals
+        2. Save season record to history
+        3. Reset season stats
+        """
+        
+        # Add to career totals
+        self.career_goals += self.goals
+        self.career_assists += self.assists
+        self.career_appearances += self.appearances
+        
+        # Save season record
+        self.career_history.append({
+            "season": season_name,
+            "team": team_name,
+            "goals": self.goals,
+            "assists": self.assists,
+            "appearances": self.appearances,
+            "age": self.age
+        })
+        
+        # Reset season stats
+        self.goals = 0
+        self.assists = 0
+        self.appearances = 0
+        
+    def start_new_season(self):
+        # This function is for future features (fitness, form, etc.)
+        pass

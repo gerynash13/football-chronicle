@@ -20,9 +20,21 @@ def save_teams_to_file(teams, filename="teams_data.json"):
                 "age": player.age,
                 "current_ability": player.current_ability,
                 "potential_ability": player.potential_ability,
+                
+                # Season stats
                 "goals": player.goals,
                 "assists": player.assists,
-                "appearances": player.appearances
+                "appearances": player.appearances,
+                
+                # Career stats
+                "career_goals": player.career_goals,
+                "career_assists": player.career_assists,
+                "career_appearances": player.career_appearances,
+                
+                # Career history
+                "career_history": player.career_history
+                
+                
             }
             team_data["squad"].append(player_data)
         
@@ -55,10 +67,19 @@ def load_teams_from_file(file_path):
               current_ability = player_data["current_ability"],
               potential_ability = player_data["potential_ability"]
               )
-              
+            
+            # Load season stats  
             player.goals = player_data.get("goals", 0)
             player.assists = player_data.get("assists", 0)
             player.appearances = player_data.get("appearances", 0)
+            
+            # Load career stats
+            player.career_goals = player_data.get("career_goals", 0)
+            player.career_assists = player_data.get("career_assists", 0)
+            player.career_appearances = player_data.get("career_appearances", 0)
+            
+            # Load career history
+            player.career_history = player_data.get("career_history", [])
               
             team.squad.append(player)
     

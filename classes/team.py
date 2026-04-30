@@ -25,7 +25,7 @@ class Team:
             # Sort by CA with randomness
             # Add random variance
             position_players.sort(
-                key=lambda p: p.current_ability + random.randint(-5, 5),
+                key=lambda p: p.current_ability + random.randint(-3, 3),
                 reverse=True
             )
             

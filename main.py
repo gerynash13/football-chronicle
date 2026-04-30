@@ -1,7 +1,7 @@
 import random
 import json
 import os
-from classes import Team, Player, Competition
+from classes import Team, Player, Competition, Season
 from name_generator import generate_squad
 from data_manager import save_teams_to_file, load_teams_from_file, save_competition_to_file, load_competition_data
 
@@ -119,9 +119,13 @@ else:
 
     save_teams_to_file(teams)
     
+# Create season
+current_season = Season(1896, teams)
+
 # Create competition
 comp = Competition("Prote Kategorias", teams)
 comp.generate_fixtures()
+current_season.add_competition(comp)
 
 if os.path.exists("competition_data.json"):
     response = input("Do you want to load the saved state? (y/n): ")
@@ -209,6 +213,8 @@ for i, player in enumerate(top_assisters, 1):
     print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.assists:<4}")
     
 print(f"\n{'='*80}")
+
+current_season.end_season()
 
 # Save final state
 save_teams_to_file(teams)
