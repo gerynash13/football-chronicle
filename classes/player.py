@@ -88,7 +88,7 @@ class Player:
         elif self.position == "GK":
             return "GK"
         
-    def end_season(self):
+    def end_season(self, season_name, team_name):
         """
         We use this function at the end of the season to:
         1. Add season state to career totals

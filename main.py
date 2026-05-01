@@ -12,6 +12,108 @@ FORMATION = {
     "FWD": 5
 }
 
+def run_season(season_year, teams):
+    
+    # Create season:
+    current_season = Season(season_year, teams)
+    
+    # Create competition
+    comp = Competition("Prote Kategorias", teams)
+    comp.generate_fixtures()
+    current_season.add_competition(comp)
+    
+    # Check for saved state:
+    if os.path.exists("competition_data.json"):
+        response = input("Do you want to load the saved state? (y/n): ")
+        if response.lower() == "y":
+            comp = load_competition_data(comp)
+            print(f"Resumed at matchday {comp.current_matchday}")
+        else:
+            # Start new save
+            os.remove("competition_data.json")
+    
+    while comp.current_matchday <= comp.total_rounds:
+        print(f"\n{'='*80}")
+        print(f"Matchday {comp.current_matchday}")
+        print(f"{'='*80}\n")
+        
+        # Show fixtures
+        fixtures = comp.get_current_fixtures()
+        for fixture in fixtures:
+            print(f"{fixture['home_team'].name} vs {fixture['away_team'].name}\n")
+            
+        # Simulate matchday
+        comp.simulate_matchday()
+        
+        # Show match results
+        print(f"\n{'-'*80}")
+        print(f"Matchday {comp.current_matchday} results")
+        print(f"{'-'*80}\n")
+        
+        matches_per_matchday = len(comp.teams) // 2
+        recent_results = comp.results[-matches_per_matchday:]
+        
+        for result in recent_results:
+            print_match_result(result)
+            
+        # Display standings
+        print_standings(comp.standings, f"STANDINGS AFTER MATCHDAY {comp.current_matchday}")
+        
+        # Save after every matchday
+        save_competition_to_file(comp)
+            
+        # Advance to next matchday
+        if comp.current_matchday < comp.total_rounds:
+            comp.advance_matchday()
+        else:
+            break
+        
+    # Season completed - show final stats
+    print(f"\n{'='*80}")
+    print(f"Final Standings")
+    print(f"{'='*80}\n")
+    
+    # Champion
+    champion = sort_standings(comp.standings)[0]
+    print(f"🏆 Champion: {champion[0]} - {champion[1]['points']} points")
+    
+    # Top scorers and assisters
+    all_players = []
+    for team in teams:
+        all_players.extend(team.squad)
+    
+    top_scorers = sorted(all_players, key=lambda p: p.goals, reverse=True)[:10]
+    top_assisters = sorted(all_players, key=lambda p: p.assists, reverse=True)[:10]
+    
+    print(f"\n{'='*80}")
+    print(f"Top Scorers - {season_year}")
+    print(f"{'='*80}\n")
+    print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Goals':<4}")
+    print(f"{'-'*80}")
+    
+    for i, player in enumerate(top_scorers, 1):
+        player_team = next(t for t in teams if player in t.squad)
+        print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.goals:<4}")
+        
+    print(f"\n{'='*80}")
+    print(f"Top Assisters - {season_year}")
+    print(f"{'='*80}\n")
+    print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Assists':<4}")
+    print(f"{'-'*80}")
+    
+    for i, player in enumerate(top_assisters, 1):
+        player_team = next(t for t in teams if player in t.squad)
+        print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.assists:<4}")
+        
+    # End season
+    current_season.end_season()
+    
+    # Clean up
+    if os.path.exists("competition_data.json"):
+        os.remove("competition_data.json")
+        
+    return teams
+
 # Display standings after matchday
 def print_standings(standings, title="STANDINGS"):
     "Print formatted league table"
@@ -119,108 +221,26 @@ else:
 
     save_teams_to_file(teams)
     
-# Create season
-current_season = Season(1896, teams)
+start_year = 1896
+num_seasons = 3
 
-# Create competition
-comp = Competition("Prote Kategorias", teams)
-comp.generate_fixtures()
-current_season.add_competition(comp)
-
-if os.path.exists("competition_data.json"):
-    response = input("Do you want to load the saved state? (y/n): ")
-    if response.lower() == "y":
-        comp = load_competition_data(comp)
-        print(f"Resumed at matchday {comp.current_matchday}")
-    else:
-        # Start new save
-        os.remove("competition_data.json")
-
-# Simulate season (matchday by matchday)
-while comp.current_matchday <= comp.total_rounds:
-    print(f"\n{'='*80}")
-    print(f"Matchday {comp.current_matchday}")
-    print(f"{'='*80}\n")
+for i in range(num_seasons):
+    season_year = f"{start_year + i}/{str(start_year + i + 1)[-2:]}"
     
-    # Show fixtures
-    fixtures = comp.get_current_fixtures()
-    for fixture in fixtures:
-        print(f"{fixture['home_team'].name} vs {fixture['away_team'].name}\n")
-        
-    # Simulate matchday
-    comp.simulate_matchday()
+    print(f"\n\n{'#'*80}")
+    print(f"{'#'*80}")
+    print(f"Starting {season_year} season")
+    print(f"{'#'*80}")
+    print(f"{'#'*80}\n\n")
     
-    # Show match results
-    print(f"\n{'-'*80}")
-    print(f"Matchday {comp.current_matchday} results")
-    print(f"{'-'*80}\n")
+    teams = run_season(season_year, teams)
     
-    matches_per_matchday = len(comp.teams) // 2
-    recent_results = comp.results[-matches_per_matchday:]
+    # Save teams after each season
+    save_teams_to_file(teams)
+    print(f"{season_year} season completed and teams saved.\n")
     
-    for result in recent_results:
-        print_match_result(result)
-        
-    # Display standings
-    print_standings(comp.standings, f"STANDINGS AFTER MATCHDAY {comp.current_matchday}")
+    # TODO: Player development, transfers, retirements, etc. can be added here in the future
     
-    # Save after every matchday
-    save_competition_to_file(comp)
-        
-    # Advance to next matchday
-    if comp.current_matchday < comp.total_rounds:
-        comp.advance_matchday()
-    else:
-        break
+    input("Press Enter to start the next season...")
     
-# Season completed - show final stats
-print(f"\n{'='*80}")
-print(f"Final Standings")
-print(f"{'='*80}\n")
-
-# Champion
-champion = sort_standings(comp.standings)[0]
-print(f"🏆 Champion: {champion[0]} - {champion[1]['points']} pts")
-
-# Top scorers and assisters
-all_players = []
-for team in teams:
-    all_players.extend(team.squad)
-    
-top_scorers = sorted(all_players, key=lambda p: p.goals, reverse=True)[:10]
-top_assisters = sorted(all_players, key=lambda p: p.assists, reverse=True)[:10]
-
-print(f"\n{'='*80}")
-print(f"Top Scorers")
-print(f"{'='*80}\n")
-print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Goals':<4}")
-print(f"{'-'*80}")
-
-for i, player in enumerate(top_scorers, 1):
-    player_team = next(t for t in teams if player in t.squad)
-    print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.goals:<4}")
-    
-print(f"\n{'='*80}")
-
-print(f"\n" + "="*80)
-print(f"Top Assisters")
-print(f"{'='*80}\n")
-print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Assists':<4}")
-print(f"{'-'*80}")
-
-for i, player in enumerate(top_assisters, 1):
-    player_team = next(t for t in teams if player in t.squad)
-    print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.assists:<4}")
-    
-print(f"\n{'='*80}")
-
-current_season.end_season()
-
-# Save final state
-save_teams_to_file(teams)
-print("\nSeason completed. Data saved to teams_data.json")
-
-# Delete competition state file after season
-if os.path.exists("competition_data.json"):
-    os.remove("competition_data.json")
-    print("Competition state cleared - ready for next season!")
+print("\nAll seasons completed. Simulation ended.")
