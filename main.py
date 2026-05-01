@@ -239,8 +239,26 @@ for i in range(num_seasons):
     save_teams_to_file(teams)
     print(f"{season_year} season completed and teams saved.\n")
     
-    # TODO: Player development, transfers, retirements, etc. can be added here in the future
-    
+    # Player development - age up and update abilities
+    development_log = []
+    for team in teams:
+        for player in team.squad:
+            old_ca = player.current_ability
+            player.start_new_season()
+            ca_change = player.current_ability - old_ca
+            if abs(ca_change) >= 2:  # Log significant changes
+                direction = "📈" if ca_change > 0 else "📉"
+                development_log.append(
+                f"  {direction} {player.name} ({team.name}): CA {old_ca} → {player.current_ability}"
+            )
+                
+    if development_log:
+        print(f"\n{'='*80}")
+        print(f"Player Development - Start of {season_year} season")
+        print(f"{'='*80}\n")
+        for log_entry in development_log:
+            print(log_entry)
+            
     input("Press Enter to start the next season...")
     
 print("\nAll seasons completed. Simulation ended.")

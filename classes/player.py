@@ -117,5 +117,43 @@ class Player:
         self.appearances = 0
         
     def start_new_season(self):
-        # This function is for future features (fitness, form, etc.)
-        pass
+        # Called before each season - ages the player and updates their ability
+        self.develop()
+        
+    def develop(self):
+        # Age the player
+        self.age += 1
+        ca_change = self._calculate_ca_change()
+        
+        # Apply change, keeping within 1 and potential ability limits
+        self.current_ability = max(1, min(self.current_ability + ca_change, self.potential_ability + ca_change))
+        
+        # Update attributes and role based on new CA
+        self.attributes = self._generate_attributes()
+        self.role = self._determine_role()
+        
+    def _calculate_ca_change(self):
+        """
+        Returns the CA change for this off-season.
+        Growth is capped by how much room the player has left to reach its PA
+        """
+        room_for_growth = self.potential_ability - self.current_ability
+        
+        if self.age <= 20:
+            change = random.randint(1, 4)
+        elif self.age <= 23:
+            change = random.randint(1, 3)
+        elif self.age <= 27:
+            change = random.randint(-1, 2)
+        elif self.age <= 30:
+            change = random.randint(-2, 1)
+        elif self.age <= 33:
+            change = random.randint(-3, 0)
+        else:
+            change = random.randint(-4, -1)
+            
+        # Can't grow beyond PA
+        if change > 0:
+            change = min(change, room_for_growth)
+            
+        return change

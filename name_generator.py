@@ -65,7 +65,7 @@ def generate_squad(team_name, average_ca=70):
   squad = []
   
   # Generate 2 goalkeepers
-  for i in range(3):
+  for i in range(2):
     name = generate_myrian_name()
     age = random.randint(17, 38)
     ca = average_ca + random.randint(-10, 10)
