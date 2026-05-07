@@ -22,6 +22,9 @@ class Player:
         
         # Career history (list of season records)
         self.career_history = []
+        
+        # Wonderkid flag (for potential future use in scouting, etc.)
+        self.is_wonderkid = False
 
     def _generate_attributes(self):
         if self.position == "FWD":

@@ -32,7 +32,10 @@ def save_teams_to_file(teams, filename="teams_data.json"):
                 "career_appearances": player.career_appearances,
                 
                 # Career history
-                "career_history": player.career_history
+                "career_history": player.career_history,
+                
+                # Wonderkid flag
+                "is_wonderkid": player.is_wonderkid
                 
                 
             }
@@ -80,6 +83,9 @@ def load_teams_from_file(file_path):
             
             # Load career history
             player.career_history = player_data.get("career_history", [])
+            
+            # Load wonderkid flag
+            player.is_wonderkid = player_data.get("is_wonderkid", False)
               
             team.squad.append(player)
     

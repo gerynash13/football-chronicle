@@ -1,4 +1,5 @@
 from classes import Player
+from nations import get_nation_config
 import random
 
 MYRIAN_NAMES = [
@@ -60,40 +61,41 @@ MYRIAN_SURNAMES = [
 
 def generate_myrian_name():
   return(f"{random.choice(MYRIAN_NAMES)} {random.choice(MYRIAN_SURNAMES)}")
+
+def _apply_pa_cap(pa, nation_config):
+  """
+  Applies the nation's PA cap to the given PA value.
+  Has a small wonderkid chance to boost PA up to the wonderkid PA cap.
+  Returns the capped PA value and a boolean indicating if the player is a wonderkid.
+  """
+  if random.random() < nation_config["wonderkid_chance"]:
+    return min(pa, nation_config["wonderkid_pa_cap"]), True
+  return min(pa, nation_config["pa_cap"]), False
   
-def generate_squad(team_name, average_ca=70):
+def generate_squad(team_name, average_ca=70, nation="Myria"):
+  nation_config = get_nation_config(nation)
   squad = []
   
-  # Generate 2 goalkeepers
-  for i in range(2):
-    name = generate_myrian_name()
-    age = random.randint(17, 38)
-    ca = average_ca + random.randint(-10, 10)
-    pa = ca + random.randint(0, 20)
-    squad.append(Player(name, "GK", age, ca, pa))
-    
-  # Generate 4 defenders
-  for i in range(4):
-    name = generate_myrian_name()
-    age = random.randint(17,38)
-    ca = average_ca + random.randint(-10, 10)
-    pa = ca + random.randint(0,20)
-    squad.append(Player(name, "DEF", age, ca, pa))
-    
-  # Generate 4 midfielders
-  for i in range(4):
-    name = generate_myrian_name()
-    age = random.randint(17, 38)
-    ca = average_ca + random.randint(-10, 10)
-    pa = ca + random.randint(0, 20)
-    squad.append(Player(name, "MID", age, ca, pa))
-    
-  # Generate 6 forwards
-  for i in range(6):
-    name = generate_myrian_name()
-    age = random.randint(17, 38)
-    ca = average_ca + random.randint(-10, 10)
-    pa = ca + random.randint(0, 20)
-    squad.append(Player(name, "FWD", age, ca, pa))
+  positions = [
+    ("GK", 2),
+    ("DEF", 4),
+    ("MID", 4),
+    ("FWD", 6)
+  ]
+  
+  for position, count in positions:
+    for _ in range(count):
+      name = generate_myrian_name()
+      age = random.randint(17, 38)
+      ca = max(1, int(random.gauss(average_ca, 10)))
+      raw_pa = ca + random.randint(0, 20)
+      
+      pa, is_wonderkid = _apply_pa_cap(raw_pa, nation_config)
+      
+      player = Player(name, age, position, ca, pa)
+      if is_wonderkid:
+        player.is_wonderkid = True
+        
+      squad.append(player)
     
   return squad
