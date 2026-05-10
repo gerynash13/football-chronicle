@@ -14,6 +14,12 @@ def pick_player_for_chance(starting_xi):
     for player in starting_xi:
         weight = position_weights.get(player.position, 0)
         weighted_players.extend([player] * weight)
+        
+    if not weighted_players:
+        weighted_players = [p for p in starting_xi if p.position != "GK"]  # Fallback to any outfield player if something goes wrong
+        
+    if not weighted_players:
+        return random.choice(starting_xi)  # Last resort, pick any player
 
     return random.choice(weighted_players)
 
@@ -38,6 +44,9 @@ def pick_assister(starting_xi, scorer):
         if player != scorer:
             weight = position_weights.get(player.position, 0)
             weighted_players.extend([player] * weight)
+            
+    if not weighted_players:
+        weighted_players = [p for p in starting_xi if p != scorer and p.position != "GK"]
     
     if not weighted_players:
         return None
@@ -45,10 +54,46 @@ def pick_assister(starting_xi, scorer):
     chosen = random.choice(weighted_players)
     return chosen
 
+def resolve_tackle(defending_xi, defending_team_name, minute):
+    # 35% chance a tackle is attempted at any given minute (add foul events later)
+    if random.random() > 0.35:
+        return None, 1.0  # No tackle, no change to chances
+    
+    candidates = []
+    for p in defending_xi:
+        if p.position == "DEF":
+            candidates.extend([p] * 3)
+        elif p.position == "MID":
+            candidates.extend([p] * 2)
+            
+    if not candidates:
+        return None, 1.0  # No defenders or midfielders available, no change to chances
+    
+    tackler = random.choice(candidates)
+    tackling = tackler.attributes.get("tackling", tackler.current_ability)
+    
+    success_chance = max(25, min(65, 30 + (tackling / 5)))
+    success = random.randint(1, 100) < success_chance
+    
+    event = {
+        "minute": minute,
+        "team": defending_team_name,
+        "type": "tackle",
+        "player": tackler.name,
+        "success": success
+    }
+    
+    return event, 0.55 if success else 1.0 # Reduce chances if tackle fails
+
 def simulate_match(team1, team2, is_home_game=True):
     # Select starting XI
     team1_xi = team1.select_starting_xi(opponent_strength=team2.get_strength())
     team2_xi = team2.select_starting_xi(opponent_strength=team1.get_strength())
+    
+    if not team1_xi:
+        raise ValueError(f"{team1.name} has no players available for the match!")
+    if not team2_xi:
+        raise ValueError(f"{team2.name} has no players available for the match!")
 
     for player in team1_xi:
         player.appearances += 1
@@ -79,10 +124,14 @@ def simulate_match(team1, team2, is_home_game=True):
         team1_chance = team1_midfield_power / total_power
 
         if random.random() < team1_chance:
+            tackle_event, chance_modifier = resolve_tackle(team2_xi, team2.name, current_minute)
+            if tackle_event:
+                events.append(tackle_event)
+
             shot_quality = (team1.attack + home_boost) - team2.defense
             scoring_chance = max(8, min(shot_quality / 2, 40))
             team_quality_bonus = team1.attack / 30
-            scoring_chance = min(scoring_chance + team_quality_bonus, 45)
+            scoring_chance = min(scoring_chance + team_quality_bonus, 45) * chance_modifier
 
             if random.randint(1, 100) < scoring_chance:
                 team1_goals += 1
@@ -115,22 +164,39 @@ def simulate_match(team1, team2, is_home_game=True):
                 accuracy = 20 + (team1.attack / 5)
 
                 if random.randint(1, 100) < accuracy:
-                    event_type = "shot_on_target"
+                    # Shot on target - GK makes a save
+                    gk = next((p for p in team2_xi if p.position == "GK"), None)
+                    if gk:
+                        events.append({
+                            "minute": current_minute,
+                            "team": team2.name,
+                            "type": "save",
+                            "player": gk.name
+                        })
+                    events.append({
+                        "minute": current_minute,
+                        "team": team1.name,
+                        "type": "shot_on_target",
+                        "player": shooter.name
+                    })
+                    
                 else:
-                    event_type = "shot_off_target"
-
-                events.append({
-                    "minute": current_minute,
-                    "team": team1.name,
-                    "type": event_type,
-                    "player": shooter.name
-                })
+                    events.append({
+                        "minute": current_minute,
+                        "team": team1.name,
+                        "type": "shot_off_target",
+                        "player": shooter.name
+                    })
 
         else:
+            tackle_event, chance_modifier = resolve_tackle(team1_xi, team1.name, current_minute)
+            if tackle_event:
+                events.append(tackle_event)
+            
             shot_quality = team2.attack - team1.defense
             scoring_chance = max(8, min(shot_quality /2, 40))
             team_quality_bonus = team2.attack / 30
-            scoring_chance = min(scoring_chance + team_quality_bonus, 45)
+            scoring_chance = min(scoring_chance + team_quality_bonus, 45) * chance_modifier
 
             if random.randint(1, 100) < scoring_chance:
                 team2_goals += 1
@@ -163,16 +229,28 @@ def simulate_match(team1, team2, is_home_game=True):
                 accuracy = 20 + (team2.attack / 5)
 
                 if random.randint(1, 100) < accuracy:
-                    event_type = "shot_on_target"
+                    # Shot on target - GK makes a save
+                    gk = next((p for p in team1_xi if p.position == "GK"), None)
+                    if gk:
+                        events.append({
+                            "minute": current_minute,
+                            "team": team1.name,
+                            "type": "save",
+                            "player": gk.name
+                        })
+                    events.append({
+                        "minute": current_minute,
+                        "team": team2.name,
+                        "type": "shot_on_target",
+                        "player": shooter.name
+                    })
                 else:
-                    event_type = "shot_off_target"
-
-                events.append({
-                    "minute": current_minute,
-                    "team": team2.name,
-                    "type": event_type,
-                    "player": shooter.name
-                })
+                    events.append({
+                        "minute": current_minute,
+                        "team": team2.name,
+                        "type": "shot_off_target",
+                        "player": shooter.name
+                    })
 
     team1_shots_on = sum(1 for e in events if e['team'] == team1.name and e['type'] == "shot_on_target")
     team1_shots_off = sum(1 for e in events if e['team'] == team1.name and e['type'] == "shot_off_target")
@@ -180,4 +258,93 @@ def simulate_match(team1, team2, is_home_game=True):
     team2_shots_on = sum(1 for e in events if e['team'] == team2.name and e['type'] == "shot_on_target")
     team2_shots_off = sum(1 for e in events if e['team'] == team2.name and e['type'] == "shot_off_target")
     
-    return team1_goals, team2_goals, events
+    if team2_goals == 0:
+        gk = next((p for p in team1_xi if p.position == "GK"), None)
+        if gk:
+            gk.clean_sheets += 1
+    
+    if team1_goals == 0:
+        gk = next((p for p in team2_xi if p.position == "GK"), None)
+        if gk:
+            gk.clean_sheets += 1
+            
+    # Calculate match ratings for all players
+    ratings = {}
+    
+    for player in team1_xi:
+        p_goals             = sum(1 for e in events if e["type"] == "goal" 
+                            and e["team"] == team1.name and e["player"] == player.name)
+        p_assists           = sum(1 for e in events if e["type"] == "goal"
+                            and e["team"] == team1.name and e.get("assister") == player.name)
+        p_saves             = sum(1 for e in events if e["type"] == "save" 
+                            and e["team"] == team1.name and e["player"] == player.name)
+        p_tackles_won       = sum(1 for e in events if e["type"] == "tackle" 
+                            and e["team"] == team1.name and e["player"] == player.name and e["success"])
+        p_tackles_attempted = sum(1 for e in events if e["type"] == "tackle" 
+                            and e["team"] == team1.name and e["player"] == player.name)
+        
+        rating = calculate_match_rating(
+            player, p_goals, p_assists, 
+            clean_sheet=(team2_goals == 0), 
+            goals_conceded=team2_goals,
+            saves=p_saves,
+            tackles_won=p_tackles_won,
+            tackles_attempted=p_tackles_attempted
+        )
+        
+        player.update_season_rating(rating)
+        ratings[player.name] = rating
+        
+    for player in team2_xi:
+        p_goals             = sum(1 for e in events if e["type"] == "goal" 
+                            and e["team"] == team2.name and e["player"] == player.name)
+        p_assists           = sum(1 for e in events if e["type"] == "goal"
+                            and e["team"] == team2.name and e.get("assister") == player.name)
+        p_saves             = sum(1 for e in events if e["type"] == "save" 
+                            and e["team"] == team2.name and e["player"] == player.name)
+        p_tackles_won       = sum(1 for e in events if e["type"] == "tackle" 
+                            and e["team"] == team2.name and e["player"] == player.name and e["success"])
+        p_tackles_attempted = sum(1 for e in events if e["type"] == "tackle" 
+                            and e["team"] == team2.name and e["player"] == player.name)
+        
+        rating = calculate_match_rating(
+            player, p_goals, p_assists, 
+            clean_sheet=(team1_goals == 0), 
+            goals_conceded=team1_goals,
+            saves=p_saves,
+            tackles_won=p_tackles_won,
+            tackles_attempted=p_tackles_attempted
+        )
+        
+        player.update_season_rating(rating)
+        ratings[player.name] = rating
+
+    return team1_goals, team2_goals, events, ratings, team1_xi, team2_xi
+
+def calculate_match_rating(player, player_goals, player_assists, clean_sheet, goals_conceded, 
+                           saves=0, tackles_won=0, tackles_attempted=0):
+    # Simple rating calculation based on goals, assists, clean sheets, and goals conceded
+    rating = 6.0  # Base rating
+    
+    goal_bonus      = {"GK": 1.5, "DEF": 1.3, "MID": 1.2, "FWD": 1.0}
+    assist_bonus    = {"GK": 1.2, "DEF": 1.0, "MID": 0.9, "FWD": 0.8}
+    cs_bonus        = {"GK": 1.0, "DEF": 0.7, "MID": 0.2, "FWD": 0.0}
+    
+    rating += player_goals * goal_bonus.get(player.position, 0.8)
+    rating += player_assists * assist_bonus.get(player.position, 0.6)
+    
+    if clean_sheet:
+        rating += cs_bonus.get(player.position, 0.0)
+        
+    if player.position == "GK":
+        rating -= goals_conceded * 0.3  # Penalty for goals conceded for keepers
+        rating += min(saves * 0.15, 1.2)  # Bonus for saves, capped to prevent overrating
+    elif player.position == "DEF":
+        rating -= goals_conceded * 0.2  # Small penalty for defenders if team concedes
+        rating += tackles_won * 0.15  # Bonus for successful tackles
+        rating -= (tackles_attempted - tackles_won) * 0.05  # Small penalty for failed tackles
+    elif player.position == "MID":
+        rating += tackles_won * 0.1  # Bonus for successful tackles
+        rating -= (tackles_attempted - tackles_won) * 0.05  # Small penalty for failed tackles
+        
+    return round(max(4.0, min(9.5, rating)), 1)  # Clamp rating between 4.0 and 9.5

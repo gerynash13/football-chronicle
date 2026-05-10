@@ -84,6 +84,7 @@ def run_season(season_year, teams):
     
     top_scorers = sorted(all_players, key=lambda p: p.goals, reverse=True)[:10]
     top_assisters = sorted(all_players, key=lambda p: p.assists, reverse=True)[:10]
+    top_clean_sheets = sorted(all_players, key=lambda p: p.clean_sheets, reverse=True)[:10]
     
     print(f"\n{'='*80}")
     print(f"Top Scorers - {season_year}")
@@ -104,6 +105,32 @@ def run_season(season_year, teams):
     for i, player in enumerate(top_assisters, 1):
         player_team = next(t for t in teams if player in t.squad)
         print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.assists:<4}")
+        
+    print(f"\n{'='*80}")
+    print(f"Top Clean Sheets - {season_year}")
+    print(f"{'='*80}\n")
+    print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Clean Sheets':<4}")
+    print(f"{'-'*80}")
+    
+    for i, player in enumerate(top_clean_sheets, 1):
+        player_team = next(t for t in teams if player in t.squad)
+        print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.clean_sheets:<4}")
+        
+    top_rated = sorted(
+        [p for p in all_players if p.season_rating_appearances >= 5],
+        key=lambda p: p.season_avg_rating, 
+        reverse=True
+    )[:10]
+    
+    print(f"\n{'='*80}")
+    print(f"Top Rated Players - {season_year} Season")
+    print(f"{'='*80}\n")
+    print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Avg Rating':<6}")
+    print(f"{'-'*80}")
+    
+    for i, player in enumerate(top_rated, 1):
+        player_team = next(t for t in teams if player in t.squad)
+        print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.season_avg_rating:<6.2f}")
         
     # End season
     current_season.end_season()
@@ -133,38 +160,106 @@ def print_standings(standings, title="STANDINGS"):
     print(f"{'='*80}\n")
     
 def print_match_result(result):
-    """Display a single match with goals and events"""
-    home = result["home_team"]
-    away = result["away_team"]
-    home_goals = result["home_goals"]
-    away_goals = result["away_goals"]
-    events = result.get("events", [])
-    
-    # Match header
-    print(f"\n{'-'*80}")
-    print(f"         {home:^25} {home_goals} - {away_goals} {away:^25}  ")
-    print(f"{'-'*80}\n")
-    
-    # Get goal events
-    goals = [e for e in events if e["type"] == "goal"]
-    
-    if goals:
-        print("\n⚽ GOALS:")
-        for goal in goals:
-            assister = f" ({goal['assister']})" if "assister" in goal else ""
-            print(f"  {goal['minute']} - {goal['player']}{assister} [{goal['team']}]")
+    home        = result["home_team"]
+    away        = result["away_team"]
+    home_goals  = result["home_goals"]
+    away_goals  = result["away_goals"]
+    events      = result.get("events", [])
+    ratings     = result.get("ratings", {})
+    home_xi     = result.get("home_xi", [])
+    away_xi     = result.get("away_xi", [])
+
+    # ── Header ────────────────────────────────────────────────────────────────
+    print(f"\n{'─'*80}")
+    print(f"  {home:^30}  {home_goals} - {away_goals}  {away:^30}")
+    print(f"{'─'*80}")
+
+    # ── Goal events ───────────────────────────────────────────────────────────
+    home_goal_events = [e for e in events if e["type"] == "goal" and e["team"] == home]
+    away_goal_events = [e for e in events if e["type"] == "goal" and e["team"] == away]
+
+    if home_goal_events or away_goal_events:
+        print()
+        max_rows = max(len(home_goal_events), len(away_goal_events))
+        for i in range(max_rows):
+            left = right = ""
+            if i < len(home_goal_events):
+                e = home_goal_events[i]
+                assist = f" ({e['assister']})" if e.get("assister") else ""
+                left = f"  ⚽ {e['player']}{assist} {e['minute']}'"
+                left = left[:48] # Ensure it doesn't exceed the column width
+            if i < len(away_goal_events):
+                e = away_goal_events[i]
+                assist = f" ({e['assister']})" if e.get("assister") else ""
+                right = f"⚽ {e['player']}{assist} {e['minute']}'"
+            print(f"{left:<50}{right}")
     else:
         print("\n  No goals scored.")
-            
-    # Shot stats
-    home_shots_on = sum(1 for e in events if e["team"] == home and e['type'] == "shot_on_target")
-    home_shots_off = sum(1 for e in events if e["team"] == home and e['type'] == "shot_off_target")
-    away_shots_on = sum(1 for e in events if e["team"] == away and e['type'] == "shot_on_target")
-    away_shots_off = sum(1 for e in events if e["team"] == away and e['type'] == "shot_off_target")
+
+    # ── Lineups ───────────────────────────────────────────────────────────────
+    print(f"\n  {'─'*76}")
+
+    position_order = {"GK": 0, "DEF": 1, "MID": 2, "FWD": 3}
+    home_sorted = sorted(home_xi, key=lambda p: position_order.get(p["position"], 4))
+    away_sorted = sorted(away_xi, key=lambda p: position_order.get(p["position"], 4))
+
+    for i in range(max(len(home_sorted), len(away_sorted))):
+        # Home player
+        if i < len(home_sorted):
+            p    = home_sorted[i]
+            name = p["name"]
+            g    = sum(1 for e in events if e["type"] == "goal"
+                       and e["team"] == home and e["player"] == name)
+            a    = sum(1 for e in events if e["type"] == "goal"
+                       and e.get("assister") == name)
+            icons     = ("⚽" * g) + ("👟" * a)
+            rating    = f"{ratings[name]:.1f}" if name in ratings else " — "
+            left_name = f"{name} {icons}".strip()
+        else:
+            left_name, rating = "", ""
+
+        # Away player
+        if i < len(away_sorted):
+            p      = away_sorted[i]
+            a_name = p["name"]
+            g      = sum(1 for e in events if e["type"] == "goal"
+                         and e["team"] == away and e["player"] == a_name)
+            a      = sum(1 for e in events if e["type"] == "goal"
+                         and e.get("assister") == a_name)
+            a_icons    = ("⚽" * g) + ("👟" * a)
+            a_rating   = f"{ratings[a_name]:.1f}" if a_name in ratings else " — "
+            right_name = f"{a_name} {a_icons}".strip()
+        else:
+            right_name, a_rating = "", ""
+
+        print(f"  {left_name:<28}{rating:>4}    {a_rating:<4}{right_name}")
+
+    print(f"  {'─'*76}")
+
+    # ── Substitutes (placeholder) ──────────────────────────────────────────
+    # Will be populated once substitutions are implemented
+    print(f"\n  SUBSTITUTES")
+    print(f"  {'─'*36}    {'─'*36}")
+    print(f"  {'—':<38}    {'—'}")
+
+    # ── Shot stats ────────────────────────────────────────────────────────────
+    h_on  = sum(1 for e in events if e["team"] == home and e["type"] == "shot_on_target")
+    a_on  = sum(1 for e in events if e["team"] == away and e["type"] == "shot_on_target")
+    h_off = sum(1 for e in events if e["team"] == home and e["type"] == "shot_off_target")
+    a_off = sum(1 for e in events if e["team"] == away and e["type"] == "shot_off_target")
     
-    print("\n📊 MATCH STATS:")
-    print(f"  Shots on target: {home_shots_on} - {away_shots_on}")
-    print(f"  Shots off target: {home_shots_off} - {away_shots_off}")
+    # ── Defense stats ───────────────────────────────────────────────────────
+    h_saves     = sum(1 for e in events if e["team"] == home and e["type"] == "save")
+    a_saves     = sum(1 for e in events if e["team"] == away and e["type"] == "save")
+    h_tkl_total = sum(1 for e in events if e["team"] == home and e["type"] == "tackle")
+    a_tkl_total = sum(1 for e in events if e["team"] == away and e["type"] == "tackle")
+    h_tkl_won   = sum(1 for e in events if e["team"] == home and e["type"] == "tackle" and e["success"])
+    a_tkl_won   = sum(1 for e in events if e["team"] == away and e["type"] == "tackle" and e["success"])
+
+    print(f"\n  Shots on target:  {h_on} - {a_on}")
+    print(f"  Shots off target: {h_off} - {a_off}")
+    print(f"  Saves:           {h_saves} - {a_saves}")
+    print(f"  Tackles won:       {h_tkl_won} - {a_tkl_won}")
     
     
 def sort_standings(standings):

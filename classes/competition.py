@@ -82,14 +82,17 @@ class Competition:
                 home_team = fixture["home_team"]
                 away_team = fixture["away_team"]
                 
-                home_goals, away_goals, events = simulate_match(home_team, away_team)
+                home_goals, away_goals, events, ratings, home_xi, away_xi = simulate_match(home_team, away_team)
                 
                 self.results.append({
                     "home_team": home_team.name,
                     "away_team": away_team.name,
                     "home_goals": home_goals,
                     "away_goals": away_goals,
-                    "events": events
+                    "events": events,
+                    "ratings": ratings,
+                    "home_xi": [{"name": p.name, "position": p.position} for p in home_xi],
+                    "away_xi": [{"name": p.name, "position": p.position} for p in away_xi]
                 })
                 
                 # Update standings

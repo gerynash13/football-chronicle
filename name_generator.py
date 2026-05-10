@@ -91,8 +91,9 @@ def generate_squad(team_name, average_ca=70, nation="Myria"):
       raw_pa = ca + random.randint(0, 20)
       
       pa, is_wonderkid = _apply_pa_cap(raw_pa, nation_config)
+      ca = min(ca, pa)  # Ensure CA does not exceed PA after capping
       
-      player = Player(name, age, position, ca, pa)
+      player = Player(name, position, age, ca, pa)
       if is_wonderkid:
         player.is_wonderkid = True
         

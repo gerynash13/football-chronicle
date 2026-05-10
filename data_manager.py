@@ -25,11 +25,15 @@ def save_teams_to_file(teams, filename="teams_data.json"):
                 "goals": player.goals,
                 "assists": player.assists,
                 "appearances": player.appearances,
+                "clean_sheets": player.clean_sheets,
+                "season_avg_rating": player.season_avg_rating,
+                "season_rating_appearances": player.season_rating_appearances,
                 
                 # Career stats
                 "career_goals": player.career_goals,
                 "career_assists": player.career_assists,
                 "career_appearances": player.career_appearances,
+                "career_clean_sheets": player.career_clean_sheets,
                 
                 # Career history
                 "career_history": player.career_history,
@@ -75,6 +79,8 @@ def load_teams_from_file(file_path):
             player.goals = player_data.get("goals", 0)
             player.assists = player_data.get("assists", 0)
             player.appearances = player_data.get("appearances", 0)
+            player.season_avg_rating = player_data.get("season_avg_rating", 0.0)
+            player.season_rating_appearances = player_data.get("season_rating_appearances", 0)
             
             # Load career stats
             player.career_goals = player_data.get("career_goals", 0)

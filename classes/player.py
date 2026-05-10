@@ -14,11 +14,16 @@ class Player:
         self.goals = 0
         self.assists = 0
         self.appearances = 0
+        self.clean_sheets = 0
+        
+        self.season_avg_rating = 0.0
+        self.season_rating_appearances = 0
         
         # Career stats (cumulative)
         self.career_goals = 0
         self.career_assists = 0
         self.career_appearances = 0
+        self.career_clean_sheets = 0
         
         # Career history (list of season records)
         self.career_history = []
@@ -103,6 +108,7 @@ class Player:
         self.career_goals += self.goals
         self.career_assists += self.assists
         self.career_appearances += self.appearances
+        self.career_clean_sheets += self.clean_sheets
         
         # Save season record
         self.career_history.append({
@@ -110,14 +116,20 @@ class Player:
             "team": team_name,
             "goals": self.goals,
             "assists": self.assists,
+            "clean_sheets": self.clean_sheets,
+            "ca": self.current_ability,
             "appearances": self.appearances,
-            "age": self.age
+            "age": self.age,
+            "avg_rating": round(self.season_avg_rating, 1) if self.season_rating_appearances > 0 else None
         })
         
         # Reset season stats
         self.goals = 0
         self.assists = 0
         self.appearances = 0
+        self.clean_sheets = 0
+        self.season_avg_rating = 0.0
+        self.season_rating_appearances = 0
         
     def start_new_season(self):
         # Called before each season - ages the player and updates their ability
@@ -160,3 +172,9 @@ class Player:
             change = min(change, room_for_growth)
             
         return change
+    
+    def update_season_rating(self, rating):
+        # Update the player's average rating for the season
+        self.season_rating_appearances += 1
+        self.season_avg_rating += ((rating - self.season_avg_rating) / self.season_rating_appearances)
+        self.season_avg_rating = round(self.season_avg_rating, 2)
