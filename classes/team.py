@@ -7,12 +7,16 @@ class Team:
         self.midfield = midfield
         self.defense = defense
         self.squad = []
+        self.morale = 0.0  # -10 to +10, where 0 is neutral
+        self.board_confidence = 50.0  # 0 to 100
+        self.fan_satisfaction = 50.0  # 0 to 100
 
     def add_player(self, player):
         self.squad.append(player)
         
     def get_strength(self):
-        return (self.attack + self.midfield + self.defense) / 3
+        base = (self.attack + self.midfield + self.defense) / 3
+        return base + (self.morale * 0.3)  # Morale can boost or reduce strength by up to 3 points
     
     def select_starting_xi(self, opponent_strength=None, rotation_chance=0.1):
         formation = {"GK": 1, "DEF": 2, "MID": 3, "FWD": 5}
@@ -25,7 +29,7 @@ class Team:
             # Sort by CA with randomness
             # Add random variance
             position_players.sort(
-                key=lambda p: p.current_ability + random.randint(-3, 3),
+                key=lambda p: p.current_ability + p.morale + random.randint(-3, 3),
                 reverse=True
             )
             

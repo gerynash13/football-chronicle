@@ -1,4 +1,5 @@
 import json
+import datetime
 from classes import Team, Player
 
 def save_teams_to_file(teams, filename="teams_data.json"):
@@ -10,7 +11,10 @@ def save_teams_to_file(teams, filename="teams_data.json"):
             "attack": team.attack,
             "midfield": team.midfield,
             "defense": team.defense,
-            "squad": []
+            "squad": [],
+            "morale": team.morale,
+            "board_confidence": team.board_confidence,
+            "fan_satisfaction": team.fan_satisfaction
         }
 
         for player in team.squad:
@@ -20,6 +24,8 @@ def save_teams_to_file(teams, filename="teams_data.json"):
                 "age": player.age,
                 "current_ability": player.current_ability,
                 "potential_ability": player.potential_ability,
+                "morale": player.morale,
+                "manager_relationship": player.manager_relationship,
                 
                 # Season stats
                 "goals": player.goals,
@@ -65,6 +71,11 @@ def load_teams_from_file(file_path):
           midfield = team_data["midfield"],
           defense = team_data["defense"]
           )
+        
+        # Load team-level attributes
+        team.morale = team_data.get("morale", 0.0)
+        team.board_confidence = team_data.get("board_confidence", 50.0)
+        team.fan_satisfaction = team_data.get("fan_satisfaction", 50.0)
 
         for player_data in team_data.get("squad", []):
             player = Player(
@@ -81,6 +92,8 @@ def load_teams_from_file(file_path):
             player.appearances = player_data.get("appearances", 0)
             player.season_avg_rating = player_data.get("season_avg_rating", 0.0)
             player.season_rating_appearances = player_data.get("season_rating_appearances", 0)
+            player.morale = player_data.get("morale", 0.0)
+            player.manager_relationship = player_data.get("manager_relationship", 0.0)
             
             # Load career stats
             player.career_goals = player_data.get("career_goals", 0)
@@ -99,7 +112,7 @@ def load_teams_from_file(file_path):
     
     return teams
 
-def save_competition_to_file(competition, filename="competition_data.json"):
+def save_competition_to_file(competition, current_date, filename="competition_data.json"):
     """Save competition to resume later"""
     
     # Convert results to JSON-friendly format
@@ -120,7 +133,8 @@ def save_competition_to_file(competition, filename="competition_data.json"):
         "current_matchday": competition.current_matchday,
         "standings": competition.standings,
         "results": serializable_results,
-        "completed_matchdays": list(competition.completed_matchdays)
+        "completed_matchdays": list(competition.completed_matchdays),
+        "current_date": current_date.isoformat()
     }
         
     with open(filename, "w", encoding="utf-8") as f:
@@ -134,11 +148,14 @@ def load_competition_data(competition, filename="competition_data.json"):
     with open(filename, "r", encoding="utf-8") as f:
         comp_data = json.load(f)
         
-    competition.current_matchday = comp_data["current_matchday"]
-    competition.standings = comp_data["standings"]
-    
-    competition.results = comp_data["results"]
+    competition.current_matchday    = comp_data["current_matchday"]
+    competition.standings           = comp_data["standings"]
+    competition.results             = comp_data["results"]
     competition.completed_matchdays = set(comp_data.get("completed_matchdays", []))
     
+    current_date = datetime.date.fromisoformat(
+        comp_data.get("current_date", datetime.date.today().isoformat())
+    )
+    
     print(f"Loaded competition state from {filename}")
-    return competition
+    return competition, current_date

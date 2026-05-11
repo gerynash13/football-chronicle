@@ -1,9 +1,13 @@
 import random
 import json
 import os
+import datetime
 from classes import Team, Player, Competition, Season
 from name_generator import generate_squad
 from data_manager import save_teams_to_file, load_teams_from_file, save_competition_to_file, load_competition_data
+from game_calendar import GameCalendar, apply_effects, apply_match_morale
+from rules import get_max_subs
+from events import Event, Effect
 
 FORMATION = {
     "GK": 1,
@@ -18,54 +22,116 @@ def run_season(season_year, teams):
     current_season = Season(season_year, teams)
     
     # Create competition
-    comp = Competition("Prote Kategorias", teams)
+    comp = Competition("Prote Kategorias", teams, max_subs=get_max_subs(season_year))
     comp.generate_fixtures()
     current_season.add_competition(comp)
+    
+    calendar = GameCalendar(season_year)
+    calendar.schedule_fixtures(comp)
     
     # Check for saved state:
     if os.path.exists("competition_data.json"):
         response = input("Do you want to load the saved state? (y/n): ")
         if response.lower() == "y":
-            comp = load_competition_data(comp)
-            print(f"Resumed at matchday {comp.current_matchday}")
+            comp, saved_date = load_competition_data(comp)
+            calendar.schedule_fixtures(comp)  # Reschedule in case there are any differences
+            calendar.current_date = saved_date
+            print(f"Resumed at {calendar.current_date.strftime('%A, %d %B %Y')}, Matchday {comp.current_matchday}")
         else:
             # Start new save
             os.remove("competition_data.json")
+            
+    last_processed = calendar.current_date
     
-    while comp.current_matchday <= comp.total_rounds:
-        print(f"\n{'='*80}")
-        print(f"Matchday {comp.current_matchday}")
-        print(f"{'='*80}\n")
+    # Main date-driven loop
+    while calendar.current_date <= calendar.season_end:
+        next_date = calendar.get_next_event_date(calendar.current_date)
         
-        # Show fixtures
-        fixtures = comp.get_current_fixtures()
-        for fixture in fixtures:
-            print(f"{fixture['home_team'].name} vs {fixture['away_team'].name}\n")
+        if next_date is None or next_date > calendar.season_end:
+            break  # No more events or past season end
+        
+        # Apply weekly decay on the first day of each week
+        d = last_processed
+        while d <= next_date:
+            if d.weekday() == 0:  # Monday
+                calendar.apply_weekly_decay(teams)
+            d += datetime.timedelta(days=1)
             
-        # Simulate matchday
-        comp.simulate_matchday()
+        calendar.current_date   = next_date
+        events_today            = calendar.get_events_for_date(calendar.current_date)
+        dynamic                 = calendar.roll_dynamic_events(teams)
+        all_events              = events_today + dynamic
         
-        # Show match results
-        print(f"\n{'-'*80}")
-        print(f"Matchday {comp.current_matchday} results")
-        print(f"{'-'*80}\n")
+        background = [e for e in all_events if not e.blocking]
+        blocking   = [e for e in all_events if e.blocking]
         
-        matches_per_matchday = len(comp.teams) // 2
-        recent_results = comp.results[-matches_per_matchday:]
-        
-        for result in recent_results:
-            print_match_result(result)
+        # Background events - silent, straight to inbox
+        for event in background:
+            apply_effects(event.effects, teams)
+            calendar.inbox.append(event)
             
-        # Display standings
-        print_standings(comp.standings, f"STANDINGS AFTER MATCHDAY {comp.current_matchday}")
-        
-        # Save after every matchday
-        save_competition_to_file(comp)
+        # Blocking events - stop the world, show them, and apply effects immediately
+        if event in blocking:
+            match_events = [e for e in all_events if e.category == "match"]
             
-        # Advance to next matchday
-        if comp.current_matchday < comp.total_rounds:
-            comp.advance_matchday()
+            if match_events:
+                today_fixtures = [f for f in comp.fixtures
+                                  if f.get("date") == calendar.current_date]
+                
+                if today_fixtures:
+                    matchday_num = today_fixtures[0]["matchday"]
+                    
+                    if matchday_num not in comp.completed_matchdays:
+                        print(f"\n{'='*80}")
+                        print(f"   {calendar.current_date.strftime('%A, %d %B %Y')}")
+                        print(f"   Matchday {matchday_num}")
+                        print(f"{'='*80}\n")
+                        
+                        for f in today_fixtures:
+                            print(f"   {f['home_team']} vs {f['away_team']}")
+                            
+                    comp.current_matchday = matchday_num
+                    comp.simulate_matchday()
+                    
+                    print(f"\n{'='*80}")
+                    print(f"   Matchday {matchday_num} Results")
+                    print(f"{'='*80}\n")
+                    
+                    recent = comp.results[-len(today_fixtures):]
+                    for result in results:
+                        print_match_result(result)
+                        
+                        home_team = next((t for t in teams if t.name == result["home_team"]), None)
+                        away_team = next((t for t in teams if t.name == result["away_team"]), None)
+                        if home_team and away_team:
+                            apply_match_morale(home_team, away_team, result["home_goals"], result["away_goals"])
+                            
+                    print_standings(comp.standings, f"STANDINGS - {calendar.current_date.strftime('%d %B %Y')}")
+                    
+                    save_competition_to_file(comp, calendar.current_date)
+                    
+        # Non-match blocking events (stub - to be expanded as we add more event types)
+        for event in [e for e in blocking if e.category != "match"]:
+            print(f"\n{'='*80}")
+            print(f"  {event.title}")
+            print(f"  {event.description}")
+            if event.choices:
+                for i, choice in enumerate(event.choices, 1):
+                    print(f"    [{i}] {choice.text}")
+                # Resolution logic to be implemented as we build out event types and choices
+            print(f"{'='*80}\n")
+            
+        last_processed = calendar.current_date
+        
+        # Advance prompt - tell the user what's next and wait for input to proceed
+        next_upcoming = calendar.get_next_event_date(
+            calendar.current_date + datetime.timedelta(days=1)
+        )
+        if next_upcoming and next_upcoming <= calendar.season_end:
+            print(f"Next scheduled event: {next_upcoming.strftime('%A, %d %B %Y')}")
+            input("Press Enter to continue...")
         else:
+            print("No more scheduled events. Advancing to season end...")
             break
         
     # Season completed - show final stats
@@ -78,9 +144,7 @@ def run_season(season_year, teams):
     print(f"🏆 Champion: {champion[0]} - {champion[1]['points']} points")
     
     # Top scorers and assisters
-    all_players = []
-    for team in teams:
-        all_players.extend(team.squad)
+    all_players = [p for t in teams for p in t.squad]
     
     top_scorers = sorted(all_players, key=lambda p: p.goals, reverse=True)[:10]
     top_assisters = sorted(all_players, key=lambda p: p.assists, reverse=True)[:10]

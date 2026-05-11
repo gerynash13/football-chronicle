@@ -9,6 +9,8 @@ class Player:
         self.potential_ability = potential_ability
         self.attributes = self._generate_attributes()
         self.role = self._determine_role()
+        self.morale = 0.0  # -10 to +10, where 0 is neutral
+        self.manager_relationship = 0.0  # -5 to +5, where 0 is neutral
 
         # Season stats (reset each season)
         self.goals = 0
