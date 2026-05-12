@@ -71,7 +71,7 @@ def run_season(season_year, teams):
             calendar.inbox.append(event)
             
         # Blocking events - stop the world, show them, and apply effects immediately
-        if event in blocking:
+        if blocking:
             match_events = [e for e in all_events if e.category == "match"]
             
             if match_events:
@@ -88,7 +88,7 @@ def run_season(season_year, teams):
                         print(f"{'='*80}\n")
                         
                         for f in today_fixtures:
-                            print(f"   {f['home_team']} vs {f['away_team']}")
+                            print(f"   {f['home_team'].name} vs {f['away_team'].name}")
                             
                     comp.current_matchday = matchday_num
                     comp.simulate_matchday()
@@ -98,13 +98,20 @@ def run_season(season_year, teams):
                     print(f"{'='*80}\n")
                     
                     recent = comp.results[-len(today_fixtures):]
-                    for result in results:
+                    for result in recent:
                         print_match_result(result)
                         
                         home_team = next((t for t in teams if t.name == result["home_team"]), None)
                         away_team = next((t for t in teams if t.name == result["away_team"]), None)
                         if home_team and away_team:
                             apply_match_morale(home_team, away_team, result["home_goals"], result["away_goals"])
+                            
+                    for team in teams:
+                        for player in team.squad:
+                            if player.morale < -2.0:
+                                calendar.schedule_player_meeting(player, team, calendar.current_date)
+                                
+                    calendar.generate_newspaper_story(teams, comp)
                             
                     print_standings(comp.standings, f"STANDINGS - {calendar.current_date.strftime('%d %B %Y')}")
                     
@@ -118,21 +125,39 @@ def run_season(season_year, teams):
             if event.choices:
                 for i, choice in enumerate(event.choices, 1):
                     print(f"    [{i}] {choice.text}")
-                # Resolution logic to be implemented as we build out event types and choices
+                print()
+                while True:
+                    try:
+                        pick = int(input("Enter your choice: ")) -1
+                        if 0 <= pick < len(event.choices):
+                            chosen = event.choices[pick]
+                            apply_effects(chosen.effects, teams)
+                            event.resolution = chosen.text
+                            event.is_read = True
+                            print(f"\n{chosen.text}")
+                            break
+                        else:
+                            print("  Enter a number between 1 and {len(event.choices)}.")
+                    except ValueError:
+                        print("  Enter a number between 1 and {len(event.choices)}.")
+            else:
+                apply_effects(event.effects, teams)
+                event.is_read = True
+                input("\nPress Enter to continue...")
             print(f"{'='*80}\n")
             
-        last_processed = calendar.current_date
-        
         # Advance prompt - tell the user what's next and wait for input to proceed
-        next_upcoming = calendar.get_next_event_date(
-            calendar.current_date + datetime.timedelta(days=1)
-        )
-        if next_upcoming and next_upcoming <= calendar.season_end:
-            print(f"Next scheduled event: {next_upcoming.strftime('%A, %d %B %Y')}")
-            input("Press Enter to continue...")
-        else:
-            print("No more scheduled events. Advancing to season end...")
-            break
+            next_upcoming = calendar.get_next_event_date(
+                calendar.current_date + datetime.timedelta(days=1)
+            )
+            if next_upcoming and next_upcoming <= calendar.season_end:
+                print(f"Next scheduled event: {next_upcoming.strftime('%A, %d %B %Y')}")
+                input("Press Enter to continue...")
+            else:
+                print("No more scheduled events. Advancing to season end...")
+                break
+            
+    last_processed = calendar.current_date
         
     # Season completed - show final stats
     print(f"\n{'='*80}")
@@ -148,7 +173,9 @@ def run_season(season_year, teams):
     
     top_scorers = sorted(all_players, key=lambda p: p.goals, reverse=True)[:10]
     top_assisters = sorted(all_players, key=lambda p: p.assists, reverse=True)[:10]
-    top_clean_sheets = sorted(all_players, key=lambda p: p.clean_sheets, reverse=True)[:10]
+    top_clean_sheets = sorted([p for p in all_players if p.position == "GK"], 
+                              key=lambda p: p.clean_sheets, 
+                              reverse=True)[:10]
     
     print(f"\n{'='*80}")
     print(f"Top Scorers - {season_year}")
