@@ -117,36 +117,36 @@ def run_season(season_year, teams):
                     
                     save_competition_to_file(comp, calendar.current_date)
                     
-        # Non-match blocking events (stub - to be expanded as we add more event types)
-        for event in [e for e in blocking if e.category != "match"]:
-            print(f"\n{'='*80}")
-            print(f"  {event.title}")
-            print(f"  {event.description}")
-            if event.choices:
-                for i, choice in enumerate(event.choices, 1):
-                    print(f"    [{i}] {choice.text}")
-                print()
-                while True:
-                    try:
-                        pick = int(input("Enter your choice: ")) -1
-                        if 0 <= pick < len(event.choices):
-                            chosen = event.choices[pick]
-                            apply_effects(chosen.effects, teams)
-                            event.resolution = chosen.text
-                            event.is_read = True
-                            print(f"\n{chosen.text}")
-                            break
-                        else:
+            # Non-match blocking events (stub - to be expanded as we add more event types)
+            for event in [e for e in blocking if e.category != "match"]:
+                print(f"\n{'='*80}")
+                print(f"  {event.title}")
+                print(f"  {event.description}")
+                if event.choices:
+                    for i, choice in enumerate(event.choices, 1):
+                        print(f"    [{i}] {choice.text}")
+                    print()
+                    while True:
+                        try:
+                            pick = int(input("Enter your choice: ")) -1
+                            if 0 <= pick < len(event.choices):
+                                chosen = event.choices[pick]
+                                apply_effects(chosen.effects, teams)
+                                event.resolution = chosen.text
+                                event.is_read = True
+                                print(f"\n{chosen.text}")
+                                break
+                            else:
+                                print("  Enter a number between 1 and {len(event.choices)}.")
+                        except ValueError:
                             print("  Enter a number between 1 and {len(event.choices)}.")
-                    except ValueError:
-                        print("  Enter a number between 1 and {len(event.choices)}.")
-            else:
-                apply_effects(event.effects, teams)
-                event.is_read = True
-                input("\nPress Enter to continue...")
-            print(f"{'='*80}\n")
-            
-        # Advance prompt - tell the user what's next and wait for input to proceed
+                else:
+                    apply_effects(event.effects, teams)
+                    event.is_read = True
+                    input("\nPress Enter to continue...")
+                print(f"{'='*80}\n")
+                
+            # Advance prompt - tell the user what's next and wait for input to proceed
             next_upcoming = calendar.get_next_event_date(
                 calendar.current_date + datetime.timedelta(days=1)
             )
@@ -156,8 +156,9 @@ def run_season(season_year, teams):
             else:
                 print("No more scheduled events. Advancing to season end...")
                 break
-            
-    last_processed = calendar.current_date
+                
+        last_processed = calendar.current_date
+        calendar.current_date += datetime.timedelta(days=1)
         
     # Season completed - show final stats
     print(f"\n{'='*80}")
@@ -328,10 +329,23 @@ def print_match_result(result):
     print(f"  {'─'*76}")
 
     # ── Substitutes (placeholder) ──────────────────────────────────────────
-    # Will be populated once substitutions are implemented
+    sub_events = [e for e in events if e["type"] == "substitution"]
+    home_subs  = [e for e in sub_events if e["team"] == home]
+    away_subs  = [e for e in sub_events if e["team"] == away]
+    
     print(f"\n  SUBSTITUTES")
     print(f"  {'─'*36}    {'─'*36}")
-    print(f"  {'—':<38}    {'—'}")
+    
+    max_sub_rows = max(len(home_subs), len(away_subs), 1)
+    for i in range(max_sub_rows):
+        left = right = "—"
+        if i < len(home_subs):
+            s = home_subs[i]
+            left = f"↑ {s['player_on']}  ↓ {s['player_off']} {s['minute']}'"
+        if i < len(away_subs):
+            s = away_subs[i]
+            right = f"↑ {s['player_on']}  ↓ {s['player_off']} {s['minute']}'"
+        print(f"  {left:<38}    {right}")
 
     # ── Shot stats ────────────────────────────────────────────────────────────
     h_on  = sum(1 for e in events if e["team"] == home and e["type"] == "shot_on_target")

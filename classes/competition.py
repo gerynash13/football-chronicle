@@ -2,7 +2,7 @@ import random
 from simulation import simulate_match
 
 class Competition:
-    def __init__(self, name, teams, competition_type="league"):
+    def __init__(self, name, teams, competition_type="league", max_subs=0):
         self.name = name
         self.teams = teams
         self.type = competition_type
@@ -11,6 +11,7 @@ class Competition:
         self.results = []
         self.standings = self.initialize_standings()
         self.completed_matchdays = set()
+        self.max_subs = max_subs
         
     def initialize_standings(self):
         standings = {}
@@ -82,7 +83,9 @@ class Competition:
                 home_team = fixture["home_team"]
                 away_team = fixture["away_team"]
                 
-                home_goals, away_goals, events, ratings, home_xi, away_xi = simulate_match(home_team, away_team)
+                home_goals, away_goals, events, ratings, home_xi, away_xi = simulate_match(
+                    home_team, away_team, max_subs=self.max_subs
+                )
                 
                 self.results.append({
                     "home_team": home_team.name,
