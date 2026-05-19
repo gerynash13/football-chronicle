@@ -149,7 +149,170 @@ def attempt_substitutions(team_name, active_xi, bench, events, goals_conceded,
         
     return active_xi, bench, sub_events, subs_used
 
-def simulate_match(team1, team2, max_subs=0, is_home_game=True):
+INJURY_TIERS = [
+    ("minor",       1,  2,  0.50),
+    ("moderate",    3,  6,  0.30),
+    ("severe",      7,  15, 0.15),
+    ("critical",    20, 45, 0.05)
+]
+
+def roll_injury_severity():
+    roll = random.random()
+    cumulative = 0.0
+    for severity, min_m, max_m, weight in INJURY_TIERS:
+        cumulative += weight
+        if roll <= cumulative:
+            return severity, random.randint(min_m, max_m)
+    return "minor", 1
+    
+def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_team_name,
+                             defending_team_name, minute, in_match_yellows, cards_enabled):
+    """
+    After a tackle, check for fouls, cards and injuries.
+    Returns (extra_events, updated_in_match_yellows)
+    """
+    extra_events = []
+    
+    # Foul check
+    foul_chance = 0.05 if tackle_event["success"] else 0.20
+    if random.random() < foul_chance:
+        extra_events.append({
+            "minute": minute, "team": defending_team_name,
+            "type": "foul", "player": tackler.name
+        })
+        
+        if cards_enabled:
+            card_roll = random.random()
+            if card_roll < 0.05:
+                # Direct red card
+                extra_events.append({
+                    "minute": minute, "team": defending_team_name,
+                    "type": "red_card", "player": tackler.name,
+                    "reason": "violent tackle"
+                })
+                tackler.red_cards += 1
+                tackler.career_red_cards += 1
+                tackler.is_suspended = True
+                tackler.suspension_matches_left = 3
+            elif card_roll < 0.30:
+                in_match_yellows[tackler.name] = in_match_yellows.get(tackler.name, 0) + 1
+                tackler.yellow_cards += 1
+                tackler.career_yellow_cards += 1
+                
+                if in_match_yellows[tackler.name] >= 2:
+                    # Second yellow card --> direct red card
+                    extra_events.append({
+                        "minute": minute, "team": defending_team_name,
+                        "type": "red_card", "player": tackler.name,
+                        "reason": "second_yellow"
+                    })
+                    tackler.red_cards += 1
+                    tackler.career_red_cards += 1
+                    tackler.is_suspended = True
+                    tackler.suspension_matches_left = 1
+                else:
+                    extra_events.append({
+                        "minute": minute, "team": defending_team_name,
+                        "type": "yellow_card", "player": tackler.name
+                    })
+                    
+    # Injury check (independent or foul)
+    if random.random() < 0.03:
+        # 70/30 - attacker or tackler gets hurt
+        if random.random() < 0.7 and attacking_active:
+            candidates = [p for p in attacking_active if p.position != "GK"]
+            injured = random.choice(candidates) if candidates else None
+            inj_team = attacking_team_name
+        else:
+            injured = tackler
+            inj_team = defending_team_name
+            
+        if injured and not injured.is_injured:
+            severity, matches_out = roll_injury_severity()
+            injured.is_injured = True
+            injured.injury_severity = severity
+            injured.injury_matches_left = matches_out
+            injured.career_injuries += 1
+            extra_events.append({
+                "minute": minute, "team": inj_team,
+                "type": "injury", "player": injured.name,
+                "severity": severity, "matches_out": matches_out
+            })
+            
+    return extra_events, in_match_yellows
+
+def attempt_forced_sub(team_name, active_xi, bench, injured_player, entry_minute,
+                       exit_minute, played, subs_used, max_subs, minute):
+    """
+    Forced substitution for an injured player, uses one sub allocation.
+    """
+    sub_events = []
+    if not bench or max_subs == 0 or subs_used >= max_subs:
+        return active_xi, bench, sub_events, subs_used
+    
+    replacement = (next((p for p in bench if p.position == injured_player.position), None)
+                   or next(iter(bench), None))
+    
+    if not replacement:
+        return active_xi, bench, sub_events, subs_used
+    
+    exit_minute[injured_player.name] = minute
+    active_xi = [replacement if p == injured_player else p for p in active_xi]
+    bench = [p for p in bench if p != replacement]
+    bench.append(injured_player)
+    
+    replacement.appearances += 1
+    entry_minute[replacement.name] = minute
+    played.append(replacement)
+    subs_used += 1
+    
+    sub_events.append({
+        "minute": minute,
+        "team": team_name,
+        "type": "substitution",
+        "player_off": injured_player.name,
+        "player_on": replacement.name,
+        "position": injured_player.position,
+        "reason": "injury"
+    })
+    return active_xi, bench, sub_events, subs_used
+
+def _handle_injury_event(evt, team1, team2,
+                         t1_active, t1_bench, t1_played,
+                         t2_active, t2_bench, t2_played,
+                         entry_minute, exit_minute,
+                         t1_subs_used, t2_subs_used,
+                         max_subs, minute, events):
+    injured_name = evt["player"]
+
+    if evt["team"] == team1.name:
+        obj = next((p for p in t1_active if p.name == injured_name), None)
+        if obj:
+            t1_active[:] = [p for p in t1_active if p.name != injured_name]
+            exit_minute[injured_name] = minute
+            t1_active[:], t1_bench[:], sub_evts, t1_subs_used = attempt_forced_sub(
+                team1.name, t1_active, t1_bench, obj,
+                entry_minute, exit_minute, t1_played,
+                t1_subs_used, max_subs, minute
+            )
+            for s in sub_evts:
+                events.append(s)
+    else:
+        obj = next((p for p in t2_active if p.name == injured_name), None)
+        if obj:
+            t2_active[:] = [p for p in t2_active if p.name != injured_name]
+            exit_minute[injured_name] = minute
+            t2_active[:], t2_bench[:], sub_evts, t2_subs_used = attempt_forced_sub(
+                team2.name, t2_active, t2_bench, obj,
+                entry_minute, exit_minute, t2_played,
+                t2_subs_used, max_subs, minute
+            )
+            for s in sub_evts:
+                events.append(s)
+
+    return t1_subs_used, t2_subs_used
+
+def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="1896/97"):
     team1_xi = team1.select_starting_xi(opponent_strength=team2.get_strength())
     team2_xi = team2.select_starting_xi(opponent_strength=team1.get_strength())
 
@@ -170,6 +333,11 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True):
     # Track when each player entered and left the pitch
     entry_minute = {p.name: 0  for p in team1_xi + team2_xi}
     exit_minute  = {p.name: 90 for p in team1_xi + team2_xi}
+    
+    from rules import get_card_rules
+    cards_enabled = get_card_rules(season_year)
+    team1_in_match_yellows = {}
+    team2_in_match_yellows = {}
 
     # All players who actually played (grows as subs come on)
     team1_played = list(team1_xi)
@@ -243,10 +411,30 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True):
             tackle_event, chance_modifier = resolve_tackle(team2_active, team2.name, current_minute)
             if tackle_event:
                 events.append(tackle_event)
+                tackler = next((p for p in team2_active if p.name == tackle_event["player"]), None)
+                if tackler:
+                    extra, team2_in_match_yellows = process_tackle_aftermath(
+                        tackle_event, tackler, team1_active,
+                        team1.name, team2.name,
+                        current_minute, team2_in_match_yellows, cards_enabled
+                    )
+                    for evt in extra:
+                        events.append(evt)
+                        if evt["type"] == "red_card":
+                            team2_active = [p for p in team2_active if p.name != evt["player"]]
+                        elif evt["type"] == "injury":
+                            team1_subs_used, team2_subs_used = _handle_injury_event(evt, team1, team2,
+                                                                team1_active, team1_bench, team1_played,
+                                                                team2_active, team2_bench, team2_played,
+                                                                entry_minute, exit_minute,
+                                                                team1_subs_used, team2_subs_used,
+                                                                max_subs, current_minute, events)
 
             shot_quality    = (team1.attack + home_boost) - team2.defense
             scoring_chance  = max(8, min(shot_quality / 2, 40))
             scoring_chance  = min(scoring_chance + team1.attack / 30, 45) * chance_modifier
+            if len(team1_active) < 11:
+                scoring_chance *= len(team1_active) / 11
 
             if random.randint(1, 100) < scoring_chance:
                 team1_goals += 1
@@ -277,10 +465,30 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True):
             tackle_event, chance_modifier = resolve_tackle(team1_active, team1.name, current_minute)
             if tackle_event:
                 events.append(tackle_event)
+                tackler = next((p for p in team1_active if p.name == tackle_event["player"]), None)
+                if tackler:
+                    extra, team1_in_match_yellows = process_tackle_aftermath(
+                        tackle_event, tackler, team2_active,
+                        team1.name, team2.name,
+                        current_minute, team2_in_match_yellows, cards_enabled
+                    )
+                    for evt in extra:
+                        events.append(evt)
+                        if evt["type"] == "red_card":
+                            team1_active = [p for p in team1_active if p.name != evt["player"]]
+                        elif evt["type"] == "injury":
+                            _handle_injury_event(evt, team1, team2,
+                                team1_active, team1_bench, team1_played,
+                                team2_active, team2_bench, team2_played,
+                                entry_minute, exit_minute,
+                                team1_subs_used, team2_subs_used,
+                                max_subs, current_minute, events)
 
             shot_quality   = team2.attack - team1.defense
             scoring_chance = max(8, min(shot_quality / 2, 40))
             scoring_chance = min(scoring_chance + team2.attack / 30, 45) * chance_modifier
+            if len(team2_active) < 11:
+                scoring_chance *= len(team2_active) / 11
 
             if random.randint(1, 100) < scoring_chance:
                 team2_goals += 1

@@ -6,8 +6,9 @@ from classes import Team, Player, Competition, Season
 from name_generator import generate_squad
 from data_manager import save_teams_to_file, load_teams_from_file, save_competition_to_file, load_competition_data
 from game_calendar import GameCalendar, apply_effects, apply_match_morale
-from rules import get_max_subs
+from rules import get_max_subs, get_card_rules, get_yellow_threshold
 from events import Event, Effect
+from simulation import roll_injury_severity
 
 FORMATION = {
     "GK": 1,
@@ -22,7 +23,11 @@ def run_season(season_year, teams):
     current_season = Season(season_year, teams)
     
     # Create competition
-    comp = Competition("Prote Kategorias", teams, max_subs=get_max_subs(season_year))
+    comp = Competition(
+        "Prote Kategorias", teams, 
+        max_subs=get_max_subs(season_year),
+        season_year=season_year
+    )
     comp.generate_fixtures()
     current_season.add_competition(comp)
     
@@ -105,6 +110,52 @@ def run_season(season_year, teams):
                         away_team = next((t for t in teams if t.name == result["away_team"]), None)
                         if home_team and away_team:
                             apply_match_morale(home_team, away_team, result["home_goals"], result["away_goals"])
+                    
+                    # Yellow card accumulation check
+                    YELLOW_THRESHOLD = get_yellow_threshold(season_year)
+                    for team in teams:
+                        for player in team.squad:
+                            if (player.yellow_cards > 0
+                                and player.yellow_cards % YELLOW_THRESHOLD == 0
+                                and not player.is_suspended):
+                                player.is_suspended = True
+                                player.suspension_matches_left = 1
+                                player.yellow_cards -= YELLOW_THRESHOLD
+                                
+                    # Suspension and injury countdown
+                    for team in teams:
+                        for player in team.squad:
+                            if player.suspension_matches_left > 0:
+                                player.suspension_matches_left -= 1
+                                if player.suspension_matches_left == 0:
+                                    player.is_suspended = False
+                            if player.injury_matches_left > 0:
+                                player.injury_matches_left -= 1
+                                if player.injury_matches_left == 0:
+                                    player.is_injured = False
+                                    player.injury_severity = None
+                                    
+                    # Off-match injury roll
+                    OFF_MATCH_INJURY_CHANCE = 0.01
+                    for team in teams:
+                        for player in team.squad:
+                            if not player.is_injured and random.random() < OFF_MATCH_INJURY_CHANCE:
+                                severity, matches_out = roll_injury_severity()
+                                player.is_injured = True
+                                player.injury_matches_left = matches_out
+                                player.injury_severity = severity
+                                player.career_injuries += 1
+                                calendar.schedule_injury_notification(player, team, calendar.current_date)
+                                
+                    # In-match injuries (schedule notifications for those flagged during simulation)
+                    for result in recent:
+                        injury_events = [e for e in result.get("events", []) if e["type"] == "injury"]
+                        for inj_evt in injury_events:
+                            for team in teams:
+                                player = next((p for p in team.squad if p.name == inj_evt["player"]), None)
+                                if player:
+                                    calendar.schedule_injury_notification(player, team, calendar.current_date)
+                                    break
                             
                     for team in teams:
                         for player in team.squad:
@@ -304,7 +355,13 @@ def print_match_result(result):
                        and e["team"] == home and e["player"] == name)
             a    = sum(1 for e in events if e["type"] == "goal"
                        and e.get("assister") == name)
-            icons     = ("⚽" * g) + ("👟" * a)
+            yellows  = sum(1 for e in events if e["type"] == "yellow_card"
+                        and e["team"] == home and e["player"] == name)
+            reds     = sum(1 for e in events if e["type"] == "red_card"
+                        and e["team"] == home and e["player"] == name)
+            injuries = sum(1 for e in events if e["type"] == "injury"
+                        and e["team"] == home and e["player"] == name)
+            icons = ("⚽" * g) + ("👟" * a) + ("🟨" * yellows) + ("🟥" * reds) + ("🚑" * injuries)
             rating    = f"{ratings[name]:.1f}" if name in ratings else " — "
             left_name = f"{name} {icons}".strip()
         else:

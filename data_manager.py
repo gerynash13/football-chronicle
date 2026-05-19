@@ -35,11 +35,23 @@ def save_teams_to_file(teams, filename="teams_data.json"):
                 "season_avg_rating": player.season_avg_rating,
                 "season_rating_appearances": player.season_rating_appearances,
                 
+                "yellow_cards": player.yellow_cards,
+                "red_cards": player.red_cards,
+                "is_suspended": player.is_suspended,
+                "suspension_matches_left": player.suspension_matches_left,
+                "is_injured": player.is_injured,
+                "injury_matches_left": player.injury_matches_left,
+                "injury_severity": player.injury_severity,
+                
                 # Career stats
                 "career_goals": player.career_goals,
                 "career_assists": player.career_assists,
                 "career_appearances": player.career_appearances,
                 "career_clean_sheets": player.career_clean_sheets,
+                
+                "career_yellow_cards": player.career_yellow_cards,
+                "career_red_cards": player.career_red_cards,
+                "career_injuries": player.career_injuries,
                 
                 # Career history
                 "career_history": player.career_history,
@@ -95,10 +107,22 @@ def load_teams_from_file(file_path):
             player.morale = player_data.get("morale", 0.0)
             player.manager_relationship = player_data.get("manager_relationship", 0.0)
             
+            player.yellow_cards = player_data.get("yellow_cards", 0)
+            player.red_cards = player_data.get("red_cards", 0)
+            player.is_suspended = player_data.get("is_suspended", False)
+            player.suspension_matches_left = player_data.get("suspension_matches_left", 0)
+            player.is_injured = player_data.get("is_injured", False)
+            player.injury_matches_left = player_data.get("injury_matches_left", 0)
+            player.injury_severity = player_data.get("injury_severity", None)
+            
             # Load career stats
             player.career_goals = player_data.get("career_goals", 0)
             player.career_assists = player_data.get("career_assists", 0)
             player.career_appearances = player_data.get("career_appearances", 0)
+            
+            player.career_yellow_cards = player_data.get("career_yellow_cards", 0)
+            player.career_red_cards = player_data.get("career_red_cards", 0)
+            player.career_injuries = player_data.get("career_injuries", 0)
             
             # Load career history
             player.career_history = player_data.get("career_history", [])

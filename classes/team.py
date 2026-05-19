@@ -24,7 +24,12 @@ class Team:
         
         for position, count in formation.items():
             # Get all the players in this position
-            position_players = [p for p in self.squad if p.position == position]
+            position_players = [
+                p for p in self.squad 
+                if p.position == position
+                and not p.is_injured
+                and not p.is_suspended
+            ]
             
             # Sort by CA with randomness
             # Add random variance

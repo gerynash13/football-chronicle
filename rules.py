@@ -19,3 +19,15 @@ def get_match_days(season_year):
         return [6, 5, 2]  # Sunday, Saturday, and Wednesday
     else:
         return [6, 5, 2, 1]  # Sunday, Saturday, Wednesday, and Tuesday
+    
+def get_card_rules(season_year):
+    """
+    Rules for the cards system. Introduced in 1970.
+    """
+    return int(season_year.split("/")[0]) >= 1970
+
+def get_yellow_threshold(season_year):
+    """
+    Yellow cards needed to trigger a one-match suspension.
+    """
+    return 5 # Can be changed

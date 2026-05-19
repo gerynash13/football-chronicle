@@ -21,11 +21,24 @@ class Player:
         self.season_avg_rating = 0.0
         self.season_rating_appearances = 0
         
+        self.yellow_cards = 0
+        self.red_cards = 0
+        self.is_suspended = False
+        self.suspension_matches_left = 0
+        
+        self.is_injured = False
+        self.injury_matches_left = 0
+        self.injury_type = None # "minor" | "moderate" | "serious" | "critical"
+        
         # Career stats (cumulative)
         self.career_goals = 0
         self.career_assists = 0
         self.career_appearances = 0
         self.career_clean_sheets = 0
+        
+        self.career_yellow_cards = 0
+        self.career_red_cards = 0
+        self.career_injuries = 0
         
         # Career history (list of season records)
         self.career_history = []
@@ -111,6 +124,8 @@ class Player:
         self.career_assists += self.assists
         self.career_appearances += self.appearances
         self.career_clean_sheets += self.clean_sheets
+        self.career_yellow_cards += self.yellow_cards
+        self.career_red_cards += self.red_cards
         
         # Save season record
         self.career_history.append({
@@ -119,6 +134,8 @@ class Player:
             "goals": self.goals,
             "assists": self.assists,
             "clean_sheets": self.clean_sheets,
+            "yellow_cards": self.yellow_cards,
+            "red_cards": self.red_cards,
             "ca": self.current_ability,
             "appearances": self.appearances,
             "age": self.age,
@@ -130,6 +147,10 @@ class Player:
         self.assists = 0
         self.appearances = 0
         self.clean_sheets = 0
+        self.yellow_cards = 0
+        self.red_cards = 0
+        self.is_suspended = False
+        self.suspension_matches_left = 0
         self.season_avg_rating = 0.0
         self.season_rating_appearances = 0
         

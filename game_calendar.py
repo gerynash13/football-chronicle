@@ -258,6 +258,47 @@ class GameCalendar:
                 )
             ]
         ))
+        
+    def schedule_injury_notification(self, player, team, from_date):
+        # Add injury news to inbox and schedule return reminder
+        severity_labels = {
+            "minor":        "a minor injury",
+            "moderate":     "a moderate injury",
+            "severe":       "a severe injury",
+            "critical":     "a critical injury"
+        }
+        label = severity_labels.get(player.injury_severity, "an injury")
+        
+        # Immediate inbox notification (background)
+        self._add_event(Event(
+            date=from_date,
+            category="injury",
+            blocking=False,
+            title=f"{player.name} - Injury Update",
+            description=(
+                f"{player.name} ({team.name}) has suffered {label}."
+                f"Expected to miss approximately {player.injury_matches_left} matches."
+            )
+        ))
+        
+        # Return reminder one matchday before the player is back
+        if player.injury_matches_left > 1:
+            match_dates = sorted(
+                e.date for e in self.scheduled_events if e.category == "match"
+            )
+            future_matches = [d for d in match_dates if d > from_date]
+            if len(future_matches) >= player.injury_matches_left - 1:
+                reminder_date = future_matches[player.injury_matches_left - 2]
+                self._add_event(Event(
+                    date=reminder_date,
+                    category="injury",
+                    blocking=False,
+                    title=f"{player.name} Returning Soon",
+                    description=(
+                        f"{player.name} is back in training and should be available "
+                        f"for the next match."
+                    )
+                ))
                     
 # Standalone helpers
 def apply_effects(effects, teams):
