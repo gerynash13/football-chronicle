@@ -1,5 +1,24 @@
 import random
 
+from player_refs import (
+    event_assister_matches,
+    event_player_id,
+    event_player_matches,
+    goal_refs,
+    player_ref,
+    sub_refs,
+    sub_off_id,
+    sub_on_id,
+)
+
+
+def _player_on_pitch(active, evt):
+    pid = event_player_id(evt)
+    if pid:
+        return next((p for p in active if p.id == pid), None)
+    return next((p for p in active if p.name == evt.get("player")), None)
+
+
 def pick_player_for_chance(starting_xi):
     """Pick a player from the team's squad weighted by position"""
     position_weights = {
@@ -79,8 +98,8 @@ def resolve_tackle(defending_xi, defending_team_name, minute):
         "minute": minute,
         "team": defending_team_name,
         "type": "tackle",
-        "player": tackler.name,
-        "success": success
+        **player_ref(tackler),
+        "success": success,
     }
     
     return event, 0.55 if success else 1.0 # Reduce chances if tackle fails
@@ -93,10 +112,14 @@ def estimate_current_rating(player, team_name, events, goals_conceded):
     goal_bonus      = {"GK": 1.5, "DEF": 1.3, "MID": 1.2, "FWD": 1.0}
     assist_bonus    = {"GK": 1.2, "DEF": 1.0, "MID": 0.9, "FWD": 0.8}
     
-    p_goals     = sum(1 for e in events if e["type"] == "goal"
-                      and e["team"] == team_name and e["player"] == player.name)
-    p_assists   = sum(1 for e in events if e["type"] == "goal"
-                      and e.get("assister") == player.name)
+    p_goals = sum(
+        1 for e in events
+        if e["type"] == "goal" and e["team"] == team_name and event_player_matches(e, player)
+    )
+    p_assists = sum(
+        1 for e in events
+        if e["type"] == "goal" and e["team"] == team_name and event_assister_matches(e, player)
+    )
     
     rating = 6.0
     rating += p_goals   * goal_bonus.get(player.position, 1.0)
@@ -138,12 +161,11 @@ def attempt_substitutions(team_name, active_xi, bench, events, goals_conceded,
         replacement.appearances += 1
         
         sub_events.append({
-            "minute":       minute,
-            "team":         team_name,
-            "type":         "substitution",
-            "player_off":   player_off.name,
-            "player_on":    replacement.name,
-            "position":     player_off.position
+            "minute": minute,
+            "team": team_name,
+            "type": "substitution",
+            **sub_refs(player_off, replacement),
+            "position": player_off.position,
         })
         subs_used += 1
         
@@ -177,8 +199,10 @@ def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_
     foul_chance = 0.05 if tackle_event["success"] else 0.20
     if random.random() < foul_chance:
         extra_events.append({
-            "minute": minute, "team": defending_team_name,
-            "type": "foul", "player": tackler.name
+            "minute": minute,
+            "team": defending_team_name,
+            "type": "foul",
+            **player_ref(tackler),
         })
         
         if cards_enabled:
@@ -186,25 +210,29 @@ def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_
             if card_roll < 0.05:
                 # Direct red card
                 extra_events.append({
-                    "minute": minute, "team": defending_team_name,
-                    "type": "red_card", "player": tackler.name,
-                    "reason": "violent tackle"
+                    "minute": minute,
+                    "team": defending_team_name,
+                    "type": "red_card",
+                    **player_ref(tackler),
+                    "reason": "violent tackle",
                 })
                 tackler.red_cards += 1
                 tackler.career_red_cards += 1
                 tackler.is_suspended = True
                 tackler.suspension_matches_left = 3
             elif card_roll < 0.30:
-                in_match_yellows[tackler.name] = in_match_yellows.get(tackler.name, 0) + 1
+                in_match_yellows[tackler.id] = in_match_yellows.get(tackler.id, 0) + 1
                 tackler.yellow_cards += 1
                 tackler.career_yellow_cards += 1
                 
-                if in_match_yellows[tackler.name] >= 2:
+                if in_match_yellows[tackler.id] >= 2:
                     # Second yellow card --> direct red card
                     extra_events.append({
-                        "minute": minute, "team": defending_team_name,
-                        "type": "red_card", "player": tackler.name,
-                        "reason": "second_yellow"
+                        "minute": minute,
+                        "team": defending_team_name,
+                        "type": "red_card",
+                        **player_ref(tackler),
+                        "reason": "second_yellow",
                     })
                     tackler.red_cards += 1
                     tackler.career_red_cards += 1
@@ -212,8 +240,10 @@ def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_
                     tackler.suspension_matches_left = 1
                 else:
                     extra_events.append({
-                        "minute": minute, "team": defending_team_name,
-                        "type": "yellow_card", "player": tackler.name
+                        "minute": minute,
+                        "team": defending_team_name,
+                        "type": "yellow_card",
+                        **player_ref(tackler),
                     })
                     
     # Injury check (independent or foul)
@@ -234,9 +264,12 @@ def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_
             injured.injury_matches_left = matches_out
             injured.career_injuries += 1
             extra_events.append({
-                "minute": minute, "team": inj_team,
-                "type": "injury", "player": injured.name,
-                "severity": severity, "matches_out": matches_out
+                "minute": minute,
+                "team": inj_team,
+                "type": "injury",
+                **player_ref(injured),
+                "severity": severity,
+                "matches_out": matches_out,
             })
             
     return extra_events, in_match_yellows
@@ -256,13 +289,13 @@ def attempt_forced_sub(team_name, active_xi, bench, injured_player, entry_minute
     if not replacement:
         return active_xi, bench, sub_events, subs_used
     
-    exit_minute[injured_player.name] = minute
+    exit_minute[injured_player.id] = minute
     active_xi = [replacement if p == injured_player else p for p in active_xi]
     bench = [p for p in bench if p != replacement]
     bench.append(injured_player)
     
     replacement.appearances += 1
-    entry_minute[replacement.name] = minute
+    entry_minute[replacement.id] = minute
     played.append(replacement)
     subs_used += 1
     
@@ -270,10 +303,9 @@ def attempt_forced_sub(team_name, active_xi, bench, injured_player, entry_minute
         "minute": minute,
         "team": team_name,
         "type": "substitution",
-        "player_off": injured_player.name,
-        "player_on": replacement.name,
+        **sub_refs(injured_player, replacement),
         "position": injured_player.position,
-        "reason": "injury"
+        "reason": "injury",
     })
     return active_xi, bench, sub_events, subs_used
 
@@ -283,13 +315,11 @@ def _handle_injury_event(evt, team1, team2,
                          entry_minute, exit_minute,
                          t1_subs_used, t2_subs_used,
                          max_subs, minute, events):
-    injured_name = evt["player"]
-
     if evt["team"] == team1.name:
-        obj = next((p for p in t1_active if p.name == injured_name), None)
+        obj = _player_on_pitch(t1_active, evt)
         if obj:
-            t1_active[:] = [p for p in t1_active if p.name != injured_name]
-            exit_minute[injured_name] = minute
+            t1_active[:] = [p for p in t1_active if p.id != obj.id]
+            exit_minute[obj.id] = minute
             t1_active[:], t1_bench[:], sub_evts, t1_subs_used = attempt_forced_sub(
                 team1.name, t1_active, t1_bench, obj,
                 entry_minute, exit_minute, t1_played,
@@ -298,10 +328,10 @@ def _handle_injury_event(evt, team1, team2,
             for s in sub_evts:
                 events.append(s)
     else:
-        obj = next((p for p in t2_active if p.name == injured_name), None)
+        obj = _player_on_pitch(t2_active, evt)
         if obj:
-            t2_active[:] = [p for p in t2_active if p.name != injured_name]
-            exit_minute[injured_name] = minute
+            t2_active[:] = [p for p in t2_active if p.id != obj.id]
+            exit_minute[obj.id] = minute
             t2_active[:], t2_bench[:], sub_evts, t2_subs_used = attempt_forced_sub(
                 team2.name, t2_active, t2_bench, obj,
                 entry_minute, exit_minute, t2_played,
@@ -331,8 +361,8 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
     team2_subs_used = 0
 
     # Track when each player entered and left the pitch
-    entry_minute = {p.name: 0  for p in team1_xi + team2_xi}
-    exit_minute  = {p.name: 90 for p in team1_xi + team2_xi}
+    entry_minute = {p.id: 0 for p in team1_xi + team2_xi}
+    exit_minute = {p.id: 90 for p in team1_xi + team2_xi}
     
     from rules import get_card_rules
     cards_enabled = get_card_rules(season_year)
@@ -381,9 +411,13 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
                     )
                     for evt in evts1:
                         events.append(evt)
-                        entry_minute[evt["player_on"]] = window
-                        exit_minute[evt["player_off"]] = window
-                        sub = next((p for p in team1.squad if p.name == evt["player_on"]), None)
+                        on_id = sub_on_id(evt)
+                        off_id = sub_off_id(evt)
+                        if on_id:
+                            entry_minute[on_id] = window
+                        if off_id:
+                            exit_minute[off_id] = window
+                        sub = next((p for p in team1.squad if p.id == on_id), None) if on_id else None
                         if sub:
                             team1_played.append(sub)
 
@@ -393,9 +427,13 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
                     )
                     for evt in evts2:
                         events.append(evt)
-                        entry_minute[evt["player_on"]] = window
-                        exit_minute[evt["player_off"]] = window
-                        sub = next((p for p in team2.squad if p.name == evt["player_on"]), None)
+                        on_id = sub_on_id(evt)
+                        off_id = sub_off_id(evt)
+                        if on_id:
+                            entry_minute[on_id] = window
+                        if off_id:
+                            exit_minute[off_id] = window
+                        sub = next((p for p in team2.squad if p.id == on_id), None) if on_id else None
                         if sub:
                             team2_played.append(sub)
 
@@ -411,7 +449,7 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
             tackle_event, chance_modifier = resolve_tackle(team2_active, team2.name, current_minute)
             if tackle_event:
                 events.append(tackle_event)
-                tackler = next((p for p in team2_active if p.name == tackle_event["player"]), None)
+                tackler = _player_on_pitch(team2_active, tackle_event)
                 if tackler:
                     extra, team2_in_match_yellows = process_tackle_aftermath(
                         tackle_event, tackler, team1_active,
@@ -421,7 +459,9 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
                     for evt in extra:
                         events.append(evt)
                         if evt["type"] == "red_card":
-                            team2_active = [p for p in team2_active if p.name != evt["player"]]
+                            sent_off = _player_on_pitch(team2_active, evt)
+                            if sent_off:
+                                team2_active = [p for p in team2_active if p.id != sent_off.id]
                         elif evt["type"] == "injury":
                             team1_subs_used, team2_subs_used = _handle_injury_event(evt, team1, team2,
                                                                 team1_active, team1_bench, team1_played,
@@ -443,29 +483,48 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
                 assister = pick_assister(team1_active, scorer)
                 if assister:
                     assister.assists += 1
-                events.append({"minute": current_minute, "team": team1.name,
-                                "type": "goal", "player": scorer.name,
-                                "assister": assister.name if assister else None})
-                events.append({"minute": current_minute, "team": team1.name,
-                                "type": "shot_on_target", "player": scorer.name})
+                events.append({
+                    "minute": current_minute,
+                    "team": team1.name,
+                    "type": "goal",
+                    **goal_refs(scorer, assister),
+                })
+                events.append({
+                    "minute": current_minute,
+                    "team": team1.name,
+                    "type": "shot_on_target",
+                    **player_ref(scorer),
+                })
             else:
                 shooter  = pick_player_for_chance(team1_active)
                 accuracy = 20 + (team1.attack / 5)
                 if random.randint(1, 100) < accuracy:
                     gk = next((p for p in team2_active if p.position == "GK"), None)
                     if gk:
-                        events.append({"minute": current_minute, "team": team2.name,
-                                        "type": "save", "player": gk.name})
-                    events.append({"minute": current_minute, "team": team1.name,
-                                    "type": "shot_on_target", "player": shooter.name})
+                        events.append({
+                            "minute": current_minute,
+                            "team": team2.name,
+                            "type": "save",
+                            **player_ref(gk),
+                        })
+                    events.append({
+                        "minute": current_minute,
+                        "team": team1.name,
+                        "type": "shot_on_target",
+                        **player_ref(shooter),
+                    })
                 else:
-                    events.append({"minute": current_minute, "team": team1.name,
-                                    "type": "shot_off_target", "player": shooter.name})
+                    events.append({
+                        "minute": current_minute,
+                        "team": team1.name,
+                        "type": "shot_off_target",
+                        **player_ref(shooter),
+                    })
         else:
             tackle_event, chance_modifier = resolve_tackle(team1_active, team1.name, current_minute)
             if tackle_event:
                 events.append(tackle_event)
-                tackler = next((p for p in team1_active if p.name == tackle_event["player"]), None)
+                tackler = _player_on_pitch(team1_active, tackle_event)
                 if tackler:
                     extra, team1_in_match_yellows = process_tackle_aftermath(
                         tackle_event, tackler, team2_active,
@@ -475,7 +534,9 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
                     for evt in extra:
                         events.append(evt)
                         if evt["type"] == "red_card":
-                            team1_active = [p for p in team1_active if p.name != evt["player"]]
+                            sent_off = _player_on_pitch(team1_active, evt)
+                            if sent_off:
+                                team1_active = [p for p in team1_active if p.id != sent_off.id]
                         elif evt["type"] == "injury":
                             _handle_injury_event(evt, team1, team2,
                                 team1_active, team1_bench, team1_played,
@@ -497,24 +558,43 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
                 assister = pick_assister(team2_active, scorer)
                 if assister:
                     assister.assists += 1
-                events.append({"minute": current_minute, "team": team2.name,
-                                "type": "goal", "player": scorer.name,
-                                "assister": assister.name if assister else None})
-                events.append({"minute": current_minute, "team": team2.name,
-                                "type": "shot_on_target", "player": scorer.name})
+                events.append({
+                    "minute": current_minute,
+                    "team": team2.name,
+                    "type": "goal",
+                    **goal_refs(scorer, assister),
+                })
+                events.append({
+                    "minute": current_minute,
+                    "team": team2.name,
+                    "type": "shot_on_target",
+                    **player_ref(scorer),
+                })
             else:
                 shooter  = pick_player_for_chance(team2_active)
                 accuracy = 20 + (team2.attack / 5)
                 if random.randint(1, 100) < accuracy:
                     gk = next((p for p in team1_active if p.position == "GK"), None)
                     if gk:
-                        events.append({"minute": current_minute, "team": team1.name,
-                                        "type": "save", "player": gk.name})
-                    events.append({"minute": current_minute, "team": team2.name,
-                                    "type": "shot_on_target", "player": shooter.name})
+                        events.append({
+                            "minute": current_minute,
+                            "team": team1.name,
+                            "type": "save",
+                            **player_ref(gk),
+                        })
+                    events.append({
+                        "minute": current_minute,
+                        "team": team2.name,
+                        "type": "shot_on_target",
+                        **player_ref(shooter),
+                    })
                 else:
-                    events.append({"minute": current_minute, "team": team2.name,
-                                    "type": "shot_off_target", "player": shooter.name})
+                    events.append({
+                        "minute": current_minute,
+                        "team": team2.name,
+                        "type": "shot_off_target",
+                        **player_ref(shooter),
+                    })
 
     # ── Clean sheets (use original XI — the starting GK gets the credit) ──────
     if team2_goals == 0:
@@ -531,22 +611,32 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
 
     def compute_ratings(played, team_name, goals_conceded):
         for player in played:
-            minutes   = exit_minute.get(player.name, 90) - entry_minute.get(player.name, 0)
-            p_goals   = sum(1 for e in events if e["type"] == "goal"
-                            and e["team"] == team_name and e["player"] == player.name)
-            p_assists = sum(1 for e in events if e["type"] == "goal"
-                            and e.get("assister") == player.name)
+            minutes = exit_minute.get(player.id, 90) - entry_minute.get(player.id, 0)
+            p_goals = sum(
+                1 for e in events
+                if e["type"] == "goal" and e["team"] == team_name and event_player_matches(e, player)
+            )
+            p_assists = sum(
+                1 for e in events
+                if e["type"] == "goal" and e["team"] == team_name and event_assister_matches(e, player)
+            )
 
             if minutes < 10 and p_goals == 0 and p_assists == 0:
-                ratings[player.name] = None
+                ratings[player.id] = None
                 continue
 
-            p_saves             = sum(1 for e in events if e["type"] == "save"
-                                      and e["player"] == player.name)
-            p_tackles_won       = sum(1 for e in events if e["type"] == "tackle"
-                                      and e["player"] == player.name and e["success"])
-            p_tackles_attempted = sum(1 for e in events if e["type"] == "tackle"
-                                      and e["player"] == player.name)
+            p_saves = sum(
+                1 for e in events
+                if e["type"] == "save" and event_player_matches(e, player)
+            )
+            p_tackles_won = sum(
+                1 for e in events
+                if e["type"] == "tackle" and event_player_matches(e, player) and e["success"]
+            )
+            p_tackles_attempted = sum(
+                1 for e in events
+                if e["type"] == "tackle" and event_player_matches(e, player)
+            )
 
             rating = calculate_match_rating(
                 player, p_goals, p_assists,
@@ -557,7 +647,7 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
                 tackles_attempted=p_tackles_attempted
             )
             player.update_season_rating(rating)
-            ratings[player.name] = rating
+            ratings[player.id] = rating
 
     compute_ratings(team1_played, team1.name, team2_goals)
     compute_ratings(team2_played, team2.name, team1_goals)

@@ -1,5 +1,6 @@
 import random
 from simulation import simulate_match
+from player_refs import xi_entry
 
 class Competition:
     def __init__(self, name, teams, competition_type="league", max_subs=0, season_year="1896/97"):
@@ -95,8 +96,10 @@ class Competition:
                     "away_goals": away_goals,
                     "events": events,
                     "ratings": ratings,
-                    "home_xi": [{"name": p.name, "position": p.position} for p in home_xi],
-                    "away_xi": [{"name": p.name, "position": p.position} for p in away_xi]
+                    "home_xi": [xi_entry(p) for p in home_xi],
+                    "away_xi": [xi_entry(p) for p in away_xi],
+                    "competition": self.name,
+                    "season": self.season_year,
                 })
                 
                 # Update standings

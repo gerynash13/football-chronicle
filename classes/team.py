@@ -10,6 +10,7 @@ class Team:
         self.morale = 0.0  # -10 to +10, where 0 is neutral
         self.board_confidence = 50.0  # 0 to 100
         self.fan_satisfaction = 50.0  # 0 to 100
+        self.trophies = []
 
     def add_player(self, player):
         self.squad.append(player)

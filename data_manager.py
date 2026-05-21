@@ -1,6 +1,8 @@
 import json
 import datetime
 from classes import Team, Player
+from records import RecordBook
+from player_refs import new_player_id
 
 def save_teams_to_file(teams, filename="teams_data.json"):
     data = []
@@ -19,6 +21,7 @@ def save_teams_to_file(teams, filename="teams_data.json"):
 
         for player in team.squad:
             player_data = {
+                "id": player.id,
                 "name": player.name,
                 "position": player.position,
                 "age": player.age,
@@ -95,13 +98,15 @@ def load_teams_from_file(file_path):
               position = player_data["position"],
               age = player_data["age"],
               current_ability = player_data["current_ability"],
-              potential_ability = player_data["potential_ability"]
+              potential_ability = player_data["potential_ability"],
+              player_id = player_data.get("id") or new_player_id(),
               )
             
             # Load season stats  
             player.goals = player_data.get("goals", 0)
             player.assists = player_data.get("assists", 0)
             player.appearances = player_data.get("appearances", 0)
+            player.clean_sheets = player_data.get("clean_sheets", 0)
             player.season_avg_rating = player_data.get("season_avg_rating", 0.0)
             player.season_rating_appearances = player_data.get("season_rating_appearances", 0)
             player.morale = player_data.get("morale", 0.0)
@@ -119,6 +124,7 @@ def load_teams_from_file(file_path):
             player.career_goals = player_data.get("career_goals", 0)
             player.career_assists = player_data.get("career_assists", 0)
             player.career_appearances = player_data.get("career_appearances", 0)
+            player.career_clean_sheets = player_data.get("career_clean_sheets", 0)
             
             player.career_yellow_cards = player_data.get("career_yellow_cards", 0)
             player.career_red_cards = player_data.get("career_red_cards", 0)
@@ -183,3 +189,21 @@ def load_competition_data(competition, filename="competition_data.json"):
     
     print(f"Loaded competition state from {filename}")
     return competition, current_date
+
+
+def save_records_to_file(record_book: RecordBook, filename: str = "records_data.json") -> None:
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(record_book.to_dict(), f, indent=2, ensure_ascii=False)
+    print(f"Saved records to {filename}")
+
+
+def load_records_from_file(filename: str = "records_data.json") -> RecordBook:
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        book = RecordBook.from_dict(data)
+        print(f"Loaded records from {filename}")
+        return book
+    except FileNotFoundError:
+        print("No records file found. Starting fresh record book.")
+        return RecordBook()

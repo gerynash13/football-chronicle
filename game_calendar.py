@@ -216,7 +216,7 @@ class GameCalendar:
         # Don't schedule if a meeting for this player is already pending
         already_pending = any(
             e.category == "player_interaction"
-            and player.name in e.title
+            and e.related_player_id == player.id
             and e.date >= from_date
             for e in self.scheduled_events
         )
@@ -236,6 +236,7 @@ class GameCalendar:
             date=meeting_date,
             category="player_interaction",
             blocking=True,
+            related_player_id=player.id,
             title=f"{player.name} Requests a Meeting",
             description=(
                 f"{player.name} ({player.position}, {team.name}) has requested a meeting. "
@@ -245,15 +246,15 @@ class GameCalendar:
                 Choice(
                     text="Support them — listen and offer reassurance",
                     effects=[
-                        Effect("player", player.name, "morale", +2.0),
-                        Effect("player", player.name, "manager_relationship", +1.0)
+                        Effect("player", player.id, "morale", +2.0),
+                        Effect("player", player.id, "manager_relationship", +1.0)
                     ]
                 ),
                 Choice(
                     text="Dismiss their concerns — remind them of their duties",
                     effects=[
-                        Effect("player", player.name, "morale", -0.5),
-                        Effect("player", player.name, "manager_relationship", -1.5)
+                        Effect("player", player.id, "morale", -0.5),
+                        Effect("player", player.id, "manager_relationship", -1.5)
                     ]
                 )
             ]
@@ -304,8 +305,11 @@ class GameCalendar:
 def apply_effects(effects, teams):
     # Apply a list of effects to the game world. 
     # Effects can target teams or players and modify their attributes.
-    team_map    = {t.name: t for t in teams}
-    player_map  = {p.name: p for t in teams for p in t.squad}
+    team_map_id = {t.id: t for t in teams}
+    team_map_name = {t.name: t for t in teams}
+    player_map_id = {p.id: p for t in teams for p in t.squad}
+    # Legacy saves / events may still reference players by name
+    player_map_name = {p.name: p for t in teams for p in t.squad}
     
     BOUNDS = {
         "morale": (-10, 10),
@@ -315,7 +319,10 @@ def apply_effects(effects, teams):
     }
     
     for effect in effects:
-        target = (team_map if effect.target_type == "team" else player_map).get(effect.target_id)
+        if effect.target_type == "team":
+            target = team_map_id.get(effect.target_id) or team_map_name.get(effect.target_id)
+        else:
+            target = player_map_id.get(effect.target_id) or player_map_name.get(effect.target_id)
         if not target:
             continue  # Invalid target, skip this effect
         lo, hi = BOUNDS.get(effect.attribute, (-10, 10))

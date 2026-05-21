@@ -362,7 +362,7 @@ def print_match_result(result):
             injuries = sum(1 for e in events if e["type"] == "injury"
                         and e["team"] == home and e["player"] == name)
             icons = ("⚽" * g) + ("👟" * a) + ("🟨" * yellows) + ("🟥" * reds) + ("🚑" * injuries)
-            rating    = f"{ratings[name]:.1f}" if name in ratings else " — "
+            rating    = (f"{ratings[name]:.1f}" if name in ratings and ratings[name] is not None else " — ")
             left_name = f"{name} {icons}".strip()
         else:
             left_name, rating = "", ""
@@ -376,7 +376,7 @@ def print_match_result(result):
             a      = sum(1 for e in events if e["type"] == "goal"
                          and e.get("assister") == a_name)
             a_icons    = ("⚽" * g) + ("👟" * a)
-            a_rating   = f"{ratings[a_name]:.1f}" if a_name in ratings else " — "
+            a_rating   = (f"{ratings[a_name]:.1f}" if a_name in ratings and ratings[a_name] is not None else " — ")
             right_name = f"{a_name} {a_icons}".strip()
         else:
             right_name, a_rating = "", ""

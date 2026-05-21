@@ -1,7 +1,9 @@
 import random
+from player_refs import new_player_id
 
 class Player:
-    def __init__(self, name, position, age, current_ability, potential_ability):
+    def __init__(self, name, position, age, current_ability, potential_ability, player_id=None):
+        self.id = player_id or new_player_id()
         self.name = name
         self.position = position # GK, DEF, MID, FWD
         self.age = age
@@ -28,7 +30,7 @@ class Player:
         
         self.is_injured = False
         self.injury_matches_left = 0
-        self.injury_type = None # "minor" | "moderate" | "serious" | "critical"
+        self.injury_severity = None  # "minor" | "moderate" | "severe" | "critical"
         
         # Career stats (cumulative)
         self.career_goals = 0
@@ -42,6 +44,8 @@ class Player:
         
         # Career history (list of season records)
         self.career_history = []
+        self.career_trophies = 0
+        self.career_trophies_by_comp = {}
         
         # Wonderkid flag (for potential future use in scouting, etc.)
         self.is_wonderkid = False
@@ -139,6 +143,8 @@ class Player:
             "ca": self.current_ability,
             "appearances": self.appearances,
             "age": self.age,
+            "squad_number": int | None, # None for pre-1928 era
+            "kit_color": str | None,    # Hex primary color, set on Team later
             "avg_rating": round(self.season_avg_rating, 1) if self.season_rating_appearances > 0 else None
         })
         

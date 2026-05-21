@@ -27,3 +27,4 @@ class Event:
     effects: List[Effect] = field(default_factory=list)  # Effects that apply regardless of choice
     is_read: bool = False  # Track if the event has been read by the player
     resolution: str = ""  # Optional field to store the outcome of the event after choices are made
+    related_player_id: str = ""  # Player this event concerns (meetings, injuries, etc.)
