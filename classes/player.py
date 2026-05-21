@@ -46,6 +46,10 @@ class Player:
         self.career_history = []
         self.career_trophies = 0
         self.career_trophies_by_comp = {}
+        # Squad number (may be assigned when squad is generated)
+        self.squad_number = None
+        # Temporary flag set when player wins a trophy this season
+        self._won_trophy_flag = False
         
         # Wonderkid flag (for potential future use in scouting, etc.)
         self.is_wonderkid = False
@@ -143,10 +147,13 @@ class Player:
             "ca": self.current_ability,
             "appearances": self.appearances,
             "age": self.age,
-            "squad_number": int | None, # None for pre-1928 era
-            "kit_color": str | None,    # Hex primary color, set on Team later
+            "squad_number": self.squad_number,
+            "kit_color": None,    # Hex primary color, set on Team later
+            "trophy": bool(self._won_trophy_flag),
             "avg_rating": round(self.season_avg_rating, 1) if self.season_rating_appearances > 0 else None
         })
+        # Clear seasonal trophy flag after recording
+        self._won_trophy_flag = False
         
         # Reset season stats
         self.goals = 0

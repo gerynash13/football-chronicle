@@ -1,7 +1,9 @@
 import random
+from player_refs import new_team_id
 
 class Team:
     def __init__(self, name, attack, midfield, defense):
+        self.id = new_team_id()
         self.name = name
         self.attack = attack
         self.midfield = midfield

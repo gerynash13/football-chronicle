@@ -1,9 +1,10 @@
 import random
 from simulation import simulate_match
-from player_refs import xi_entry
+from player_refs import xi_entry, new_competition_id
 
 class Competition:
     def __init__(self, name, teams, competition_type="league", max_subs=0, season_year="1896/97"):
+        self.id = new_competition_id()
         self.name = name
         self.teams = teams
         self.type = competition_type
@@ -148,3 +149,62 @@ class Competition:
         if not self.fixtures:
             return 0
         return max(f["matchday"] for f in self.fixtures)
+
+
+class CupCompetition(Competition):
+    """Simple knockout cup with auto-scaling to next power of two.
+
+    Fixtures are generated per round with `matchday` representing the round number.
+    """
+    def __init__(self, name, teams, max_subs=0, season_year="1896/97"):
+        super().__init__(name, teams, competition_type="cup", max_subs=max_subs, season_year=season_year)
+
+    def _next_power_of_two(self, n):
+        p = 1
+        while p < n:
+            p *= 2
+        return p
+
+    def generate_fixtures(self):
+        # Build initial bracket
+        teams = self.teams.copy()
+        n = len(teams)
+        target = self._next_power_of_two(n)
+
+        # Add byes as None entries
+        while len(teams) < target:
+            teams.append(None)
+
+        # Each round gets a matchday number starting at 1
+        fixtures = []
+        round_num = 1
+        current_round = teams
+
+        while len(current_round) > 1:
+            next_round = []
+            for i in range(0, len(current_round), 2):
+                home = current_round[i]
+                away = current_round[i+1]
+                if home is None and away is None:
+                    next_round.append(None)
+                    continue
+                if home is None:
+                    # away gets a bye
+                    next_round.append(away)
+                    continue
+                if away is None:
+                    next_round.append(home)
+                    continue
+
+                fixtures.append({
+                    "matchday": round_num,
+                    "home_team": home,
+                    "away_team": away
+                })
+                # placeholder for winner in next_round
+                next_round.append(None)
+
+            current_round = next_round
+            round_num += 1
+
+        self.fixtures = fixtures

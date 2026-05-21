@@ -15,6 +15,16 @@ def new_player_id() -> str:
     return str(uuid.uuid4())
 
 
+def new_team_id() -> str:
+    """Generate a unique ID for a team."""
+    return str(uuid.uuid4())
+
+
+def new_competition_id() -> str:
+    """Generate a unique ID for a competition."""
+    return str(uuid.uuid4())
+
+
 def player_ref(player) -> dict[str, str]:
     return {"player_id": player.id, "player": player.name}
 

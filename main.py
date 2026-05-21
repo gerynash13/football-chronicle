@@ -4,7 +4,16 @@ import os
 import datetime
 from classes import Team, Player, Competition, Season
 from name_generator import generate_squad
-from data_manager import save_teams_to_file, load_teams_from_file, save_competition_to_file, load_competition_data
+from data_manager import (
+    save_teams_to_file,
+    load_teams_from_file,
+    save_competition_to_file,
+    load_competition_data,
+    save_records_to_file,
+    load_records_from_file,
+)
+from records import RecordBook
+from player_refs import find_player, event_assister_matches_id, event_matches_id
 from game_calendar import GameCalendar, apply_effects, apply_match_morale
 from rules import get_max_subs, get_card_rules, get_yellow_threshold
 from events import Event, Effect
@@ -17,7 +26,7 @@ FORMATION = {
     "FWD": 5
 }
 
-def run_season(season_year, teams):
+def run_season(season_year, teams, record_book: RecordBook):
     
     # Create season:
     current_season = Season(season_year, teams)
@@ -105,11 +114,28 @@ def run_season(season_year, teams):
                     recent = comp.results[-len(today_fixtures):]
                     for result in recent:
                         print_match_result(result)
+                        record_book.process_match(
+                            result,
+                            teams,
+                            competition_name=comp.name,
+                            season_year=season_year,
+                        )
                         
                         home_team = next((t for t in teams if t.name == result["home_team"]), None)
                         away_team = next((t for t in teams if t.name == result["away_team"]), None)
                         if home_team and away_team:
                             apply_match_morale(home_team, away_team, result["home_goals"], result["away_goals"])
+
+                        # If this is a cup competition and the match was a draw, schedule a replay
+                        if comp.type == "cup":
+                            for result in recent:
+                                if result["home_goals"] == result["away_goals"]:
+                                    home_team = next((t for t in teams if t.name == result["home_team"]), None)
+                                    away_team = next((t for t in teams if t.name == result["away_team"]), None)
+                                    if home_team and away_team:
+                                        scheduled = calendar.schedule_replay(comp, home_team, away_team, calendar.current_date)
+                                        if scheduled:
+                                            print(f"Replay scheduled for {home_team.name} vs {away_team.name} on {scheduled.strftime('%Y-%m-%d')}")
                     
                     # Yellow card accumulation check
                     YELLOW_THRESHOLD = get_yellow_threshold(season_year)
@@ -151,11 +177,17 @@ def run_season(season_year, teams):
                     for result in recent:
                         injury_events = [e for e in result.get("events", []) if e["type"] == "injury"]
                         for inj_evt in injury_events:
-                            for team in teams:
-                                player = next((p for p in team.squad if p.name == inj_evt["player"]), None)
-                                if player:
-                                    calendar.schedule_injury_notification(player, team, calendar.current_date)
-                                    break
+                            player, team_name = find_player(
+                                teams,
+                                player_id=inj_evt.get("player_id"),
+                                name=inj_evt.get("player"),
+                                team_name=inj_evt.get("team"),
+                            )
+                            if player:
+                                team = next(t for t in teams if t.name == team_name)
+                                calendar.schedule_injury_notification(
+                                    player, team, calendar.current_date
+                                )
                             
                     for team in teams:
                         for player in team.squad:
@@ -275,6 +307,19 @@ def run_season(season_year, teams):
         player_team = next(t for t in teams if player in t.squad)
         print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.season_avg_rating:<6.2f}")
         
+    # Update all-time / season records before rolling player stats into career
+    record_book.finalize_season(comp, teams, season_year)
+    record_book.print_season_records(comp, teams, season_year)
+
+    champion_name = sort_standings(comp.standings)[0][0]
+    for team in teams:
+        if team.name == champion_name:
+            # Award trophy to team and mark players
+            team.trophies.append({"competition": comp.name, "season": season_year})
+            for player in team.squad:
+                player._won_trophy_flag = True
+                player.career_trophies += 1
+                player.career_trophies_by_comp[comp.name] = player.career_trophies_by_comp.get(comp.name, 0) + 1
     # End season
     current_season.end_season()
     
@@ -282,7 +327,7 @@ def run_season(season_year, teams):
     if os.path.exists("competition_data.json"):
         os.remove("competition_data.json")
         
-    return teams
+    return teams, record_book
 
 # Display standings after matchday
 def print_standings(standings, title="STANDINGS"):
@@ -311,6 +356,18 @@ def print_match_result(result):
     ratings     = result.get("ratings", {})
     home_xi     = result.get("home_xi", [])
     away_xi     = result.get("away_xi", [])
+
+    def _rating_for(entry):
+        pid = entry.get("id")
+        if pid and pid in ratings:
+            val = ratings[pid]
+            return f"{val:.1f}" if val is not None else " — "
+        # Legacy saves keyed ratings by name
+        name = entry.get("name", "")
+        if name in ratings:
+            val = ratings[name]
+            return f"{val:.1f}" if val is not None else " — "
+        return " — "
 
     # ── Header ────────────────────────────────────────────────────────────────
     print(f"\n{'─'*80}")
@@ -351,18 +408,19 @@ def print_match_result(result):
         if i < len(home_sorted):
             p    = home_sorted[i]
             name = p["name"]
+            pid  = p.get("id")
             g    = sum(1 for e in events if e["type"] == "goal"
-                       and e["team"] == home and e["player"] == name)
+                       and e["team"] == home and event_matches_id(e, pid, name))
             a    = sum(1 for e in events if e["type"] == "goal"
-                       and e.get("assister") == name)
+                       and event_assister_matches_id(e, pid, name))
             yellows  = sum(1 for e in events if e["type"] == "yellow_card"
-                        and e["team"] == home and e["player"] == name)
+                        and e["team"] == home and event_matches_id(e, pid, name))
             reds     = sum(1 for e in events if e["type"] == "red_card"
-                        and e["team"] == home and e["player"] == name)
+                        and e["team"] == home and event_matches_id(e, pid, name))
             injuries = sum(1 for e in events if e["type"] == "injury"
-                        and e["team"] == home and e["player"] == name)
+                        and e["team"] == home and event_matches_id(e, pid, name))
             icons = ("⚽" * g) + ("👟" * a) + ("🟨" * yellows) + ("🟥" * reds) + ("🚑" * injuries)
-            rating    = (f"{ratings[name]:.1f}" if name in ratings and ratings[name] is not None else " — ")
+            rating = _rating_for(p)
             left_name = f"{name} {icons}".strip()
         else:
             left_name, rating = "", ""
@@ -371,12 +429,13 @@ def print_match_result(result):
         if i < len(away_sorted):
             p      = away_sorted[i]
             a_name = p["name"]
+            a_pid  = p.get("id")
             g      = sum(1 for e in events if e["type"] == "goal"
-                         and e["team"] == away and e["player"] == a_name)
+                         and e["team"] == away and event_matches_id(e, a_pid, a_name))
             a      = sum(1 for e in events if e["type"] == "goal"
-                         and e.get("assister") == a_name)
+                         and event_assister_matches_id(e, a_pid, a_name))
             a_icons    = ("⚽" * g) + ("👟" * a)
-            a_rating   = (f"{ratings[a_name]:.1f}" if a_name in ratings and ratings[a_name] is not None else " — ")
+            a_rating   = _rating_for(p)
             right_name = f"{a_name} {a_icons}".strip()
         else:
             right_name, a_rating = "", ""
@@ -480,6 +539,7 @@ else:
     
 start_year = 1896
 num_seasons = 3
+record_book = load_records_from_file()
 
 for i in range(num_seasons):
     season_year = f"{start_year + i}/{str(start_year + i + 1)[-2:]}"
@@ -490,10 +550,11 @@ for i in range(num_seasons):
     print(f"{'#'*80}")
     print(f"{'#'*80}\n\n")
     
-    teams = run_season(season_year, teams)
+    teams, record_book = run_season(season_year, teams, record_book)
     
-    # Save teams after each season
+    # Save teams and records after each season
     save_teams_to_file(teams)
+    save_records_to_file(record_book)
     print(f"{season_year} season completed and teams saved.\n")
     
     # Player development - age up and update abilities

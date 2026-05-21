@@ -270,6 +270,46 @@ class GameCalendar:
         }
         label = severity_labels.get(player.injury_severity, "an injury")
         
+        def schedule_replay(self, competition, home_team, away_team, from_date):
+            """Schedule a replay for a cup match on the next available midweek date.
+
+            Adds a fixture to `competition.fixtures` with a new matchday number and
+            schedules the match event on the calendar.
+            """
+            # Determine next matchday number
+            existing_matchdays = [f["matchday"] for f in competition.fixtures] if competition.fixtures else []
+            new_matchday = max(existing_matchdays) + 1 if existing_matchdays else 1
+
+            # Find a date for the replay: prefer a midweek day (Wednesday)
+            candidate = from_date + timedelta(days=1)
+            match_dates = set(e.date for e in self.scheduled_events if e.category == "match")
+            # Limit search to season end
+            while candidate <= self.season_end:
+                # Avoid existing match dates
+                if candidate not in match_dates and candidate > from_date:
+                    break
+                candidate += timedelta(days=1)
+
+            if candidate > self.season_end:
+                return None
+
+            # Add fixture and schedule event
+            competition.fixtures.append({
+                "matchday": new_matchday,
+                "home_team": home_team,
+                "away_team": away_team,
+                "date": candidate
+            })
+
+            self._add_event(Event(
+                date=candidate,
+                category="match",
+                blocking=True,
+                title=f"Replay: {home_team.name} vs {away_team.name}",
+                description=f"Replay scheduled for {candidate.strftime('%A, %d %B %Y')}"
+            ))
+
+            return candidate
         # Immediate inbox notification (background)
         self._add_event(Event(
             date=from_date,

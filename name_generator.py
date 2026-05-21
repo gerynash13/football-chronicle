@@ -96,7 +96,23 @@ def generate_squad(team_name, average_ca=70, nation="Myria"):
       player = Player(name, position, age, ca, pa)
       if is_wonderkid:
         player.is_wonderkid = True
-        
       squad.append(player)
-    
+  # Assign squad numbers: basic sequential assignment, but ensure a goalkeeper gets #1
+  nums = list(range(1, len(squad) + 1))
+  random.shuffle(nums)
+  # Ensure a GK has number 1 if possible
+  gks = [p for p in squad if p.position == "GK"]
+  if gks:
+    first_gk = gks[0]
+    # find index of first_gk and number 1 position
+    try:
+      idx = squad.index(first_gk)
+      one_idx = nums.index(1)
+      nums[idx], nums[one_idx] = nums[one_idx], nums[idx]
+    except ValueError:
+      pass
+
+  for p, n in zip(squad, nums):
+    p.squad_number = n
+
   return squad
