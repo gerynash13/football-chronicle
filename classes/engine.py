@@ -52,8 +52,16 @@ import os
 import random
 import datetime
 
-from classes import Team, Player, Competition, Season
-from classes.competition import CupCompetition
+try:
+    # Local project structure — classes is a package
+    from classes import Team, Player, Competition, Season
+    from classes.competition import CupCompetition
+except ModuleNotFoundError:
+    # Flat structure (test environment)
+    from team import Team
+    from player import Player
+    from competition import Competition, CupCompetition
+    from season import Season
 from name_generator import generate_squad
 from data_manager import (
     save_teams_to_file,
@@ -652,6 +660,32 @@ class GameEngine:
         # Records
         self.record_book.finalize_season(self.comp, self.teams, self.season_year)
 
+        # Snapshot leaderboard rows BEFORE end_season() resets season stats
+        def _player_rows(players):
+            return [
+                {
+                    "name":         p.name,
+                    "team":         next(t.name for t in self.teams if p in t.squad),
+                    "goals":        p.goals,
+                    "assists":      p.assists,
+                    "clean_sheets": p.clean_sheets,
+                    "avg_rating":   round(p.season_avg_rating, 2),
+                }
+                for p in players
+            ]
+
+        season_end_state = {
+            "type":             "season_end",
+            "season":           self.season_year,
+            "date":             self.calendar.current_date.isoformat(),
+            "champion":         champion_name,
+            "final_standings":  self._serialise_standings(),
+            "top_scorers":      _player_rows(top_scorers),
+            "top_assisters":    _player_rows(top_assisters),
+            "top_clean_sheets": _player_rows(top_clean_sheets),
+            "top_rated":        _player_rows(top_rated),
+        }
+
         # End season (rolls stats into career, resets season counters)
         self.current_season.end_season()
         self._season_complete = True
@@ -660,30 +694,7 @@ class GameEngine:
         if os.path.exists("competition_data.json"):
             os.remove("competition_data.json")
 
-        def _player_rows(players):
-            return [
-                {
-                    "name":   p.name,
-                    "team":   next(t.name for t in self.teams if p in t.squad),
-                    "goals":  p.goals,
-                    "assists": p.assists,
-                    "clean_sheets": p.clean_sheets,
-                    "avg_rating":   round(p.season_avg_rating, 2),
-                }
-                for p in players
-            ]
-
-        return {
-            "type":              "season_end",
-            "season":            self.season_year,
-            "date":              self.calendar.current_date.isoformat(),
-            "champion":          champion_name,
-            "final_standings":   self._serialise_standings(),
-            "top_scorers":       _player_rows(top_scorers),
-            "top_assisters":     _player_rows(top_assisters),
-            "top_clean_sheets":  _player_rows(top_clean_sheets),
-            "top_rated":         _player_rows(top_rated),
-        }
+        return season_end_state
 
     # ── Between seasons ───────────────────────────────────────────────────────
 

@@ -1,6 +1,11 @@
 import json
 import datetime
-from classes import Team, Player
+import random
+try:
+    from classes import Team, Player
+except ModuleNotFoundError:
+    from team import Team
+    from player import Player
 from records import RecordBook
 from player_refs import new_player_id
 

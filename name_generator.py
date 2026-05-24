@@ -1,6 +1,6 @@
 import datetime
 import random
-from player import Player
+from classes import Player
 from nations import get_nation_config
 
 def _random_birth_date(birth_year: int) -> datetime.date:

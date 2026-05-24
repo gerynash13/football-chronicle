@@ -26,19 +26,19 @@
               decay, upset multiplier, competition prestige values
               (schema designed, runtime logic not yet implemented)
 
-- [next]      Region system
+- [done]      Region system
                 nations.yaml  → 4 named regions per nation
                 teams.yaml    → home_region per team
                 player.py     → birth_region field
                 data_manager  → save/load birth_region
                 name_generator → assign birth_region from team region
 
-- [next]      Budget system
+- [done]      Budget system
                 team.py       → budget, wage_budget fields
                 teams.yaml    → starting budget per team
                 data_manager  → save/load budget fields
 
-- [next]      News feed foundation (event capture layer only — not articles)
+- [done]      News feed foundation (event capture layer only — not articles)
                 NewsFeed class in engine
                 publish() hooks in simulation, competition, engine
                 relevance tiers: global | regional | local
