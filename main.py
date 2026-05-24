@@ -1,8 +1,59 @@
-import random
-import json
+"""
+engine.py — GameEngine
+
+The GameEngine owns all game logic and state.
+It has no knowledge of how output is displayed — no print(), no input().
+
+PUBLIC INTERFACE
+================
+engine = GameEngine(start_year=1896, num_seasons=3)
+state  = engine.advance()     # move to the next event; returns a state dict
+state  = engine.choose(index) # resolve a blocking choice; returns a state dict
+
+Every method returns a state dict with at minimum:
+    {
+        "type":    str,   # identifies what kind of state this is
+        "season":  str,   # e.g. "1896/97"
+        "date":    str,   # ISO date string of the current calendar date
+    }
+
+The "type" field tells the view what to render. Full schemas for each
+type are documented on their respective _state_* methods below.
+
+STATE MACHINE
+=============
+The game moves through these states in order:
+
+    NEEDS_SETUP
+        │  advance() with load=True/False
+        ▼
+    SEASON_IDLE ◄────────────────────────────────┐
+        │  advance()                              │
+        ▼                                         │
+    MATCHDAY  (results, standings, replays)       │
+        │  advance()                              │
+        ▼                                         │
+    BLOCKING_EVENT  (choices or acknowledgement)  │
+        │  choose(index)                          │
+        ▼                                         │
+    SEASON_IDLE ─── (repeat until season ends) ──┘
+        │  advance() when no more events
+        ▼
+    SEASON_END  (final stats, champion)
+        │  advance()
+        ▼
+    BETWEEN_SEASONS  (development log)
+        │  advance()
+        ▼
+    SEASON_IDLE  (next season starts) ── or ──► GAME_OVER
+"""
+
 import os
+import random
 import datetime
+
 from classes import Team, Player, Competition, Season
+from classes.competition import CupCompetition
 from name_generator import generate_squad
 from data_manager import (
     save_teams_to_file,
@@ -12,571 +63,647 @@ from data_manager import (
     save_records_to_file,
     load_records_from_file,
 )
+from data_loader import (
+    load_nations,
+    teams_in_competition,
+    competitions_for_season,
+    get_nation,
+    TeamConfig,
+)
 from records import RecordBook
-from player_refs import find_player, event_assister_matches_id, event_matches_id
+from player_refs import find_player
 from game_calendar import GameCalendar, apply_effects, apply_match_morale
-from rules import get_max_subs, get_card_rules, get_yellow_threshold
-from events import Event, Effect
+from rules import get_max_subs, get_yellow_threshold
 from simulation import roll_injury_severity
 
-FORMATION = {
-    "GK": 1,
-    "DEF": 2,
-    "MID": 3,
-    "FWD": 5
-}
 
-def run_season(season_year, teams, record_book: RecordBook):
-    
-    # Create season:
-    current_season = Season(season_year, teams)
-    
-    # Create competition
-    comp = Competition(
-        "Prote Kategorias", teams, 
-        max_subs=get_max_subs(season_year),
-        season_year=season_year
-    )
-    comp.generate_fixtures()
-    current_season.add_competition(comp)
-    
-    calendar = GameCalendar(season_year)
-    calendar.schedule_fixtures(comp)
-    
-    # Check for saved state:
-    if os.path.exists("competition_data.json"):
-        response = input("Do you want to load the saved state? (y/n): ")
-        if response.lower() == "y":
-            comp, saved_date = load_competition_data(comp)
-            calendar.schedule_fixtures(comp)  # Reschedule in case there are any differences
-            calendar.current_date = saved_date
-            print(f"Resumed at {calendar.current_date.strftime('%A, %d %B %Y')}, Matchday {comp.current_matchday}")
+class GameEngine:
+
+    # ── Construction ──────────────────────────────────────────────────────────
+
+    def __init__(self, start_year: int = 1896, num_seasons: int = 3):
+        self.start_year  = start_year
+        self.num_seasons = num_seasons
+
+        # Persisted across seasons
+        self.teams:       list       = []
+        self.record_book: RecordBook = RecordBook()
+
+        # Per-season objects, set in _start_season()
+        self.season_year:    str         = ""
+        self.current_season: Season      = None
+        self.comp:           Competition = None
+        self.calendar:       GameCalendar = None
+
+        # Internal bookkeeping
+        self._season_index:   int  = 0       # which season we're on (0-based)
+        self._last_processed: datetime.date = None
+        self._pending_event   = None         # blocking non-match event awaiting choice
+        self._season_complete: bool = False  # True once end_season() has been called
+
+    # ── Public interface ──────────────────────────────────────────────────────
+
+    def advance(self, load_save: bool = False) -> dict:
+        """
+        Move the game forward by one step and return a state dict.
+
+        The meaning of "one step" depends on the current situation:
+          - If no teams are loaded yet, initialise and return NEEDS_SETUP
+            (unless load_save is True, in which case load from disk first)
+          - If a blocking event is pending, return it again — the caller
+            must call choose() before advancing further
+          - If a matchday is due, simulate it and return MATCHDAY
+          - If a non-match blocking event is next, return BLOCKING_EVENT
+          - If the season is over, finalise it and return SEASON_END
+          - If all seasons are done, return GAME_OVER
+
+        load_save is only consulted on the very first advance() call.
+        """
+
+        # ── First call: initialise ────────────────────────────────────────────
+        if not self.teams:
+            return self._initialise(load_save)
+
+        # ── A blocking event is waiting for a choice ──────────────────────────
+        if self._pending_event is not None:
+            return self._state_blocking_event(self._pending_event)
+
+        # ── Season is fully complete — move between seasons ───────────────────
+        if self._season_complete:
+            return self._advance_between_seasons()
+
+        # ── Drive the calendar forward ────────────────────────────────────────
+        return self._advance_calendar()
+
+    def choose(self, index: int) -> dict:
+        """
+        Resolve the current blocking event by selecting option `index` (0-based).
+
+        Returns an error state if there is no pending event or the index is
+        out of range. Otherwise applies the chosen effects, clears the pending
+        event, and advances to the next state.
+        """
+        if self._pending_event is None:
+            return {"type": "error", "message": "No blocking event is pending."}
+
+        event = self._pending_event
+        if not event.choices:
+            # Acknowledgement-only event — any input dismisses it
+            apply_effects(event.effects, self.teams)
+            event.is_read = True
+            self._pending_event = None
+            return self._advance_calendar()
+
+        if index < 0 or index >= len(event.choices):
+            return {
+                "type":    "error",
+                "message": f"Invalid choice. Pick 0–{len(event.choices) - 1}.",
+            }
+
+        chosen = event.choices[index]
+        apply_effects(chosen.effects, self.teams)
+        event.resolution = chosen.text
+        event.is_read    = True
+        self._pending_event = None
+        return self._advance_calendar()
+
+    # ── Initialisation ────────────────────────────────────────────────────────
+
+    def _initialise(self, load_save: bool) -> dict:
+        """Load or generate teams, then start the first season."""
+        self.record_book = load_records_from_file()
+
+        if os.path.exists("teams_data.json"):
+            self.teams = load_teams_from_file("teams_data.json")
         else:
-            # Start new save
-            os.remove("competition_data.json")
-            
-    last_processed = calendar.current_date
-    
-    # Main date-driven loop
-    while calendar.current_date <= calendar.season_end:
-        next_date = calendar.get_next_event_date(calendar.current_date)
-        
-        if next_date is None or next_date > calendar.season_end:
-            break  # No more events or past season end
-        
-        # Apply weekly decay on the first day of each week
-        d = last_processed
-        while d <= next_date:
-            if d.weekday() == 0:  # Monday
-                calendar.apply_weekly_decay(teams)
-            d += datetime.timedelta(days=1)
-            
-        calendar.current_date   = next_date
-        events_today            = calendar.get_events_for_date(calendar.current_date)
-        dynamic                 = calendar.roll_dynamic_events(teams)
-        all_events              = events_today + dynamic
-        
-        background = [e for e in all_events if not e.blocking]
-        blocking   = [e for e in all_events if e.blocking]
-        
-        # Background events - silent, straight to inbox
-        for event in background:
-            apply_effects(event.effects, teams)
-            calendar.inbox.append(event)
-            
-        # Blocking events - stop the world, show them, and apply effects immediately
-        if blocking:
-            match_events = [e for e in all_events if e.category == "match"]
-            
-            if match_events:
-                today_fixtures = [f for f in comp.fixtures
-                                  if f.get("date") == calendar.current_date]
-                
-                if today_fixtures:
-                    matchday_num = today_fixtures[0]["matchday"]
-                    
-                    if matchday_num not in comp.completed_matchdays:
-                        print(f"\n{'='*80}")
-                        print(f"   {calendar.current_date.strftime('%A, %d %B %Y')}")
-                        print(f"   Matchday {matchday_num}")
-                        print(f"{'='*80}\n")
-                        
-                        for f in today_fixtures:
-                            print(f"   {f['home_team'].name} vs {f['away_team'].name}")
-                            
-                    comp.current_matchday = matchday_num
-                    comp.simulate_matchday()
-                    
-                    print(f"\n{'='*80}")
-                    print(f"   Matchday {matchday_num} Results")
-                    print(f"{'='*80}\n")
-                    
-                    recent = comp.results[-len(today_fixtures):]
-                    for result in recent:
-                        print_match_result(result)
-                        record_book.process_match(
-                            result,
-                            teams,
-                            competition_name=comp.name,
-                            season_year=season_year,
-                        )
-                        
-                        home_team = next((t for t in teams if t.name == result["home_team"]), None)
-                        away_team = next((t for t in teams if t.name == result["away_team"]), None)
-                        if home_team and away_team:
-                            apply_match_morale(home_team, away_team, result["home_goals"], result["away_goals"])
+            self.teams = self._bootstrap_teams()
+            save_teams_to_file(self.teams)
 
-                        # If this is a cup competition and the match was a draw, schedule a replay
-                        if comp.type == "cup":
-                            for result in recent:
-                                if result["home_goals"] == result["away_goals"]:
-                                    home_team = next((t for t in teams if t.name == result["home_team"]), None)
-                                    away_team = next((t for t in teams if t.name == result["away_team"]), None)
-                                    if home_team and away_team:
-                                        scheduled = calendar.schedule_replay(comp, home_team, away_team, calendar.current_date)
-                                        if scheduled:
-                                            print(f"Replay scheduled for {home_team.name} vs {away_team.name} on {scheduled.strftime('%Y-%m-%d')}")
-                    
-                    # Yellow card accumulation check
-                    YELLOW_THRESHOLD = get_yellow_threshold(season_year)
-                    for team in teams:
-                        for player in team.squad:
-                            if (player.yellow_cards > 0
-                                and player.yellow_cards % YELLOW_THRESHOLD == 0
-                                and not player.is_suspended):
-                                player.is_suspended = True
-                                player.suspension_matches_left = 1
-                                player.yellow_cards -= YELLOW_THRESHOLD
-                                
-                    # Suspension and injury countdown
-                    for team in teams:
-                        for player in team.squad:
-                            if player.suspension_matches_left > 0:
-                                player.suspension_matches_left -= 1
-                                if player.suspension_matches_left == 0:
-                                    player.is_suspended = False
-                            if player.injury_matches_left > 0:
-                                player.injury_matches_left -= 1
-                                if player.injury_matches_left == 0:
-                                    player.is_injured = False
-                                    player.injury_severity = None
-                                    
-                    # Off-match injury roll
-                    OFF_MATCH_INJURY_CHANCE = 0.01
-                    for team in teams:
-                        for player in team.squad:
-                            if not player.is_injured and random.random() < OFF_MATCH_INJURY_CHANCE:
-                                severity, matches_out = roll_injury_severity()
-                                player.is_injured = True
-                                player.injury_matches_left = matches_out
-                                player.injury_severity = severity
-                                player.career_injuries += 1
-                                calendar.schedule_injury_notification(player, team, calendar.current_date)
-                                
-                    # In-match injuries (schedule notifications for those flagged during simulation)
-                    for result in recent:
-                        injury_events = [e for e in result.get("events", []) if e["type"] == "injury"]
-                        for inj_evt in injury_events:
-                            player, team_name = find_player(
-                                teams,
-                                player_id=inj_evt.get("player_id"),
-                                name=inj_evt.get("player"),
-                                team_name=inj_evt.get("team"),
-                            )
-                            if player:
-                                team = next(t for t in teams if t.name == team_name)
-                                calendar.schedule_injury_notification(
-                                    player, team, calendar.current_date
-                                )
-                            
-                    for team in teams:
-                        for player in team.squad:
-                            if player.morale < -2.0:
-                                calendar.schedule_player_meeting(player, team, calendar.current_date)
-                                
-                    calendar.generate_newspaper_story(teams, comp)
-                            
-                    print_standings(comp.standings, f"STANDINGS - {calendar.current_date.strftime('%d %B %Y')}")
-                    
-                    save_competition_to_file(comp, calendar.current_date)
-                    
-            # Non-match blocking events (stub - to be expanded as we add more event types)
-            for event in [e for e in blocking if e.category != "match"]:
-                print(f"\n{'='*80}")
-                print(f"  {event.title}")
-                print(f"  {event.description}")
-                if event.choices:
-                    for i, choice in enumerate(event.choices, 1):
-                        print(f"    [{i}] {choice.text}")
-                    print()
-                    while True:
-                        try:
-                            pick = int(input("Enter your choice: ")) -1
-                            if 0 <= pick < len(event.choices):
-                                chosen = event.choices[pick]
-                                apply_effects(chosen.effects, teams)
-                                event.resolution = chosen.text
-                                event.is_read = True
-                                print(f"\n{chosen.text}")
-                                break
-                            else:
-                                print("  Enter a number between 1 and {len(event.choices)}.")
-                        except ValueError:
-                            print("  Enter a number between 1 and {len(event.choices)}.")
-                else:
-                    apply_effects(event.effects, teams)
-                    event.is_read = True
-                    input("\nPress Enter to continue...")
-                print(f"{'='*80}\n")
-                
-            # Advance prompt - tell the user what's next and wait for input to proceed
-            next_upcoming = calendar.get_next_event_date(
-                calendar.current_date + datetime.timedelta(days=1)
-            )
-            if next_upcoming and next_upcoming <= calendar.season_end:
-                print(f"Next scheduled event: {next_upcoming.strftime('%A, %d %B %Y')}")
-                input("Press Enter to continue...")
+        self._start_season(load_save=load_save)
+        return self._advance_calendar()
+
+    def _bootstrap_teams(self) -> list:
+        """
+        First-launch team generation.
+
+        Reads teams.yaml to find which teams exist at the start year,
+        then checks data/squads/<season_year>.yaml for pre-written squads.
+        Falls back to generate_squad() for any team without a squad file.
+
+        This only runs once — the result is saved to teams_data.json and
+        loaded from there on every subsequent launch.
+        """
+        from name_generator import generate_squad
+
+        season_year = self._season_label(0)
+        team_configs = teams_in_competition("prote_kategorias", season_year)
+
+        teams = []
+        squad_data = self._load_squad_file(season_year)
+
+        for cfg in team_configs:
+            team = Team(cfg.name, cfg.attack, cfg.midfield, cfg.defense)
+            team.prestige = cfg.prestige
+
+            if cfg.id in squad_data:
+                # Pre-written squad from YAML
+                team.squad = self._build_squad_from_yaml(squad_data[cfg.id])
             else:
-                print("No more scheduled events. Advancing to season end...")
-                break
-                
-        last_processed = calendar.current_date
-        calendar.current_date += datetime.timedelta(days=1)
-        
-    # Season completed - show final stats
-    print(f"\n{'='*80}")
-    print(f"Final Standings")
-    print(f"{'='*80}\n")
-    
-    # Champion
-    champion = sort_standings(comp.standings)[0]
-    print(f"🏆 Champion: {champion[0]} - {champion[1]['points']} points")
-    
-    # Top scorers and assisters
-    all_players = [p for t in teams for p in t.squad]
-    
-    top_scorers = sorted(all_players, key=lambda p: p.goals, reverse=True)[:10]
-    top_assisters = sorted(all_players, key=lambda p: p.assists, reverse=True)[:10]
-    top_clean_sheets = sorted([p for p in all_players if p.position == "GK"], 
-                              key=lambda p: p.clean_sheets, 
-                              reverse=True)[:10]
-    
-    print(f"\n{'='*80}")
-    print(f"Top Scorers - {season_year}")
-    print(f"{'='*80}\n")
-    print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Goals':<4}")
-    print(f"{'-'*80}")
-    
-    for i, player in enumerate(top_scorers, 1):
-        player_team = next(t for t in teams if player in t.squad)
-        print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.goals:<4}")
-        
-    print(f"\n{'='*80}")
-    print(f"Top Assisters - {season_year}")
-    print(f"{'='*80}\n")
-    print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Assists':<4}")
-    print(f"{'-'*80}")
-    
-    for i, player in enumerate(top_assisters, 1):
-        player_team = next(t for t in teams if player in t.squad)
-        print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.assists:<4}")
-        
-    print(f"\n{'='*80}")
-    print(f"Top Clean Sheets - {season_year}")
-    print(f"{'='*80}\n")
-    print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Clean Sheets':<4}")
-    print(f"{'-'*80}")
-    
-    for i, player in enumerate(top_clean_sheets, 1):
-        player_team = next(t for t in teams if player in t.squad)
-        print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.clean_sheets:<4}")
-        
-    top_rated = sorted(
-        [p for p in all_players if p.season_rating_appearances >= 5],
-        key=lambda p: p.season_avg_rating, 
-        reverse=True
-    )[:10]
-    
-    print(f"\n{'='*80}")
-    print(f"Top Rated Players - {season_year} Season")
-    print(f"{'='*80}\n")
-    print(f"{'Rank':<5}{'Name':<30}{'Team':<30}{'Avg Rating':<6}")
-    print(f"{'-'*80}")
-    
-    for i, player in enumerate(top_rated, 1):
-        player_team = next(t for t in teams if player in t.squad)
-        print(f"{i:<5} {player.name:<30} {player_team.name:<30} {player.season_avg_rating:<6.2f}")
-        
-    # Update all-time / season records before rolling player stats into career
-    record_book.finalize_season(comp, teams, season_year)
-    record_book.print_season_records(comp, teams, season_year)
+                # Fall back to procedural generation
+                nation = get_nation(cfg.nation_id)
+                team.squad = generate_squad(
+                    cfg.name,
+                    average_ca=cfg.avg_ca,
+                    nation=nation.name,
+                )
 
-    champion_name = sort_standings(comp.standings)[0][0]
-    for team in teams:
-        if team.name == champion_name:
-            # Award trophy to team and mark players
-            team.trophies.append({"competition": comp.name, "season": season_year})
-            for player in team.squad:
-                player._won_trophy_flag = True
-                player.career_trophies += 1
-                player.career_trophies_by_comp[comp.name] = player.career_trophies_by_comp.get(comp.name, 0) + 1
-    # End season
-    current_season.end_season()
-    
-    # Clean up
-    if os.path.exists("competition_data.json"):
-        os.remove("competition_data.json")
-        
-    return teams, record_book
+            teams.append(team)
 
-# Display standings after matchday
-def print_standings(standings, title="STANDINGS"):
-    "Print formatted league table"
-    sorted_standings = sort_standings(standings)
-    
-    print(f"\n{'='*80}")
-    print(title)
-    print(f"{'='*80}\n")
-    print(f"{'Pos':<5}{'Team':<30}{'GP':<4}{'W':<4}{'D':<4}{'L':<4}{'GF':<4}{'GA':<4}{'GD':<5}{'Pts':<4}")
-    print(f"{'-'*80}")
-    
-    for i, (team_name, stats) in enumerate(sorted_standings, 1):
-        print(f"{i:<5}{team_name:<30}{stats['played']:<4}{stats['wins']:<4}"
-            f"{stats['draws']:<4}{stats['losses']:<4}{stats['goals_for']:<4}"
-            f"{stats['goals_against']:<4}{stats['goal_difference']:<5}{stats['points']:<4}")
-    
-    print(f"{'='*80}\n")
-    
-def print_match_result(result):
-    home        = result["home_team"]
-    away        = result["away_team"]
-    home_goals  = result["home_goals"]
-    away_goals  = result["away_goals"]
-    events      = result.get("events", [])
-    ratings     = result.get("ratings", {})
-    home_xi     = result.get("home_xi", [])
-    away_xi     = result.get("away_xi", [])
+        return teams
 
-    def _rating_for(entry):
-        pid = entry.get("id")
-        if pid and pid in ratings:
-            val = ratings[pid]
-            return f"{val:.1f}" if val is not None else " — "
-        # Legacy saves keyed ratings by name
-        name = entry.get("name", "")
-        if name in ratings:
-            val = ratings[name]
-            return f"{val:.1f}" if val is not None else " — "
-        return " — "
+    def _load_squad_file(self, season_year: str) -> dict:
+        """
+        Load data/squads/<season_year>.yaml if it exists.
+        Returns a dict keyed by team_id, or empty dict if file not found.
 
-    # ── Header ────────────────────────────────────────────────────────────────
-    print(f"\n{'─'*80}")
-    print(f"  {home:^30}  {home_goals} - {away_goals}  {away:^30}")
-    print(f"{'─'*80}")
+        The season_year "1896/97" maps to the filename "1896_97.yaml".
+        """
+        import yaml
+        filename = season_year.replace("/", "_") + ".yaml"
+        path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            "data", "squads", filename
+        )
+        if not os.path.exists(path):
+            return {}
+        with open(path, "r", encoding="utf-8") as f:
+            return yaml.safe_load(f) or {}
 
-    # ── Goal events ───────────────────────────────────────────────────────────
-    home_goal_events = [e for e in events if e["type"] == "goal" and e["team"] == home]
-    away_goal_events = [e for e in events if e["type"] == "goal" and e["team"] == away]
+    def _build_squad_from_yaml(self, players_data: list) -> list:
+        """
+        Build a list of Player objects from a squad YAML entry.
 
-    if home_goal_events or away_goal_events:
-        print()
-        max_rows = max(len(home_goal_events), len(away_goal_events))
-        for i in range(max_rows):
-            left = right = ""
-            if i < len(home_goal_events):
-                e = home_goal_events[i]
-                assist = f" ({e['assister']})" if e.get("assister") else ""
-                left = f"  ⚽ {e['player']}{assist} {e['minute']}'"
-                left = left[:48] # Ensure it doesn't exceed the column width
-            if i < len(away_goal_events):
-                e = away_goal_events[i]
-                assist = f" ({e['assister']})" if e.get("assister") else ""
-                right = f"⚽ {e['player']}{assist} {e['minute']}'"
-            print(f"{left:<50}{right}")
-    else:
-        print("\n  No goals scored.")
-
-    # ── Lineups ───────────────────────────────────────────────────────────────
-    print(f"\n  {'─'*76}")
-
-    position_order = {"GK": 0, "DEF": 1, "MID": 2, "FWD": 3}
-    home_sorted = sorted(home_xi, key=lambda p: position_order.get(p["position"], 4))
-    away_sorted = sorted(away_xi, key=lambda p: position_order.get(p["position"], 4))
-
-    for i in range(max(len(home_sorted), len(away_sorted))):
-        # Home player
-        if i < len(home_sorted):
-            p    = home_sorted[i]
-            name = p["name"]
-            pid  = p.get("id")
-            g    = sum(1 for e in events if e["type"] == "goal"
-                       and e["team"] == home and event_matches_id(e, pid, name))
-            a    = sum(1 for e in events if e["type"] == "goal"
-                       and event_assister_matches_id(e, pid, name))
-            yellows  = sum(1 for e in events if e["type"] == "yellow_card"
-                        and e["team"] == home and event_matches_id(e, pid, name))
-            reds     = sum(1 for e in events if e["type"] == "red_card"
-                        and e["team"] == home and event_matches_id(e, pid, name))
-            injuries = sum(1 for e in events if e["type"] == "injury"
-                        and e["team"] == home and event_matches_id(e, pid, name))
-            icons = ("⚽" * g) + ("👟" * a) + ("🟨" * yellows) + ("🟥" * reds) + ("🚑" * injuries)
-            rating = _rating_for(p)
-            left_name = f"{name} {icons}".strip()
-        else:
-            left_name, rating = "", ""
-
-        # Away player
-        if i < len(away_sorted):
-            p      = away_sorted[i]
-            a_name = p["name"]
-            a_pid  = p.get("id")
-            g      = sum(1 for e in events if e["type"] == "goal"
-                         and e["team"] == away and event_matches_id(e, a_pid, a_name))
-            a      = sum(1 for e in events if e["type"] == "goal"
-                         and event_assister_matches_id(e, a_pid, a_name))
-            a_icons    = ("⚽" * g) + ("👟" * a)
-            a_rating   = _rating_for(p)
-            right_name = f"{a_name} {a_icons}".strip()
-        else:
-            right_name, a_rating = "", ""
-
-        print(f"  {left_name:<28}{rating:>4}    {a_rating:<4}{right_name}")
-
-    print(f"  {'─'*76}")
-
-    # ── Substitutes (placeholder) ──────────────────────────────────────────
-    sub_events = [e for e in events if e["type"] == "substitution"]
-    home_subs  = [e for e in sub_events if e["team"] == home]
-    away_subs  = [e for e in sub_events if e["team"] == away]
-    
-    print(f"\n  SUBSTITUTES")
-    print(f"  {'─'*36}    {'─'*36}")
-    
-    max_sub_rows = max(len(home_subs), len(away_subs), 1)
-    for i in range(max_sub_rows):
-        left = right = "—"
-        if i < len(home_subs):
-            s = home_subs[i]
-            left = f"↑ {s['player_on']}  ↓ {s['player_off']} {s['minute']}'"
-        if i < len(away_subs):
-            s = away_subs[i]
-            right = f"↑ {s['player_on']}  ↓ {s['player_off']} {s['minute']}'"
-        print(f"  {left:<38}    {right}")
-
-    # ── Shot stats ────────────────────────────────────────────────────────────
-    h_on  = sum(1 for e in events if e["team"] == home and e["type"] == "shot_on_target")
-    a_on  = sum(1 for e in events if e["team"] == away and e["type"] == "shot_on_target")
-    h_off = sum(1 for e in events if e["team"] == home and e["type"] == "shot_off_target")
-    a_off = sum(1 for e in events if e["team"] == away and e["type"] == "shot_off_target")
-    
-    # ── Defense stats ───────────────────────────────────────────────────────
-    h_saves     = sum(1 for e in events if e["team"] == home and e["type"] == "save")
-    a_saves     = sum(1 for e in events if e["team"] == away and e["type"] == "save")
-    h_tkl_total = sum(1 for e in events if e["team"] == home and e["type"] == "tackle")
-    a_tkl_total = sum(1 for e in events if e["team"] == away and e["type"] == "tackle")
-    h_tkl_won   = sum(1 for e in events if e["team"] == home and e["type"] == "tackle" and e["success"])
-    a_tkl_won   = sum(1 for e in events if e["team"] == away and e["type"] == "tackle" and e["success"])
-
-    print(f"\n  Shots on target:  {h_on} - {a_on}")
-    print(f"  Shots off target: {h_off} - {a_off}")
-    print(f"  Saves:           {h_saves} - {a_saves}")
-    print(f"  Tackles won:       {h_tkl_won} - {a_tkl_won}")
-    
-    
-def sort_standings(standings):
-    """Sort standings with proper tiebreakers"""
-    return sorted(
-        standings.items(),
-        key=lambda x: (
-            -x[1]["points"],
-            -x[1]["goal_difference"],
-            -x[1]["goals_for"],
-            x[0]
-        )        
-    )
-
-sulhavon = Team("Kluba Sulhavonos", 64, 58, 57)
-maritima_thesia = Team("Kluba Maritima Thesias", 65, 64, 67)
-mercaria = Team("Mercaria Kluba", 63, 67, 65)
-portavar = Team("Portavar Kluba", 60, 58, 59)
-esalum = Team("Kluba Sportika Esalumou", 51, 53, 52)
-mileius = Team("Kluba Sportika Mileiu", 58, 56, 59)
-galvonon = Team("Kluba Sportika Galvononos", 66, 68, 63)
-pk_galvonon = Team("Populara Kluba Galvononos", 61, 60, 61)
-gedium = Team("Kluba Sportika Gedimou", 58, 59, 61)
-soleium = Team("Kluba Sportika Soleiu", 57, 60, 58)
-metia = Team("Kluba Maritima Metia", 50, 50, 51)
-alentum = Team("Kluba Sportika Alentumou", 60, 62, 61)
-
-south_thesia = Team("Kluba Notias Thesias", 48, 50, 49)
-burium = Team("Kluba Sportika Buriou", 43, 45, 44)
-sufelhar = Team("Kluba Sportika Sufelharos", 40, 41, 42)
-eleica = Team("Kluba Sportika Eleicas", 44, 43, 45)
-drosvon = Team("Kluba Potamia Drosvon", 40, 42, 41)
-ancivon = Team("Kluba Sportika Ancivonos", 39, 40, 38)
-nalhavon = Team("Brakika Kluba Nalhavonos", 41, 38, 39)
-malia = Team("Kluba Pyron Malias", 40, 41, 43)
-novius = Team("Kluba Sportika Noviou", 40, 42, 41)
-lunara = Team("Kluba Sportika Lunaras", 38, 39, 38)
-amana = Team("Kluba Emvaria Amanas", 38, 40, 39)
-ircenta = Team("Kluba Sportika Ircentas", 37, 38, 36)
-skriptavon = Team("Kluba tou Skriptavonos", 41, 44, 40)
-coraerum = Team("Kluba Sportika Coraerou", 40, 41, 40)
-
-veldhavon = Team("Kluba Veldhavonos", 39, 38, 40)
-
-teams = [sulhavon, maritima_thesia, mercaria, portavar, esalum, mileius, galvonon, pk_galvonon, gedium, soleium, metia, alentum]
-
-if os.path.exists("teams_data.json"):
-    teams = load_teams_from_file("teams_data.json")
-else:
-    print("No teams data found. Generating new squads...")
-    for team in teams:
-        avg_ca = int((team.attack + team.midfield + team.defense) / 3)
-        team.squad = generate_squad(team.name, average_ca=avg_ca)
-
-    save_teams_to_file(teams)
-    
-start_year = 1896
-num_seasons = 3
-record_book = load_records_from_file()
-
-for i in range(num_seasons):
-    season_year = f"{start_year + i}/{str(start_year + i + 1)[-2:]}"
-    
-    print(f"\n\n{'#'*80}")
-    print(f"{'#'*80}")
-    print(f"Starting {season_year} season")
-    print(f"{'#'*80}")
-    print(f"{'#'*80}\n\n")
-    
-    teams, record_book = run_season(season_year, teams, record_book)
-    
-    # Save teams and records after each season
-    save_teams_to_file(teams)
-    save_records_to_file(record_book)
-    print(f"{season_year} season completed and teams saved.\n")
-    
-    # Player development - age up and update abilities
-    development_log = []
-    for team in teams:
-        for player in team.squad:
-            old_ca = player.current_ability
-            player.start_new_season()
-            ca_change = player.current_ability - old_ca
-            if abs(ca_change) >= 2:  # Log significant changes
-                direction = "📈" if ca_change > 0 else "📉"
-                development_log.append(
-                f"  {direction} {player.name} ({team.name}): CA {old_ca} → {player.current_ability}"
+        Expected shape per player:
+            name:              str
+            position:          GK | DEF | MID | FWD
+            age:               int
+            current_ability:   int
+            potential_ability: int
+            squad_number:      int   (optional)
+        """
+        squad = []
+        for p in players_data:
+            player = Player(
+                name=p["name"],
+                position=p["position"],
+                age=p["age"],
+                current_ability=p["current_ability"],
+                potential_ability=p["potential_ability"],
             )
-                
-    if development_log:
-        print(f"\n{'='*80}")
-        print(f"Player Development - Start of {season_year} season")
-        print(f"{'='*80}\n")
-        for log_entry in development_log:
-            print(log_entry)
-            
-    input("Press Enter to start the next season...")
-    
-print("\nAll seasons completed. Simulation ended.")
+            if "squad_number" in p:
+                player.squad_number = p["squad_number"]
+            squad.append(player)
+        return squad
+
+    def _start_season(self, load_save: bool = False):
+        """Initialise all per-season objects."""
+        self.season_year    = self._season_label(self._season_index)
+        self._season_complete = False
+
+        self.current_season = Season(self.season_year, self.teams)
+
+        self.comp = Competition(
+            "Prote Kategorias",
+            self.teams,
+            max_subs=get_max_subs(self.season_year),
+            season_year=self.season_year,
+        )
+        self.comp.generate_fixtures()
+        self.current_season.add_competition(self.comp)
+
+        self.calendar = GameCalendar(self.season_year)
+        self.calendar.schedule_fixtures(self.comp)
+
+        if load_save and os.path.exists("competition_data.json"):
+            self.comp, saved_date = load_competition_data(self.comp)
+            self.calendar.schedule_fixtures(self.comp)
+            self.calendar.current_date = saved_date
+
+        self._last_processed = self.calendar.current_date
+
+    # ── Calendar driving ──────────────────────────────────────────────────────
+
+    def _advance_calendar(self) -> dict:
+        """
+        Move to the next calendar event and process it.
+
+        Background events are consumed silently (no state returned for them —
+        they just mutate world state). The first blocking event encountered
+        stops the loop and returns a state dict.
+        """
+        # If the season is already flagged as complete, don't re-enter the loop
+        if self._season_complete:
+            return self._advance_between_seasons()
+
+        while self.calendar.current_date <= self.calendar.season_end:
+            next_date = self.calendar.get_next_event_date(self.calendar.current_date)
+
+            if next_date is None or next_date > self.calendar.season_end:
+                return self._finalise_season()
+
+            # Apply weekly morale/relationship decay
+            d = self._last_processed
+            while d <= next_date:
+                if d.weekday() == 0:
+                    self.calendar.apply_weekly_decay(self.teams)
+                d += datetime.timedelta(days=1)
+
+            self.calendar.current_date = next_date
+            events_today = self.calendar.get_events_for_date(self.calendar.current_date)
+            dynamic      = self.calendar.roll_dynamic_events(self.teams)
+            all_events   = events_today + dynamic
+
+            # Background events — silent
+            for event in [e for e in all_events if not e.blocking]:
+                apply_effects(event.effects, self.teams)
+                self.calendar.inbox.append(event)
+
+            # Blocking events — process and return to caller
+            blocking = [e for e in all_events if e.blocking]
+            if blocking:
+                match_events = [e for e in blocking if e.category == "match"]
+                if match_events:
+                    state = self._process_matchday()
+                    self._last_processed = self.calendar.current_date
+                    self.calendar.current_date += datetime.timedelta(days=1)
+                    return state
+
+                # Non-match blocking event — park it and return
+                self._pending_event = blocking[0]
+                self._last_processed = self.calendar.current_date
+                self.calendar.current_date += datetime.timedelta(days=1)
+                return self._state_blocking_event(self._pending_event)
+
+            self._last_processed = self.calendar.current_date
+            self.calendar.current_date += datetime.timedelta(days=1)
+
+        return self._finalise_season()
+
+    # ── Matchday processing ───────────────────────────────────────────────────
+
+    def _process_matchday(self) -> dict:
+        """
+        Simulate all matches for today, run post-match logic, and return
+        a MATCHDAY state dict.
+
+        This is the largest chunk of logic extracted from main.py.
+        Every side-effect (stat updates, morale, injuries, suspensions,
+        saves) happens here. The returned dict contains all the data the
+        view needs to render results, standings, and notifications.
+        """
+        today_fixtures = [
+            f for f in self.comp.fixtures
+            if f.get("date") == self.calendar.current_date
+        ]
+        if not today_fixtures:
+            return self._advance_calendar()
+
+        matchday_num = today_fixtures[0]["matchday"]
+        if matchday_num in self.comp.completed_matchdays:
+            return self._advance_calendar()
+
+        self.comp.current_matchday = matchday_num
+
+        # Simulate
+        if self.comp.type == "cup":
+            drawn_fixtures = self.comp.simulate_cup_round()
+        else:
+            self.comp.simulate_matchday()
+            drawn_fixtures = []
+
+        recent = self.comp.results[-len(today_fixtures):]
+
+        # Record-book and morale updates
+        for result in recent:
+            self.record_book.process_match(
+                result,
+                self.teams,
+                competition_name=self.comp.name,
+                season_year=self.season_year,
+            )
+            home_team = next((t for t in self.teams if t.name == result["home_team"]), None)
+            away_team = next((t for t in self.teams if t.name == result["away_team"]), None)
+            if home_team and away_team:
+                apply_match_morale(home_team, away_team, result["home_goals"], result["away_goals"])
+
+        # Cup: schedule replays for draws
+        scheduled_replays = []
+        for drawn in drawn_fixtures:
+            replay_date = self.calendar.schedule_replay(
+                self.comp,
+                drawn["home_team"],
+                drawn["away_team"],
+                self.calendar.current_date,
+            )
+            if replay_date:
+                scheduled_replays.append({
+                    "home_team": drawn["home_team"].name,
+                    "away_team": drawn["away_team"].name,
+                    "date":      replay_date.isoformat(),
+                })
+
+        # Cup: advance winners for completed replays
+        if self.comp.type == "cup":
+            for fixture in today_fixtures:
+                if fixture.get("is_replay"):
+                    replay_result = next(
+                        (r for r in recent
+                         if r["home_team"] == fixture["home_team"].name
+                         and r["away_team"] == fixture["away_team"].name),
+                        None,
+                    )
+                    if replay_result:
+                        if replay_result["home_goals"] > replay_result["away_goals"]:
+                            winner = fixture["home_team"]
+                        elif replay_result["away_goals"] > replay_result["home_goals"]:
+                            winner = fixture["away_team"]
+                        else:
+                            winner = None
+                        if winner:
+                            self.comp.advance_cup_winner(
+                                fixture["home_team"],
+                                fixture["away_team"],
+                                winner,
+                            )
+
+        # Yellow card accumulation → suspensions
+        yellow_threshold = get_yellow_threshold(self.season_year)
+        newly_suspended  = []
+        for team in self.teams:
+            for player in team.squad:
+                if (player.yellow_cards > 0
+                        and player.yellow_cards % yellow_threshold == 0
+                        and not player.is_suspended):
+                    player.is_suspended = True
+                    player.suspension_matches_left = 1
+                    player.yellow_cards -= yellow_threshold
+                    newly_suspended.append({"player": player.name, "team": team.name})
+
+        # Suspension and injury countdown
+        for team in self.teams:
+            for player in team.squad:
+                if player.suspension_matches_left > 0:
+                    player.suspension_matches_left -= 1
+                    if player.suspension_matches_left == 0:
+                        player.is_suspended = False
+                if player.injury_matches_left > 0:
+                    player.injury_matches_left -= 1
+                    if player.injury_matches_left == 0:
+                        player.is_injured      = False
+                        player.injury_severity = None
+
+        # Off-match injury roll
+        new_injuries = []
+        for team in self.teams:
+            for player in team.squad:
+                if not player.is_injured and random.random() < 0.01:
+                    severity, matches_out = roll_injury_severity()
+                    player.is_injured          = True
+                    player.injury_matches_left = matches_out
+                    player.injury_severity     = severity
+                    player.career_injuries    += 1
+                    self.calendar.schedule_injury_notification(
+                        player, team, self.calendar.current_date
+                    )
+                    new_injuries.append({
+                        "player":   player.name,
+                        "team":     team.name,
+                        "severity": severity,
+                        "matches":  matches_out,
+                    })
+
+        # In-match injuries
+        for result in recent:
+            for inj_evt in [e for e in result.get("events", []) if e["type"] == "injury"]:
+                player, team_name = find_player(
+                    self.teams,
+                    player_id=inj_evt.get("player_id"),
+                    name=inj_evt.get("player"),
+                    team_name=inj_evt.get("team"),
+                )
+                if player:
+                    team = next(t for t in self.teams if t.name == team_name)
+                    self.calendar.schedule_injury_notification(
+                        player, team, self.calendar.current_date
+                    )
+
+        # Low-morale player meetings
+        for team in self.teams:
+            for player in team.squad:
+                if player.morale < -2.0:
+                    self.calendar.schedule_player_meeting(
+                        player, team, self.calendar.current_date
+                    )
+
+        # Newspaper story (probabilistic)
+        self.calendar.generate_newspaper_story(self.teams, self.comp)
+
+        # Persist
+        save_competition_to_file(self.comp, self.calendar.current_date)
+
+        # Next event date (for the view to display)
+        next_event = self.calendar.get_next_event_date(
+            self.calendar.current_date + datetime.timedelta(days=1)
+        )
+
+        return {
+            "type":               "matchday",
+            "season":             self.season_year,
+            "date":               self.calendar.current_date.isoformat(),
+            "matchday_num":       matchday_num,
+            "competition":        self.comp.name,
+            "results":            recent,
+            "standings":          self._serialise_standings(),
+            "scheduled_replays":  scheduled_replays,
+            "newly_suspended":    newly_suspended,
+            "new_injuries":       new_injuries,
+            "next_event_date":    next_event.isoformat() if next_event else None,
+        }
+
+    # ── Season end ────────────────────────────────────────────────────────────
+
+    def _finalise_season(self) -> dict:
+        """
+        Called when the calendar has no more events.
+        Computes final stats, awards the trophy, calls end_season(), and
+        returns a SEASON_END state dict. Does NOT advance to the next season
+        yet — that happens on the next advance() call so the view can show
+        final stats first.
+        """
+        all_players = [p for t in self.teams for p in t.squad]
+
+        top_scorers = sorted(all_players, key=lambda p: p.goals, reverse=True)[:10]
+        top_assisters = sorted(all_players, key=lambda p: p.assists, reverse=True)[:10]
+        top_clean_sheets = sorted(
+            [p for p in all_players if p.position == "GK"],
+            key=lambda p: p.clean_sheets, reverse=True
+        )[:10]
+        top_rated = sorted(
+            [p for p in all_players if p.season_rating_appearances >= 5],
+            key=lambda p: p.season_avg_rating, reverse=True
+        )[:10]
+
+        sorted_table = self._sorted_standings()
+        champion_name = sorted_table[0][0]
+
+        # Trophy
+        for team in self.teams:
+            if team.name == champion_name:
+                team.trophies.append({
+                    "competition": self.comp.name,
+                    "season":      self.season_year,
+                })
+                for player in team.squad:
+                    player._won_trophy_flag = True
+                    player.career_trophies += 1
+                    player.career_trophies_by_comp[self.comp.name] = (
+                        player.career_trophies_by_comp.get(self.comp.name, 0) + 1
+                    )
+
+        # Records
+        self.record_book.finalize_season(self.comp, self.teams, self.season_year)
+
+        # End season (rolls stats into career, resets season counters)
+        self.current_season.end_season()
+        self._season_complete = True
+
+        # Clean up save file
+        if os.path.exists("competition_data.json"):
+            os.remove("competition_data.json")
+
+        def _player_rows(players):
+            return [
+                {
+                    "name":   p.name,
+                    "team":   next(t.name for t in self.teams if p in t.squad),
+                    "goals":  p.goals,
+                    "assists": p.assists,
+                    "clean_sheets": p.clean_sheets,
+                    "avg_rating":   round(p.season_avg_rating, 2),
+                }
+                for p in players
+            ]
+
+        return {
+            "type":              "season_end",
+            "season":            self.season_year,
+            "date":              self.calendar.current_date.isoformat(),
+            "champion":          champion_name,
+            "final_standings":   self._serialise_standings(),
+            "top_scorers":       _player_rows(top_scorers),
+            "top_assisters":     _player_rows(top_assisters),
+            "top_clean_sheets":  _player_rows(top_clean_sheets),
+            "top_rated":         _player_rows(top_rated),
+        }
+
+    # ── Between seasons ───────────────────────────────────────────────────────
+
+    def _advance_between_seasons(self) -> dict:
+        """
+        Called after SEASON_END has been shown.
+        Ages players, saves, and either starts the next season or ends the game.
+        """
+        # Save after season
+        save_teams_to_file(self.teams)
+        save_records_to_file(self.record_book)
+
+        # Player development
+        development_log = []
+        for team in self.teams:
+            for player in team.squad:
+                old_ca = player.current_ability
+                player.start_new_season()
+                ca_change = player.current_ability - old_ca
+                if abs(ca_change) >= 2:
+                    development_log.append({
+                        "player":    player.name,
+                        "team":      team.name,
+                        "old_ca":    old_ca,
+                        "new_ca":    player.current_ability,
+                        "direction": "up" if ca_change > 0 else "down",
+                    })
+
+        self._season_index   += 1
+        self._season_complete = False
+
+        if self._season_index >= self.num_seasons:
+            return {
+                "type":            "game_over",
+                "seasons_played":  self.num_seasons,
+                "development_log": development_log,
+            }
+
+        # Start the next season
+        self._start_season()
+
+        return {
+            "type":            "between_seasons",
+            "completed_season": self._season_label(self._season_index - 1),
+            "next_season":      self.season_year,
+            "development_log":  development_log,
+        }
+
+    # ── Blocking event state ──────────────────────────────────────────────────
+
+    def _state_blocking_event(self, event) -> dict:
+        """
+        Return a BLOCKING_EVENT state dict for a pending non-match event.
+
+        Schema:
+            type:        "blocking_event"
+            season:      str
+            date:        str  (ISO)
+            event_id:    str
+            category:    str
+            title:       str
+            description: str
+            choices:     list of {"index": int, "text": str}
+                         empty list means acknowledgement-only
+        """
+        return {
+            "type":        "blocking_event",
+            "season":      self.season_year,
+            "date":        self.calendar.current_date.isoformat(),
+            "event_id":    event.id,
+            "category":    event.category,
+            "title":       event.title,
+            "description": event.description,
+            "choices": [
+                {"index": i, "text": c.text}
+                for i, c in enumerate(event.choices)
+            ],
+        }
+
+    # ── Helpers ───────────────────────────────────────────────────────────────
+
+    def _season_label(self, index: int) -> str:
+        year = self.start_year + index
+        return f"{year}/{str(year + 1)[-2:]}"
+
+    def _sorted_standings(self) -> list:
+        return sorted(
+            self.comp.standings.items(),
+            key=lambda x: (
+                -x[1]["points"],
+                -x[1]["goal_difference"],
+                -x[1]["goals_for"],
+                x[0],
+            ),
+        )
+
+    def _serialise_standings(self) -> list:
+        """Return standings as a list of dicts, sorted, for easy rendering."""
+        return [
+            {"team": name, **stats}
+            for name, stats in self._sorted_standings()
+        ]

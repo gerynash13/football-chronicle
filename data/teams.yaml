@@ -1,0 +1,348 @@
+# teams.yaml
+#
+# SCHEMA
+# ======
+# id:               unique slug — referenced by squads files and competition
+#                   participant lists
+# name:             display name
+# nation_id:        foreign key → nations.yaml
+# founded_year:     year the club was founded; the engine does not generate
+#                   this team before this season year
+# prestige:         starting value on the 0-10000 scale (see nations.yaml
+#                   for tier thresholds)
+# attack:           starting attacking strength (used until squad CA takes over)
+# midfield:         starting midfield strength
+# defense:          starting defensive strength
+# competitions:     list of competition_ids this team belongs to at founding
+#                   the engine enrolls the team in these competitions from
+#                   founded_year onward
+#
+# NOTE ON SQUADS
+# Teams do not generate squads at runtime. Instead, squads are loaded from
+# data/squads/<season_year>.yaml on first launch. If no squad file exists
+# for a team in a given season, the engine falls back to generate_squad()
+# using the team's average CA — this covers newly promoted clubs and
+# expansion teams that don't have pre-written squads.
+
+
+# ── Myria — Prote Kategorias (top division) ───────────────────────────────────
+#
+# All 12 founding members of the Prote Kategorias.
+# Prestige values reflect early-era standing — the league itself is new,
+# so even the strongest clubs start with modest prestige scores.
+
+- id: kluba_sulhavonos
+  name: Kluba Sulhavonos
+  nation_id: myria
+  founded_year: 1891
+  prestige: 950
+  attack: 64
+  midfield: 58
+  defense: 57
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+- id: kluba_maritima_thesias
+  name: Kluba Maritima Thesias
+  nation_id: myria
+  founded_year: 1893
+  prestige: 980
+  attack: 65
+  midfield: 64
+  defense: 67
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+- id: mercaria_kluba
+  name: Mercaria Kluba
+  nation_id: myria
+  founded_year: 1894
+  prestige: 920
+  attack: 63
+  midfield: 67
+  defense: 65
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+- id: portavar_kluba
+  name: Portavar Kluba
+  nation_id: myria
+  founded_year: 1878
+  prestige: 870
+  attack: 60
+  midfield: 58
+  defense: 59
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+- id: kluba_sportika_esalumou
+  name: Kluba Sportika Esalumou
+  nation_id: myria
+  founded_year: 1895
+  prestige: 680
+  attack: 51
+  midfield: 53
+  defense: 52
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+- id: kluba_sportika_mileiu
+  name: Kluba Sportika Mileiu
+  nation_id: myria
+  founded_year: 1895
+  prestige: 780
+  attack: 58
+  midfield: 56
+  defense: 59
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+- id: kluba_sportika_galvononos
+  name: Kluba Sportika Galvononos
+  nation_id: myria
+  founded_year: 1896
+  prestige: 1000
+  attack: 66
+  midfield: 68
+  defense: 63
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+- id: populara_kluba_galvononos
+  name: Populara Kluba Galvononos
+  nation_id: myria
+  founded_year: 1896
+  prestige: 890
+  attack: 61
+  midfield: 60
+  defense: 61
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+- id: kluba_sportika_gedimou
+  name: Kluba Sportika Gedimou
+  nation_id: myria
+  founded_year: 1897
+  prestige: 810
+  attack: 58
+  midfield: 59
+  defense: 61
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+- id: kluba_sportika_soleiu
+  name: Kluba Sportika Soleiu
+  nation_id: myria
+  founded_year: 1898
+  prestige: 790
+  attack: 57
+  midfield: 60
+  defense: 58
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+- id: kluba_maritima_metia
+  name: Kluba Maritima Metia
+  nation_id: myria
+  founded_year: 1899
+  prestige: 620
+  attack: 50
+  midfield: 50
+  defense: 51
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+- id: kluba_sportika_alentumou
+  name: Kluba Sportika Alentumou
+  nation_id: myria
+  founded_year: 1899
+  prestige: 840
+  attack: 60
+  midfield: 62
+  defense: 61
+  competitions:
+    - prote_kategorias
+    - myria_cup
+
+
+# ── Myria — lower divisions (not yet in Prote Kategorias at 1896) ─────────────
+#
+# These teams exist and will be promoted/relegated once a second division
+# is implemented. For now they are defined here so they can participate
+# in the cup from their founding year onward.
+
+- id: kluba_notias_thesias
+  name: Kluba Notias Thesias
+  nation_id: myria
+  founded_year: 1897
+  prestige: 420
+  attack: 48
+  midfield: 50
+  defense: 49
+  competitions:
+    - myria_cup
+
+- id: kluba_sportika_buriou
+  name: Kluba Sportika Buriou
+  nation_id: myria
+  founded_year: 1900
+  prestige: 340
+  attack: 43
+  midfield: 45
+  defense: 44
+  competitions:
+    - myria_cup
+
+- id: kluba_sportika_sufelharos
+  name: Kluba Sportika Sufelharos
+  nation_id: myria
+  founded_year: 1901
+  prestige: 290
+  attack: 40
+  midfield: 41
+  defense: 42
+  competitions:
+    - myria_cup
+
+- id: kluba_sportika_eleicas
+  name: Kluba Sportika Eleicas
+  nation_id: myria
+  founded_year: 1900
+  prestige: 360
+  attack: 44
+  midfield: 43
+  defense: 45
+  competitions:
+    - myria_cup
+
+- id: kluba_potamia_drosvon
+  name: Kluba Potamia Drosvon
+  nation_id: myria
+  founded_year: 1902
+  prestige: 280
+  attack: 40
+  midfield: 42
+  defense: 41
+  competitions:
+    - myria_cup
+
+- id: kluba_sportika_ancivonos
+  name: Kluba Sportika Ancivonos
+  nation_id: myria
+  founded_year: 1903
+  prestige: 260
+  attack: 39
+  midfield: 40
+  defense: 38
+  competitions:
+    - myria_cup
+
+- id: brakika_kluba_nalhavonos
+  name: Brakika Kluba Nalhavonos
+  nation_id: myria
+  founded_year: 1904
+  prestige: 270
+  attack: 41
+  midfield: 38
+  defense: 39
+  competitions:
+    - myria_cup
+
+- id: kluba_pyron_malias
+  name: Kluba Pyron Malias
+  nation_id: myria
+  founded_year: 1902
+  prestige: 275
+  attack: 40
+  midfield: 41
+  defense: 43
+  competitions:
+    - myria_cup
+
+- id: kluba_sportika_noviou
+  name: Kluba Sportika Noviou
+  nation_id: myria
+  founded_year: 1901
+  prestige: 255
+  attack: 40
+  midfield: 42
+  defense: 41
+  competitions:
+    - myria_cup
+
+- id: kluba_sportika_lunaras
+  name: Kluba Sportika Lunaras
+  nation_id: myria
+  founded_year: 1904
+  prestige: 240
+  attack: 38
+  midfield: 39
+  defense: 38
+  competitions:
+    - myria_cup
+
+- id: kluba_emvaria_amanas
+  name: Kluba Emvaria Amanas
+  nation_id: myria
+  founded_year: 1903
+  prestige: 245
+  attack: 38
+  midfield: 40
+  defense: 39
+  competitions:
+    - myria_cup
+
+- id: kluba_sportika_ircentas
+  name: Kluba Sportika Ircentas
+  nation_id: myria
+  founded_year: 1905
+  prestige: 220
+  attack: 37
+  midfield: 38
+  defense: 36
+  competitions:
+    - myria_cup
+
+- id: kluba_tou_skriptavonos
+  name: Kluba tou Skriptavonos
+  nation_id: myria
+  founded_year: 1903
+  prestige: 265
+  attack: 41
+  midfield: 44
+  defense: 40
+  competitions:
+    - myria_cup
+
+- id: kluba_sportika_coraerou
+  name: Kluba Sportika Coraerou
+  nation_id: myria
+  founded_year: 1904
+  prestige: 258
+  attack: 40
+  midfield: 41
+  defense: 40
+  competitions:
+    - myria_cup
+
+- id: kluba_veldhavonos
+  name: Kluba Veldhavonos
+  nation_id: myria
+  founded_year: 1906
+  prestige: 248
+  attack: 39
+  midfield: 38
+  defense: 40
+  competitions:
+    - myria_cup

@@ -1,0 +1,162 @@
+# competitions.yaml
+#
+# SCHEMA
+# ======
+# id:               unique slug
+# name:             display name
+# type:             league | cup | supercup | international_league |
+#                   international_cup
+# nation_id:        host nation (null for multi-nation international competitions)
+# founded_year:     first season this competition exists; engine skips it before
+#                   this year
+# prestige:         base prestige value (0-10000); actual prestige awarded is
+#                   scaled by the host nation's current prestige:
+#                     award = base_prestige × (nation_prestige / 10000)
+#                   for international competitions the scaling uses the average
+#                   prestige of all participating nations
+# tier:             division level within a nation (1 = top flight)
+#                   null for cup and international competitions
+# frequency:        how often the competition runs, in years (default 1)
+#                   used for Olympics (4) and World Cup (4)
+#
+# timing:           when in the year the competition is resolved
+#   season:         runs across the full domestic season (league, cup)
+#   end_of_season:  resolved at the end of the season before summer break;
+#                   used for competitions that historically ran mid-season
+#                   but are treated as end-of-season for now — marked so
+#                   the engine can switch them to mid-season later without
+#                   changing the data file
+#   summer:         resolved in the summer between seasons (Olympics, WC)
+#
+# match_day:        preferred day type for scheduling fixtures
+#   primary:        uses the primary match day for this season year
+#                   (derived from rules.get_match_days())
+#   midweek:        Wednesday / Tuesday slot
+#   flexible:       engine picks the next available slot
+#
+# participants:     how teams/nations qualify
+#   type:           all_members | top_n | qualified | fixed
+#   source:         competition_id to draw qualifiers from (for qualified type)
+#   count:          number of participants (for top_n type)
+#   nations:        explicit list of nation_ids (for fixed type, e.g. BHC)
+#
+# rounds:           for cup competitions, prestige points awarded per round
+#                   indexed from first round (index 0) to winner (last index)
+#                   teams receive points ONLY for the round they exit at,
+#                   not cumulatively — winner receives the last value
+
+# ── Domestic competitions — Myria ────────────────────────────────────────────
+
+- id: prote_kategorias
+  name: Prote Kategorias
+  type: league
+  nation_id: myria
+  founded_year: 1891
+  prestige: 7000
+  tier: 1
+  frequency: 1
+  timing: season
+  match_day: primary
+  participants:
+    type: all_members
+
+- id: myria_cup
+  name: Myrian Cup
+  type: cup
+  nation_id: myria
+  founded_year: 1893
+  prestige: 5000
+  tier: null
+  frequency: 1
+  timing: season
+  match_day: midweek
+  participants:
+    type: all_members
+  rounds:
+    # prestige per exit round: [R1, R2, QF, SF, Final, Winner]
+    # scaled by competition prestige × nation prestige factor at award time
+    - 50    # eliminated in round 1
+    - 100   # eliminated in round 2
+    - 200   # eliminated in quarter-final
+    - 350   # eliminated in semi-final
+    - 600   # runner-up
+    - 1000  # winner
+
+- id: myria_supercup
+  name: Myrian Supercup
+  type: supercup
+  nation_id: myria
+  founded_year: 1894
+  prestige: 4000
+  tier: null
+  frequency: 1
+  timing: end_of_season
+  match_day: flexible
+  participants:
+    type: fixed
+    # participants are determined at runtime: league winner vs cup winner
+    count: 2
+  rounds:
+    - 400   # runner-up
+    - 800   # winner
+
+
+# ── International competitions ────────────────────────────────────────────────
+
+- id: british_home_championship
+  name: British Home Championship
+  type: international_league
+  nation_id: null
+  founded_year: 1883
+  prestige: 6000
+  tier: null
+  frequency: 1
+  # Historically ran January–April (mid-season).
+  # Set to end_of_season for now — the timing field allows the engine to
+  # switch this to a mid-season international window later without any
+  # changes to this file.
+  timing: end_of_season
+  match_day: flexible
+  participants:
+    type: fixed
+    nations: [england, scotland, wales, ireland]
+
+- id: olympics_football
+  name: Olympic Football Tournament
+  type: international_cup
+  nation_id: null
+  founded_year: 1908          # first official Olympic football tournament
+  prestige: 8000
+  tier: null
+  frequency: 4               # every 4 years
+  timing: summer
+  match_day: flexible
+  participants:
+    type: qualified
+    count: 8                  # starts small, expands as more nations develop
+  rounds:
+    - 100   # group stage exit
+    - 300   # quarter-final exit
+    - 600   # semi-final exit
+    - 900   # bronze medal / runner-up
+    - 1500  # gold medal winner
+
+- id: fifa_world_cup
+  name: FIFA World Cup
+  type: international_cup
+  nation_id: null
+  founded_year: 1930
+  prestige: 10000
+  tier: null
+  frequency: 4
+  timing: summer
+  match_day: flexible
+  participants:
+    type: qualified
+    count: 13                 # 13 teams in the first World Cup, expands later
+  rounds:
+    - 200   # group stage / first round exit
+    - 500   # quarter-final exit
+    - 900   # semi-final exit
+    - 1400  # runner-up
+    - 2500  # winner

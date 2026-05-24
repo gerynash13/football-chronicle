@@ -1,30 +1,27 @@
-"""
-Nation configuration for player configuration.
-Each nation has:
-    - tier: description of the nation's footballing strength (e.g. "top-tier", "mid-tier", "lower-tier")
-    - pa_cap: the maximum potential ability for players from that nation
-    - wonderkid_pa_cap: the maximum potential ability for wonderkids from that nation
-    - wonderkid_chance: probability (0-1) that a player from that nation will be a wonderkid
-"""
+from data_loader import get_nation, load_nations, TIER_STATS, prestige_to_tier
+
+# Keep TIER_DEFAULTS exported so any code that imports nations.py can use it
+TIER_DEFAULTS = TIER_STATS
+
+def get_nation_config(nation_name: str) -> dict:
+    """
+    Backward-compatible acccessor.
+    Accepts either a nation id (e.g. "myria") or a nation name (e.g. "Myria").
+    Returns the dict shape the old code expected.
+    """
+    # Try by id first (lowercase match)
+    try:
+        nation = get_nation(nation_name.lower())
+        return nation.to_player_config()
+    except ValueError:
+        pass
     
-NATIONS = {
-    "Myria": {
-        "tier": "low-tier",
-        "pa_cap": 85,
-        "wonderkid_pa_cap": 100,
-        "wonderkid_chance": 0.04
-    },
-}
-
-TIER_DEFAULTS = {
-    "top-tier":     {"pa_cap": 180, "wonderkid_pa_cap": 200, "wonderkid_chance": 0.08},
-    "high-tier":    {"pa_cap": 150, "wonderkid_pa_cap": 170, "wonderkid_chance": 0.06},
-    "mid-tier":     {"pa_cap": 120, "wonderkid_pa_cap": 140, "wonderkid_chance": 0.05},
-    "low-tier":     {"pa_cap": 85,  "wonderkid_pa_cap": 100, "wonderkid_chance": 0.04},
-    "lower-tier":   {"pa_cap": 70,  "wonderkid_pa_cap": 82,  "wonderkid_chance": 0.02},
-}
-
-def get_nation_config(nation_name):
-    if nation_name not in NATIONS:
-        raise ValueError(f"Nation '{nation_name}' not found in configuration.")
-    return NATIONS[nation_name]
+    # Fall back to matching by display name
+    all_nations = load.nations()
+    for nation in all_nations.values():
+        if nation.name.lower() == nation_name.lower():
+            return nation.to_player_config()
+        
+    raise ValueError(
+        f"Nation '{nation_name}' not found in nations.yaml."
+    )

@@ -1,0 +1,10 @@
+kluba_sulhavonos:
+  - name: Sulhvar Veldhanos
+    position: GK
+    nationality: myria
+    birth_year: 1868
+    current_ability: 62
+    potential_ability: 68
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12

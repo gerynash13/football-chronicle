@@ -1,0 +1,289 @@
+# nations.yaml
+#
+# SCHEMA
+# ======
+# id:                 unique slug — used as foreign key in teams.yaml,
+#                     competitions.yaml, and on player nationality fields
+# name:               display name
+# is_fictional:       fictional nations use Myrian name generators and are
+#                     fully playable; real nations host generated squads for
+#                     international competitions
+# founded_year:       year the national football association was founded;
+#                     the nation does not participate in international
+#                     competitions before this year
+# prestige:           starting value on the 0-10000 scale; tier is derived
+#                     from this number, never stored separately
+#
+#                     Tier thresholds:
+#                       0    – 1000  → lower-tier
+#                       1001 – 2500  → low-tier
+#                       2501 – 5000  → mid-tier
+#                       5001 – 7500  → high-tier
+#                       7501 – 10000 → top-tier
+#
+# prestige_weights:   how nation prestige is updated each season
+#   league:           weight given to domestic league performance (0.0–1.0)
+#   international:    weight given to national team results (0.0–1.0)
+#                     the two weights should sum to 1.0
+#
+# prestige_decay:     fraction of prestige lost each season before gains
+#                     are applied (e.g. 0.03 = 3% decay per season)
+# prestige_floor:     minimum prestige value — nation never falls below this
+#
+# tier_change_min_seasons: seasons a nation must spend above/below a tier
+#                     threshold before the tier officially changes; prevents
+#                     single-season variance from flipping tiers
+#
+# name_generator:     which name pool to use when generating players
+#                     currently supported: myrian, english, scottish,
+#                     welsh, irish, dutch, danish, belgian, swiss
+#
+# eligible_for_international: whether this nation fields a national team
+
+# Fictional nations
+
+- id: myria
+  name: Myria
+  is_fictional: true
+  founded_year: 1905
+  prestige: 1200
+  prestige_weights:
+    league: 0.60
+    international: 0.40
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: myrian
+  eligible_for_international: true
+
+  # ── Real nations — organised football exists at 1896 start ───────────────────
+#
+# Prestige starting values reflect the footballing landscape of 1896:
+#   England   invented the game, strongest league, most developed football
+#   Scotland  close second, technically excellent, strong domestic game
+#   Wales     active but no professional league yet
+#   Ireland   active but no professional league yet
+#   others    recently founded associations, developing rapidly
+
+- id: england
+  name: England
+  is_fictional: false
+  founded_year: 1863
+  prestige: 8500
+  prestige_weights:
+    league: 0.70        # England's strength is primarily its domestic league
+    international: 0.30
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: english
+  eligible_for_international: true
+ 
+- id: scotland
+  name: Scotland
+  is_fictional: false
+  founded_year: 1873
+  prestige: 7200
+  prestige_weights:
+    league: 0.65
+    international: 0.35
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: scottish
+  eligible_for_international: true
+ 
+- id: wales
+  name: Wales
+  is_fictional: false
+  founded_year: 1876
+  prestige: 4800
+  prestige_weights:
+    league: 0.50
+    international: 0.50  # Wales has no professional league yet — international
+                          # results are equally important to prestige
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: welsh
+  eligible_for_international: true
+ 
+- id: ireland
+  name: Ireland
+  is_fictional: false
+  founded_year: 1880
+  prestige: 4200
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: irish
+  eligible_for_international: true
+ 
+- id: netherlands
+  name: Netherlands
+  is_fictional: false
+  founded_year: 1889
+  prestige: 2800
+  prestige_weights:
+    league: 0.60
+    international: 0.40
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: dutch
+  eligible_for_international: true
+ 
+- id: denmark
+  name: Denmark
+  is_fictional: false
+  founded_year: 1889
+  prestige: 2600
+  prestige_weights:
+    league: 0.60
+    international: 0.40
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: danish
+  eligible_for_international: true
+ 
+- id: belgium
+  name: Belgium
+  is_fictional: false
+  founded_year: 1895
+  prestige: 2200
+  prestige_weights:
+    league: 0.60
+    international: 0.40
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: belgian
+  eligible_for_international: true
+ 
+- id: switzerland
+  name: Switzerland
+  is_fictional: false
+  founded_year: 1895
+  prestige: 2100
+  prestige_weights:
+    league: 0.60
+    international: 0.40
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: swiss
+  eligible_for_international: true
+
+# ── Real nations — early clubs exist, no association yet at 1896 ─────────────
+#
+# These nations have football activity but no organised national body.
+# They cannot participate in international competitions until their
+# founded_year is reached. The engine generates their squads from that
+# point onward.
+#
+# Prestige starting values are lower, reflecting their undeveloped state.
+# Their prestige_weights lean heavily on international results since their
+# domestic leagues don't exist yet — international performance is their
+# primary route to prestige growth early on.
+
+- id: germany
+  name: Germany
+  is_fictional: false
+  founded_year: 1900        # DFB founded
+  prestige: 1800
+  prestige_weights:
+    league: 0.65
+    international: 0.35
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: german
+  eligible_for_international: true
+ 
+- id: austria
+  name: Austria
+  is_fictional: false
+  founded_year: 1904        # ÖFB founded
+  prestige: 1600
+  prestige_weights:
+    league: 0.60
+    international: 0.40
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: austrian
+  eligible_for_international: true
+ 
+- id: hungary
+  name: Hungary
+  is_fictional: false
+  founded_year: 1901        # MLSZ founded
+  prestige: 1500
+  prestige_weights:
+    league: 0.60
+    international: 0.40
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: hungarian
+  eligible_for_international: true
+ 
+- id: bohemia
+  name: Bohemia
+  is_fictional: false
+  founded_year: 1901        # ČFS founded; later becomes Czechoslovakia
+  prestige: 1400
+  prestige_weights:
+    league: 0.55
+    international: 0.45
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: czech
+  eligible_for_international: true
+ 
+- id: france
+  name: France
+  is_fictional: false
+  founded_year: 1919        # FFF founded
+  prestige: 1600
+  prestige_weights:
+    league: 0.65
+    international: 0.35
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: french
+  eligible_for_international: true
+ 
+- id: argentina
+  name: Argentina
+  is_fictional: false
+  founded_year: 1893        # AFA founded
+  prestige: 1900
+  prestige_weights:
+    league: 0.55
+    international: 0.45
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: argentinian
+  eligible_for_international: true
+ 
+- id: uruguay
+  name: Uruguay
+  is_fictional: false
+  founded_year: 1900        # AUF founded
+  prestige: 1700
+  prestige_weights:
+    league: 0.50
+    international: 0.50    # Uruguay's prestige driven heavily by international
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: uruguayan
+  eligible_for_international: true

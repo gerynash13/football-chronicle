@@ -1,14 +1,33 @@
 import random
+import datetime
 from player_refs import new_player_id
 
 class Player:
-    def __init__(self, name, position, age, current_ability, potential_ability, player_id=None):
+    def __init__(self, name, position, age, current_ability, potential_ability, 
+                 player_id=None, nationality=None, parent_nationality=None,
+                 preferred_foot=None, contract_expires=None, wage=0):
+        
         self.id = player_id or new_player_id()
         self.name = name
         self.position = position # GK, DEF, MID, FWD
-        self.age = age
+        self.birth_date = birth_date    # datetime.date
         self.current_ability = current_ability
         self.potential_ability = potential_ability
+        
+        # Identity
+        self.nationality = nationality
+        self.parent_nationality = parent_nationality
+        self.preferred_foot = preferred_foot or random.choice(
+            ["right", "right", "right", "left", "left", "both"]
+        )  # weighted ~50% right, ~33% left, ~17% both
+        
+        # Contract
+        self.contract_expires = contract_expires
+        self.wage = wage
+        
+        # Status
+        self.is_injured = False
+        
         self.attributes = self._generate_attributes()
         self.role = self._determine_role()
         self.morale = 0.0  # -10 to +10, where 0 is neutral
@@ -46,13 +65,38 @@ class Player:
         self.career_history = []
         self.career_trophies = 0
         self.career_trophies_by_comp = {}
-        # Squad number (may be assigned when squad is generated)
+        # Squad number - assigned per season by the engine, not stored permanently
+        # Only used when competition rules permit squad numbers (post-1928)
         self.squad_number = None
         # Temporary flag set when player wins a trophy this season
         self._won_trophy_flag = False
         
         # Wonderkid flag (for potential future use in scouting, etc.)
         self.is_wonderkid = False
+        
+    # Derived properties
+    def age_on(self, reference_date: datetime.date) -> int:
+        """
+        Calculate age on a specific date.
+        Used during season transitions to update ages accurately.
+        """
+        bd = self.birth_date
+        age = reference_date.year - bd.year
+        # If the birthday hasn't happened yet this year, subtract a year
+        if (reference_date.month, reference_date.day) < (bd.month, bd.day):
+            age -= 1
+        return age
+    
+    @property
+    def age(self) -> int:
+        """
+        Convenience property - returns age on current date
+        
+        During gameplay, prefer age_on(season_date) for accuracy.
+        This property exists so any code that reads player.age still works
+        without modification during the transition period.
+        """
+        return self.age_on(datetime.date.today())
 
     def _generate_attributes(self):
         if self.position == "FWD":

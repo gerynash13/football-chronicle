@@ -260,6 +260,54 @@ class GameCalendar:
             ]
         ))
         
+    def schedule_replay(self, competition, home_team, away_team, from_date):
+        """
+        Schedule a cup replay on the next available date after from_date.
+ 
+        Adds the fixture to competition.fixtures with a new matchday number
+        and registers a blocking match event on the calendar so the game loop
+        stops and simulates it at the right time.
+ 
+        Returns the scheduled date, or None if no date is available before
+        the season ends.
+ 
+        Why a new matchday number instead of reusing the drawn round's number?
+        Because matchday numbers are how simulate_cup_round() finds its
+        fixtures. If the replay shared a number with an already-completed
+        round, it would be skipped by the completed_matchdays check.
+        """
+        existing_matchdays = [f["matchday"] for f in competition.fixtures] if competition.fixtures else []
+        new_matchday = max(existing_matchdays) + 1 if existing_matchdays else 1
+        
+        # Find a date for the replay, skipping any day that already has a match
+        candidate = from_date + timedelta(days=1)
+        match_dates = set(e.date for e in self.scheduled_events if e.category == "match")
+        while candidate <= self.season_end:
+            if candidate not in match_dates:
+                break
+            candidate += timedelta(days=1)
+            
+        if candidate > self.season_end:
+            return None  # No date available before the season ends
+        
+        competition.fixtures.append({
+            "matchday": new_matchday,
+            "home_team": home_team,
+            "away_team": away_team,
+            "date": candidate,
+            "is_replay": True
+        })
+        
+        self.add_event(Event(
+            date=candidate,
+            category="match",
+            blocking=True,
+            title=f"Replay: {home_team.name} vs {away_team.name}",
+            description=f"Replay scheduled for {candidate.strftime('%A, %d %B %Y')}."
+        ))
+        
+        return candidate
+        
     def schedule_injury_notification(self, player, team, from_date):
         # Add injury news to inbox and schedule return reminder
         severity_labels = {

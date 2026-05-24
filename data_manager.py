@@ -24,9 +24,15 @@ def save_teams_to_file(teams, filename="teams_data.json"):
                 "id": player.id,
                 "name": player.name,
                 "position": player.position,
-                "age": player.age,
+                "birth_date": player.birth_date.isoformat(),
                 "current_ability": player.current_ability,
                 "potential_ability": player.potential_ability,
+                "nationality": player.nationality,
+                "parent_nationality": player.parent_nationality,
+                "preferred_foot": player.preferred_foot,
+                "contract_expires": player.contract_expires,
+                "wage": player.wage,
+                "is_retired": player.is_retired,
                 "morale": player.morale,
                 "manager_relationship": player.manager_relationship,
                 
@@ -93,14 +99,35 @@ def load_teams_from_file(file_path):
         team.fan_satisfaction = team_data.get("fan_satisfaction", 50.0)
 
         for player_data in team_data.get("squad", []):
+            if "birth_date" in player_data:
+                birth_date = datetime.date.fromisoformat(player_data["birth_date"])
+            else:
+                age = player_data.get("age", 25)
+                approx_year = datetime.date.today().year - age
+                birth_date = datetime.date(
+                    approx_year,
+                    random.randint(1, 12),
+                    random.randint(1, 28)
+                )
+            
             player = Player(
               name = player_data["name"],
               position = player_data["position"],
-              age = player_data["age"],
+              birth_date = birth_date,
               current_ability = player_data["current_ability"],
               potential_ability = player_data["potential_ability"],
               player_id = player_data.get("id") or new_player_id(),
+              nationality = player_data.get("nationality"),
+              parent_nationality = player_data.get("parent_nationality"),
+              preferred_foot = player_data.get("preferred_foot"),
+              contract_expires = player_data.get("contract_expires"),
+              wage = player_data.get("wage"),
               )
+            
+            # Status fields
+            player.is_retired = player_data.get("is_retired", False)
+            player.morale = player_data.get("morale", 0.0)
+            player.manager_relationship = player_data.get("manager_relationship", 0.0)
             
             # Load season stats  
             player.goals = player_data.get("goals", 0)
