@@ -40,12 +40,12 @@
 #
 # eligible_for_international: whether this nation fields a national team
 
-# Fictional nations
+# ── Fictional nations ─────────────────────────────────────────────────────────
 
 - id: myria
   name: Myria
   is_fictional: true
-  founded_year: 1905
+  founded_year: 1880
   prestige: 1200
   prestige_weights:
     league: 0.60
@@ -55,8 +55,23 @@
   tier_change_min_seasons: 3
   name_generator: myrian
   eligible_for_international: true
+  regions:
+    - id: bridia
+      name: Bridia
+      talent_modifier: 1.0   # multiplier on PA caps for players born here
+                              # starts at 1.0 — shifts dynamically at runtime
+    - id: masia
+      name: Masia
+      talent_modifier: 1.0
+    - id: lunia
+      name: Lunia
+      talent_modifier: 1.0
+    - id: vetia_and_sileia
+      name: Vetia & Sileia
+      talent_modifier: 1.0
 
-  # ── Real nations — organised football exists at 1896 start ───────────────────
+
+# ── Real nations — organised football exists at 1896 start ───────────────────
 #
 # Prestige starting values reflect the footballing landscape of 1896:
 #   England   invented the game, strongest league, most developed football
@@ -71,14 +86,27 @@
   founded_year: 1863
   prestige: 8500
   prestige_weights:
-    league: 0.70        # England's strength is primarily its domestic league
+    league: 0.70
     international: 0.30
   prestige_decay: 0.03
   prestige_floor: 500
   tier_change_min_seasons: 3
   name_generator: english
   eligible_for_international: true
- 
+  regions:
+    - id: eng_northwest
+      name: North West Corridor
+      talent_modifier: 1.1   # Manchester, Liverpool — historically rich in talent
+    - id: eng_northeast
+      name: Yorkshire & North East
+      talent_modifier: 1.05  # Newcastle, Sunderland area
+    - id: eng_midlands
+      name: Midlands
+      talent_modifier: 1.0
+    - id: eng_london
+      name: Greater London & South Coast
+      talent_modifier: 0.95  # London football less dominant in 1896
+
 - id: scotland
   name: Scotland
   is_fictional: false
@@ -92,7 +120,20 @@
   tier_change_min_seasons: 3
   name_generator: scottish
   eligible_for_international: true
- 
+  regions:
+    - id: sco_glasgow
+      name: Glasgow & Strathclyde
+      talent_modifier: 1.1   # Glasgow/Edinburgh — heart of Scottish football
+    - id: sco_edinburgh
+      name: Edinburgh & The Lothians
+      talent_modifier: 1.0
+    - id: sco_grampian
+      name: Grampian
+      talent_modifier: 1.0
+    - id: sco_highlands
+      name: Highlands & Islands
+      talent_modifier: 0.9
+
 - id: wales
   name: Wales
   is_fictional: false
@@ -100,14 +141,26 @@
   prestige: 4800
   prestige_weights:
     league: 0.50
-    international: 0.50  # Wales has no professional league yet — international
-                          # results are equally important to prestige
+    international: 0.50
   prestige_decay: 0.03
   prestige_floor: 500
   tier_change_min_seasons: 3
   name_generator: welsh
   eligible_for_international: true
- 
+  regions:
+    - id: wal_cardiff_swansea
+      name: Cardiff & Swansea
+      talent_modifier: 1.1   # Cardiff, Swansea — industrial heartland
+    - id: wal_north_west
+      name: Y Fro Gymraeg (North & West Coast)
+      talent_modifier: 0.95
+    - id: wal_valleys
+      name: The Valleys
+      talent_modifier: 0.9
+    - id: wal_marches
+      name: The Marches
+      talent_modifier: 0.9
+
 - id: ireland
   name: Ireland
   is_fictional: false
@@ -121,7 +174,20 @@
   tier_change_min_seasons: 3
   name_generator: irish
   eligible_for_international: true
- 
+  regions:
+    - id: ire_leinster
+      name: Leinster
+      talent_modifier: 1.1   # Dublin — most developed football region
+    - id: ire_munster
+      name: Munster
+      talent_modifier: 1.0
+    - id: ire_connacht
+      name: Connacht
+      talent_modifier: 0.9
+    - id: ire_ulster
+      name: Ulster
+      talent_modifier: 0.95
+
 - id: netherlands
   name: Netherlands
   is_fictional: false
@@ -135,7 +201,20 @@
   tier_change_min_seasons: 3
   name_generator: dutch
   eligible_for_international: true
- 
+  regions:
+    - id: ned_randstad
+      name: Randstad Hub
+      talent_modifier: 1.1   # Amsterdam, Rotterdam — early football hub
+    - id: ned_frisian
+      name: Frisian North
+      talent_modifier: 0.95
+    - id: ned_saxon
+      name: Saxon East
+      talent_modifier: 0.95
+    - id: ned_brabant_limburg
+      name: Brabant & Limburg
+      talent_modifier: 1.0
+
 - id: denmark
   name: Denmark
   is_fictional: false
@@ -149,7 +228,20 @@
   tier_change_min_seasons: 3
   name_generator: danish
   eligible_for_international: true
- 
+  regions:
+    - id: den_copenhagen
+      name: Copenhagen Region
+      talent_modifier: 1.1   # Copenhagen
+    - id: den_jutland
+      name: Jutland
+      talent_modifier: 1.0
+    - id: den_central
+      name: Central Denmark 
+      talent_modifier: 0.95
+    - id: den_islands
+      name: Southern Islands
+      talent_modifier: 0.9
+
 - id: belgium
   name: Belgium
   is_fictional: false
@@ -163,7 +255,20 @@
   tier_change_min_seasons: 3
   name_generator: belgian
   eligible_for_international: true
- 
+  regions:
+    - id: bel_brussels
+      name: Brussels
+      talent_modifier: 1.05
+    - id: bel_flanders
+      name: Flanders
+      talent_modifier: 1.0
+    - id: bel_wallonia
+      name: Wallonia
+      talent_modifier: 1.0
+    - id: bel_ostbelgien
+      name: Ostbelgien
+      talent_modifier: 0.95
+
 - id: switzerland
   name: Switzerland
   is_fictional: false
@@ -177,6 +282,20 @@
   tier_change_min_seasons: 3
   name_generator: swiss
   eligible_for_international: true
+  regions:
+    - id: sui_german
+      name: German Plateau
+      talent_modifier: 1.05  # Zurich, Basel
+    - id: sui_french
+      name: Romandie
+      talent_modifier: 1.0   # Geneva, Lausanne
+    - id: sui_italian
+      name: Ticino
+      talent_modifier: 0.95
+    - id: sui_alpine
+      name: Alpine
+      talent_modifier: 0.9
+
 
 # ── Real nations — early clubs exist, no association yet at 1896 ─────────────
 #
@@ -193,7 +312,7 @@
 - id: germany
   name: Germany
   is_fictional: false
-  founded_year: 1900        # DFB founded
+  founded_year: 1900
   prestige: 1800
   prestige_weights:
     league: 0.65
@@ -203,11 +322,24 @@
   tier_change_min_seasons: 3
   name_generator: german
   eligible_for_international: true
- 
+  regions:
+    - id: ger_west
+      name: West Rurh Valley
+      talent_modifier: 1.05  # Ruhr, Rhine — industrial heartland
+    - id: ger_south
+      name: Bavaria & Swabia
+      talent_modifier: 1.05  # Bavaria, Baden
+    - id: ger_north
+      name: Hanseatic North
+      talent_modifier: 1.0   # Hamburg, Bremen
+    - id: ger_east
+      name: Eastern States
+      talent_modifier: 0.95
+
 - id: austria
   name: Austria
   is_fictional: false
-  founded_year: 1904        # ÖFB founded
+  founded_year: 1904
   prestige: 1600
   prestige_weights:
     league: 0.60
@@ -217,11 +349,24 @@
   tier_change_min_seasons: 3
   name_generator: austrian
   eligible_for_international: true
- 
+  regions:
+    - id: aut_vienna
+      name: Vienna
+      talent_modifier: 1.2   # Vienna dominates Austrian football entirely
+    - id: aut_alpine
+      name: Alpine West
+      talent_modifier: 0.9
+    - id: aut_styria
+      name: Styria
+      talent_modifier: 0.95
+    - id: aut_east
+      name: Burgenland
+      talent_modifier: 0.9
+
 - id: hungary
   name: Hungary
   is_fictional: false
-  founded_year: 1901        # MLSZ founded
+  founded_year: 1901
   prestige: 1500
   prestige_weights:
     league: 0.60
@@ -231,11 +376,24 @@
   tier_change_min_seasons: 3
   name_generator: hungarian
   eligible_for_international: true
- 
+  regions:
+    - id: hun_budapest
+      name: Budapest
+      talent_modifier: 1.2   # Budapest dominates like Vienna does Austria
+    - id: hun_north
+      name: Northern Highlands
+      talent_modifier: 0.9
+    - id: hun_east
+      name: Great Plain
+      talent_modifier: 0.9
+    - id: hun_west
+      name: Transdanubia
+      talent_modifier: 0.9
+
 - id: bohemia
   name: Bohemia
   is_fictional: false
-  founded_year: 1901        # ČFS founded; later becomes Czechoslovakia
+  founded_year: 1901
   prestige: 1400
   prestige_weights:
     league: 0.55
@@ -245,11 +403,24 @@
   tier_change_min_seasons: 3
   name_generator: czech
   eligible_for_international: true
- 
+  regions:
+    - id: boh_prague
+      name: Prague
+      talent_modifier: 1.15
+    - id: boh_south
+      name: Southern Bohemia
+      talent_modifier: 1.0
+    - id: boh_moravia
+      name: Moravia
+      talent_modifier: 1.0
+    - id: boh_north_west
+      name: Sudeten
+      talent_modifier: 0.9
+
 - id: france
   name: France
   is_fictional: false
-  founded_year: 1919        # FFF founded
+  founded_year: 1919
   prestige: 1600
   prestige_weights:
     league: 0.65
@@ -259,11 +430,24 @@
   tier_change_min_seasons: 3
   name_generator: french
   eligible_for_international: true
- 
+  regions:
+    - id: fra_paris
+      name: Île-de-France
+      talent_modifier: 1.1
+    - id: fra_north_east
+      name: Alpine East
+      talent_modifier: 1.0
+    - id: fra_south
+      name: Occitania
+      talent_modifier: 1.0
+    - id: fra_west
+      name: Brittany
+      talent_modifier: 0.95
+
 - id: argentina
   name: Argentina
   is_fictional: false
-  founded_year: 1893        # AFA founded
+  founded_year: 1893
   prestige: 1900
   prestige_weights:
     league: 0.55
@@ -273,17 +457,43 @@
   tier_change_min_seasons: 3
   name_generator: argentinian
   eligible_for_international: true
- 
+  regions:
+    - id: arg_buenos_aires
+      name: Greater Buenos Aires
+      talent_modifier: 1.2   # British railway clubs founded here
+    - id: arg_pampas
+      name: The Pampas
+      talent_modifier: 0.95
+    - id: arg_northwest
+      name: Mesopotamian North
+      talent_modifier: 0.9
+    - id: arg_patagonia
+      name: Patagonia
+      talent_modifier: 0.85
+
 - id: uruguay
   name: Uruguay
   is_fictional: false
-  founded_year: 1900        # AUF founded
+  founded_year: 1900
   prestige: 1700
   prestige_weights:
     league: 0.50
-    international: 0.50    # Uruguay's prestige driven heavily by international
+    international: 0.50
   prestige_decay: 0.03
   prestige_floor: 500
   tier_change_min_seasons: 3
   name_generator: uruguayan
   eligible_for_international: true
+  regions:
+    - id: uru_montevideo
+      name: Montevideo
+      talent_modifier: 1.25  # Nearly all Uruguayan football is in Montevideo
+    - id: uru_interior
+      name: Interior Plains
+      talent_modifier: 0.9
+    - id: uru_north
+      name: Gaucho Frontier
+      talent_modifier: 0.85
+    - id: uru_west
+      name: Western Litoral
+      talent_modifier: 0.85

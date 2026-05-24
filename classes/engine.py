@@ -70,6 +70,13 @@ from data_loader import (
     get_nation,
     TeamConfig,
 )
+from news_feed import (
+    NewsFeed,
+    publish_match_result,
+    publish_hat_trick,
+    publish_competition_winner,
+    publish_record_broken,
+)
 from records import RecordBook
 from player_refs import find_player
 from game_calendar import GameCalendar, apply_effects, apply_match_morale
@@ -88,6 +95,7 @@ class GameEngine:
         # Persisted across seasons
         self.teams:       list       = []
         self.record_book: RecordBook = RecordBook()
+        self.news_feed:   NewsFeed   = NewsFeed()
 
         # Per-season objects, set in _start_season()
         self.season_year:    str         = ""
@@ -203,18 +211,21 @@ class GameEngine:
 
         for cfg in team_configs:
             team = Team(cfg.name, cfg.attack, cfg.midfield, cfg.defense)
-            team.prestige = cfg.prestige
+            team.prestige    = cfg.prestige
+            team.home_region = cfg.home_region
+            team.budget      = cfg.budget
+            team.wage_budget = cfg.wage_budget
 
             if cfg.id in squad_data:
-                # Pre-written squad from YAML
                 team.squad = self._build_squad_from_yaml(squad_data[cfg.id])
             else:
-                # Fall back to procedural generation
                 nation = get_nation(cfg.nation_id)
                 team.squad = generate_squad(
                     cfg.name,
                     average_ca=cfg.avg_ca,
                     nation=nation.name,
+                    season_year=season_year,
+                    home_region=cfg.home_region,
                 )
 
             teams.append(team)
@@ -420,6 +431,49 @@ class GameEngine:
             away_team = next((t for t in self.teams if t.name == result["away_team"]), None)
             if home_team and away_team:
                 apply_match_morale(home_team, away_team, result["home_goals"], result["away_goals"])
+
+            # ── News feed: match result ───────────────────────────────────────
+            publish_match_result(
+                self.news_feed,
+                competition = self.comp.name,
+                home_team   = result["home_team"],
+                away_team   = result["away_team"],
+                home_goals  = result["home_goals"],
+                away_goals  = result["away_goals"],
+                date        = self.calendar.current_date,
+                season      = self.season_year,
+                home_region = home_team.home_region if home_team else "",
+                away_region = away_team.home_region if away_team else "",
+                relevance   = ["local"],
+            )
+
+            # ── News feed: hat tricks ─────────────────────────────────────────
+            from collections import Counter
+            goal_events  = [e for e in result.get("events", []) if e["type"] == "goal"]
+            goals_by_pid: Counter = Counter()
+            pid_to_name:  dict    = {}
+            for evt in goal_events:
+                pid = evt.get("player_id") or evt.get("player", "")
+                goals_by_pid[pid] += 1
+                pid_to_name[pid] = evt.get("player", "")
+            for pid, count in goals_by_pid.items():
+                if count >= 3:
+                    publish_hat_trick(
+                        self.news_feed,
+                        player      = pid_to_name[pid],
+                        player_id   = pid,
+                        team        = result["home_team"] if any(
+                            e.get("player_id") == pid and e["team"] == result["home_team"]
+                            for e in goal_events
+                        ) else result["away_team"],
+                        goals       = count,
+                        competition = self.comp.name,
+                        match       = (f"{result['home_team']} {result['home_goals']}"
+                                       f"-{result['away_goals']} {result['away_team']}"),
+                        date        = self.calendar.current_date,
+                        season      = self.season_year,
+                        relevance   = ["local", "regional"],
+                    )
 
         # Cup: schedule replays for draws
         scheduled_replays = []

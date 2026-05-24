@@ -1,15 +1,19 @@
-from classes import Player
-from nations import get_nation_config
-import random
 import datetime
+import random
+from player import Player
+from nations import get_nation_config
 
 def _random_birth_date(birth_year: int) -> datetime.date:
-  # Have to update it later to include days 29-31 depending on month
-  return datetime.date(
-    birth_date,
-    random.randint(1, 12),
-    random.randint(1, 28)
-  )
+    """
+    Pick a random day within birth_year.
+    Uses randint(1, 28) for day to safely cover all months without
+    needing to handle variable month lengths.
+    """
+    return datetime.date(
+        birth_year,
+        random.randint(1, 12),
+        random.randint(1, 28),
+    )
 
 MYRIAN_NAMES = [
     "Nikolvar", "Andrevos", "Aleksalhos", "Demetralhos", "Ioannalhos", "Georvos", 
@@ -81,64 +85,66 @@ def _apply_pa_cap(pa, nation_config):
     return min(pa, nation_config["wonderkid_pa_cap"]), True
   return min(pa, nation_config["pa_cap"]), False
   
-def generate_squad(team_name, average_ca=70, nation="Myria", season_year=None):
-  nation_config = get_nation_config(nation)
-  squad = []
-  
-  if season_year:
-    ref_year = int(season_year.split("/")[0])
-  else:
-    ref_year = datetime.datetime.now().year
-    
-  nation_id = nation.lower()
-  
-  positions = [
-    ("GK", 2),
-    ("DEF", 4),
-    ("MID", 4),
-    ("FWD", 6)
-  ]
-  
-  for position, count in positions:
-    for _ in range(count):
-      name = generate_myrian_name()
-      age = random.randint(17, 38)
-      birth_year = ref_year - age
-      birth_date = _random_birth_date(birth_year)
-      
-      ca = max(1, int(random.gauss(average_ca, 10)))
-      raw_pa = ca + random.randint(0, 20)
-      
-      pa, is_wonderkid = _apply_pa_cap(raw_pa, nation_config)
-      ca = min(ca, pa)  # Ensure CA does not exceed PA after capping
-      
-      player = Player(
-        name=name,
-        position=position,
-        birth_date=birth_date,
-        current_ability=ca,
-        potential_ability=pa,
-        nationality=nation_id,
-      )
-      if is_wonderkid:
-        player.is_wonderkid = True
-      squad.append(player)
-      
-  # Squad numbers: only assign in seasons where they historically exist (1928-)
-  if season_year and int(season_year.split("/")[0]) >= 1928:
-    nums = list(range(1, len(squad) + 1))
-    random.shuffle(nums)
-    # Ensure GK gets number 1
-    gks = [p for p in squad if p.position == "GK"]
-    if gks:
-      try:
-        idx = squad.index(gks[0])
-        one_idx = nums.index(1)
-        nums[idx], nums[one_idx] = nums[one_idx], nums[idx]
-      except ValueError:
-        pass
-      
-    for p, n in zip(squad, nums):
-      p.squad_number = n
-      
-  return squad
+def generate_squad(team_name, average_ca=70, nation="Myria",
+                   season_year=None, home_region=None):
+    nation_config = get_nation_config(nation)
+    squad = []
+
+    if season_year:
+        ref_year = int(season_year.split("/")[0])
+    else:
+        ref_year = datetime.date.today().year
+
+    nation_id = nation.lower()
+
+    positions = [
+        ("GK", 2),
+        ("DEF", 4),
+        ("MID", 4),
+        ("FWD", 6)
+    ]
+
+    for position, count in positions:
+        for _ in range(count):
+            name       = generate_myrian_name()
+            age        = random.randint(17, 38)
+            birth_year = ref_year - age
+            birth_date = _random_birth_date(birth_year)
+
+            ca     = max(1, int(random.gauss(average_ca, 10)))
+            raw_pa = ca + random.randint(0, 20)
+
+            pa, is_wonderkid = _apply_pa_cap(raw_pa, nation_config)
+            ca = min(ca, pa)
+
+            player = Player(
+                name               = name,
+                position           = position,
+                birth_date         = birth_date,
+                current_ability    = ca,
+                potential_ability  = pa,
+                nationality        = nation_id,
+                birth_region       = home_region,
+            )
+            if is_wonderkid:
+                player.is_wonderkid = True
+            squad.append(player)
+
+    # Squad numbers: only assign in seasons where they historically exist.
+    # First recorded use was 1928; we use that as the gate.
+    if season_year and int(season_year.split("/")[0]) >= 1928:
+        nums = list(range(1, len(squad) + 1))
+        random.shuffle(nums)
+        # Ensure a GK gets #1
+        gks = [p for p in squad if p.position == "GK"]
+        if gks:
+            try:
+                idx     = squad.index(gks[0])
+                one_idx = nums.index(1)
+                nums[idx], nums[one_idx] = nums[one_idx], nums[idx]
+            except ValueError:
+                pass
+        for p, n in zip(squad, nums):
+            p.squad_number = n
+
+    return squad

@@ -13,6 +13,10 @@ class Team:
         self.board_confidence = 50.0  # 0 to 100
         self.fan_satisfaction = 50.0  # 0 to 100
         self.trophies = []
+        self.prestige = 500.0
+        self.home_region = ""
+        self.budget = 1000
+        self.wage_budget = 300
 
     def add_player(self, player):
         self.squad.append(player)

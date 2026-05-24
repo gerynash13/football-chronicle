@@ -3,258 +3,264 @@ import datetime
 from player_refs import new_player_id
 
 class Player:
-    def __init__(self, name, position, age, current_ability, potential_ability, 
-                 player_id=None, nationality=None, parent_nationality=None,
+    def __init__(self, name, position, birth_date, current_ability,
+                 potential_ability, player_id=None,
+                 nationality=None, parent_nationality=None,
+                 birth_region=None,
                  preferred_foot=None, contract_expires=None, wage=0):
-        
-        self.id = player_id or new_player_id()
-        self.name = name
-        self.position = position # GK, DEF, MID, FWD
-        self.birth_date = birth_date    # datetime.date
-        self.current_ability = current_ability
-        self.potential_ability = potential_ability
-        
+
+        self.id                 = player_id or new_player_id()
+        self.name               = name
+        self.position           = position
+        self.birth_date         = birth_date
+        self.current_ability    = current_ability
+        self.potential_ability  = potential_ability
+
         # Identity
-        self.nationality = nationality
+        self.nationality        = nationality
         self.parent_nationality = parent_nationality
-        self.preferred_foot = preferred_foot or random.choice(
+        self.birth_region       = birth_region       # region_id string
+        self.preferred_foot     = preferred_foot or random.choice(
             ["right", "right", "right", "left", "left", "both"]
-        )  # weighted ~50% right, ~33% left, ~17% both
-        
+        )  # weighted: ~50% right, ~33% left, ~17% both
+
         # Contract
-        self.contract_expires = contract_expires
-        self.wage = wage
-        
+        self.contract_expires   = contract_expires  # int season start year or None
+        self.wage               = wage              # relative integer unit
+
         # Status
-        self.is_injured = False
-        
-        self.attributes = self._generate_attributes()
-        self.role = self._determine_role()
-        self.morale = 0.0  # -10 to +10, where 0 is neutral
-        self.manager_relationship = 0.0  # -5 to +5, where 0 is neutral
+        self.is_retired         = False
+
+        self.attributes         = self._generate_attributes()
+        self.role               = self._determine_role()
+        self.morale             = 0.0   # -10 to +10
+        self.manager_relationship = 0.0 # -5 to +5
 
         # Season stats (reset each season)
-        self.goals = 0
-        self.assists = 0
-        self.appearances = 0
-        self.clean_sheets = 0
-        
-        self.season_avg_rating = 0.0
+        self.goals                    = 0
+        self.assists                  = 0
+        self.appearances              = 0
+        self.clean_sheets             = 0
+        self.season_avg_rating        = 0.0
         self.season_rating_appearances = 0
-        
-        self.yellow_cards = 0
-        self.red_cards = 0
-        self.is_suspended = False
-        self.suspension_matches_left = 0
-        
-        self.is_injured = False
-        self.injury_matches_left = 0
-        self.injury_severity = None  # "minor" | "moderate" | "severe" | "critical"
-        
+        self.yellow_cards             = 0
+        self.red_cards                = 0
+        self.is_suspended             = False
+        self.suspension_matches_left  = 0
+        self.is_injured               = False
+        self.injury_matches_left      = 0
+        self.injury_severity          = None  # minor | moderate | severe | critical
+
         # Career stats (cumulative)
-        self.career_goals = 0
-        self.career_assists = 0
-        self.career_appearances = 0
+        self.career_goals        = 0
+        self.career_assists      = 0
+        self.career_appearances  = 0
         self.career_clean_sheets = 0
-        
         self.career_yellow_cards = 0
-        self.career_red_cards = 0
-        self.career_injuries = 0
-        
-        # Career history (list of season records)
-        self.career_history = []
-        self.career_trophies = 0
+        self.career_red_cards    = 0
+        self.career_injuries     = 0
+
+        # Career history and trophies
+        self.career_history          = []
+        self.career_trophies         = 0
         self.career_trophies_by_comp = {}
-        # Squad number - assigned per season by the engine, not stored permanently
-        # Only used when competition rules permit squad numbers (post-1928)
+        self._won_trophy_flag        = False
+
+        # Squad number — assigned per season by the engine, not stored permanently.
+        # Only used in seasons where competition rules permit squad numbers (post-1928).
         self.squad_number = None
-        # Temporary flag set when player wins a trophy this season
-        self._won_trophy_flag = False
-        
-        # Wonderkid flag (for potential future use in scouting, etc.)
+
+        # Wonderkid flag
         self.is_wonderkid = False
-        
-    # Derived properties
+
+    # ── Derived properties ────────────────────────────────────────────────────
+
     def age_on(self, reference_date: datetime.date) -> int:
         """
         Calculate age on a specific date.
         Used during season transitions to update ages accurately.
+        
+        Why a method rather than a property?
+        Age is only meaningful relative to a specific date. A property
+        would have to assume "today", which means different things in a
+        game running across simulated decades. Passing the date explicitly
+        makes the calculation unambiguous.
         """
         bd = self.birth_date
         age = reference_date.year - bd.year
-        # If the birthday hasn't happened yet this year, subtract a year
+        # If the birthday hasn't occurred yet this year, subtract one
         if (reference_date.month, reference_date.day) < (bd.month, bd.day):
             age -= 1
         return age
-    
+
     @property
     def age(self) -> int:
         """
-        Convenience property - returns age on current date
+        Convenience property — returns age as of today's real date.
         
         During gameplay, prefer age_on(season_date) for accuracy.
-        This property exists so any code that reads player.age still works
-        without modification during the transition period.
+        This property exists so any code that reads player.age still
+        works without modification during the transition period.
         """
         return self.age_on(datetime.date.today())
+
+    # ── Attributes and role ───────────────────────────────────────────────────
 
     def _generate_attributes(self):
         if self.position == "FWD":
             return {
-                "finishing": self.current_ability + random.randint(-5, 5),
-                "pace": self.current_ability + random.randint(-5, 5),
-                "dribbling": self.current_ability + random.randint(-5, 5),
-                "positioning": self.current_ability + random.randint(-5, 5)
+                "finishing":   self.current_ability + random.randint(-5, 5),
+                "pace":        self.current_ability + random.randint(-5, 5),
+                "dribbling":   self.current_ability + random.randint(-5, 5),
+                "positioning": self.current_ability + random.randint(-5, 5),
             }
-
         elif self.position == "MID":
             return {
-                "passing": self.current_ability + random.randint(-5, 5),
-                "vision": self.current_ability + random.randint(-5, 5),
-                "stamina": self.current_ability + random.randint(-5, 5),
-                "tackling": self.current_ability + random.randint(-5, 5)
+                "passing":  self.current_ability + random.randint(-5, 5),
+                "vision":   self.current_ability + random.randint(-5, 5),
+                "stamina":  self.current_ability + random.randint(-5, 5),
+                "tackling": self.current_ability + random.randint(-5, 5),
             }
-
         elif self.position == "DEF":
             return {
-                "tackling": self.current_ability + random.randint(-5, 5),
+                "tackling":    self.current_ability + random.randint(-5, 5),
                 "positioning": self.current_ability + random.randint(-5, 5),
-                "heading": self.current_ability + random.randint(-5, 5),
-                "pace": self.current_ability + random.randint(-5, 5)
+                "heading":     self.current_ability + random.randint(-5, 5),
+                "pace":        self.current_ability + random.randint(-5, 5),
             }
-
         elif self.position == "GK":
             return {
-                "reflexes": self.current_ability + random.randint(-5, 5),
+                "reflexes":    self.current_ability + random.randint(-5, 5),
                 "positioning": self.current_ability + random.randint(-5, 5),
-                "handling": self.current_ability + random.randint(-5, 5),
-                "command": self.current_ability + random.randint(-5, 5)
+                "handling":    self.current_ability + random.randint(-5, 5),
+                "command":     self.current_ability + random.randint(-5, 5),
             }
 
     def _determine_role(self):
         if self.position == "FWD":
-            # Striker --> High Finishing and Positioning
-            # Winger --> High Pace and Dribbling
-            if self.attributes["finishing"] + self.attributes["positioning"] > self.attributes["pace"] + self.attributes["dribbling"]:
+            if (self.attributes["finishing"] + self.attributes["positioning"]
+                    > self.attributes["pace"] + self.attributes["dribbling"]):
                 return "ST"
-            else:
-                return "W"
-
+            return "W"
         elif self.position == "MID":
             attacking = self.attributes["passing"] + self.attributes["vision"]
             defensive = self.attributes["tackling"] + self.attributes["stamina"]
-
             if attacking > defensive:
                 return "AM"
-
             elif defensive > attacking:
                 return "DM"
-
-            else:
-                return "CM"
-
+            return "CM"
         elif self.position == "DEF":
-            # If pace quite higher than heading --> FB
             if self.attributes["pace"] > self.attributes["heading"] + 5:
                 return "FB"
-            else:
-                return "CB"
-        
+            return "CB"
         elif self.position == "GK":
             return "GK"
-        
-    def end_season(self, season_name, team_name):
+
+    # ── Season lifecycle ──────────────────────────────────────────────────────
+
+    def end_season(self, season_name, team_name, season_date=None):
         """
-        We use this function at the end of the season to:
-        1. Add season state to career totals
-        2. Save season record to history
-        3. Reset season stats
-        """
+        Roll season stats into career totals, save history record, reset.
         
-        # Add to career totals
-        self.career_goals += self.goals
-        self.career_assists += self.assists
-        self.career_appearances += self.appearances
+        season_date is used to record the player's age accurately.
+        Falls back to birth_date year arithmetic if not provided.
+        """
+        self.career_goals        += self.goals
+        self.career_assists      += self.assists
+        self.career_appearances  += self.appearances
         self.career_clean_sheets += self.clean_sheets
         self.career_yellow_cards += self.yellow_cards
-        self.career_red_cards += self.red_cards
-        
-        # Save season record
+        self.career_red_cards    += self.red_cards
+
+        recorded_age = (
+            self.age_on(season_date) if season_date
+            else int(season_name.split("/")[0]) - self.birth_date.year
+        )
+
         self.career_history.append({
-            "season": season_name,
-            "team": team_name,
-            "goals": self.goals,
-            "assists": self.assists,
+            "season":       season_name,
+            "team":         team_name,
+            "age":          recorded_age,
+            "goals":        self.goals,
+            "assists":      self.assists,
             "clean_sheets": self.clean_sheets,
             "yellow_cards": self.yellow_cards,
-            "red_cards": self.red_cards,
-            "ca": self.current_ability,
-            "appearances": self.appearances,
-            "age": self.age,
+            "red_cards":    self.red_cards,
+            "ca":           self.current_ability,
+            "appearances":  self.appearances,
             "squad_number": self.squad_number,
-            "kit_color": None,    # Hex primary color, set on Team later
-            "trophy": bool(self._won_trophy_flag),
-            "avg_rating": round(self.season_avg_rating, 1) if self.season_rating_appearances > 0 else None
+            "kit_color":    None,
+            "trophy":       bool(self._won_trophy_flag),
+            "avg_rating":   round(self.season_avg_rating, 1)
+                            if self.season_rating_appearances > 0 else None,
         })
-        # Clear seasonal trophy flag after recording
         self._won_trophy_flag = False
-        
+
         # Reset season stats
-        self.goals = 0
-        self.assists = 0
-        self.appearances = 0
-        self.clean_sheets = 0
-        self.yellow_cards = 0
-        self.red_cards = 0
-        self.is_suspended = False
-        self.suspension_matches_left = 0
-        self.season_avg_rating = 0.0
+        self.goals                    = 0
+        self.assists                  = 0
+        self.appearances              = 0
+        self.clean_sheets             = 0
+        self.yellow_cards             = 0
+        self.red_cards                = 0
+        self.is_suspended             = False
+        self.suspension_matches_left  = 0
+        self.season_avg_rating        = 0.0
         self.season_rating_appearances = 0
-        
+
     def start_new_season(self):
-        # Called before each season - ages the player and updates their ability
+        """Called at season transition — develops the player."""
         self.develop()
-        
+
     def develop(self):
-        # Age the player
-        self.age += 1
+        """
+        Apply off-season development.
+        Age is no longer incremented here — it is derived from birth_date.
+        The development curve still uses age, read via the age property.
+        """
         ca_change = self._calculate_ca_change()
-        
-        # Apply change, keeping within 1 and potential ability limits
-        self.current_ability = max(1, min(self.current_ability + ca_change, self.potential_ability + ca_change))
-        
-        # Update attributes and role based on new CA
+        self.current_ability = max(
+            1,
+            min(self.current_ability + ca_change, self.potential_ability)
+        )
         self.attributes = self._generate_attributes()
-        self.role = self._determine_role()
-        
+        self.role       = self._determine_role()
+
+        # Retirement check — players over 38 have increasing chance to retire
+        if self.age >= 35:
+            retire_chance = min(0.8, (self.age - 34) * 0.15)
+            if random.random() < retire_chance:
+                self.is_retired = True
+
     def _calculate_ca_change(self):
         """
-        Returns the CA change for this off-season.
-        Growth is capped by how much room the player has left to reach its PA
+        CA change for the off-season, based on age and room left to grow.
         """
         room_for_growth = self.potential_ability - self.current_ability
-        
-        if self.age <= 20:
+        age = self.age  # use derived age
+
+        if age <= 20:
             change = random.randint(1, 4)
-        elif self.age <= 23:
+        elif age <= 23:
             change = random.randint(1, 3)
-        elif self.age <= 27:
+        elif age <= 27:
             change = random.randint(-1, 2)
-        elif self.age <= 30:
+        elif age <= 30:
             change = random.randint(-2, 1)
-        elif self.age <= 33:
+        elif age <= 33:
             change = random.randint(-3, 0)
         else:
             change = random.randint(-4, -1)
-            
-        # Can't grow beyond PA
+
         if change > 0:
             change = min(change, room_for_growth)
-            
+
         return change
-    
+
     def update_season_rating(self, rating):
-        # Update the player's average rating for the season
         self.season_rating_appearances += 1
-        self.season_avg_rating += ((rating - self.season_avg_rating) / self.season_rating_appearances)
+        self.season_avg_rating += (
+            (rating - self.season_avg_rating) / self.season_rating_appearances
+        )
         self.season_avg_rating = round(self.season_avg_rating, 2)

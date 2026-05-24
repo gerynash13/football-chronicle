@@ -9,66 +9,65 @@ def save_teams_to_file(teams, filename="teams_data.json"):
 
     for team in teams:
         team_data = {
-            "name": team.name,
-            "attack": team.attack,
-            "midfield": team.midfield,
-            "defense": team.defense,
-            "squad": [],
-            "morale": team.morale,
+            "name":             team.name,
+            "attack":           team.attack,
+            "midfield":         team.midfield,
+            "defense":          team.defense,
+            "squad":            [],
+            "morale":           team.morale,
             "board_confidence": team.board_confidence,
-            "fan_satisfaction": team.fan_satisfaction
+            "fan_satisfaction": team.fan_satisfaction,
+            "prestige":         team.prestige,
+            "home_region":      team.home_region,
+            "budget":           team.budget,
+            "wage_budget":      team.wage_budget,
         }
 
         for player in team.squad:
             player_data = {
-                "id": player.id,
-                "name": player.name,
-                "position": player.position,
-                "birth_date": player.birth_date.isoformat(),
-                "current_ability": player.current_ability,
-                "potential_ability": player.potential_ability,
-                "nationality": player.nationality,
-                "parent_nationality": player.parent_nationality,
-                "preferred_foot": player.preferred_foot,
-                "contract_expires": player.contract_expires,
-                "wage": player.wage,
-                "is_retired": player.is_retired,
-                "morale": player.morale,
+                "id":                   player.id,
+                "name":                 player.name,
+                "position":             player.position,
+                "birth_date":           player.birth_date.isoformat(),
+                "current_ability":      player.current_ability,
+                "potential_ability":    player.potential_ability,
+                "nationality":          player.nationality,
+                "parent_nationality":   player.parent_nationality,
+                "birth_region":         player.birth_region,
+                "preferred_foot":       player.preferred_foot,
+                "contract_expires":     player.contract_expires,
+                "wage":                 player.wage,
+                "is_retired":           player.is_retired,
+                "morale":               player.morale,
                 "manager_relationship": player.manager_relationship,
-                
+
                 # Season stats
-                "goals": player.goals,
-                "assists": player.assists,
-                "appearances": player.appearances,
-                "clean_sheets": player.clean_sheets,
-                "season_avg_rating": player.season_avg_rating,
+                "goals":                    player.goals,
+                "assists":                  player.assists,
+                "appearances":              player.appearances,
+                "clean_sheets":             player.clean_sheets,
+                "season_avg_rating":        player.season_avg_rating,
                 "season_rating_appearances": player.season_rating_appearances,
-                
-                "yellow_cards": player.yellow_cards,
-                "red_cards": player.red_cards,
-                "is_suspended": player.is_suspended,
-                "suspension_matches_left": player.suspension_matches_left,
-                "is_injured": player.is_injured,
-                "injury_matches_left": player.injury_matches_left,
-                "injury_severity": player.injury_severity,
-                
+                "yellow_cards":             player.yellow_cards,
+                "red_cards":                player.red_cards,
+                "is_suspended":             player.is_suspended,
+                "suspension_matches_left":  player.suspension_matches_left,
+                "is_injured":               player.is_injured,
+                "injury_matches_left":      player.injury_matches_left,
+                "injury_severity":          player.injury_severity,
+
                 # Career stats
-                "career_goals": player.career_goals,
-                "career_assists": player.career_assists,
-                "career_appearances": player.career_appearances,
+                "career_goals":        player.career_goals,
+                "career_assists":      player.career_assists,
+                "career_appearances":  player.career_appearances,
                 "career_clean_sheets": player.career_clean_sheets,
-                
                 "career_yellow_cards": player.career_yellow_cards,
-                "career_red_cards": player.career_red_cards,
-                "career_injuries": player.career_injuries,
-                
-                # Career history
-                "career_history": player.career_history,
-                
-                # Wonderkid flag
-                "is_wonderkid": player.is_wonderkid
-                
-                
+                "career_red_cards":    player.career_red_cards,
+                "career_injuries":     player.career_injuries,
+
+                # Career history and flags
+                "career_history":  player.career_history,
+                "is_wonderkid":    player.is_wonderkid,
             }
             team_data["squad"].append(player_data)
         
@@ -93,76 +92,81 @@ def load_teams_from_file(file_path):
           defense = team_data["defense"]
           )
         
-        # Load team-level attributes
-        team.morale = team_data.get("morale", 0.0)
+        team.morale           = team_data.get("morale", 0.0)
         team.board_confidence = team_data.get("board_confidence", 50.0)
         team.fan_satisfaction = team_data.get("fan_satisfaction", 50.0)
+        team.prestige         = team_data.get("prestige", 500.0)
+        team.home_region      = team_data.get("home_region", "")
+        team.budget           = team_data.get("budget", 1000)
+        team.wage_budget      = team_data.get("wage_budget", 300)
 
         for player_data in team_data.get("squad", []):
+            # ── Birth date — with backward-compat fallback for old saves ──────
+            # Old saves stored "age" as an integer. New saves store "birth_date"
+            # as an ISO string. We support both so existing saves don't break.
             if "birth_date" in player_data:
                 birth_date = datetime.date.fromisoformat(player_data["birth_date"])
             else:
+                # Reconstruct an approximate birth date from the old age field.
+                # We don't know the real birth year, so we estimate from the
+                # save file itself (no perfect solution — this is a one-time
+                # migration path for saves that predate birth_date).
                 age = player_data.get("age", 25)
                 approx_year = datetime.date.today().year - age
-                birth_date = datetime.date(
+                birth_date  = datetime.date(
                     approx_year,
                     random.randint(1, 12),
-                    random.randint(1, 28)
+                    random.randint(1, 28),
                 )
-            
+
             player = Player(
-              name = player_data["name"],
-              position = player_data["position"],
-              birth_date = birth_date,
-              current_ability = player_data["current_ability"],
-              potential_ability = player_data["potential_ability"],
-              player_id = player_data.get("id") or new_player_id(),
-              nationality = player_data.get("nationality"),
-              parent_nationality = player_data.get("parent_nationality"),
-              preferred_foot = player_data.get("preferred_foot"),
-              contract_expires = player_data.get("contract_expires"),
-              wage = player_data.get("wage"),
-              )
-            
+                name              = player_data["name"],
+                position          = player_data["position"],
+                birth_date        = birth_date,
+                current_ability   = player_data["current_ability"],
+                potential_ability = player_data["potential_ability"],
+                player_id         = player_data.get("id") or new_player_id(),
+                nationality        = player_data.get("nationality"),
+                parent_nationality= player_data.get("parent_nationality"),
+                birth_region      = player_data.get("birth_region"),
+                preferred_foot    = player_data.get("preferred_foot"),
+                contract_expires  = player_data.get("contract_expires"),
+                wage              = player_data.get("wage", 0),
+            )
+
             # Status fields
-            player.is_retired = player_data.get("is_retired", False)
-            player.morale = player_data.get("morale", 0.0)
+            player.is_retired           = player_data.get("is_retired", False)
+            player.morale               = player_data.get("morale", 0.0)
             player.manager_relationship = player_data.get("manager_relationship", 0.0)
-            
-            # Load season stats  
-            player.goals = player_data.get("goals", 0)
-            player.assists = player_data.get("assists", 0)
-            player.appearances = player_data.get("appearances", 0)
-            player.clean_sheets = player_data.get("clean_sheets", 0)
-            player.season_avg_rating = player_data.get("season_avg_rating", 0.0)
+
+            # Season stats
+            player.goals                     = player_data.get("goals", 0)
+            player.assists                   = player_data.get("assists", 0)
+            player.appearances               = player_data.get("appearances", 0)
+            player.clean_sheets              = player_data.get("clean_sheets", 0)
+            player.season_avg_rating         = player_data.get("season_avg_rating", 0.0)
             player.season_rating_appearances = player_data.get("season_rating_appearances", 0)
-            player.morale = player_data.get("morale", 0.0)
-            player.manager_relationship = player_data.get("manager_relationship", 0.0)
-            
-            player.yellow_cards = player_data.get("yellow_cards", 0)
-            player.red_cards = player_data.get("red_cards", 0)
-            player.is_suspended = player_data.get("is_suspended", False)
-            player.suspension_matches_left = player_data.get("suspension_matches_left", 0)
-            player.is_injured = player_data.get("is_injured", False)
-            player.injury_matches_left = player_data.get("injury_matches_left", 0)
-            player.injury_severity = player_data.get("injury_severity", None)
-            
-            # Load career stats
-            player.career_goals = player_data.get("career_goals", 0)
-            player.career_assists = player_data.get("career_assists", 0)
-            player.career_appearances = player_data.get("career_appearances", 0)
+            player.yellow_cards              = player_data.get("yellow_cards", 0)
+            player.red_cards                 = player_data.get("red_cards", 0)
+            player.is_suspended              = player_data.get("is_suspended", False)
+            player.suspension_matches_left   = player_data.get("suspension_matches_left", 0)
+            player.is_injured                = player_data.get("is_injured", False)
+            player.injury_matches_left       = player_data.get("injury_matches_left", 0)
+            player.injury_severity           = player_data.get("injury_severity", None)
+
+            # Career stats
+            player.career_goals        = player_data.get("career_goals", 0)
+            player.career_assists      = player_data.get("career_assists", 0)
+            player.career_appearances  = player_data.get("career_appearances", 0)
             player.career_clean_sheets = player_data.get("career_clean_sheets", 0)
-            
             player.career_yellow_cards = player_data.get("career_yellow_cards", 0)
-            player.career_red_cards = player_data.get("career_red_cards", 0)
-            player.career_injuries = player_data.get("career_injuries", 0)
-            
-            # Load career history
+            player.career_red_cards    = player_data.get("career_red_cards", 0)
+            player.career_injuries     = player_data.get("career_injuries", 0)
+
+            # Career history and flags
             player.career_history = player_data.get("career_history", [])
-            
-            # Load wonderkid flag
-            player.is_wonderkid = player_data.get("is_wonderkid", False)
-              
+            player.is_wonderkid   = player_data.get("is_wonderkid", False)
+
             team.squad.append(player)
     
         teams.append(team)
