@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device_width", initial-scale="1.0">
+    <title>The Football Chronicle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="masthead-rule"></div>
+        <div class="masthead-inner">
+            <div class="masthead-meta left" id="meta-date">Est. 1896</div>
+            <div class="masthead-title">
+                <div class="masthead-subtitle">The Official Record of</div>
+                <h1>The Football Chronicle</h1>
+                <div class="masthead-edition" id="meta-season">- Loading -</div>
+            </div>
+            <div class="metahead-meta right" id="meta-matchday">Matchday -</div>
+        </div>
+        <div class="masthead-rule double"></div>
+    </header>
+
+    <!-- Main layout: three columns -->
+    <main class="chronicle-layout">
+
+        <!-- Left column: league table and news ticker -->
+        <aside class="col-left">
+
+            <section class="panel" id="panel-standings">
+                <h2 class="panel-heading">League Table</h2>
+                <div class="panel-rule"></div>
+                <table class="standings-table" id="standings-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="team-col">Club</th>
+                            <th>P</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>GD</th>
+                            <th>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody id="standings-body">
+                        <tr>
+                            <td colspan="8" class="empty-state">Awaiting kick-off...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="panel" id="panel-news">
+                <h2 class="panel-heading">Dispatches</h2>
+                <div class="panel-rule"></div>
+                <ul class="news-list" id="news_list">
+                    <li class="news-item empty-state">No dispatches yet.</li>
+                </ul>
+            </section>
+
+        </aside>
+
+        <!-- Centre column: main content area -->
+        <section class="col-centre">
+
+            <!-- Blocking event (choices). Shown when type=blocking_event -->
+            <div class="panel event-panel hidden" id="panel-event">
+                <div class="event-category" id="event-category">Notice</div>
+                <h2 class="event-title" id="event-title"></h2>
+                <div class="panel-rule"></div>
+                <p class="event-description" id="event-description"></p>
+                <div class="event-choices" id="event-choices"></div>
+            </div>
+
+            <!-- Season end summary -->
+            <div class="panel season-end-panel hidden" id="panel-season-end">
+                <div class="season-end-header">
+                    <div class="trophy-mark">✦</div>
+                    <h2 class="season-end-title">Season Complete</h2>
+                    <div class="trophy-mark">✦</div>
+                </div>
+                <div class="panel-rule"></div>
+                <div class="champion-declaration" id="champion-declaration"></div>
+                <div class="season-stats-grid" id="season-stats-grid"></div>
+                <button class="advance-btn" id="btn-next-season">
+                    Advance to Next Season
+                </button>
+            </div>
+
+            <!-- Match results feed -->
+            <div id="results-feed">
+                <div class="feed-placeholder" id="feed-placeholder">
+                    <p class="placeholder-text">
+                        The season awaits.<br>
+                        <span>Press the button below to begin.</span>
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Right column: injuries, suspensions, inbox -->
+        <aside class="col-right">
+
+            <section class="panel" id="panel-notifications">
+                <h2 class="panel-heading">Club Notices</h2>
+                <div class="panel-rule"></div>
+                <ul class="notice-list" id="notice-list">
+                    <li class="empty-state">No notices.</li>
+                </ul>
+            </section>
+
+            <section class="panel" id="panel-inbox">
+                <h2 class="panel-heading">Correspondence</h2>
+                <div class="panel-rule"></div>
+                <ul class="inbox-list" id="inbox-list">
+                    <li class="empty-state">No correspondence.</li>
+                </ul>
+            </section>
+
+        </aside>
+
+    </main>
+
+    <!-- Footer controls -->
+    <footer class="chronicle-footer">
+        <div class="footer-rule"></div>
+        <div class="footer-inner">
+            <div class="footer-status" id="footer-status">Ready.</div>
+            <button class="advance-btn" id="btn-advance" onclick="advance()">
+                Advance
+            </button>
+            <div class="footer-next" id="footer-next"></div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

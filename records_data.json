@@ -1,0 +1,4949 @@
+{
+  "extremes": {
+    "all:player_most_goals_match": {
+      "value": 3,
+      "holder": "Aurelvar Glykanos",
+      "holder_id": "c8f10c0f-28cd-4574-b247-e86de7a8087b",
+      "team": "Populara Kluba Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Soleiu 1-3 Populara Kluba Galvononos (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:player_most_goals_match": {
+      "value": 2,
+      "holder": "Klaudvar Nalhanos",
+      "holder_id": "6f7b667e-b1a9-4efc-ab03-dbd900856e7e",
+      "team": "Kluba Sportika Alentumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 0-5 Kluba Sportika Alentumou (1896/97)",
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_most_goals_match": {
+      "value": 3,
+      "holder": "Aurelvar Glykanos",
+      "holder_id": "c8f10c0f-28cd-4574-b247-e86de7a8087b",
+      "team": "Populara Kluba Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Soleiu 1-3 Populara Kluba Galvononos (1896/97)",
+      "secondary": null
+    },
+    "all:player_youngest_scorer": {
+      "value": 146,
+      "holder": "Renzohos Ferraavar",
+      "holder_id": "ee32e9e7-691f-492e-a94d-67a7dafce48c",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 1-1 Kluba Maritima Metia (1896/97)",
+      "secondary": null
+    },
+    "all:player_oldest_scorer": {
+      "value": 168,
+      "holder": "Giovanavar Logothavar",
+      "holder_id": "1fa51bf5-0a47-4df5-a515-c8660c046e28",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Galvononos 4-3 Kluba Sportika Alentumou (1896/97)",
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_youngest_scorer": {
+      "value": 146,
+      "holder": "Renzohos Ferraavar",
+      "holder_id": "ee32e9e7-691f-492e-a94d-67a7dafce48c",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 1-1 Kluba Maritima Metia (1896/97)",
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_oldest_scorer": {
+      "value": 168,
+      "holder": "Giovanavar Logothavar",
+      "holder_id": "1fa51bf5-0a47-4df5-a515-c8660c046e28",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Galvononos 4-3 Kluba Sportika Alentumou (1896/97)",
+      "secondary": null
+    },
+    "all:player_braces:most": {
+      "value": 3,
+      "holder": "Pelhon Fustavar",
+      "holder_id": "9a67142b-c205-48f5-b230-0f3581542bfd",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_braces:most": {
+      "value": 3,
+      "holder": "Pelhon Fustavar",
+      "holder_id": "9a67142b-c205-48f5-b230-0f3581542bfd",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:player_braces:most": {
+      "value": 2,
+      "holder": "Klaudvar Nalhanos",
+      "holder_id": "6f7b667e-b1a9-4efc-ab03-dbd900856e7e",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "all:player_fastest_goal": {
+      "value": 1,
+      "holder": "Pirnalh Jurikavar",
+      "holder_id": "3950f282-3c77-473b-8dc6-bd8078944e6b",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Pirnalh Jurikavar 1' — Kluba Sportika Gedimou 1-5 Kluba Sportika Galvononos (1896/97)",
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_fastest_goal": {
+      "value": 1,
+      "holder": "Pirnalh Jurikavar",
+      "holder_id": "3950f282-3c77-473b-8dc6-bd8078944e6b",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Pirnalh Jurikavar 1' — Kluba Sportika Gedimou 1-5 Kluba Sportika Galvononos (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:player_fastest_goal": {
+      "value": 4,
+      "holder": "Franseschos Nauavar",
+      "holder_id": "d7429ab9-8bb3-4427-887d-8abf02b7b51a",
+      "team": "Kluba Sportika Alentumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Franseschos Nauavar 4' — Kluba Sulhavonos 0-5 Kluba Sportika Alentumou (1896/97)",
+      "secondary": null
+    },
+    "all:match_most_goals": {
+      "value": 8,
+      "holder": "Kluba Sulhavonos vs Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 6-2 Populara Kluba Galvononos (1896/97)",
+      "secondary": null
+    },
+    "comp:Prote Kategorias:match_most_goals": {
+      "value": 8,
+      "holder": "Kluba Sulhavonos vs Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 6-2 Populara Kluba Galvononos (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_biggest_loss": {
+      "value": 5,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 0-5 Kluba Sportika Alentumou (1896/97)",
+      "secondary": "Kluba Sportika Alentumou"
+    },
+    "team:Kluba Sportika Alentumou:team_biggest_win": {
+      "value": 5,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 0-5 Kluba Sportika Alentumou (1896/97)",
+      "secondary": "Kluba Sulhavonos"
+    },
+    "comp:Prote Kategorias:team_biggest_win": {
+      "value": 5,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 0-5 Kluba Sportika Alentumou (1896/97)",
+      "secondary": null
+    },
+    "all:player_youngest_debut": {
+      "value": 146,
+      "holder": "Renzohos Ferraavar",
+      "holder_id": "ee32e9e7-691f-492e-a94d-67a7dafce48c",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 0-5 Kluba Sportika Alentumou (1896/97)",
+      "secondary": null
+    },
+    "all:player_oldest_debut": {
+      "value": 168,
+      "holder": "Shlomo Pedraavar",
+      "holder_id": "7b0be3ee-c1c5-4b59-8d90-8ebbd57413b7",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 0-5 Kluba Sportika Alentumou (1896/97)",
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_youngest_debut": {
+      "value": 146,
+      "holder": "Renzohos Ferraavar",
+      "holder_id": "ee32e9e7-691f-492e-a94d-67a7dafce48c",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 0-5 Kluba Sportika Alentumou (1896/97)",
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_oldest_debut": {
+      "value": 168,
+      "holder": "Shlomo Pedraavar",
+      "holder_id": "7b0be3ee-c1c5-4b59-8d90-8ebbd57413b7",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 0-5 Kluba Sportika Alentumou (1896/97)",
+      "secondary": null
+    },
+    "all:gk_longest_clean_sheet_run": {
+      "value": 4,
+      "holder": "Barukh Boteravar",
+      "holder_id": "e6e3be1a-11fc-4a93-a269-ad5799b00d6a",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "4 consecutive clean sheets",
+      "secondary": null
+    },
+    "comp:Prote Kategorias:gk_longest_clean_sheet_run": {
+      "value": 4,
+      "holder": "Barukh Boteravar",
+      "holder_id": "e6e3be1a-11fc-4a93-a269-ad5799b00d6a",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "4 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:gk_longest_clean_sheet_run": {
+      "value": 2,
+      "holder": "Gaietahos Fontavar",
+      "holder_id": "a82f7b60-05fd-4421-8bdb-90559c971428",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "2 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:gk_longest_clean_sheet_run": {
+      "value": 1,
+      "holder": "Haim Sulhikos",
+      "holder_id": "8b34b265-b0ae-4e97-bae5-c622fbf71c29",
+      "team": "Kluba Sportika Alentumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "1 consecutive clean sheets",
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_longest_winning_run": {
+      "value": 6,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_longest_winning_run": {
+      "value": 3,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "all:team_longest_winning_run": {
+      "value": 6,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_longest_scoring_run": {
+      "value": 13,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_longest_scoring_run": {
+      "value": 8,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "all:team_longest_scoring_run": {
+      "value": 13,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_longest_unbeaten_run": {
+      "value": 11,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_longest_unbeaten_run": {
+      "value": 5,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "all:team_longest_unbeaten_run": {
+      "value": 11,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_longest_winning_run": {
+      "value": 3,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_longest_scoring_run": {
+      "value": 8,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_longest_unbeaten_run": {
+      "value": 7,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:player_most_goals_match": {
+      "value": 2,
+      "holder": "Filipalhos Ferraavar",
+      "holder_id": "6ef82203-c3ee-42d5-9016-54d5c28825b2",
+      "team": "Kluba Maritima Metia",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Portavar Kluba 0-2 Kluba Maritima Metia (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:player_most_goals_match": {
+      "value": 3,
+      "holder": "Gideon Caldavar",
+      "holder_id": "e56e9343-4079-44ce-9a3d-f15478a32abf",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Soleiu 4-3 Kluba Maritima Thesias (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:player_fastest_goal": {
+      "value": 2,
+      "holder": "Shlomo Juravar",
+      "holder_id": "dd811d8d-9c9b-40eb-ba98-83b644fbb938",
+      "team": "Kluba Maritima Metia",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Shlomo Juravar 2' — Kluba Maritima Metia 3-2 Kluba Sportika Mileiu (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_biggest_win": {
+      "value": 4,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Populara Kluba Galvononos 0-4 Kluba Maritima Thesias (1896/97)",
+      "secondary": "Populara Kluba Galvononos"
+    },
+    "team:Kluba Maritima Metia:team_biggest_loss": {
+      "value": 4,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Maritima Metia 0-4 Kluba Sportika Esalumou (1896/97)",
+      "secondary": "Kluba Sportika Esalumou"
+    },
+    "team:Kluba Maritima Thesias:gk_longest_clean_sheet_run": {
+      "value": 1,
+      "holder": "Lucivar Pintavar",
+      "holder_id": "1e5ec9d1-e971-4087-ae54-253384c2fcc7",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "1 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:gk_longest_clean_sheet_run": {
+      "value": 1,
+      "holder": "Spyrolhos Brakhos",
+      "holder_id": "575f85ef-67cd-4dfa-b8c6-5654fb39e593",
+      "team": "Kluba Maritima Metia",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "1 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_longest_winning_run": {
+      "value": 5,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_longest_scoring_run": {
+      "value": 10,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_longest_unbeaten_run": {
+      "value": 5,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_longest_winning_run": {
+      "value": 2,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_longest_scoring_run": {
+      "value": 6,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_longest_unbeaten_run": {
+      "value": 2,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:player_most_goals_match": {
+      "value": 3,
+      "holder": "Pelhvar Campavar",
+      "holder_id": "7e7d7390-26b4-4c97-a974-0e13f3cba506",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Mercaria Kluba 5-2 Kluba Maritima Metia (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:player_most_goals_match": {
+      "value": 2,
+      "holder": "Bralhor Vinavar",
+      "holder_id": "cca351ba-e4e9-4082-954e-6ce9b7cfe462",
+      "team": "Kluba Sportika Soleiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Soleiu 3-0 Portavar Kluba (1896/97)",
+      "secondary": null
+    },
+    "team:Mercaria Kluba:player_fastest_goal": {
+      "value": 3,
+      "holder": "Aristalhos Goruveira",
+      "holder_id": "4e75641b-f5d9-40ba-bce7-b89a43ebae4d",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Aristalhos Goruveira 3' — Kluba Sportika Alentumou 1-3 Mercaria Kluba (1896/97)",
+      "secondary": null
+    },
+    "team:Mercaria Kluba:gk_longest_clean_sheet_run": {
+      "value": 4,
+      "holder": "Barukh Boteravar",
+      "holder_id": "e6e3be1a-11fc-4a93-a269-ad5799b00d6a",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "4 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:gk_longest_clean_sheet_run": {
+      "value": 2,
+      "holder": "Yosef Mikranos",
+      "holder_id": "bb7a6e84-1c7e-48f2-9cb6-0123732f8ca0",
+      "team": "Kluba Sportika Soleiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "2 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_longest_winning_run": {
+      "value": 6,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_longest_scoring_run": {
+      "value": 13,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_longest_unbeaten_run": {
+      "value": 11,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_longest_winning_run": {
+      "value": 4,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_longest_scoring_run": {
+      "value": 11,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_longest_unbeaten_run": {
+      "value": 7,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:player_most_goals_match": {
+      "value": 3,
+      "holder": "Tolvhan Ekonomidvar",
+      "holder_id": "0ca6bd4a-28a1-4590-98e8-db67fbd6c290",
+      "team": "Kluba Sportika Gedimou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Gedimou 4-2 Kluba Sportika Alentumou (1896/97)",
+      "secondary": null
+    },
+    "team:Portavar Kluba:player_most_goals_match": {
+      "value": 2,
+      "holder": "Benedikvar Marivavar",
+      "holder_id": "aa029948-e465-42e4-8a1b-2152c4153091",
+      "team": "Portavar Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Mileiu 1-2 Portavar Kluba (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:player_fastest_goal": {
+      "value": 1,
+      "holder": "Giacomohos Brakikos",
+      "holder_id": "74e64173-cb10-417e-a05c-70d4430d5bb0",
+      "team": "Kluba Sportika Gedimou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Giacomohos Brakikos 1' — Mercaria Kluba 2-2 Kluba Sportika Gedimou (1896/97)",
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_biggest_loss": {
+      "value": 3,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Mercaria Kluba 3-0 Portavar Kluba (1896/97)",
+      "secondary": "Mercaria Kluba"
+    },
+    "team:Kluba Sportika Gedimou:team_biggest_win": {
+      "value": 3,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Maritima Metia 0-3 Kluba Sportika Gedimou (1896/97)",
+      "secondary": "Kluba Maritima Metia"
+    },
+    "team:Portavar Kluba:gk_longest_clean_sheet_run": {
+      "value": 1,
+      "holder": "Miquehos Drosvhalhos",
+      "holder_id": "8f5f2d6e-a898-46f2-9152-f7e6a24ff8ae",
+      "team": "Portavar Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "1 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:gk_longest_clean_sheet_run": {
+      "value": 1,
+      "holder": "Filipalhos Jurikavar",
+      "holder_id": "8f3134ff-f417-446d-a7fe-4450840815b7",
+      "team": "Kluba Sportika Gedimou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "1 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_longest_winning_run": {
+      "value": 3,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_longest_scoring_run": {
+      "value": 6,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_longest_unbeaten_run": {
+      "value": 3,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_longest_winning_run": {
+      "value": 2,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_longest_scoring_run": {
+      "value": 7,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_longest_unbeaten_run": {
+      "value": 5,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:player_most_goals_match": {
+      "value": 2,
+      "holder": "Sivanos Caldavar",
+      "holder_id": "90be5228-8555-49a9-8560-3fd12c8501d1",
+      "team": "Kluba Sportika Esalumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Maritima Metia 0-4 Kluba Sportika Esalumou (1896/97)",
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:player_most_goals_match": {
+      "value": 3,
+      "holder": "Aurelvar Glykanos",
+      "holder_id": "c8f10c0f-28cd-4574-b247-e86de7a8087b",
+      "team": "Populara Kluba Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Soleiu 1-3 Populara Kluba Galvononos (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:player_fastest_goal": {
+      "value": 3,
+      "holder": "Barukh Dravanos",
+      "holder_id": "577d4bb4-6660-4cf3-a734-5de1e29bc06a",
+      "team": "Kluba Sportika Esalumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Barukh Dravanos 3' — Kluba Sportika Esalumou 2-0 Kluba Sportika Mileiu (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_biggest_loss": {
+      "value": 2,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Maritima Thesias 2-0 Kluba Sportika Esalumou (1896/97)",
+      "secondary": "Kluba Maritima Thesias"
+    },
+    "team:Populara Kluba Galvononos:team_biggest_win": {
+      "value": 5,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Mileiu 0-5 Populara Kluba Galvononos (1896/97)",
+      "secondary": "Kluba Sportika Mileiu"
+    },
+    "team:Kluba Sportika Esalumou:gk_longest_clean_sheet_run": {
+      "value": 2,
+      "holder": "Protopalhos Stratigavar",
+      "holder_id": "69311920-6e7b-4521-a2ea-d28821a340d0",
+      "team": "Kluba Sportika Esalumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "2 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:gk_longest_clean_sheet_run": {
+      "value": 1,
+      "holder": "Silvaros Drosvhalhos",
+      "holder_id": "da26a004-5936-4c00-9f23-895ceca21e1e",
+      "team": "Populara Kluba Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "1 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_longest_winning_run": {
+      "value": 1,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_longest_scoring_run": {
+      "value": 6,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_longest_unbeaten_run": {
+      "value": 5,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_longest_winning_run": {
+      "value": 4,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_longest_scoring_run": {
+      "value": 13,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_longest_unbeaten_run": {
+      "value": 4,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:player_most_goals_match": {
+      "value": 3,
+      "holder": "Karmelos Vitavar",
+      "holder_id": "6347bf75-a2f9-499e-8b57-4920ba62b5eb",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Galvononos 5-3 Kluba Sportika Mileiu (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:player_braces:most": {
+      "value": 1,
+      "holder": "Pirnalh Jurikavar",
+      "holder_id": "3950f282-3c77-473b-8dc6-bd8078944e6b",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:player_most_goals_match": {
+      "value": 2,
+      "holder": "Florivos Arnhalos",
+      "holder_id": "06092675-1ac4-4daf-b797-c03acda38c55",
+      "team": "Kluba Sportika Mileiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Alentumou 5-2 Kluba Sportika Mileiu (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:player_fastest_goal": {
+      "value": 1,
+      "holder": "Pirnalh Jurikavar",
+      "holder_id": "3950f282-3c77-473b-8dc6-bd8078944e6b",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Pirnalh Jurikavar 1' — Kluba Sportika Gedimou 1-5 Kluba Sportika Galvononos (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_biggest_loss": {
+      "value": 5,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Mileiu 0-5 Populara Kluba Galvononos (1896/97)",
+      "secondary": "Populara Kluba Galvononos"
+    },
+    "team:Kluba Sportika Galvononos:team_biggest_win": {
+      "value": 4,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Gedimou 1-5 Kluba Sportika Galvononos (1896/97)",
+      "secondary": "Kluba Sportika Gedimou"
+    },
+    "team:Kluba Sportika Mileiu:gk_longest_clean_sheet_run": {
+      "value": 1,
+      "holder": "Renzohos Pethikos",
+      "holder_id": "e8371683-90bf-49f6-9335-4ee6952e13de",
+      "team": "Kluba Sportika Mileiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "1 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:gk_longest_clean_sheet_run": {
+      "value": 1,
+      "holder": "Perelhos Emvhalhos",
+      "holder_id": "7dbbc25e-dd56-462b-a65b-162826729ac2",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "1 consecutive clean sheets",
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_longest_winning_run": {
+      "value": 2,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_longest_scoring_run": {
+      "value": 5,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_longest_unbeaten_run": {
+      "value": 2,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_longest_winning_run": {
+      "value": 2,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_longest_scoring_run": {
+      "value": 7,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_longest_unbeaten_run": {
+      "value": 4,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:player_most_goals_match": {
+      "value": 2,
+      "holder": "Aleksalhos Brakhalhos",
+      "holder_id": "d901c230-7418-458f-b89a-701d3e75bc34",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 6-2 Populara Kluba Galvononos (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:player_fastest_goal": {
+      "value": 1,
+      "holder": "Leonardhos Brakikos",
+      "holder_id": "afb6cfbc-b9dc-4acf-a7c6-2785fa041bc0",
+      "team": "Kluba Sportika Soleiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Leonardhos Brakikos 1' — Kluba Sportika Gedimou 0-3 Kluba Sportika Soleiu (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:player_braces:most": {
+      "value": 2,
+      "holder": "Apostolhos Murnikos",
+      "holder_id": "1a2b2626-b5ef-43a1-9134-4a59bb1e9033",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:player_fastest_goal": {
+      "value": 1,
+      "holder": "Gideon Caldavar",
+      "holder_id": "e56e9343-4079-44ce-9a3d-f15478a32abf",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Gideon Caldavar 1' — Kluba Maritima Thesias 2-0 Mercaria Kluba (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_biggest_loss": {
+      "value": 4,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Gedimou 1-5 Kluba Sportika Galvononos (1896/97)",
+      "secondary": "Kluba Sportika Galvononos"
+    },
+    "team:Kluba Sportika Esalumou:team_biggest_win": {
+      "value": 4,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Maritima Metia 0-4 Kluba Sportika Esalumou (1896/97)",
+      "secondary": "Kluba Maritima Metia"
+    },
+    "team:Kluba Sulhavonos:team_biggest_win": {
+      "value": 4,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 6-2 Populara Kluba Galvononos (1896/97)",
+      "secondary": "Populara Kluba Galvononos"
+    },
+    "team:Kluba Sportika Soleiu:team_biggest_loss": {
+      "value": 2,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Soleiu 1-3 Populara Kluba Galvononos (1896/97)",
+      "secondary": "Populara Kluba Galvononos"
+    },
+    "team:Kluba Sportika Galvononos:team_biggest_loss": {
+      "value": 3,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Maritima Thesias 3-0 Kluba Sportika Galvononos (1896/97)",
+      "secondary": "Kluba Maritima Thesias"
+    },
+    "team:Mercaria Kluba:player_braces:most": {
+      "value": 1,
+      "holder": "Aristalhos Goruveira",
+      "holder_id": "4e75641b-f5d9-40ba-bce7-b89a43ebae4d",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:player_fastest_goal": {
+      "value": 2,
+      "holder": "Perelhos Toranos",
+      "holder_id": "27fd458d-d93c-4378-8154-6ff5d8a1906e",
+      "team": "Kluba Sportika Mileiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Perelhos Toranos 2' — Mercaria Kluba 2-1 Kluba Sportika Mileiu (1896/97)",
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_biggest_win": {
+      "value": 3,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Mercaria Kluba 3-0 Portavar Kluba (1896/97)",
+      "secondary": "Portavar Kluba"
+    },
+    "team:Portavar Kluba:player_fastest_goal": {
+      "value": 3,
+      "holder": "Ioannalhos Logothavar",
+      "holder_id": "7bc92d4c-4207-4b03-9ed4-3ee56614ed30",
+      "team": "Portavar Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Ioannalhos Logothavar 3' — Portavar Kluba 3-1 Kluba Sportika Soleiu (1896/97)",
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_biggest_win": {
+      "value": 2,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Portavar Kluba 3-1 Kluba Sportika Soleiu (1896/97)",
+      "secondary": "Kluba Sportika Soleiu"
+    },
+    "team:Kluba Sulhavonos:player_fastest_goal": {
+      "value": 1,
+      "holder": "Pelhvar Talvikos",
+      "holder_id": "ce2023eb-d09d-43ec-8bfb-dd0920c4b7d1",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Pelhvar Talvikos 1' — Kluba Sulhavonos 1-0 Kluba Maritima Thesias (1896/97)",
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:player_braces:most": {
+      "value": 3,
+      "holder": "Pelhon Fustavar",
+      "holder_id": "9a67142b-c205-48f5-b230-0f3581542bfd",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "all:player_hattricks:most": {
+      "value": 1,
+      "holder": "Aurelvar Glykanos",
+      "holder_id": "c8f10c0f-28cd-4574-b247-e86de7a8087b",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_hattricks:most": {
+      "value": 1,
+      "holder": "Aurelvar Glykanos",
+      "holder_id": "c8f10c0f-28cd-4574-b247-e86de7a8087b",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:player_hattricks:most": {
+      "value": 1,
+      "holder": "Aurelvar Glykanos",
+      "holder_id": "c8f10c0f-28cd-4574-b247-e86de7a8087b",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:player_braces:most": {
+      "value": 2,
+      "holder": "Valentinos Galveiros",
+      "holder_id": "23c97455-06f1-4326-9f92-8a0e95172842",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:player_braces:most": {
+      "value": 1,
+      "holder": "Aleksalhos Brakhalhos",
+      "holder_id": "d901c230-7418-458f-b89a-701d3e75bc34",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_biggest_loss": {
+      "value": 4,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sulhavonos 6-2 Populara Kluba Galvononos (1896/97)",
+      "secondary": "Kluba Sulhavonos"
+    },
+    "team:Kluba Sportika Esalumou:player_braces:most": {
+      "value": 2,
+      "holder": "Barukh Dravanos",
+      "holder_id": "577d4bb4-6660-4cf3-a734-5de1e29bc06a",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_biggest_loss": {
+      "value": 3,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Esalumou 3-0 Mercaria Kluba (1896/97)",
+      "secondary": "Kluba Sportika Esalumou"
+    },
+    "team:Populara Kluba Galvononos:player_fastest_goal": {
+      "value": 3,
+      "holder": "Vicenthos Pethanos",
+      "holder_id": "26ab5ab4-bd80-409e-99b5-9ae65c267dda",
+      "team": "Populara Kluba Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Vicenthos Pethanos 3' — Populara Kluba Galvononos 2-2 Kluba Sportika Esalumou (1896/97)",
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:player_braces:most": {
+      "value": 1,
+      "holder": "Bralhor Vinavar",
+      "holder_id": "cca351ba-e4e9-4082-954e-6ce9b7cfe462",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_biggest_win": {
+      "value": 3,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Soleiu 3-0 Portavar Kluba (1896/97)",
+      "secondary": "Portavar Kluba"
+    },
+    "team:Kluba Maritima Thesias:team_biggest_loss": {
+      "value": 3,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Mercaria Kluba 4-1 Kluba Maritima Thesias (1896/97)",
+      "secondary": "Mercaria Kluba"
+    },
+    "team:Kluba Maritima Thesias:player_hattricks:most": {
+      "value": 1,
+      "holder": "Gideon Caldavar",
+      "holder_id": "e56e9343-4079-44ce-9a3d-f15478a32abf",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:player_braces:most": {
+      "value": 1,
+      "holder": "Benedikvar Marivavar",
+      "holder_id": "aa029948-e465-42e4-8a1b-2152c4153091",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:player_braces:most": {
+      "value": 1,
+      "holder": "Tolvhan Ekonomidvar",
+      "holder_id": "0ca6bd4a-28a1-4590-98e8-db67fbd6c290",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:player_hattricks:most": {
+      "value": 1,
+      "holder": "Tolvhan Ekonomidvar",
+      "holder_id": "0ca6bd4a-28a1-4590-98e8-db67fbd6c290",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_biggest_loss": {
+      "value": 2,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Gedimou 4-2 Kluba Sportika Alentumou (1896/97)",
+      "secondary": "Kluba Sportika Gedimou"
+    },
+    "team:Kluba Sportika Mileiu:team_biggest_win": {
+      "value": 2,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Kluba Sportika Mileiu 2-0 Kluba Maritima Metia (1896/97)",
+      "secondary": "Kluba Maritima Metia"
+    },
+    "team:Kluba Maritima Metia:player_braces:most": {
+      "value": 1,
+      "holder": "Filipalhos Ferraavar",
+      "holder_id": "6ef82203-c3ee-42d5-9016-54d5c28825b2",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_biggest_win": {
+      "value": 2,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "Portavar Kluba 0-2 Kluba Maritima Metia (1896/97)",
+      "secondary": "Portavar Kluba"
+    },
+    "team:Kluba Sportika Galvononos:player_hattricks:most": {
+      "value": 1,
+      "holder": "Karmelos Vitavar",
+      "holder_id": "6347bf75-a2f9-499e-8b57-4920ba62b5eb",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:player_hattricks:most": {
+      "value": 1,
+      "holder": "Pelhvar Campavar",
+      "holder_id": "7e7d7390-26b4-4c97-a974-0e13f3cba506",
+      "team": null,
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_consecutive_titles": {
+      "value": 1,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "1 consecutive titles",
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_max_point_gap_runner_up": {
+      "value": 7,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "7 pts clear (1896/97)",
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_most_points": {
+      "value": 35,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_most_points": {
+      "value": 35,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_least_points": {
+      "value": 35,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_least_points": {
+      "value": 12,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_most_wins": {
+      "value": 16,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_most_wins": {
+      "value": 16,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_least_wins": {
+      "value": 16,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_least_wins": {
+      "value": 4,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_most_draws": {
+      "value": 3,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_most_draws": {
+      "value": 7,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_least_draws": {
+      "value": 3,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_least_draws": {
+      "value": 1,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_most_losses": {
+      "value": 3,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_most_losses": {
+      "value": 14,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_least_losses": {
+      "value": 3,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_least_losses": {
+      "value": 3,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_most_goals_for": {
+      "value": 46,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_most_goals_for": {
+      "value": 46,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_least_goals_for": {
+      "value": 46,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_least_goals_for": {
+      "value": 21,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_most_goals_against": {
+      "value": 22,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_most_goals_against": {
+      "value": 52,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_least_goals_against": {
+      "value": 22,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_least_goals_against": {
+      "value": 22,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_best_goal_difference": {
+      "value": 24,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_best_goal_difference": {
+      "value": 24,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_season_worst_goal_difference": {
+      "value": 24,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_season_worst_goal_difference": {
+      "value": -19,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_best_league_position": {
+      "value": 1,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:team_worst_league_position": {
+      "value": 1,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_most_points": {
+      "value": 28,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_least_points": {
+      "value": 28,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_most_wins": {
+      "value": 13,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_least_wins": {
+      "value": 13,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_most_draws": {
+      "value": 2,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_least_draws": {
+      "value": 2,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_most_losses": {
+      "value": 7,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_least_losses": {
+      "value": 7,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_most_goals_for": {
+      "value": 44,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_least_goals_for": {
+      "value": 44,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_most_goals_against": {
+      "value": 29,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_least_goals_against": {
+      "value": 29,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_best_goal_difference": {
+      "value": 15,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_season_worst_goal_difference": {
+      "value": 15,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_best_league_position": {
+      "value": 2,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:team_worst_league_position": {
+      "value": 2,
+      "holder": "Kluba Maritima Thesias",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_most_points": {
+      "value": 28,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_least_points": {
+      "value": 28,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_most_wins": {
+      "value": 12,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_least_wins": {
+      "value": 12,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_most_draws": {
+      "value": 4,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_least_draws": {
+      "value": 4,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_most_losses": {
+      "value": 6,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_least_losses": {
+      "value": 6,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_most_goals_for": {
+      "value": 45,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_least_goals_for": {
+      "value": 45,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_most_goals_against": {
+      "value": 36,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_least_goals_against": {
+      "value": 36,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_best_goal_difference": {
+      "value": 9,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_season_worst_goal_difference": {
+      "value": 9,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_best_league_position": {
+      "value": 3,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:team_worst_league_position": {
+      "value": 3,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_most_points": {
+      "value": 26,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_least_points": {
+      "value": 26,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_most_wins": {
+      "value": 10,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_least_wins": {
+      "value": 10,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_most_draws": {
+      "value": 6,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_least_draws": {
+      "value": 6,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_most_losses": {
+      "value": 6,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_least_losses": {
+      "value": 6,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_most_goals_for": {
+      "value": 43,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_least_goals_for": {
+      "value": 43,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_most_goals_against": {
+      "value": 33,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_least_goals_against": {
+      "value": 33,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_best_goal_difference": {
+      "value": 10,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_season_worst_goal_difference": {
+      "value": 10,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_best_league_position": {
+      "value": 4,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:team_worst_league_position": {
+      "value": 4,
+      "holder": "Kluba Sportika Alentumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_most_points": {
+      "value": 24,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_least_points": {
+      "value": 24,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_most_wins": {
+      "value": 10,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_least_wins": {
+      "value": 10,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_most_draws": {
+      "value": 4,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_least_draws": {
+      "value": 4,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_most_losses": {
+      "value": 8,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_least_losses": {
+      "value": 8,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_most_goals_for": {
+      "value": 33,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_least_goals_for": {
+      "value": 33,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_most_goals_against": {
+      "value": 35,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_least_goals_against": {
+      "value": 35,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_best_goal_difference": {
+      "value": -2,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_season_worst_goal_difference": {
+      "value": -2,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_best_league_position": {
+      "value": 5,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:team_worst_league_position": {
+      "value": 5,
+      "holder": "Kluba Sportika Gedimou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_most_points": {
+      "value": 23,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_least_points": {
+      "value": 23,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_most_wins": {
+      "value": 9,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_least_wins": {
+      "value": 9,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_most_draws": {
+      "value": 5,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_least_draws": {
+      "value": 5,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_most_losses": {
+      "value": 8,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_least_losses": {
+      "value": 8,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_most_goals_for": {
+      "value": 39,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_least_goals_for": {
+      "value": 39,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_most_goals_against": {
+      "value": 32,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_least_goals_against": {
+      "value": 32,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_best_goal_difference": {
+      "value": 7,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_season_worst_goal_difference": {
+      "value": 7,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_best_league_position": {
+      "value": 6,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:team_worst_league_position": {
+      "value": 6,
+      "holder": "Kluba Sportika Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_most_points": {
+      "value": 22,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_least_points": {
+      "value": 22,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_most_wins": {
+      "value": 10,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_least_wins": {
+      "value": 10,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_most_draws": {
+      "value": 2,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_least_draws": {
+      "value": 2,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_most_losses": {
+      "value": 10,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_least_losses": {
+      "value": 10,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_most_goals_for": {
+      "value": 33,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_least_goals_for": {
+      "value": 33,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_most_goals_against": {
+      "value": 37,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_least_goals_against": {
+      "value": 37,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_best_goal_difference": {
+      "value": -4,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_season_worst_goal_difference": {
+      "value": -4,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_best_league_position": {
+      "value": 7,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:team_worst_league_position": {
+      "value": 7,
+      "holder": "Kluba Sulhavonos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_most_points": {
+      "value": 19,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_least_points": {
+      "value": 19,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_most_wins": {
+      "value": 6,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_least_wins": {
+      "value": 6,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_most_draws": {
+      "value": 7,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_least_draws": {
+      "value": 7,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_most_losses": {
+      "value": 9,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_least_losses": {
+      "value": 9,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_most_goals_for": {
+      "value": 38,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_least_goals_for": {
+      "value": 38,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_most_goals_against": {
+      "value": 40,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_least_goals_against": {
+      "value": 40,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_best_goal_difference": {
+      "value": -2,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_season_worst_goal_difference": {
+      "value": -2,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_best_league_position": {
+      "value": 8,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:team_worst_league_position": {
+      "value": 8,
+      "holder": "Kluba Sportika Soleiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_most_points": {
+      "value": 17,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_least_points": {
+      "value": 17,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_most_wins": {
+      "value": 8,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_least_wins": {
+      "value": 8,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_most_draws": {
+      "value": 1,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_least_draws": {
+      "value": 1,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_most_losses": {
+      "value": 13,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_least_losses": {
+      "value": 13,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_most_goals_for": {
+      "value": 28,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_least_goals_for": {
+      "value": 28,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_most_goals_against": {
+      "value": 43,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_least_goals_against": {
+      "value": 43,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_best_goal_difference": {
+      "value": -15,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_season_worst_goal_difference": {
+      "value": -15,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_best_league_position": {
+      "value": 9,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:team_worst_league_position": {
+      "value": 9,
+      "holder": "Portavar Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_most_points": {
+      "value": 16,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_least_points": {
+      "value": 16,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_most_wins": {
+      "value": 5,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_least_wins": {
+      "value": 5,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_most_draws": {
+      "value": 6,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_least_draws": {
+      "value": 6,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_most_losses": {
+      "value": 11,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_least_losses": {
+      "value": 11,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_most_goals_for": {
+      "value": 26,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_least_goals_for": {
+      "value": 26,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_most_goals_against": {
+      "value": 31,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_least_goals_against": {
+      "value": 31,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_best_goal_difference": {
+      "value": -5,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_season_worst_goal_difference": {
+      "value": -5,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_best_league_position": {
+      "value": 10,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:team_worst_league_position": {
+      "value": 10,
+      "holder": "Kluba Sportika Esalumou",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_most_points": {
+      "value": 14,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_least_points": {
+      "value": 14,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_most_wins": {
+      "value": 5,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_least_wins": {
+      "value": 5,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_most_draws": {
+      "value": 4,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_least_draws": {
+      "value": 4,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_most_losses": {
+      "value": 13,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_least_losses": {
+      "value": 13,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_most_goals_for": {
+      "value": 21,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_least_goals_for": {
+      "value": 21,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_most_goals_against": {
+      "value": 40,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_least_goals_against": {
+      "value": 40,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_best_goal_difference": {
+      "value": -19,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_season_worst_goal_difference": {
+      "value": -19,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_best_league_position": {
+      "value": 11,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:team_worst_league_position": {
+      "value": 11,
+      "holder": "Kluba Maritima Metia",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_most_points": {
+      "value": 12,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_least_points": {
+      "value": 12,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_most_wins": {
+      "value": 4,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_least_wins": {
+      "value": 4,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_most_draws": {
+      "value": 4,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_least_draws": {
+      "value": 4,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_most_losses": {
+      "value": 14,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_least_losses": {
+      "value": 14,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_most_goals_for": {
+      "value": 34,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_least_goals_for": {
+      "value": 34,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_most_goals_against": {
+      "value": 52,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_least_goals_against": {
+      "value": 52,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_best_goal_difference": {
+      "value": -18,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_season_worst_goal_difference": {
+      "value": -18,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_best_league_position": {
+      "value": 12,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:team_worst_league_position": {
+      "value": 12,
+      "holder": "Kluba Sportika Mileiu",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_most_home_goals_season": {
+      "value": 27,
+      "holder": "Mercaria Kluba",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:team_most_away_goals_season": {
+      "value": 24,
+      "holder": "Populara Kluba Galvononos",
+      "holder_id": null,
+      "team": null,
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "all:player_most_goals_season": {
+      "value": 11,
+      "holder": "Gideon Caldavar",
+      "holder_id": "e56e9343-4079-44ce-9a3d-f15478a32abf",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "all:player_most_assists_season": {
+      "value": 8,
+      "holder": "Nikolvar Brakhos",
+      "holder_id": "50c29ccd-0cf2-4a3e-9d10-eee9b291c795",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "all:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Gaietahos Fontavar",
+      "holder_id": "a82f7b60-05fd-4421-8bdb-90559c971428",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "all:gk_most_clean_sheets_season": {
+      "value": 7,
+      "holder": "Barukh Boteravar",
+      "holder_id": "e6e3be1a-11fc-4a93-a269-ad5799b00d6a",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_most_goals_season": {
+      "value": 11,
+      "holder": "Gideon Caldavar",
+      "holder_id": "e56e9343-4079-44ce-9a3d-f15478a32abf",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_most_assists_season": {
+      "value": 8,
+      "holder": "Nikolvar Brakhos",
+      "holder_id": "50c29ccd-0cf2-4a3e-9d10-eee9b291c795",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Gaietahos Fontavar",
+      "holder_id": "a82f7b60-05fd-4421-8bdb-90559c971428",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:gk_most_clean_sheets_season": {
+      "value": 7,
+      "holder": "Barukh Boteravar",
+      "holder_id": "e6e3be1a-11fc-4a93-a269-ad5799b00d6a",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:player_most_goals_season": {
+      "value": 8,
+      "holder": "Augustalhos Pintavar",
+      "holder_id": "92950310-f754-473a-aab7-7bf4c3270ebf",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:player_most_assists_season": {
+      "value": 6,
+      "holder": "Shlomo Pedraavar",
+      "holder_id": "7b0be3ee-c1c5-4b59-8d90-8ebbd57413b7",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Gaietahos Fontavar",
+      "holder_id": "a82f7b60-05fd-4421-8bdb-90559c971428",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:gk_most_clean_sheets_season": {
+      "value": 6,
+      "holder": "Gaietahos Fontavar",
+      "holder_id": "a82f7b60-05fd-4421-8bdb-90559c971428",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "all:player_most_goals_career": {
+      "value": 21,
+      "holder": "Aristalhos Goruveira",
+      "holder_id": "4e75641b-f5d9-40ba-bce7-b89a43ebae4d",
+      "team": "Mercaria Kluba",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "all:player_most_assists_career": {
+      "value": 13,
+      "holder": "Laurentinhos Veldheiros",
+      "holder_id": "9087f429-80be-463b-bfce-b97e9176c24f",
+      "team": "Kluba Sportika Galvononos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "all:player_most_appearances_career": {
+      "value": 44,
+      "holder": "Gaietahos Fontavar",
+      "holder_id": "a82f7b60-05fd-4421-8bdb-90559c971428",
+      "team": "Kluba Sulhavonos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_most_goals_career": {
+      "value": 21,
+      "holder": "Aristalhos Goruveira",
+      "holder_id": "4e75641b-f5d9-40ba-bce7-b89a43ebae4d",
+      "team": "Mercaria Kluba",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_most_assists_career": {
+      "value": 13,
+      "holder": "Laurentinhos Veldheiros",
+      "holder_id": "9087f429-80be-463b-bfce-b97e9176c24f",
+      "team": "Kluba Sportika Galvononos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:player_most_appearances_career": {
+      "value": 44,
+      "holder": "Gaietahos Fontavar",
+      "holder_id": "a82f7b60-05fd-4421-8bdb-90559c971428",
+      "team": "Kluba Sulhavonos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "all:gk_most_clean_sheets_career": {
+      "value": 13,
+      "holder": "Barukh Boteravar",
+      "holder_id": "e6e3be1a-11fc-4a93-a269-ad5799b00d6a",
+      "team": "Mercaria Kluba",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "comp:Prote Kategorias:gk_most_clean_sheets_career": {
+      "value": 13,
+      "holder": "Barukh Boteravar",
+      "holder_id": "e6e3be1a-11fc-4a93-a269-ad5799b00d6a",
+      "team": "Mercaria Kluba",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:player_club_goals": {
+      "value": 14,
+      "holder": "Christofalhos Panagiotopalhos",
+      "holder_id": "9238c6e4-9776-4ab2-a3c2-e7ee6e2d916d",
+      "team": "Kluba Sulhavonos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:player_club_assists": {
+      "value": 10,
+      "holder": "Aleksalhos Brakhalhos",
+      "holder_id": "d901c230-7418-458f-b89a-701d3e75bc34",
+      "team": "Kluba Sulhavonos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:player_club_appearances": {
+      "value": 44,
+      "holder": "Gaietahos Fontavar",
+      "holder_id": "a82f7b60-05fd-4421-8bdb-90559c971428",
+      "team": "Kluba Sulhavonos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:player_most_goals_season": {
+      "value": 11,
+      "holder": "Gideon Caldavar",
+      "holder_id": "e56e9343-4079-44ce-9a3d-f15478a32abf",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:player_most_assists_season": {
+      "value": 8,
+      "holder": "Nikolvar Brakhos",
+      "holder_id": "50c29ccd-0cf2-4a3e-9d10-eee9b291c795",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Celestinos Stratigavar",
+      "holder_id": "67db11e9-5aaa-4369-8c22-2d049869110f",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:gk_most_clean_sheets_season": {
+      "value": 3,
+      "holder": "Lucivar Pintavar",
+      "holder_id": "1e5ec9d1-e971-4087-ae54-253384c2fcc7",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:player_club_goals": {
+      "value": 14,
+      "holder": "Albertohos Galveiros",
+      "holder_id": "44be0de2-6edf-4743-8887-4869db4d1469",
+      "team": "Kluba Maritima Thesias",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:player_club_assists": {
+      "value": 10,
+      "holder": "Nikolvar Brakhos",
+      "holder_id": "50c29ccd-0cf2-4a3e-9d10-eee9b291c795",
+      "team": "Kluba Maritima Thesias",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:player_club_appearances": {
+      "value": 44,
+      "holder": "Celestinos Stratigavar",
+      "holder_id": "67db11e9-5aaa-4369-8c22-2d049869110f",
+      "team": "Kluba Maritima Thesias",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:player_most_goals_season": {
+      "value": 10,
+      "holder": "Aristalhos Goruveira",
+      "holder_id": "4e75641b-f5d9-40ba-bce7-b89a43ebae4d",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:player_most_assists_season": {
+      "value": 5,
+      "holder": "Valentinos Kalveira",
+      "holder_id": "c00f29e9-0256-40ed-8ee2-871d60ff34ed",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Pelhvar Tornheiros",
+      "holder_id": "cdf954cc-aaa3-41b0-9011-3c0b68f06404",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:gk_most_clean_sheets_season": {
+      "value": 7,
+      "holder": "Barukh Boteravar",
+      "holder_id": "e6e3be1a-11fc-4a93-a269-ad5799b00d6a",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:player_club_goals": {
+      "value": 21,
+      "holder": "Aristalhos Goruveira",
+      "holder_id": "4e75641b-f5d9-40ba-bce7-b89a43ebae4d",
+      "team": "Mercaria Kluba",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:player_club_assists": {
+      "value": 11,
+      "holder": "Pelhvar Talvōdēs",
+      "holder_id": "950ba921-ea62-4a64-8cdc-e220b35ba369",
+      "team": "Mercaria Kluba",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Mercaria Kluba:player_club_appearances": {
+      "value": 44,
+      "holder": "Pelhvar Talvōdēs",
+      "holder_id": "950ba921-ea62-4a64-8cdc-e220b35ba369",
+      "team": "Mercaria Kluba",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:player_most_goals_season": {
+      "value": 7,
+      "holder": "Nikolvar Toranos",
+      "holder_id": "61243394-0657-4ff5-8ced-35a09298489d",
+      "team": "Portavar Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:player_most_assists_season": {
+      "value": 3,
+      "holder": "Grigoralhos Juravar",
+      "holder_id": "f16986e9-cad4-456a-9873-3f48cd138d96",
+      "team": "Portavar Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Anastasvar Glykanos",
+      "holder_id": "f3ac50e3-9a07-43b8-abf6-88e8df8a5808",
+      "team": "Portavar Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:gk_most_clean_sheets_season": {
+      "value": 1,
+      "holder": "Victorvar Lacavar",
+      "holder_id": "12d8f075-d65f-4c31-b337-b02967179f1b",
+      "team": "Portavar Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:player_club_goals": {
+      "value": 16,
+      "holder": "Nikolvar Toranos",
+      "holder_id": "61243394-0657-4ff5-8ced-35a09298489d",
+      "team": "Portavar Kluba",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:player_club_assists": {
+      "value": 8,
+      "holder": "Sivanos Emhalhos",
+      "holder_id": "ec1739af-540b-4173-9267-d5d0879a166e",
+      "team": "Portavar Kluba",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Portavar Kluba:player_club_appearances": {
+      "value": 44,
+      "holder": "Anastasvar Glykanos",
+      "holder_id": "f3ac50e3-9a07-43b8-abf6-88e8df8a5808",
+      "team": "Portavar Kluba",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:player_most_goals_season": {
+      "value": 8,
+      "holder": "Barukh Dravanos",
+      "holder_id": "577d4bb4-6660-4cf3-a734-5de1e29bc06a",
+      "team": "Kluba Sportika Esalumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:player_most_assists_season": {
+      "value": 3,
+      "holder": "Anselmohos Sulheiros",
+      "holder_id": "5da6036d-17bf-4af8-8e9a-101606f6bdc7",
+      "team": "Kluba Sportika Esalumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Protopalhos Stratigavar",
+      "holder_id": "69311920-6e7b-4521-a2ea-d28821a340d0",
+      "team": "Kluba Sportika Esalumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:gk_most_clean_sheets_season": {
+      "value": 5,
+      "holder": "Protopalhos Stratigavar",
+      "holder_id": "69311920-6e7b-4521-a2ea-d28821a340d0",
+      "team": "Kluba Sportika Esalumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:player_club_goals": {
+      "value": 9,
+      "holder": "Barukh Dravanos",
+      "holder_id": "577d4bb4-6660-4cf3-a734-5de1e29bc06a",
+      "team": "Kluba Sportika Esalumou",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:player_club_assists": {
+      "value": 4,
+      "holder": "Emvhon Ioannidvar",
+      "holder_id": "75ea047c-e7f4-4135-bcef-e012820d1776",
+      "team": "Kluba Sportika Esalumou",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:player_club_appearances": {
+      "value": 44,
+      "holder": "Protopalhos Stratigavar",
+      "holder_id": "69311920-6e7b-4521-a2ea-d28821a340d0",
+      "team": "Kluba Sportika Esalumou",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:player_most_goals_season": {
+      "value": 8,
+      "holder": "Valentinos Galveiros",
+      "holder_id": "23c97455-06f1-4326-9f92-8a0e95172842",
+      "team": "Kluba Sportika Mileiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:player_most_assists_season": {
+      "value": 7,
+      "holder": "Valentinos Galveiros",
+      "holder_id": "23c97455-06f1-4326-9f92-8a0e95172842",
+      "team": "Kluba Sportika Mileiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Benedikvar Maragavar",
+      "holder_id": "88087200-18c7-4f44-ad03-b4883f51de87",
+      "team": "Kluba Sportika Mileiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:gk_most_clean_sheets_season": {
+      "value": 2,
+      "holder": "Renzohos Pethikos",
+      "holder_id": "e8371683-90bf-49f6-9335-4ee6952e13de",
+      "team": "Kluba Sportika Mileiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:player_club_goals": {
+      "value": 13,
+      "holder": "Perelhos Toranos",
+      "holder_id": "27fd458d-d93c-4378-8154-6ff5d8a1906e",
+      "team": "Kluba Sportika Mileiu",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:player_club_assists": {
+      "value": 9,
+      "holder": "Valentinos Galveiros",
+      "holder_id": "23c97455-06f1-4326-9f92-8a0e95172842",
+      "team": "Kluba Sportika Mileiu",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:player_club_appearances": {
+      "value": 44,
+      "holder": "Adrianos Lucivar",
+      "holder_id": "b34331e0-ae3b-48e2-83f6-f0d4c19f8758",
+      "team": "Kluba Sportika Mileiu",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:player_most_goals_season": {
+      "value": 10,
+      "holder": "Karmelos Vitavar",
+      "holder_id": "6347bf75-a2f9-499e-8b57-4920ba62b5eb",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:player_most_assists_season": {
+      "value": 7,
+      "holder": "Ramhona Fustaveira",
+      "holder_id": "5573cb7b-94d7-4a88-bf58-ee6ba0c57437",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Ramhona Fustaveira",
+      "holder_id": "5573cb7b-94d7-4a88-bf58-ee6ba0c57437",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:gk_most_clean_sheets_season": {
+      "value": 2,
+      "holder": "Perelhos Emvhalhos",
+      "holder_id": "7dbbc25e-dd56-462b-a65b-162826729ac2",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:player_club_goals": {
+      "value": 13,
+      "holder": "Veldhir Eforavar",
+      "holder_id": "5964569d-b4db-439c-a7f9-66261acc379a",
+      "team": "Kluba Sportika Galvononos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:player_club_assists": {
+      "value": 13,
+      "holder": "Laurentinhos Veldheiros",
+      "holder_id": "9087f429-80be-463b-bfce-b97e9176c24f",
+      "team": "Kluba Sportika Galvononos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:player_club_appearances": {
+      "value": 44,
+      "holder": "Ramhona Fustaveira",
+      "holder_id": "5573cb7b-94d7-4a88-bf58-ee6ba0c57437",
+      "team": "Kluba Sportika Galvononos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:player_most_goals_season": {
+      "value": 11,
+      "holder": "Shaul Brakeiros",
+      "holder_id": "051488d1-949b-4a64-bc11-b8a3da65484b",
+      "team": "Populara Kluba Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:player_most_assists_season": {
+      "value": 8,
+      "holder": "Aurelvar Glykanos",
+      "holder_id": "c8f10c0f-28cd-4574-b247-e86de7a8087b",
+      "team": "Populara Kluba Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Brunavar Drosvhalhos",
+      "holder_id": "a3adf112-5c2f-46d6-90e9-b91d5505db17",
+      "team": "Populara Kluba Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:gk_most_clean_sheets_season": {
+      "value": 2,
+      "holder": "Klementos Synedriavar",
+      "holder_id": "e5d66af5-edbf-4957-932c-05b770bb4714",
+      "team": "Populara Kluba Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:player_club_goals": {
+      "value": 18,
+      "holder": "Shaul Brakeiros",
+      "holder_id": "051488d1-949b-4a64-bc11-b8a3da65484b",
+      "team": "Populara Kluba Galvononos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:player_club_assists": {
+      "value": 9,
+      "holder": "Aurelvar Glykanos",
+      "holder_id": "c8f10c0f-28cd-4574-b247-e86de7a8087b",
+      "team": "Populara Kluba Galvononos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:player_club_appearances": {
+      "value": 44,
+      "holder": "Brunavar Drosvhalhos",
+      "holder_id": "a3adf112-5c2f-46d6-90e9-b91d5505db17",
+      "team": "Populara Kluba Galvononos",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:player_most_goals_season": {
+      "value": 5,
+      "holder": "Tolvhan Ekonomidvar",
+      "holder_id": "0ca6bd4a-28a1-4590-98e8-db67fbd6c290",
+      "team": "Kluba Sportika Gedimou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:player_most_assists_season": {
+      "value": 7,
+      "holder": "Gideon Megistos",
+      "holder_id": "8f8f1153-fde2-49fb-8a1e-35792518b572",
+      "team": "Kluba Sportika Gedimou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Filipalhos Jurikavar",
+      "holder_id": "8f3134ff-f417-446d-a7fe-4450840815b7",
+      "team": "Kluba Sportika Gedimou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:gk_most_clean_sheets_season": {
+      "value": 4,
+      "holder": "Filipalhos Jurikavar",
+      "holder_id": "8f3134ff-f417-446d-a7fe-4450840815b7",
+      "team": "Kluba Sportika Gedimou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:player_club_goals": {
+      "value": 10,
+      "holder": "Tolvhan Ekonomidvar",
+      "holder_id": "0ca6bd4a-28a1-4590-98e8-db67fbd6c290",
+      "team": "Kluba Sportika Gedimou",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:player_club_assists": {
+      "value": 9,
+      "holder": "Sulhvar Tameiavar",
+      "holder_id": "bd15ff71-c863-4d60-9627-398ff6c27811",
+      "team": "Kluba Sportika Gedimou",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:player_club_appearances": {
+      "value": 44,
+      "holder": "Filipalhos Jurikavar",
+      "holder_id": "8f3134ff-f417-446d-a7fe-4450840815b7",
+      "team": "Kluba Sportika Gedimou",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:player_most_goals_season": {
+      "value": 9,
+      "holder": "Augustalhos Veldhōdēs",
+      "holder_id": "bbc8fdd1-d4ba-449a-88b8-30689621538f",
+      "team": "Kluba Sportika Soleiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:player_most_assists_season": {
+      "value": 7,
+      "holder": "Pantazalhos Ferraavar",
+      "holder_id": "78f222ed-8861-48f0-9588-8c060a710311",
+      "team": "Kluba Sportika Soleiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Yosef Mikranos",
+      "holder_id": "bb7a6e84-1c7e-48f2-9cb6-0123732f8ca0",
+      "team": "Kluba Sportika Soleiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:gk_most_clean_sheets_season": {
+      "value": 4,
+      "holder": "Yosef Mikranos",
+      "holder_id": "bb7a6e84-1c7e-48f2-9cb6-0123732f8ca0",
+      "team": "Kluba Sportika Soleiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:player_club_goals": {
+      "value": 19,
+      "holder": "Augustalhos Veldhōdēs",
+      "holder_id": "bbc8fdd1-d4ba-449a-88b8-30689621538f",
+      "team": "Kluba Sportika Soleiu",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:player_club_assists": {
+      "value": 9,
+      "holder": "Brakhor Brakeiros",
+      "holder_id": "2d6aa9f4-8dfd-48f1-9493-8b6d0e51e213",
+      "team": "Kluba Sportika Soleiu",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:player_club_appearances": {
+      "value": 44,
+      "holder": "Pantazalhos Ferraavar",
+      "holder_id": "78f222ed-8861-48f0-9588-8c060a710311",
+      "team": "Kluba Sportika Soleiu",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:player_most_goals_season": {
+      "value": 6,
+      "holder": "Filipalhos Ferraavar",
+      "holder_id": "6ef82203-c3ee-42d5-9016-54d5c28825b2",
+      "team": "Kluba Maritima Metia",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:player_most_assists_season": {
+      "value": 3,
+      "holder": "Shlomo Juravar",
+      "holder_id": "dd811d8d-9c9b-40eb-ba98-83b644fbb938",
+      "team": "Kluba Maritima Metia",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Reuven Talvanos",
+      "holder_id": "57bdb2c5-6825-4eed-b2a0-aab2c56c66fb",
+      "team": "Kluba Maritima Metia",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:gk_most_clean_sheets_season": {
+      "value": 2,
+      "holder": "Spyrolhos Brakhos",
+      "holder_id": "575f85ef-67cd-4dfa-b8c6-5654fb39e593",
+      "team": "Kluba Maritima Metia",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:player_club_goals": {
+      "value": 11,
+      "holder": "Shlomo Juravar",
+      "holder_id": "dd811d8d-9c9b-40eb-ba98-83b644fbb938",
+      "team": "Kluba Maritima Metia",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:player_club_assists": {
+      "value": 5,
+      "holder": "Kallistratos Argentavar",
+      "holder_id": "9a6b109c-5d18-4bd8-b7f7-1f0472f28e1b",
+      "team": "Kluba Maritima Metia",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:player_club_appearances": {
+      "value": 44,
+      "holder": "Timotealhos Karageorvos",
+      "holder_id": "baf9af4a-222e-4f49-b711-a8715c260710",
+      "team": "Kluba Maritima Metia",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:player_most_goals_season": {
+      "value": 9,
+      "holder": "Klaudvar Nalhanos",
+      "holder_id": "6f7b667e-b1a9-4efc-ab03-dbd900856e7e",
+      "team": "Kluba Sportika Alentumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:player_most_assists_season": {
+      "value": 7,
+      "holder": "Ponselhos Petroikos",
+      "holder_id": "85e53482-7d33-4221-8f0d-22eb480d5fa4",
+      "team": "Kluba Sportika Alentumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:player_most_appearances_season": {
+      "value": 22,
+      "holder": "Haim Sulhikos",
+      "holder_id": "8b34b265-b0ae-4e97-bae5-c622fbf71c29",
+      "team": "Kluba Sportika Alentumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:gk_most_clean_sheets_season": {
+      "value": 3,
+      "holder": "Haim Sulhikos",
+      "holder_id": "8b34b265-b0ae-4e97-bae5-c622fbf71c29",
+      "team": "Kluba Sportika Alentumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:player_club_goals": {
+      "value": 20,
+      "holder": "Klaudvar Nalhanos",
+      "holder_id": "6f7b667e-b1a9-4efc-ab03-dbd900856e7e",
+      "team": "Kluba Sportika Alentumou",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:player_club_assists": {
+      "value": 8,
+      "holder": "Ponselhos Petroikos",
+      "holder_id": "85e53482-7d33-4221-8f0d-22eb480d5fa4",
+      "team": "Kluba Sportika Alentumou",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:player_club_appearances": {
+      "value": 44,
+      "holder": "Haim Sulhikos",
+      "holder_id": "8b34b265-b0ae-4e97-bae5-c622fbf71c29",
+      "team": "Kluba Sportika Alentumou",
+      "season": null,
+      "competition": null,
+      "detail": null,
+      "secondary": null
+    },
+    "all:gk_best_unbeaten_start": {
+      "value": 7,
+      "holder": "Haim Sulhikos",
+      "holder_id": "8b34b265-b0ae-4e97-bae5-c622fbf71c29",
+      "team": "Kluba Sportika Alentumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "7 matches from season start",
+      "secondary": null
+    },
+    "comp:Prote Kategorias:gk_best_unbeaten_start": {
+      "value": 7,
+      "holder": "Haim Sulhikos",
+      "holder_id": "8b34b265-b0ae-4e97-bae5-c622fbf71c29",
+      "team": "Kluba Sportika Alentumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "7 matches from season start",
+      "secondary": null
+    },
+    "team:Kluba Sulhavonos:gk_best_unbeaten_start": {
+      "value": 0,
+      "holder": "Gaietahos Fontavar",
+      "holder_id": "a82f7b60-05fd-4421-8bdb-90559c971428",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "0 matches from season start",
+      "secondary": null
+    },
+    "team:Kluba Maritima Thesias:gk_best_unbeaten_start": {
+      "value": 5,
+      "holder": "Lucivar Pintavar",
+      "holder_id": "1e5ec9d1-e971-4087-ae54-253384c2fcc7",
+      "team": "Kluba Maritima Thesias",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "5 matches from season start",
+      "secondary": null
+    },
+    "team:Mercaria Kluba:gk_best_unbeaten_start": {
+      "value": 4,
+      "holder": "Barukh Boteravar",
+      "holder_id": "e6e3be1a-11fc-4a93-a269-ad5799b00d6a",
+      "team": "Mercaria Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "4 matches from season start",
+      "secondary": null
+    },
+    "team:Portavar Kluba:gk_best_unbeaten_start": {
+      "value": 0,
+      "holder": "Victorvar Lacavar",
+      "holder_id": "12d8f075-d65f-4c31-b337-b02967179f1b",
+      "team": "Portavar Kluba",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "0 matches from season start",
+      "secondary": null
+    },
+    "team:Kluba Sportika Esalumou:gk_best_unbeaten_start": {
+      "value": 0,
+      "holder": "Protopalhos Stratigavar",
+      "holder_id": "69311920-6e7b-4521-a2ea-d28821a340d0",
+      "team": "Kluba Sportika Esalumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "0 matches from season start",
+      "secondary": null
+    },
+    "team:Kluba Sportika Mileiu:gk_best_unbeaten_start": {
+      "value": 0,
+      "holder": "Renzohos Pethikos",
+      "holder_id": "e8371683-90bf-49f6-9335-4ee6952e13de",
+      "team": "Kluba Sportika Mileiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "0 matches from season start",
+      "secondary": null
+    },
+    "team:Kluba Sportika Galvononos:gk_best_unbeaten_start": {
+      "value": 2,
+      "holder": "Perelhos Emvhalhos",
+      "holder_id": "7dbbc25e-dd56-462b-a65b-162826729ac2",
+      "team": "Kluba Sportika Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "2 matches from season start",
+      "secondary": null
+    },
+    "team:Populara Kluba Galvononos:gk_best_unbeaten_start": {
+      "value": 4,
+      "holder": "Klementos Synedriavar",
+      "holder_id": "e5d66af5-edbf-4957-932c-05b770bb4714",
+      "team": "Populara Kluba Galvononos",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "4 matches from season start",
+      "secondary": null
+    },
+    "team:Kluba Sportika Gedimou:gk_best_unbeaten_start": {
+      "value": 1,
+      "holder": "Filipalhos Jurikavar",
+      "holder_id": "8f3134ff-f417-446d-a7fe-4450840815b7",
+      "team": "Kluba Sportika Gedimou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "1 matches from season start",
+      "secondary": null
+    },
+    "team:Kluba Sportika Soleiu:gk_best_unbeaten_start": {
+      "value": 2,
+      "holder": "Yosef Mikranos",
+      "holder_id": "bb7a6e84-1c7e-48f2-9cb6-0123732f8ca0",
+      "team": "Kluba Sportika Soleiu",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "2 matches from season start",
+      "secondary": null
+    },
+    "team:Kluba Maritima Metia:gk_best_unbeaten_start": {
+      "value": 0,
+      "holder": "Spyrolhos Brakhos",
+      "holder_id": "575f85ef-67cd-4dfa-b8c6-5654fb39e593",
+      "team": "Kluba Maritima Metia",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "0 matches from season start",
+      "secondary": null
+    },
+    "team:Kluba Sportika Alentumou:gk_best_unbeaten_start": {
+      "value": 7,
+      "holder": "Haim Sulhikos",
+      "holder_id": "8b34b265-b0ae-4e97-bae5-c622fbf71c29",
+      "team": "Kluba Sportika Alentumou",
+      "season": "1896/97",
+      "competition": "Prote Kategorias",
+      "detail": "7 matches from season start",
+      "secondary": null
+    }
+  },
+  "counters": {
+    "all:player_braces": {
+      "6f7b667e-b1a9-4efc-ab03-dbd900856e7e": 2,
+      "3950f282-3c77-473b-8dc6-bd8078944e6b": 1,
+      "1a2b2626-b5ef-43a1-9134-4a59bb1e9033": 2,
+      "4e75641b-f5d9-40ba-bce7-b89a43ebae4d": 1,
+      "c8f10c0f-28cd-4574-b247-e86de7a8087b": 1,
+      "06092675-1ac4-4daf-b797-c03acda38c55": 1,
+      "d901c230-7418-458f-b89a-701d3e75bc34": 1,
+      "23c97455-06f1-4326-9f92-8a0e95172842": 2,
+      "90be5228-8555-49a9-8560-3fd12c8501d1": 1,
+      "cca351ba-e4e9-4082-954e-6ce9b7cfe462": 1,
+      "c00f29e9-0256-40ed-8ee2-871d60ff34ed": 1,
+      "70e0818e-1173-44bf-89f8-d238a9993d82": 1,
+      "0e4f57e4-de5a-478d-8c3f-d48cd6eed40e": 1,
+      "e56e9343-4079-44ce-9a3d-f15478a32abf": 1,
+      "aa029948-e465-42e4-8a1b-2152c4153091": 1,
+      "44be0de2-6edf-4743-8887-4869db4d1469": 1,
+      "0ca6bd4a-28a1-4590-98e8-db67fbd6c290": 1,
+      "577d4bb4-6660-4cf3-a734-5de1e29bc06a": 2,
+      "1fa51bf5-0a47-4df5-a515-c8660c046e28": 1,
+      "6ef82203-c3ee-42d5-9016-54d5c28825b2": 1,
+      "9a67142b-c205-48f5-b230-0f3581542bfd": 3,
+      "58473b1e-581a-4849-872e-1341994c1c43": 2,
+      "6347bf75-a2f9-499e-8b57-4920ba62b5eb": 1,
+      "f4c0e581-7700-487d-938d-6b7d309dda02": 1,
+      "92950310-f754-473a-aab7-7bf4c3270ebf": 1,
+      "d90d922c-e648-4a86-a72e-73291b683af0": 1,
+      "9087f429-80be-463b-bfce-b97e9176c24f": 1,
+      "7bc92d4c-4207-4b03-9ed4-3ee56614ed30": 1,
+      "7e7d7390-26b4-4c97-a974-0e13f3cba506": 1,
+      "27fd458d-d93c-4378-8154-6ff5d8a1906e": 1,
+      "051488d1-949b-4a64-bc11-b8a3da65484b": 2,
+      "2c734d76-0638-4859-9942-7c6656fe4c23": 1,
+      "9efbe941-8bfc-4854-a91a-3dc7cad2429d": 1,
+      "f9502382-98b3-4a31-8817-fce5887c2824": 1,
+      "908ede2e-d9b2-4805-b85a-361a02ab2a5b": 1,
+      "dd811d8d-9c9b-40eb-ba98-83b644fbb938": 1,
+      "ac073388-1fbc-472a-a61a-c0e8ea7b5bd2": 1
+    },
+    "comp:Prote Kategorias:player_braces": {
+      "6f7b667e-b1a9-4efc-ab03-dbd900856e7e": 2,
+      "3950f282-3c77-473b-8dc6-bd8078944e6b": 1,
+      "1a2b2626-b5ef-43a1-9134-4a59bb1e9033": 2,
+      "4e75641b-f5d9-40ba-bce7-b89a43ebae4d": 1,
+      "c8f10c0f-28cd-4574-b247-e86de7a8087b": 1,
+      "06092675-1ac4-4daf-b797-c03acda38c55": 1,
+      "d901c230-7418-458f-b89a-701d3e75bc34": 1,
+      "23c97455-06f1-4326-9f92-8a0e95172842": 2,
+      "90be5228-8555-49a9-8560-3fd12c8501d1": 1,
+      "cca351ba-e4e9-4082-954e-6ce9b7cfe462": 1,
+      "c00f29e9-0256-40ed-8ee2-871d60ff34ed": 1,
+      "70e0818e-1173-44bf-89f8-d238a9993d82": 1,
+      "0e4f57e4-de5a-478d-8c3f-d48cd6eed40e": 1,
+      "e56e9343-4079-44ce-9a3d-f15478a32abf": 1,
+      "aa029948-e465-42e4-8a1b-2152c4153091": 1,
+      "44be0de2-6edf-4743-8887-4869db4d1469": 1,
+      "0ca6bd4a-28a1-4590-98e8-db67fbd6c290": 1,
+      "577d4bb4-6660-4cf3-a734-5de1e29bc06a": 2,
+      "1fa51bf5-0a47-4df5-a515-c8660c046e28": 1,
+      "6ef82203-c3ee-42d5-9016-54d5c28825b2": 1,
+      "9a67142b-c205-48f5-b230-0f3581542bfd": 3,
+      "58473b1e-581a-4849-872e-1341994c1c43": 2,
+      "6347bf75-a2f9-499e-8b57-4920ba62b5eb": 1,
+      "f4c0e581-7700-487d-938d-6b7d309dda02": 1,
+      "92950310-f754-473a-aab7-7bf4c3270ebf": 1,
+      "d90d922c-e648-4a86-a72e-73291b683af0": 1,
+      "9087f429-80be-463b-bfce-b97e9176c24f": 1,
+      "7bc92d4c-4207-4b03-9ed4-3ee56614ed30": 1,
+      "7e7d7390-26b4-4c97-a974-0e13f3cba506": 1,
+      "27fd458d-d93c-4378-8154-6ff5d8a1906e": 1,
+      "051488d1-949b-4a64-bc11-b8a3da65484b": 2,
+      "2c734d76-0638-4859-9942-7c6656fe4c23": 1,
+      "9efbe941-8bfc-4854-a91a-3dc7cad2429d": 1,
+      "f9502382-98b3-4a31-8817-fce5887c2824": 1,
+      "908ede2e-d9b2-4805-b85a-361a02ab2a5b": 1,
+      "dd811d8d-9c9b-40eb-ba98-83b644fbb938": 1,
+      "ac073388-1fbc-472a-a61a-c0e8ea7b5bd2": 1
+    },
+    "team:Kluba Sportika Alentumou:player_braces": {
+      "6f7b667e-b1a9-4efc-ab03-dbd900856e7e": 2
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Sulhavonos": {
+      "Kluba Sulhavonos": 19
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Sportika Alentumou": {
+      "Kluba Sportika Alentumou": 20
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:a82f7b60-05fd-4421-8bdb-90559c971428": {
+      "a82f7b60-05fd-4421-8bdb-90559c971428": 0
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:8b34b265-b0ae-4e97-bae5-c622fbf71c29": {
+      "8b34b265-b0ae-4e97-bae5-c622fbf71c29": 0
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Maritima Thesias": {
+      "Kluba Maritima Thesias": 26
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Maritima Metia": {
+      "Kluba Maritima Metia": 12
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:1e5ec9d1-e971-4087-ae54-253384c2fcc7": {
+      "1e5ec9d1-e971-4087-ae54-253384c2fcc7": 1
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:d0b9a662-d15d-488f-8ead-6f48d4b210ea": {
+      "d0b9a662-d15d-488f-8ead-6f48d4b210ea": 0
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Mercaria Kluba": {
+      "Mercaria Kluba": 27
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Sportika Soleiu": {
+      "Kluba Sportika Soleiu": 15
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:e6e3be1a-11fc-4a93-a269-ad5799b00d6a": {
+      "e6e3be1a-11fc-4a93-a269-ad5799b00d6a": 0
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:bb7a6e84-1c7e-48f2-9cb6-0123732f8ca0": {
+      "bb7a6e84-1c7e-48f2-9cb6-0123732f8ca0": 1
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Portavar Kluba": {
+      "Portavar Kluba": 16
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Sportika Gedimou": {
+      "Kluba Sportika Gedimou": 21
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:12d8f075-d65f-4c31-b337-b02967179f1b": {
+      "12d8f075-d65f-4c31-b337-b02967179f1b": 0
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:8f3134ff-f417-446d-a7fe-4450840815b7": {
+      "8f3134ff-f417-446d-a7fe-4450840815b7": 0
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Sportika Esalumou": {
+      "Kluba Sportika Esalumou": 16
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Populara Kluba Galvononos": {
+      "Populara Kluba Galvononos": 24
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:69311920-6e7b-4521-a2ea-d28821a340d0": {
+      "69311920-6e7b-4521-a2ea-d28821a340d0": 0
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:da26a004-5936-4c00-9f23-895ceca21e1e": {
+      "da26a004-5936-4c00-9f23-895ceca21e1e": 0
+    },
+    "team:Kluba Sportika Galvononos:player_braces": {
+      "3950f282-3c77-473b-8dc6-bd8078944e6b": 1,
+      "1fa51bf5-0a47-4df5-a515-c8660c046e28": 1,
+      "6347bf75-a2f9-499e-8b57-4920ba62b5eb": 1,
+      "9087f429-80be-463b-bfce-b97e9176c24f": 1
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Sportika Mileiu": {
+      "Kluba Sportika Mileiu": 16
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Sportika Galvononos": {
+      "Kluba Sportika Galvononos": 16
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:e8371683-90bf-49f6-9335-4ee6952e13de": {
+      "e8371683-90bf-49f6-9335-4ee6952e13de": 0
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:920473fb-a6ec-4dc8-ba89-159db9ae1ba2": {
+      "920473fb-a6ec-4dc8-ba89-159db9ae1ba2": 0
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Sportika Alentumou": {
+      "Kluba Sportika Alentumou": 23
+    },
+    "team:Kluba Maritima Thesias:player_braces": {
+      "1a2b2626-b5ef-43a1-9134-4a59bb1e9033": 2,
+      "e56e9343-4079-44ce-9a3d-f15478a32abf": 1,
+      "44be0de2-6edf-4743-8887-4869db4d1469": 1,
+      "58473b1e-581a-4849-872e-1341994c1c43": 2
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:7dbbc25e-dd56-462b-a65b-162826729ac2": {
+      "7dbbc25e-dd56-462b-a65b-162826729ac2": 1
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Sportika Mileiu": {
+      "Kluba Sportika Mileiu": 18
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Maritima Metia": {
+      "Kluba Maritima Metia": 9
+    },
+    "team:Mercaria Kluba:player_braces": {
+      "4e75641b-f5d9-40ba-bce7-b89a43ebae4d": 1,
+      "c00f29e9-0256-40ed-8ee2-871d60ff34ed": 1,
+      "d90d922c-e648-4a86-a72e-73291b683af0": 1,
+      "7e7d7390-26b4-4c97-a974-0e13f3cba506": 1,
+      "9efbe941-8bfc-4854-a91a-3dc7cad2429d": 1
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Sportika Esalumou": {
+      "Kluba Sportika Esalumou": 10
+    },
+    "team:Populara Kluba Galvononos:player_braces": {
+      "c8f10c0f-28cd-4574-b247-e86de7a8087b": 1,
+      "9a67142b-c205-48f5-b230-0f3581542bfd": 3,
+      "f4c0e581-7700-487d-938d-6b7d309dda02": 1,
+      "051488d1-949b-4a64-bc11-b8a3da65484b": 2
+    },
+    "all:player_hattricks": {
+      "c8f10c0f-28cd-4574-b247-e86de7a8087b": 1,
+      "e56e9343-4079-44ce-9a3d-f15478a32abf": 1,
+      "0ca6bd4a-28a1-4590-98e8-db67fbd6c290": 1,
+      "6347bf75-a2f9-499e-8b57-4920ba62b5eb": 1,
+      "7e7d7390-26b4-4c97-a974-0e13f3cba506": 1
+    },
+    "comp:Prote Kategorias:player_hattricks": {
+      "c8f10c0f-28cd-4574-b247-e86de7a8087b": 1,
+      "e56e9343-4079-44ce-9a3d-f15478a32abf": 1,
+      "0ca6bd4a-28a1-4590-98e8-db67fbd6c290": 1,
+      "6347bf75-a2f9-499e-8b57-4920ba62b5eb": 1,
+      "7e7d7390-26b4-4c97-a974-0e13f3cba506": 1
+    },
+    "team:Populara Kluba Galvononos:player_hattricks": {
+      "c8f10c0f-28cd-4574-b247-e86de7a8087b": 1
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Sportika Soleiu": {
+      "Kluba Sportika Soleiu": 23
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:575f85ef-67cd-4dfa-b8c6-5654fb39e593": {
+      "575f85ef-67cd-4dfa-b8c6-5654fb39e593": 0
+    },
+    "team:Kluba Sportika Mileiu:player_braces": {
+      "06092675-1ac4-4daf-b797-c03acda38c55": 1,
+      "23c97455-06f1-4326-9f92-8a0e95172842": 2,
+      "27fd458d-d93c-4378-8154-6ff5d8a1906e": 1,
+      "f9502382-98b3-4a31-8817-fce5887c2824": 1
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Portavar Kluba": {
+      "Portavar Kluba": 12
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:8f5f2d6e-a898-46f2-9152-f7e6a24ff8ae": {
+      "8f5f2d6e-a898-46f2-9152-f7e6a24ff8ae": 0
+    },
+    "team:Kluba Sulhavonos:player_braces": {
+      "d901c230-7418-458f-b89a-701d3e75bc34": 1,
+      "70e0818e-1173-44bf-89f8-d238a9993d82": 1,
+      "92950310-f754-473a-aab7-7bf4c3270ebf": 1
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:e5d66af5-edbf-4957-932c-05b770bb4714": {
+      "e5d66af5-edbf-4957-932c-05b770bb4714": 0
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Sportika Gedimou": {
+      "Kluba Sportika Gedimou": 12
+    },
+    "team:Kluba Sportika Esalumou:player_braces": {
+      "90be5228-8555-49a9-8560-3fd12c8501d1": 1,
+      "577d4bb4-6660-4cf3-a734-5de1e29bc06a": 2
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Mercaria Kluba": {
+      "Mercaria Kluba": 19
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:67ec94de-58bf-42a5-821a-6b47a83a9298": {
+      "67ec94de-58bf-42a5-821a-6b47a83a9298": 0
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:073c7297-e3c4-4947-948c-fdaa514abb2a": {
+      "073c7297-e3c4-4947-948c-fdaa514abb2a": 0
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Populara Kluba Galvononos": {
+      "Populara Kluba Galvononos": 21
+    },
+    "team:Kluba Sportika Soleiu:player_braces": {
+      "cca351ba-e4e9-4082-954e-6ce9b7cfe462": 1,
+      "0e4f57e4-de5a-478d-8c3f-d48cd6eed40e": 1
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Maritima Thesias": {
+      "Kluba Maritima Thesias": 18
+    },
+    "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Sportika Galvononos": {
+      "Kluba Sportika Galvononos": 23
+    },
+    "team:Kluba Maritima Thesias:player_hattricks": {
+      "e56e9343-4079-44ce-9a3d-f15478a32abf": 1
+    },
+    "team:Portavar Kluba:player_braces": {
+      "aa029948-e465-42e4-8a1b-2152c4153091": 1,
+      "7bc92d4c-4207-4b03-9ed4-3ee56614ed30": 1,
+      "2c734d76-0638-4859-9942-7c6656fe4c23": 1
+    },
+    "gk_cs_streak:comp:Prote Kategorias:1896/97:31a9e232-835a-4cd5-a9e9-5316ccc62241": {
+      "31a9e232-835a-4cd5-a9e9-5316ccc62241": 0
+    },
+    "team:Kluba Sportika Gedimou:player_braces": {
+      "0ca6bd4a-28a1-4590-98e8-db67fbd6c290": 1,
+      "ac073388-1fbc-472a-a61a-c0e8ea7b5bd2": 1
+    },
+    "team:Kluba Sportika Gedimou:player_hattricks": {
+      "0ca6bd4a-28a1-4590-98e8-db67fbd6c290": 1
+    },
+    "team:Kluba Maritima Metia:player_braces": {
+      "6ef82203-c3ee-42d5-9016-54d5c28825b2": 1,
+      "908ede2e-d9b2-4805-b85a-361a02ab2a5b": 1,
+      "dd811d8d-9c9b-40eb-ba98-83b644fbb938": 1
+    },
+    "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Sulhavonos": {
+      "Kluba Sulhavonos": 14
+    },
+    "team:Kluba Sportika Galvononos:player_hattricks": {
+      "6347bf75-a2f9-499e-8b57-4920ba62b5eb": 1
+    },
+    "team:Mercaria Kluba:player_hattricks": {
+      "7e7d7390-26b4-4c97-a974-0e13f3cba506": 1
+    }
+  },
+  "streaks": {},
+  "comp_champions": {
+    "Prote Kategorias": {
+      "Mercaria Kluba": 1
+    }
+  }
+}

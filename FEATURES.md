@@ -44,7 +44,7 @@
                 relevance tiers: global | regional | local
                 stored as structured events, consumed by news generator later
 
-- [next]      Engine smoke test — verify full season runs without errors
+- [done]      Engine smoke test — verify full season runs without errors
 
 - [soon]      Prestige runtime logic
                 season-end prestige update (league contribution)

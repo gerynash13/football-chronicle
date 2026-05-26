@@ -1,0 +1,641 @@
+/* Variables */
+:root {
+    --ink: #1a1209;
+    --ink-faded: #4a3f2f;
+    --ink-light: #7a6a52;
+    --paper: #f5efe2;
+    --paper-dark: #ede4ce;
+    --paper-tone: #e0d5be;
+    --rule: #8b7355;
+    --rule-light: #c4b08a;
+    --accent: #8b2020;
+    --accent-dim: #6b1818;
+    --gold: #b8860b;
+    --serif: 'Playfair Display', Georgia, serif;
+    --fell: 'IM Fell English', Georgia, serif;
+    --mono: 'Courier Prime', 'Courier New', monospace;
+    --col-gap: 1.5rem;
+    --panel-pad: 1rem 1.2rem;
+}
+
+/* Reset & base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 15px
+}
+
+body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--fell);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Subtle paper texture via repeating gradient */
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 24px,
+            rgba(139, 115, 85, 0.06) 24px,
+            rgba(139, 115, 85, 0.06) 25px
+        );
+}
+
+/* Masthead */
+.masthead {
+    text-align: center;
+    padding: 0.6rem 2rem 0;
+    background: var(--paper);
+}
+
+.masthead-rule {
+    height: 2px;
+    background-color: var(--ink);
+    margin-bottom: 0.4rem;
+}
+
+.masthead-rule.double {
+    box-shadow: 0 4px 0 var(--ink);
+    margin-top: 0.4rem;
+    margin-bottom: 0;
+}
+
+.masthead-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3rem 0;
+}
+
+.masthead-meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-faded);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    width: 140px;
+}
+
+.masthead-meta.right {
+    text-align: right;
+}
+
+.masthead-title {
+    flex: 1;
+}
+
+.masthead-subtitle {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.1rem;
+}
+
+.masthead-title h1 {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    color: var(--ink);
+}
+
+.masthead-edition {
+    font-family: var(--fell);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-faded);
+    margin-top: 0.15rem;
+}
+
+/* Chronicle layout */
+.chronicle-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr 220px;
+    gap: var(--col-gap);
+    padding: 1.2rem 1.5rem;
+    flex: 1;
+    align-items: start;
+    border-left: 1px solid var(--rule-light);
+    border-right: 1px solid var(--rule-light);
+    margin: 0 0.5rem;
+    border-top: 3px double var(--ink);
+}
+
+/* Column dividers */
+.col-left {
+    border-right: 1px solid var(--rule-light);
+    padding-right: var(--col-gap);
+}
+
+.col-right {
+    border-left: 1px solid var(--rule-light);
+    padding-left: var(--col-gap);
+}
+
+/* Panels */
+.panel {
+    margin-bottom: 1.5rem;
+}
+
+.panel-heading {
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-bottom: 0.3rem;
+}
+
+.panel-rule {
+    height: 1px;
+    background: var(--rule);
+    margin-bottom: 0.7rem;
+    box-shadow: 0 2px 0 var(--rule-light);
+}
+
+/* Standings table */
+.standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+}
+
+.standings-table thead tr {
+    border-bottom: 1px solid var(--rule);
+}
+
+.standings-table th {
+    color: var(--ink-faded);
+    font-weight: 700;
+    padding: 0.3rem 0.5rem;
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+
+.standings-table th.team-col {
+    text-align: left;
+}
+
+.standings-table td {
+    text-align: center;
+    padding: 0.22rem 0.15rem;
+    border-bottom: 1px solid rgba (139, 115, 85, 0.2);
+    color: var(--ink);
+}
+
+.standings-table td.team-col {
+    text-align: left;
+    font-family: var(--fell);
+    font-size: 0.78rem;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.standings-table tr.top-3 td {
+    color: var(--accent-dim);
+    font-weight: 700;
+}
+
+.standings-table tr.promoted td {
+    border-left: 2px solid var(--accent);
+}
+
+/* News / Dispatches */
+.news-list {
+    list-style: none;
+}
+
+.news-item {
+    font-family: var(--fell);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    padding: 0.4rem 0;
+    border-bottom: 1px dotted var(--rule-light);
+    color: var(--ink-faded);
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-item .news-type {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.1rem;
+}
+
+/* Match result card */
+.matchday-block {
+    margin-bottom: 1.4rem;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.matchday-heading {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.matchday-heading .match-date {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--ink-faded);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+
+.result-card {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid var(--rule-light);
+    margin-bottom: 0.4rem;
+    background: var(--paper-dark);
+    position: relative;
+}
+
+.result-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--rule);
+}
+
+.result-team {
+    font-family: var(--fell);
+    font-size: 0.85rem;
+    color: var(--ink);
+    line-height: 1.2;
+}
+
+.result-team.home {
+    text-align: right;
+}
+
+.result-team.away {
+    text-align: left;
+}
+
+.result-score {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--ink);
+    letter-spacing: 0.05rem;
+    white-space: nowrap;
+    text-align: center;
+    min-width: 3.5rem;
+}
+
+.result-scorers {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--ink-light);
+    margin-top: 0.1rem;
+}
+
+/* Blocking event panel */
+.event-panel {
+    border: 2px solid var(--ink);
+    padding: var(--panel-pad);
+    margin-bottom: 1.4rem;
+    background: var(--paper-dark);
+    animation: fadeIn 0.3s ease;
+}
+
+.event-category {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+}
+
+.event-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.event-description {
+    font-family: var(--fell);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ink-faded);
+    margin-bottom: 1rem;
+}
+
+.event-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.choice-btn {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 0.6rem 1rem;
+    font-family: var(--fell);
+    font-size: 0.88rem;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, border-color 0.15s;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.choice-btn::before {
+    content: attr(data-index);
+    position: absolute;
+    left: 0.7rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.choice-btn:hover {
+    background: var(--paper-tone);
+    border-color: var(--rule);
+}
+
+/* Season end */
+.season-end-panel {
+    border: 2px double var(--ink);
+    padding: 1.5rem;
+    text-align: center;
+    animation: fadeIn 0.5 ease;
+}
+
+.season-end-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.trophy-mark {
+    font-size: 1.2rem;
+    color: var(--gold);
+}
+
+.season-end-title {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 0.05rem;
+}
+
+.champion-declaration {
+    font-family: var(--fell);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-faded);
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+}
+
+.champion-declaration strong {
+    font-family: var(--serif);
+    font-style: normal;
+    font-size: 1.3rem;
+    color: var(--accent);
+    display: block;
+    font-weight: 700;
+}
+
+.season-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    text-align: left;
+    margin-bottom: 1.2rem;
+}
+
+/*.stat-block { }*/
+
+.stat-block h4 {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-light);
+    margin-bottom: 0.3rem;
+    border-bottom: 1px solid var(--rule-light);
+    padding-bottom: 0.2rem;
+}
+
+.state-block ol {
+    list-style: none;
+    counter-reset: stat-counter;
+}
+
+.stat-block li {
+    counter-increment: stat-counter;
+    font-family: var(--fell);
+    font-size: 0.82rem;
+    color: var(--ink-faded);
+    padding: 0.15rem 0;
+    display: flex;
+    gap: 0.4rem;
+    align-items: baseline;
+}
+
+.stat-block li::before {
+    content: counter(stat-counter) ".";
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ink-light);
+    min-width: 1.2rem;
+}
+
+.stat-block li strong {
+    color: var(--ink);
+    font-style: normal;
+}
+
+.stat-block li .stat-val {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin-left: auto;
+}
+
+/* Notices/Inbox (Right column) */
+.notice-list, .inbox-list {
+    list-style: none;
+}
+
+.notice-item, .inbox-item {
+    font-family: var(--fell);
+    font-size: 0.78rem;
+    line-height: 1.4;
+    padding: 0.35rem 0;
+    border-bottom: 1px dotted var(--rule-light);
+    color: var(--ink-faded);
+}
+
+.notice-item .notice-tag, .inbox-item .inbox-tag {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    color: var(--ink-light);
+    display: block;
+}
+
+.notice-item.injury .notice-tag {
+    color: #7a2020;
+}
+
+.notice-item.suspended .notice-tag {
+    color: var(--gold);
+}
+
+/* Footer */
+.chronicle-footer {
+    background: var(--paper);
+    padding: 0 1.5rem 1rem;
+    margin: 0 0.5rem;
+}
+
+.footer-rule {
+    height: 3px;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    background: var(--paper-tone);
+    margin-bottom: 0.8rem;
+}
+
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.footer-status {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-light);
+    letter-spacing: 0.05em;
+    flex: 1;
+}
+
+.footer-next {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--ink-light);
+    letter-spacing: 0.04em;
+    flex: 1;
+    text-align: right;
+}
+
+/* Advance button */
+.advance-btn {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 0.6rem 2.2rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s;
+    flex-shrink: 0;
+}
+
+.advance-btn:hover {
+    background: var(--accent);
+}
+
+.advance-btn:active {
+    background: var(--accent-dim);
+}
+
+.advance-btn:disabled {
+    background: var(--rule-light);
+    color: var(--ink-light);
+    cursor: not-allowed;
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+.empty-state {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--ink-light);
+    font-style: italic;
+    letter-spacing: 0.04em;
+}
+
+.feed-placeholder {
+    border: 1px dashed  var(--rule-light);
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.placeholder-text {
+    font-family: var(--fell);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-light);
+    line-height: 1.8;
+}
+
+.placeholder-text span {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-top: 0.4rem;
+    text-transform: uppercase;
+}
