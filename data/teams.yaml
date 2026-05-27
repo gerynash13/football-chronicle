@@ -28,7 +28,7 @@
   name: Kluba Sulhavonos
   nation_id: myria
   home_region: masia
-  founded_year: 1881
+  founded_year: 1891
   prestige: 950
   attack: 64
   midfield: 58
@@ -43,7 +43,7 @@
   name: Kluba Maritima Thesias
   nation_id: myria
   home_region: bridia
-  founded_year: 1879
+  founded_year: 1893
   prestige: 980
   attack: 65
   midfield: 64
@@ -58,7 +58,7 @@
   name: Mercaria Kluba
   nation_id: myria
   home_region: bridia
-  founded_year: 1883
+  founded_year: 1894
   prestige: 920
   attack: 63
   midfield: 67
@@ -73,7 +73,7 @@
   name: Portavar Kluba
   nation_id: myria
   home_region: bridia
-  founded_year: 1878
+  founded_year: 1895
   prestige: 870
   attack: 60
   midfield: 58
@@ -88,7 +88,7 @@
   name: Kluba Sportika Esalumou
   nation_id: myria
   home_region: lunia
-  founded_year: 1885
+  founded_year: 1895
   prestige: 680
   attack: 51
   midfield: 53
@@ -103,7 +103,7 @@
   name: Kluba Sportika Mileiu
   nation_id: myria
   home_region: bridia
-  founded_year: 1882
+  founded_year: 1895
   prestige: 780
   attack: 58
   midfield: 56
@@ -118,7 +118,7 @@
   name: Kluba Sportika Galvononos
   nation_id: myria
   home_region: bridia
-  founded_year: 1877
+  founded_year: 1896
   prestige: 1000
   attack: 66
   midfield: 68
@@ -133,7 +133,7 @@
   name: Populara Kluba Galvononos
   nation_id: myria
   home_region: bridia
-  founded_year: 1884
+  founded_year: 1896
   prestige: 890
   attack: 61
   midfield: 60
@@ -148,7 +148,7 @@
   name: Kluba Sportika Gedimou
   nation_id: myria
   home_region: bridia
-  founded_year: 1880
+  founded_year: 1897
   prestige: 810
   attack: 58
   midfield: 59
@@ -163,7 +163,7 @@
   name: Kluba Sportika Soleiu
   nation_id: myria
   home_region: bridia
-  founded_year: 1883
+  founded_year: 1898
   prestige: 790
   attack: 57
   midfield: 60
@@ -178,7 +178,7 @@
   name: Kluba Maritima Metia
   nation_id: myria
   home_region: bridia
-  founded_year: 1886
+  founded_year: 1899
   prestige: 620
   attack: 50
   midfield: 50
@@ -193,7 +193,7 @@
   name: Kluba Sportika Alentumou
   nation_id: myria
   home_region: bridia
-  founded_year: 1882
+  founded_year: 1899
   prestige: 840
   attack: 60
   midfield: 62
@@ -211,7 +211,7 @@
   name: Kluba Notias Thesias
   nation_id: myria
   home_region: bridia
-  founded_year: 1887
+  founded_year: 1897
   prestige: 420
   attack: 48
   midfield: 50
@@ -225,7 +225,7 @@
   name: Kluba Sportika Buriou
   nation_id: myria
   home_region: bridia
-  founded_year: 1889
+  founded_year: 1900
   prestige: 340
   attack: 43
   midfield: 45
@@ -239,7 +239,7 @@
   name: Kluba Sportika Sufelharos
   nation_id: myria
   home_region: bridia
-  founded_year: 1890
+  founded_year: 1901
   prestige: 290
   attack: 40
   midfield: 41
@@ -253,7 +253,7 @@
   name: Kluba Sportika Eleicas
   nation_id: myria
   home_region: bridia
-  founded_year: 1888
+  founded_year: 1900
   prestige: 360
   attack: 44
   midfield: 43
@@ -267,7 +267,7 @@
   name: Kluba Potamia Drosvon
   nation_id: myria
   home_region: bridia
-  founded_year: 1891
+  founded_year: 1902
   prestige: 280
   attack: 40
   midfield: 42
@@ -281,7 +281,7 @@
   name: Kluba Sportika Ancivonos
   nation_id: myria
   home_region: bridia
-  founded_year: 1892
+  founded_year: 1903
   prestige: 260
   attack: 39
   midfield: 40
@@ -295,7 +295,7 @@
   name: Brakika Kluba Nalhavonos
   nation_id: myria
   home_region: bridia
-  founded_year: 1891
+  founded_year: 1904
   prestige: 270
   attack: 41
   midfield: 38
@@ -309,7 +309,7 @@
   name: Kluba Pyron Malias
   nation_id: myria
   home_region: bridia
-  founded_year: 1890
+  founded_year: 1902
   prestige: 275
   attack: 40
   midfield: 41
@@ -323,7 +323,7 @@
   name: Kluba Sportika Noviou
   nation_id: myria
   home_region: lunia
-  founded_year: 1893
+  founded_year: 1901
   prestige: 255
   attack: 40
   midfield: 42
@@ -337,7 +337,7 @@
   name: Kluba Sportika Lunaras
   nation_id: myria
   home_region: lunia
-  founded_year: 1892
+  founded_year: 1904
   prestige: 240
   attack: 38
   midfield: 39
@@ -351,7 +351,7 @@
   name: Kluba Emvaria Amanas
   nation_id: myria
   home_region: vetia_sileia
-  founded_year: 1893
+  founded_year: 1903
   prestige: 245
   attack: 38
   midfield: 40
@@ -365,7 +365,7 @@
   name: Kluba Sportika Ircentas
   nation_id: myria
   home_region: vetia_sileia
-  founded_year: 1894
+  founded_year: 1906
   prestige: 220
   attack: 37
   midfield: 38
@@ -379,7 +379,7 @@
   name: Kluba tou Skriptavonos
   nation_id: myria
   home_region: bridia
-  founded_year: 1891
+  founded_year: 1903
   prestige: 265
   attack: 41
   midfield: 44
@@ -393,7 +393,7 @@
   name: Kluba Sportika Coraerou
   nation_id: myria
   home_region: bridia
-  founded_year: 1892
+  founded_year: 1904
   prestige: 258
   attack: 40
   midfield: 41
@@ -407,7 +407,7 @@
   name: Kluba Veldhavonos
   nation_id: myria
   home_region: masia
-  founded_year: 1893
+  founded_year: 1906
   prestige: 248
   attack: 39
   midfield: 38

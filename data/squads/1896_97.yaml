@@ -2,9 +2,1046 @@ kluba_sulhavonos:
   - name: Sulhvar Veldhanos
     position: GK
     nationality: myria
-    birth_year: 1868
+    birth_year: 1870
+    current_ability: 55
+    potential_ability: 59
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+  - name: Brakhor Kalveira
+    position: DEF
+    nationality: myria
+    birth_year: 1869
+    current_ability: 57
+    potential_ability: 58
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 9
+
+  - name: Pethor Sulheiros
+    position: DEF
+    nationality: myria
+    birth_year: 1872
+    current_ability: 59
+    potential_ability: 65
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 9
+
+  - name: Kalvon Veldheiros
+    position: DEF
+    nationality: myria
+    birth_year: 1877
+    current_ability: 44
+    potential_ability: 58
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 9
+
+  - name: Gorulh Tornheiros
+    position: MID
+    nationality: myria
+    birth_year: 1874
+    current_ability: 55
+    potential_ability: 66
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 9
+
+  - name: Tolvhan Arnhelos
+    position: MID
+    nationality: myria
+    birth_year: 1864
+    current_ability: 70
+    potential_ability: 71
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 13
+
+  - name: Murnon Goruveira
+    position: MID
+    nationality: myria
+    birth_year: 1873
+    current_ability: 55
+    potential_ability: 64
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 9
+
+  - name: Nalhon Kalvanos
+    position: FWD
+    nationality: myria
+    birth_year: 1875
+    current_ability: 63
+    potential_ability: 75
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+  - name: Emhavar Brakeiros
+    position: FWD
+    nationality: myria
+    birth_year: 1871
+    current_ability: 64
+    potential_ability: 68
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 11
+
+  - name: Sulhon Drosvanos
+    position: FWD
+    nationality: myria
+    birth_year: 1870
+    current_ability: 67
+    potential_ability: 70
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 10
+
+  - name: Orlhon Pethalhos
+    position: FWD
+    nationality: myria
+    birth_year: 1874
+    current_ability: 63
+    potential_ability: 75
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 10
+
+  - name: Drosvhar Murnanos
+    position: FWD
+    nationality: myria
+    birth_year: 1875
+    current_ability: 63
+    potential_ability: 71
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 9
+
+  - name: Pirnalh Tolvheiros
+    position: FWD
+    nationality: myria
+    birth_year: 1878
+    current_ability: 46
+    potential_ability: 65
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 9
+
+kluba_maritima_thesias:
+  - name: Arthur Smith
+    position: GK
+    nationality: england
+    birth_year: 1869
+    current_ability: 69 
+    potential_ability: 70 
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+  - name: Marcalhos Fustavar
+    position: DEF
+    nationality: myria
+    birth_year: 1873
+    current_ability: 63
+    potential_ability: 70
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 12
+
+  - name: George Williams
+    position: DEF
+    nationality: england
+    birth_year: 1866
+    current_ability: 69
+    potential_ability: 69
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+  - name: Alberto Repetto
+    position: MID
+    nationality: myria
+    birth_year: 1874
+    current_ability: 59
+    potential_ability: 68
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+  - name: John Davidson
+    position: MID
+    nationality: england
+    birth_year: 1865
+    current_ability: 71
+    potential_ability: 71
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 12
+
+  - name: Giovanavar Vidravar
+    position: MID
+    nationality: myria
+    birth_year: 1872
     current_ability: 62
     potential_ability: 68
     preferred_foot: right
     contract_expires: 1897
     wage: 12
+
+  - name: William Barkley
+    position: FWD
+    nationality: england
+    birth_year: 1871
+    current_ability: 66
+    potential_ability: 70
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+  - name: Cesarhos Grimaldi
+    position: FWD
+    nationality: myria
+    birth_year: 1870
+    current_ability: 64
+    potential_ability: 67
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+  - name: Henry Carlisle
+    position: FWD
+    nationality: england
+    birth_year: 1868
+    current_ability: 69
+    potential_ability: 69
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+  - name: Brunavar Arata
+    position: FWD
+    nationality: myria
+    birth_year: 1874
+    current_ability: 62
+    potential_ability: 71
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 12
+
+  - name: Thomas Austin
+    position: FWD
+    nationality: england
+    birth_year: 1873
+    current_ability: 64
+    potential_ability: 72
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+  - name: David Addison
+    position: MID
+    nationality: england
+    birth_year: 1876
+    current_ability: 52
+    potential_ability: 64
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+  - name: Luigivar Cuneo
+    position: FWD
+    nationality: myria
+    birth_year: 1877
+    current_ability: 50
+    potential_ability: 63
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+mercaria_kluba:
+  - name: Peros Mercelhar
+    position: GK
+    nationality: myria
+    birth_year: 1868
+    current_ability: 63
+    potential_ability: 64
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 20
+
+  - name: Bernalhos Dominalhar
+    position: DEF
+    nationality: myria
+    birth_year: 1871
+    current_ability: 66
+    potential_ability: 69
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 23
+
+  - name: Arnalhos Juravar
+    position: DEF
+    nationality: myria
+    birth_year: 1870
+    current_ability: 66
+    potential_ability: 68
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 23
+
+  - name: Guilhon Portavar
+    position: MID
+    nationality: myria
+    birth_year: 1873
+    current_ability: 67
+    potential_ability: 75
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 24
+
+  - name: Ramhos Mercavar
+    position: MID
+    nationality: myria
+    birth_year: 1866
+    current_ability: 70
+    potential_ability: 70
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 27
+
+  - name: Jordavar Molnavar
+    position: MID
+    nationality: myria
+    birth_year: 1874
+    current_ability: 64
+    potential_ability: 73
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 21
+
+  - name: Rikalhos Fornavar
+    position: FWD
+    nationality: myria
+    birth_year: 1875
+    current_ability: 63
+    potential_ability: 74
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 20
+
+  - name: Ferranhos Vidravar
+    position: FWD
+    nationality: myria
+    birth_year: 1872
+    current_ability: 62
+    potential_ability: 67
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 19
+
+  - name: Olivar Emvaravar
+    position: FWD
+    nationality: myria
+    birth_year: 1869
+    current_ability: 65
+    potential_ability: 67
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 22
+
+  - name: Bertavar Sartravar
+    position: FWD
+    nationality: myria
+    birth_year: 1872
+    current_ability: 62
+    potential_ability: 70
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 19
+
+  - name: Jaumelhos Boteravar
+    position: FWD
+    nationality: myria
+    birth_year: 1874
+    current_ability: 63
+    potential_ability: 71
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 20
+    
+  - name: Ponselhos Salavar
+    position: DEF
+    nationality: myria
+    birth_year: 1876
+    current_ability: 49
+    potential_ability: 60
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 6
+
+  - name: Dalmauhos Arcavar
+    position: MID
+    nationality: myria
+    birth_year: 1877
+    current_ability: 48
+    potential_ability: 63
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 5
+
+portavar_kluba:
+  - name: Miquelhos Pescavar
+    position: GK
+    nationality: myria
+    birth_year: 1871
+    current_ability: 61
+    potential_ability: 65
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 18
+
+  - name: Blailhos Sulhanos
+    position: DEF
+    nationality: myria
+    birth_year: 1870
+    current_ability: 58
+    potential_ability: 61
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 15
+
+  - name: Llorenhos Kalveira
+    position: DEF
+    nationality: myria
+    birth_year: 1873
+    current_ability: 58
+    potential_ability: 66
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 15
+
+  - name: Vicenthos Brakavar
+    position: MID
+    nationality: myria
+    birth_year: 1872
+    current_ability: 57
+    potential_ability: 62
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 14
+
+  - name: Mateuhos Portavar
+    position: MID
+    nationality: myria
+    birth_year: 1868
+    current_ability: 60
+    potential_ability: 61
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 17
+
+  - name: Mundilhos Nauavar
+    position: MID
+    nationality: myria
+    birth_year: 1874
+    current_ability: 57
+    potential_ability: 65
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 14
+
+  - name: Franseschos Marivar
+    position: FWD
+    nationality: myria
+    birth_year: 1875
+    current_ability: 59
+    potential_ability: 69
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 16
+
+  - name: Guerauhos Drosveira
+    position: FWD
+    nationality: myria
+    birth_year: 1871
+    current_ability: 60
+    potential_ability: 64
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 17
+
+  - name: Huguelhos Carnavar
+    position: FWD
+    nationality: myria
+    birth_year: 1870
+    current_ability: 62
+    potential_ability: 65
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 19
+
+  - name: Gaietahos Teixavar
+    position: FWD
+    nationality: myria
+    birth_year: 1873
+    current_ability: 59
+    potential_ability: 68
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 16
+
+  - name: Perelhos Pescavar
+    position: FWD
+    nationality: myria
+    birth_year: 1875
+    current_ability: 60
+    potential_ability: 72
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 17
+
+  - name: Gilaberthos Caldavar
+    position: DEF
+    nationality: myria
+    birth_year: 1876
+    current_ability: 42
+    potential_ability: 55
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 4
+
+  - name: Miquehos Boteravar
+    position: FWD
+    nationality: myria
+    birth_year: 1877
+    current_ability: 41
+    potential_ability: 56
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 4
+
+kluba_sportika_galvononos:
+  - name: Vasilhos Portikavar
+    position: GK
+    nationality: myria
+    birth_year: 1870
+    current_ability: 62
+    potential_ability: 65
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 19
+
+  - name: Nikolvar Terranos
+    position: DEF
+    nationality: myria
+    birth_year: 1872
+    current_ability: 63
+    potential_ability: 68
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 20
+
+  - name: Demetralhos Bouleutar
+    position: DEF
+    nationality: myria
+    birth_year: 1871
+    current_ability: 64
+    potential_ability: 67
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 21
+
+  - name: Ioannalhos Archavar
+    position: MID
+    nationality: myria
+    birth_year: 1875
+    current_ability: 66
+    potential_ability: 76
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 23
+
+  - name: Georvos Konsulavar
+    position: MID
+    nationality: myria
+    birth_year: 1867
+    current_ability: 71
+    potential_ability: 71
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 28
+
+  - name: Stefanhos Eforavar
+    position: MID
+    nationality: myria
+    birth_year: 1873
+    current_ability: 67
+    potential_ability: 73
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 24
+
+  - name: Kostanvar Grammatavar
+    position: FWD
+    nationality: myria
+    birth_year: 1874
+    current_ability: 65
+    potential_ability: 74
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 22
+
+  - name: Filipalhos Logothavar
+    position: FWD
+    nationality: myria
+    birth_year: 1871
+    current_ability: 66
+    potential_ability: 69
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 23
+
+  - name: Teodvar Tameiavar
+    position: FWD
+    nationality: myria
+    birth_year: 1869
+    current_ability: 68
+    potential_ability: 69
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 25
+
+  - name: Mikhavar Stratigavar
+    position: FWD
+    nationality: myria
+    birth_year: 1875
+    current_ability: 66
+    potential_ability: 78
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 23
+
+  - name: Kyrialhos Notaravar
+    position: FWD
+    nationality: myria
+    birth_year: 1874
+    current_ability: 65
+    potential_ability: 72
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 22
+
+  - name: Grigoralhos Protokolavar
+    position: DEF
+    nationality: myria
+    birth_year: 1876
+    current_ability: 49
+    potential_ability: 62
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 6
+
+  - name: Panaghos Synedriavar
+    position: MID
+    nationality: myria
+    birth_year: 1877
+    current_ability: 54
+    potential_ability: 70
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 11
+
+populara_kluba_galvononos:
+  - name: Galvhor Sulhanos
+    position: GK
+    nationality: myria
+    birth_year: 1872
+    current_ability: 60
+    potential_ability: 66
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 17
+
+  - name: Bralhor Sulhanos
+    position: DEF
+    nationality: myria
+    birth_year: 1867
+    current_ability: 64
+    potential_ability: 64
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 21
+
+  - name: Dravon Kalveira
+    position: DEF
+    nationality: myria
+    birth_year: 1874
+    current_ability: 59
+    potential_ability: 68
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 16
+
+  - name: Galvon Dravikos
+    position: MID
+    nationality: myria
+    birth_year: 1873
+    current_ability: 62
+    potential_ability: 70
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 19
+
+  - name: Drosvon Galvikos
+    position: MID
+    nationality: myria
+    birth_year: 1871
+    current_ability: 66
+    potential_ability: 71
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 23
+
+  - name: Talvon Dravanos
+    position: MID
+    nationality: myria
+    birth_year: 1875
+    current_ability: 61
+    potential_ability: 70
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 18
+
+  - name: Nalhon Galveiros
+    position: FWD
+    nationality: myria
+    birth_year: 1876
+    current_ability: 60
+    potential_ability: 72
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 17
+
+  - name: Aristalhos Pescavar
+    position: FWD
+    nationality: myria
+    birth_year: 1872
+    current_ability: 61
+    potential_ability: 66
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 18
+
+  - name: Panaghos Sulhanos
+    position: FWD
+    nationality: myria
+    birth_year: 1871
+    current_ability: 63
+    potential_ability: 67
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 20
+
+  - name: Manolhos Galvōdēs
+    position: FWD
+    nationality: myria
+    birth_year: 1874
+    current_ability: 61
+    potential_ability: 69
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 18
+
+  - name: Stavralhos Kalphos
+    position: FWD
+    nationality: myria
+    birth_year: 1875
+    current_ability: 60
+    potential_ability: 69
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 17
+
+  - name: Spyrolhos Dravanos
+    position: MID
+    nationality: myria
+    birth_year: 1876
+    current_ability: 45
+    potential_ability: 59
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 4
+
+  - name: Eustrathos Pethikos
+    position: FWD
+    nationality: myria
+    birth_year: 1878
+    current_ability: 44
+    potential_ability: 58
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 4
+
+kluba_sportika_esalumou:
+  - name: Nikos Sentius
+    position: GK
+    nationality: myria
+    birth_year: 1867
+    current_ability: 57
+    potential_ability: 57
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 14
+
+  - name: Nikolvar Terranos
+    position: DEF
+    nationality: myria
+    birth_year: 1873
+    current_ability: 50
+    potential_ability: 58
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 7
+
+  - name: Laurivos Solivar
+    position: DEF
+    nationality: myria
+    birth_year: 1871
+    current_ability: 49
+    potential_ability: 53
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 6
+
+  - name: Panaghos Hatzipalhos
+    position: MID
+    nationality: myria
+    birth_year: 1874
+    current_ability: 53
+    potential_ability: 62
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 10
+
+  - name: Kostanvar Lunivar
+    position: MID
+    nationality: myria
+    birth_year: 1870
+    current_ability: 55
+    potential_ability: 59
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 12
+
+  - name: Santhon Sylvavar
+    position: MID
+    nationality: myria
+    birth_year: 1872
+    current_ability: 51
+    potential_ability: 56
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 8
+
+  - name: Apostolhos Korinthios
+    position: FWD
+    nationality: myria
+    birth_year: 1871
+    current_ability: 51
+    potential_ability: 55
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 8
+
+  - name: Silvaros Vitavar
+    position: FWD
+    nationality: myria
+    birth_year: 1870
+    current_ability: 50
+    potential_ability: 53
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 7
+
+  - name: Mikhavar Vasiliadvar
+    position: FWD
+    nationality: myria
+    birth_year: 1868
+    current_ability: 54
+    potential_ability: 55
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 11
+
+  - name: Dominalhos Arcavar
+    position: FWD
+    nationality: myria
+    birth_year: 1874
+    current_ability: 49
+    potential_ability: 58
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 6
+
+  - name: Haralhos Angelidvar
+    position: FWD
+    nationality: myria
+    birth_year: 1873
+    current_ability: 51
+    potential_ability: 59
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 8
+
+  - name: Vitaros Terranos
+    position: DEF
+    nationality: myria
+    birth_year: 1876
+    current_ability: 36
+    potential_ability: 49
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 4
+
+  - name: Victorvar Masius
+    position: FWD
+    nationality: myria
+    birth_year: 1877
+    current_ability: 34
+    potential_ability: 44
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 4
+
+kluba_sportika_mileiu:
+  - name: Marcalhos Pescavar
+    position: GK
+    nationality: myria
+    birth_year: 1870
+    current_ability: 58
+    potential_ability: 62
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 15
+
+  - name: Pescar Tolvhavar
+    position: DEF
+    nationality: myria
+    birth_year: 1866
+    current_ability: 63
+    potential_ability: 63
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 20
+
+  - name: Giovanavar Maragavar
+    position: DEF
+    nationality: myria
+    birth_year: 1872
+    current_ability: 56
+    potential_ability: 61
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 13
+
+  - name: Brunavar Pescavar
+    position: MID
+    nationality: myria
+    birth_year: 1874
+    current_ability: 54
+    potential_ability: 62
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 11
+
+  - name: Matteohos Portikavar
+    position: MID
+    nationality: myria
+    birth_year: 1871
+    current_ability: 59
+    potential_ability: 64
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 16
+
+  - name: Enricohos Nauavar
+    position: MID
+    nationality: myria
+    birth_year: 1875
+    current_ability: 55
+    potential_ability: 65
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 12
+
+  - name: Cesarhos Saxavar
+    position: FWD
+    nationality: myria
+    birth_year: 1876
+    current_ability: 58
+    potential_ability: 69
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 15
+
+  - name: Albertohos Rioavar
+    position: FWD
+    nationality: myria
+    birth_year: 1872
+    current_ability: 57
+    potential_ability: 62
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 14
+
+  - name: Renzohos Marivavar
+    position: FWD
+    nationality: myria
+    birth_year: 1871
+    current_ability: 60
+    potential_ability: 64
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 17
+
+  - name: Giacomohos Fustaveira
+    position: FWD
+    nationality: myria
+    birth_year: 1874
+    current_ability: 58
+    potential_ability: 66
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 15
+
+  - name: Anselmohos Vidravar
+    position: FWD
+    nationality: myria
+    birth_year: 1875
+    current_ability: 57
+    potential_ability: 65
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 14
+
+  - name: Luigivar Pescavar
+    position: FWD
+    nationality: myria
+    birth_year: 1876
+    current_ability: 42
+    potential_ability: 54
+    preferred_foot: left
+    contract_expires: 1897
+    wage: 4
+
+  - name: Benedettohos Salavar
+    position: DEF
+    nationality: myria
+    birth_year: 1878
+    current_ability: 41
+    potential_ability: 55
+    preferred_foot: right
+    contract_expires: 1897
+    wage: 4
