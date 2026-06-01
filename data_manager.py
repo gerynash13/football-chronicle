@@ -181,26 +181,30 @@ def load_teams_from_file(file_path):
 def save_competition_to_file(competition, current_date, filename="competition_data.json"):
     """Save competition to resume later"""
     
+    def _team_name(val):
+        # Accept either a Team object or a plain string
+        return val.name if hasattr(val, "name") else val
+    
     # Convert results to JSON-friendly format
     serializable_results = []
     for result in competition.results:
-        serializable_result = {
-            "home_team": result["home_team"],
-            "away_team": result["away_team"],
-            "home_goals": result["home_goals"],
-            "away_goals": result["away_goals"],
-            "events": result.get("events", [])
-        }
-        serializable_results.append(serializable_result)
+        serializable_results.append({
+            "home_team":    _team_name(result["home_team"]),
+            "away_team":    _team_name(result["away_team"]),
+            "home_goals":   result["home_goals"],
+            "away_goals":   result["away_goals"],
+            "events":       result.get("events", []),
+            "matchday":     result.get("matchday")
+        })
         
     comp_data = {
-        "name": competition.name,
-        "type": competition.type,
-        "current_matchday": competition.current_matchday,
-        "standings": competition.standings,
-        "results": serializable_results,
-        "completed_matchdays": list(competition.completed_matchdays),
-        "current_date": current_date.isoformat()
+        "name":                 competition.name,
+        "type":                 competition.type,
+        "current_matchday":     competition.current_matchday,
+        "standings":            competition.standings,
+        "results":              serializable_results,
+        "completed_matchdays":  list(competition.completed_matchdays),
+        "current_date":         current_date.isoformat()
     }
         
     with open(filename, "w", encoding="utf-8") as f:

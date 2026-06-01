@@ -52,19 +52,38 @@ class GameCalendar:
             end -= timedelta(days=1)
         return start, end
     
-    def schedule_fixtures(self, competition):
+    def schedule_fixtures(self, competition, preferred_day: int | None = None, start_from_end: bool = False):
         # Assign real calendar dates to the fixtures based on the rules for match days
+        # Pass the secondary day for the cup fixtures
         # Deterministic - safe to call multiple times without changing the schedule
-        primary_day = get_match_days(self.season_year)[0]
-        matchdays   = sorted(set(f["matchday"] for f in competition.fixtures))
-        current     = self.season_start
+        available_days = get_match_days(self.season_year)
+        primary_day = preferred_day if preferred_day is not None else available_days[0]
         
+        matchdays   = sorted(set(f["matchday"] for f in competition.fixtures))
         matchday_dates = {}
-        for matchday_num in matchdays:
-            while current.weekday() != primary_day:
-                current += timedelta(days=1)
-            matchday_dates[matchday_num] = current
-            current += timedelta(weeks=1)  # Move to the next week for the next matchday
+        if not start_from_end:
+            current = self.season_start
+            for matchday_num in matchdays:
+                while current.weekday() != primary_day:
+                    current += timedelta(days=1)
+                # Skip dates taken by another competition
+                occupied = {e.date for e in self.scheduled_events if e.category == "match"}
+                while current in occupied:
+                    current += timedelta(weeks=1)
+                matchday_dates[matchday_num] = current
+                current += timedelta(weeks=1)
+        else:
+            # Schedule matchdays backwards from season end so later rounds
+            # (e.g. cup final) occur at the very end of the season.
+            current = self.season_end
+            for matchday_num in sorted(matchdays, reverse=True):
+                while current.weekday() != primary_day:
+                    current -= timedelta(days=1)
+                occupied = {e.date for e in self.scheduled_events if e.category == "match"}
+                while current in occupied:
+                    current -= timedelta(weeks=1)
+                matchday_dates[matchday_num] = current
+                current -= timedelta(weeks=1)
             
         for fixture in competition.fixtures:
             fixture["date"] = matchday_dates[fixture["matchday"]]
@@ -76,7 +95,7 @@ class GameCalendar:
                 category="match",
                 blocking=True,
                 title=f"Matchday {matchday_num}",
-                description=f"{len(competition.teams) // 2} matches scheduled for {match_date.strftime('%A, %d %B %Y')}. Prepare your team!"
+                description=f"{len(competition.teams) // 2} matches scheduled for {match_date.strftime('%A, %d %B %Y')}.",
             ))
             
     def _add_event(self, event):

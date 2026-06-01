@@ -10,6 +10,21 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <!-- Main menu overlay - shown before the game starts -->
+    <div class="main-menu" id="main-menu">
+        <div class="main-menu-inner">
+            <div class="menu-subtitle">The Official Record of</div>
+            <h1 class="menu-title">The Football Chronicle</h1>
+            <div class="menu-rule"></div>
+            <p class="menu-tagline">A digital chronicle of the world of football</p>
+            <div class="menu-actions" id="menu-actions">
+                <button class="menu-btn primary" id="btn-new-game">New Game</button>
+                <button class="menu-btn" id="btn-continue">Continue</button>
+            </div>
+            <div class="menu-status" id="menu-status"></div>
+        </div>
+    </div>
+
     <!-- Masthead-->
     <header class="masthead">
         <div class="masthead-rule"></div>
@@ -20,16 +35,25 @@
                 <h1>The Football Chronicle</h1>
                 <div class="masthead-edition" id="meta-season">- Loading -</div>
             </div>
-            <div class="metahead-meta right" id="meta-matchday">Matchday -</div>
+            <div class="masthead-meta right" id="meta-matchday">Matchday -</div>
         </div>
         <div class="masthead-rule double"></div>
     </header>
 
-    <!-- Main layout: three columns -->
+    <!-- Main layout: newspaper sidebar + main article -->
     <main class="chronicle-layout">
 
-        <!-- Left column: league table and news ticker -->
-        <aside class="col-left">
+        <!-- Left sidebar: world-level navigation and highlights -->
+        <aside class="sidebar world-sidebar">
+            <section class="panel nav-panel">
+                <h2 class="panel-heading">World</h2>
+                <div class="panel-rule"></div>
+                <ul class="nav-list">
+                    <li><button class="nav-link active" data-page="newspaper">Newspaper</button></li>
+                    <li><button class="nav-link" data-page="hall_of_fame">Hall of Fame</button></li>
+                    <li><button class="nav-link" data-page="competitions">Competitions</button></li>
+                </ul>
+            </section>
 
             <section class="panel" id="panel-standings">
                 <h2 class="panel-heading">League Table</h2>
@@ -58,17 +82,19 @@
             <section class="panel" id="panel-news">
                 <h2 class="panel-heading">Dispatches</h2>
                 <div class="panel-rule"></div>
-                <ul class="news-list" id="news_list">
+                <ul class="news-list" id="news-list">
                     <li class="news-item empty-state">No dispatches yet.</li>
                 </ul>
             </section>
-
         </aside>
 
-        <!-- Centre column: main content area -->
-        <section class="col-centre">
+        <!-- Centre: article-style main content -->
+        <section class="main-content">
+            <div class="page-intro">
+                <h2 class="page-heading" id="page-heading">Club Dashboard</h2>
+                <p class="page-lead" id="page-lead">Pick a club to manage before the season begins, then follow your results, table position and dispatches in the newspaper.</p>
+            </div>
 
-            <!-- Blocking event (choices). Shown when type=blocking_event -->
             <div class="panel event-panel hidden" id="panel-event">
                 <div class="event-category" id="event-category">Notice</div>
                 <h2 class="event-title" id="event-title"></h2>
@@ -77,7 +103,6 @@
                 <div class="event-choices" id="event-choices"></div>
             </div>
 
-            <!-- Season end summary -->
             <div class="panel season-end-panel hidden" id="panel-season-end">
                 <div class="season-end-header">
                     <div class="trophy-mark">✦</div>
@@ -86,13 +111,21 @@
                 </div>
                 <div class="panel-rule"></div>
                 <div class="champion-declaration" id="champion-declaration"></div>
+                <div class="cup-winner-declaration" id="cup-winner-declaration" style="display:none;margin-top:0.5rem"></div>
                 <div class="season-stats-grid" id="season-stats-grid"></div>
                 <button class="advance-btn" id="btn-next-season">
                     Advance to Next Season
                 </button>
             </div>
 
-            <!-- Match results feed -->
+            <div class="panel cup-bracket-panel hidden" id="panel-cup-bracket">
+                <div class="cup-bracket-header">
+                    <span class="cup-bracket.title" id="cup-bracket-title">Myrian Cup</span>
+                </div>
+                <div class="panel-rule"></div>
+                <div class="cup-bracket" id="cup-bracket"></div>
+            </div>
+
             <div id="results-feed">
                 <div class="feed-placeholder" id="feed-placeholder">
                     <p class="placeholder-text">
@@ -101,17 +134,22 @@
                     </p>
                 </div>
             </div>
-
         </section>
 
-        <!-- Right column: injuries, suspensions, inbox -->
-        <aside class="col-right">
-
-            <section class="panel" id="panel-notifications">
-                <h2 class="panel-heading">Club Notices</h2>
+        <!-- Right sidebar: club-level navigation and inbox -->
+        <aside class="sidebar club-sidebar">
+            <section class="panel nav-panel">
+                <h2 class="panel-heading">Club</h2>
                 <div class="panel-rule"></div>
-                <ul class="notice-list" id="notice-list">
-                    <li class="empty-state">No notices.</li>
+                <ul class="nav-list">
+                    <li><button class="nav-link" data-page="dashboard">Dashboard</button></li>
+                    <li><button class="nav-link" data-page="inbox">Inbox</button></li>
+                    <li><button class="nav-link" data-page="team">Team</button></li>
+                    <li><button class="nav-link" data-page="tactics">Tactics</button></li>
+                    <li><button class="nav-link" data-page="academy">Youth Academy</button></li>
+                    <li><button class="nav-link" data-page="transfers">Transfers</button></li>
+                    <li><button class="nav-link" data-page="scouting">Scouting</button></li>
+                    <li><button class="nav-link" data-page="training">Training</button></li>
                 </ul>
             </section>
 
@@ -123,8 +161,14 @@
                 </ul>
             </section>
 
+            <section class="panel" id="panel-notifications">
+                <h2 class="panel-heading">Club Notices</h2>
+                <div class="panel-rule"></div>
+                <ul class="notice-list" id="notice-list">
+                    <li class="empty-state">No notices.</li>
+                </ul>
+            </section>
         </aside>
-
     </main>
 
     <!-- Footer controls -->

@@ -136,7 +136,8 @@ class Competition:
         self.completed_matchdays.add(self.current_matchday)
                 
     def advance_matchday(self):
-        input("Do you want to advance to the next matchday? (Press Enter)")
+        # Non-interactive environment: simply advance the matchday counter.
+        # Removed blocking input() so the engine can run headless (API/web).
         self.current_matchday += 1
         
     
@@ -189,8 +190,11 @@ class CupCompetition(Competition):
         if self.current_matchday in self.completed_matchdays:
             return []
         
-        current_round_num = self.advance_matchday()
-        current_fixtures = [f for f in self.fixtures if f["matchday"] == current_round_num]
+        current_round_num = self.current_matchday
+        # Only consider fixtures that have both teams assigned; placeholders
+        # for future rounds may exist with None entries and should be
+        # ignored until those slots are filled.
+        current_fixtures = [f for f in self.fixtures if f["matchday"] == current_round_num and f.get("home_team") is not None and f.get("away_team") is not None]
         
         drawn_fixtures = []
         
@@ -206,8 +210,8 @@ class CupCompetition(Competition):
             )
             
             self.results.append({
-                "home_team": home_team,
-                "away_team": away_team,
+                "home_team": home_team.name,
+                "away_team": away_team.name,
                 "home_goals": hg,
                 "away_goals": ag,
                 "events": events,
@@ -228,15 +232,19 @@ class CupCompetition(Competition):
         # ——— Step 2: collect winners (decided matches only) ———————————————————
         winners = []
         for fixture in current_fixtures:
+            # Find the matching result by name for this fixture
             result = next(
-                r for r in self.results
-                if r["home_team"] == fixture["home_team"].name
-                and r["away_team"] == fixture["away_team"].name
-                and r.get("matchday") == current_round_num
+                (r for r in self.results
+                 if r["home_team"] == fixture["home_team"].name
+                 and r["away_team"] == fixture["away_team"].name
+                 and r.get("matchday") == current_round_num),
+                None
             )
+            if result is None:
+                continue
             if result["home_goals"] > result["away_goals"]:
                 winners.append(fixture["home_team"])
-            elif result["away_goals"] < result["home_goals"]:
+            elif result["away_goals"] > result["home_goals"]:
                 winners.append(fixture["away_team"])
             # Draws produce no winner yet, bracket slots remain open
             
@@ -247,13 +255,23 @@ class CupCompetition(Competition):
         # trigger next-round building once all slots are filled.
         if len(winners) > 1 and len(drawn_fixtures) == 0:
             next_round_num = current_round_num + 1
-            for i in range(0, len(winners), 2):
-                self.fixtures.append({
-                    "matchday": next_round_num,
-                    "home_team": winners[i],
-                    "away_team": winners[i + 1]
-                })
-                
+            # Try to fill any placeholder fixtures for the next round first
+            placeholders = [f for f in self.fixtures if f["matchday"] == next_round_num and (f.get("home_team") is None or f.get("away_team") is None)]
+            if placeholders:
+                # Fill placeholders sequentially
+                for idx in range(0, len(winners), 2):
+                    slot = placeholders[idx // 2]
+                    slot["home_team"] = winners[idx]
+                    slot["away_team"] = winners[idx + 1]
+            else:
+                for i in range(0, len(winners), 2):
+                    self.fixtures.append({
+                        "matchday": next_round_num,
+                        "home_team": winners[i],
+                        "away_team": winners[i + 1]
+                    })
+        
+        self.completed_matchdays.add(current_round_num)        
         self.current_matchday += 1
         return drawn_fixtures
     
@@ -272,7 +290,8 @@ class CupCompetition(Competition):
         
         original = next(
             (f for f in self.fixtures
-             if f["home_team"].name == home_team.name
+             if f.get("home_team") is not None and f.get("away_team") is not None
+             and f["home_team"].name == home_team.name
              and f["away_team"].name == away_team.name),
             None
         )
@@ -280,8 +299,9 @@ class CupCompetition(Competition):
             return
         
         original_round = original["matchday"]
-        next_round_num = max(f["matchday"] for f in self.fixtures) + 1
-        
+        # Next round is the immediate successor round number
+        next_round_num = original_round + 1
+
         # Collect all winners from original round (decided + this replay)
         original_fixtures = [f for f in self.fixtures if f["matchday"] == original_round]
         round_results     = [r for r in self.results if r.get("matchday") == original_round]
@@ -306,15 +326,23 @@ class CupCompetition(Competition):
                 else:
                     winners.append(fixture["away_team"])
                     
-        # Only build next round when every slot in this round is decided
+        # Only build/fill next round when every slot in this round is decided
         total_slots = len(original_fixtures)
         if len(winners) == total_slots and total_slots > 1:
-            for i in range(0, len(winners), 2):
-                self.fixtures.append({
-                    "matchday": next_round_num,
-                    "home_team": winners[i],
-                    "away_team": winners[i + 1]
-                })
+            # If placeholders were pre-created, fill them; otherwise append
+            placeholders = [f for f in self.fixtures if f["matchday"] == next_round_num]
+            if placeholders:
+                for idx in range(0, len(winners), 2):
+                    slot = placeholders[idx // 2]
+                    slot["home_team"] = winners[idx]
+                    slot["away_team"] = winners[idx + 1]
+            else:
+                for i in range(0, len(winners), 2):
+                    self.fixtures.append({
+                        "matchday": next_round_num,
+                        "home_team": winners[i],
+                        "away_team": winners[i + 1]
+                    })
                 
     def generate_fixtures(self):
         # Build initial bracket
@@ -326,35 +354,35 @@ class CupCompetition(Competition):
         while len(teams) < target:
             teams.append(None)
             
-        # Each round gets a matchday number starting at 1
+        # Create fixtures placeholders for every round so the calendar
+        # can schedule cup rounds across the season. Round 1 contains
+        # the initial team pairings; later rounds are placeholders
+        # (home/away set to None) until winners are filled in.
+        import math
+        rounds = int(math.log2(target))
         fixtures = []
+
+        # Round 1: pair teams
         round_num = 1
-        current_round = teams
-        
-        while len(current_round) > 1:
-            next_round = []
-            for i in range(0, len(current_round), 2):
-                home = current_round[i]
-                away = current_round[i + 1]
-                if home is None and away is None:
-                    next_round.append(None)
-                    continue
-                if home is None:
-                    next_round.append(away)
-                    continue
-                if away is None:
-                    next_round.append(home)
-                    continue
-                
+        for i in range(0, len(teams), 2):
+            home = teams[i]
+            away = teams[i + 1]
+            fixtures.append({
+                "matchday": round_num,
+                "home_team": home,
+                "away_team": away
+            })
+
+        # Subsequent rounds: create placeholders
+        for r in range(2, rounds + 1):
+            matches_in_round = target // (2 ** r)
+            if matches_in_round < 1:
+                matches_in_round = 1
+            for _ in range(matches_in_round):
                 fixtures.append({
-                    "matchday": round_num,
-                    "home_team": home,
-                    "away_team": away
+                    "matchday": r,
+                    "home_team": None,
+                    "away_team": None
                 })
-                # Placeholder for next round
-                next_round.append(None)
-                
-            current_round = next_round
-            round_num += 1
-            
+
         self.fixtures = fixtures

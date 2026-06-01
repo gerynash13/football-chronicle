@@ -62,13 +62,13 @@
 
 ## UI LAYER
 
-- [soon]      Flask API (api.py)
+- [done]      Flask API (api.py)
                 POST /api/advance    → engine.advance()
                 POST /api/choose     → engine.choose(index)
                 GET  /api/state      → current state without advancing
                 GET  /api/inbox      → calendar inbox items
 
-- [soon]      Basic HTML/CSS/JS frontend
+- [done]      Basic HTML/CSS/JS frontend
                 Season overview page
                 Matchday results view
                 League table

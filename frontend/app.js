@@ -46,6 +46,7 @@ async function advance() {
     render(state);
     await refreshNews();
     await refreshInbox();
+    await refreshCupBracket();
 
     // For states that require deliberate user action, keep the footer
     // button disabled so the user can't accidentally skip past them.
@@ -68,6 +69,7 @@ async function choose(index) {
     render(state);
     await refreshNews();
     await refreshInbox();
+    await refreshCupBracket();
 
     // Re-enable unless the next state also requires engagement
     const lockStates = ['blocking_event', 'season_end', 'game_over'];
@@ -80,38 +82,45 @@ async function choose(index) {
   }
 }
 
+// ── State: which club the user manages (set after team selection) ─────────────
+let managedTeam = null;
+
 // ── Central renderer ──────────────────────────────────────────────────────────
 
 function render(state) {
-  // Hide all content panels first
+  // Track managed team from any state that carries it
+  if (state.managed_team) managedTeam = state.managed_team;
+
   hide('panel-event');
   hide('panel-season-end');
+  hide('panel-cup-bracket');
 
   const type = state.type;
 
-  if (type === 'matchday')         renderMatchday(state);
-  else if (type === 'blocking_event') renderBlockingEvent(state);
-  else if (type === 'season_end')  renderSeasonEnd(state);
+  if (type === 'matchday')            renderMatchday(state);
+  else if (type === 'blocking_event') {
+    if (state.category === 'setup')   renderTeamSelection(state);
+    else                              renderBlockingEvent(state);
+  }
+  else if (type === 'season_end')     renderSeasonEnd(state);
   else if (type === 'between_seasons') renderBetweenSeasons(state);
-  else if (type === 'game_over')   renderGameOver(state);
-  else if (type === 'not_started') setStatus('Ready. Press Advance to begin.');
-  else if (type === 'error')       setStatus(`Error: ${state.message}`);
+  else if (type === 'game_over')      renderGameOver(state);
+  else if (type === 'not_started')    setStatus('Ready. Press Advance to begin.');
+  else if (type === 'error')          setStatus(`Error: ${state.message}`);
 }
 
 // ── Matchday renderer ─────────────────────────────────────────────────────────
 
 function renderMatchday(state) {
-  // Update masthead
   setText('meta-season', state.season);
   setText('meta-matchday', `Matchday ${state.matchday_num}`);
   setText('meta-date', formatDate(state.date));
 
-  // Update standings
-  renderStandings(state.standings);
+  // Show managed club in the masthead edition line
+  if (managedTeam) setText('meta-season', `${state.season} — ${managedTeam}`);
 
-  // Replace the entire results feed with just this matchday.
-  // The user sees the current edition of the newspaper — previous
-  // matchdays are accessible from the competition page (to be built).
+  renderStandings(state.standings, managedTeam);
+
   hide('feed-placeholder');
   const feed = document.getElementById('results-feed');
   feed.innerHTML = `
@@ -120,14 +129,12 @@ function renderMatchday(state) {
         <span>${state.competition} — Matchday ${state.matchday_num}</span>
         <span class="match-date">${formatDate(state.date)}</span>
       </div>
-      ${state.results.map(renderResultCard).join('')}
+      ${state.results.map(r => renderResultCard(r, managedTeam)).join('')}
     </div>
   `;
 
-  // Right column: injuries + suspensions
   renderNotifications(state.new_injuries || [], state.newly_suspended || []);
 
-  // Footer
   setStatus(`Matchday ${state.matchday_num} complete.`);
   const next = state.next_event_date
     ? `Next: ${formatDate(state.next_event_date)}`
@@ -135,22 +142,24 @@ function renderMatchday(state) {
   setText('footer-next', next);
 }
 
-function renderResultCard(result) {
+function renderResultCard(result, yourTeam = null) {
   const hg = result.home_goals;
   const ag = result.away_goals;
+  const isYours = yourTeam &&
+    (result.home_team === yourTeam || result.away_team === yourTeam);
 
   const homeGoals = goalScorers(result.events, result.home_team);
   const awayGoals = goalScorers(result.events, result.away_team);
 
   return `
-    <div class="result-card">
+    <div class="result-card${isYours ? ' your-match' : ''}">
       <div class="result-team home">
-        <div>${result.home_team}</div>
+        <div class="${result.home_team === yourTeam ? 'your-team-name' : ''}">${result.home_team}</div>
         ${homeGoals ? `<div class="result-scorers">${homeGoals}</div>` : ''}
       </div>
       <div class="result-score">${hg} – ${ag}</div>
       <div class="result-team away">
-        <div>${result.away_team}</div>
+        <div class="${result.away_team === yourTeam ? 'your-team-name' : ''}">${result.away_team}</div>
         ${awayGoals ? `<div class="result-scorers">${awayGoals}</div>` : ''}
       </div>
     </div>
@@ -170,21 +179,22 @@ function goalScorers(events, teamName) {
 
 // ── Standings renderer ────────────────────────────────────────────────────────
 
-function renderStandings(standings) {
+function renderStandings(standings, yourTeam = null) {
   const tbody = document.getElementById('standings-body');
   if (!standings || standings.length === 0) return;
 
   tbody.innerHTML = standings.map((row, i) => {
-    const cls = i < 1 ? 'top-3 promoted' : i < 3 ? 'top-3' : '';
+    const isYours = row.team === yourTeam;
+    const cls = [
+      i < 1 ? 'top-3 promoted' : i < 3 ? 'top-3' : '',
+      isYours ? 'your-club' : ''
+    ].join(' ').trim();
 
-    // Shorten long names: keep first word if it's not "Kluba"/"Populara",
-    // otherwise keep the last meaningful word
     const name = abbreviateTeam(row.team);
-
     return `
       <tr class="${cls}">
         <td>${i + 1}</td>
-        <td class="team-col" title="${row.team}">${name}</td>
+        <td class="team-col" title="${row.team}">${name}${isYours ? ' ◀' : ''}</td>
         <td>${row.played}</td>
         <td>${row.wins}</td>
         <td>${row.draws}</td>
@@ -219,6 +229,7 @@ function renderBlockingEvent(state) {
   setText('event-description', state.description);
 
   const choicesEl = document.getElementById('event-choices');
+  choicesEl.className = 'event-choices';
   choicesEl.innerHTML = '';
 
   if (state.choices && state.choices.length > 0) {
@@ -244,6 +255,40 @@ function renderBlockingEvent(state) {
   }
 }
 
+function renderTeamSelection(state) {
+  show('panel-event');
+  hide('feed-placeholder');
+
+  setText('event-category', 'Club Selection');
+  setText('event-title', state.title);
+  setText('event-description', state.description);
+
+  const choicesEl = document.getElementById('event-choices');
+  choicesEl.className = 'event-choices choice-grid';
+  choicesEl.innerHTML = '';
+
+  if (state.choices && state.choices.length > 0) {
+    state.choices.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'choice-btn team-choice';
+      btn.textContent = c.text;
+      btn.dataset.index = c.index + 1;
+      btn.onclick = () => choose(c.index);
+      choicesEl.appendChild(btn);
+    });
+    setStatus(`${state.title} — select your club to begin.`);
+    setText('footer-next', 'Choose a club above.');
+  } else {
+    const btn = document.createElement('button');
+    btn.className = 'advance-btn';
+    btn.textContent = 'Continue';
+    btn.onclick = () => choose(0);
+    choicesEl.appendChild(btn);
+    setStatus(`${state.title} — continue when ready.`);
+    setText('footer-next', '');
+  }
+}
+
 // ── Season end renderer ───────────────────────────────────────────────────────
 
 function renderSeasonEnd(state) {
@@ -258,6 +303,16 @@ function renderSeasonEnd(state) {
     Champions of the ${state.season} season:<br>
     <strong>${state.champion}</strong>
   `;
+
+  // Cup winner (if any)
+  const cupEl = document.getElementById('cup-winner-declaration');
+  if (state.cup_winner) {
+    cupEl.innerHTML = `Cup Winners:<br><strong>${state.cup_winner}</strong>`;
+    cupEl.style.display = 'block';
+  } else {
+    cupEl.innerHTML = '';
+    cupEl.style.display = 'none';
+  }
 
   // Stats grid
   const grid = document.getElementById('season-stats-grid');
@@ -478,6 +533,53 @@ async function refreshInbox() {
   }
 }
 
+async function refreshCupBracket() {
+  try {
+    const bracket = await api('GET', '/api/cup_bracket');
+    const panel = document.getElementById('panel-cup-bracket');
+    const container = document.getElementById('cup-bracket');
+
+    if (!bracket || !bracket.rounds || bracket.rounds.length === 0) {
+      hide('panel-cup-bracket');
+      if (container) container.innerHTML = '';
+      return;
+    }
+
+    show('panel-cup-bracket');
+    container.innerHTML = bracket.rounds.map(round => {
+      const fixtures = round.fixtures.map(f => {
+        const home = f.home || 'TBD';
+        const away = f.away || 'TBD';
+        const score = f.played
+          ? (f.is_draw ? 'Draw' : `${f.home_goals}–${f.away_goals}`)
+          : 'vs';
+        const homeClass = f.winner === f.home ? ' winner' : '';
+        const awayClass = f.winner === f.away ? ' winner' : '';
+        const playedClass = f.played ? ' played' : ' pending';
+        const drawClass = f.is_draw ? ' draw' : '';
+
+        return `
+          <div class="cup-match${playedClass}${drawClass}">
+            <div class="cup-team${homeClass}">${home}</div>
+            <div class="cup-score">${score}</div>
+            <div class="cup-team${awayClass}">${away}</div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="cup-round">
+          <h4>${round.label}</h4>
+          ${fixtures}
+        </div>
+      `;
+    }).join('');
+  } catch (e) {
+    console.warn('Cup bracket load failed:', e);
+    hide('panel-cup-bracket');
+  }
+}
+
 // ── Utilities ─────────────────────────────────────────────────────────────────
 
 function setText(id, text) {
@@ -503,6 +605,18 @@ function setStatus(msg) {
   setText('footer-status', msg);
 }
 
+function setPage(page) {
+  document.querySelectorAll('.nav-link').forEach(el => {
+    el.classList.toggle('active', el.dataset.page === page);
+  });
+
+  const selected = document.querySelector(`.nav-link[data-page="${page}"]`);
+  if (selected) {
+    setText('page-heading', selected.textContent.trim());
+    setText('page-lead', 'A newspaper-style club view and world overview will appear here as the simulation advances.');
+  }
+}
+
 function formatDate(iso) {
   if (!iso) return '';
   const d = new Date(iso + 'T00:00:00');
@@ -514,17 +628,64 @@ function formatDate(iso) {
 // ── Init ──────────────────────────────────────────────────────────────────────
 
 (async function init() {
+  document.querySelectorAll('.nav-link').forEach(el => {
+    el.addEventListener('click', () => setPage(el.dataset.page));
+  });
+  setPage('newspaper');
+
   // On load, check if the engine has already been started
   // (e.g. server was restarted but game data exists)
   try {
     const state = await api('GET', '/api/state');
     if (state.type !== 'not_started') {
+      // Game already started — hide main menu and render
+      hide('main-menu');
       render(state);
       await refreshNews();
       await refreshInbox();
+      await refreshCupBracket();
     } else {
-      setStatus('Ready. Press Advance to begin.');
+      // Show main menu and wait for user action
+      show('main-menu');
+      setStatus('Ready. Start a New Game or Continue a saved game.');
     }
+  
+    // Wire main menu buttons
+    const newBtn = document.getElementById('btn-new-game');
+    const contBtn = document.getElementById('btn-continue');
+    const menuStatus = document.getElementById('menu-status');
+    if (newBtn) newBtn.addEventListener('click', async () => {
+      menuStatus.textContent = 'Starting new game…';
+      disable(true);
+      try {
+        const state = await api('POST', '/api/advance', { load_save: false });
+        hide('main-menu');
+        render(state);
+        await refreshNews();
+        await refreshInbox();
+        await refreshCupBracket();
+        disable(false);
+      } catch (e) {
+        menuStatus.textContent = `Error: ${e.message}`;
+        disable(false);
+      }
+    });
+    if (contBtn) contBtn.addEventListener('click', async () => {
+      menuStatus.textContent = 'Resuming saved game…';
+      disable(true);
+      try {
+        const state = await api('POST', '/api/advance', { load_save: true });
+        hide('main-menu');
+        render(state);
+        await refreshNews();
+        await refreshInbox();
+        await refreshCupBracket();
+        disable(false);
+      } catch (e) {
+        menuStatus.textContent = `Error: ${e.message}`;
+        disable(false);
+      }
+    });
   } catch (e) {
     setStatus('Cannot reach API. Is api.py running?');
   }

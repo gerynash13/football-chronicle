@@ -134,8 +134,9 @@ def get_state():
         return jsonify({
             "type": "not_started",
             "message": "Call POST /api/advance to advance the game.",
+            "managed_team": engine.managed_team,
         })
-    return jsonify(_last_state)
+    return jsonify({**_last_state, "managed_team": engine.managed_team})
 
 @app.route("/api/news", methods=["GET"])
 def get_news():
@@ -302,6 +303,10 @@ def _serialize_player(player, team_name: str) -> dict:
     
 # Dev utilities
 
+@app.route("/api/cup_bracket", methods=["GET"])
+def get_cup_bracket():
+    return jsonify(engine.get_cup_bracket())
+
 @app.route("/api/ping", methods=["GET"])
 def ping():
     """
@@ -311,6 +316,7 @@ def ping():
         "status": "ok",
         "season": engine.season_year or "not started",
         "teams": len(engine.teams),
+        "managed_team": engine.managed_team
     })
     
     

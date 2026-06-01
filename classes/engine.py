@@ -87,8 +87,9 @@ from news_feed import (
 )
 from records import RecordBook
 from player_refs import find_player
+from events import Event, Choice
 from game_calendar import GameCalendar, apply_effects, apply_match_morale
-from rules import get_max_subs, get_yellow_threshold
+from rules import get_max_subs, get_yellow_threshold, get_match_days
 from simulation import roll_injury_severity
 
 
@@ -109,6 +110,7 @@ class GameEngine:
         self.season_year:    str         = ""
         self.current_season: Season      = None
         self.comp:           Competition = None
+        self.cup:            object = None
         self.calendar:       GameCalendar = None
 
         # Internal bookkeeping
@@ -116,6 +118,7 @@ class GameEngine:
         self._last_processed: datetime.date = None
         self._pending_event   = None         # blocking non-match event awaiting choice
         self._season_complete: bool = False  # True once end_season() has been called
+        self.managed_team: str | None = None
 
     # ── Public interface ──────────────────────────────────────────────────────
 
@@ -163,6 +166,24 @@ class GameEngine:
             return {"type": "error", "message": "No blocking event is pending."}
 
         event = self._pending_event
+        if event.category == "setup":
+            if index < 0 or index >= len(event.choices):
+                return {
+                    "type":    "error",
+                    "message": f"Invalid choice. Pick 0–{len(event.choices) - 1}.",
+                }
+            chosen = event.choices[index]
+            # Resolve name → Team object so the rest of the engine
+            # can compare by identity rather than string matching
+            self.managed_team = next(
+                (t for t in self.teams if t.name == chosen.text),
+                None
+            )
+            event.resolution = chosen.text
+            event.is_read    = True
+            self._pending_event = None
+            return self._advance_calendar()
+
         if not event.choices:
             # Acknowledgement-only event — any input dismisses it
             apply_effects(event.effects, self.teams)
@@ -196,7 +217,22 @@ class GameEngine:
             save_teams_to_file(self.teams)
 
         self._start_season(load_save=load_save)
-        return self._advance_calendar()
+        self._pending_event = self._build_team_selection_event()
+        return self._state_blocking_event(self._pending_event)
+
+    def _build_team_selection_event(self) -> Event:
+        choices = [Choice(text=team.name) for team in sorted(self.teams, key=lambda t: t.name)]
+        return Event(
+            date=self.calendar.current_date,
+            category="setup",
+            blocking=True,
+            title="Choose your club",
+            description=(
+                "Select the team you will manage for this season. "
+                "Your choice will shape the club-level story and inbox as gameplay expands."
+            ),
+            choices=choices,
+        )
 
     def _bootstrap_teams(self) -> list:
         """
@@ -249,10 +285,11 @@ class GameEngine:
         """
         import yaml
         filename = season_year.replace("/", "_") + ".yaml"
-        path = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)),
-            "data", "squads", filename
-        )
+        # The data/ directory lives at the project root. When this module
+        # is located inside the `classes` package, __file__ points to
+        # classes/engine.py — so walk up one level to reach the project root.
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        path = os.path.join(project_root, "data", "squads", filename)
         if not os.path.exists(path):
             return {}
         with open(path, "r", encoding="utf-8") as f:
@@ -316,6 +353,7 @@ class GameEngine:
 
         self.current_season = Season(self.season_year, self.teams)
 
+        # League
         self.comp = Competition(
             "Prote Kategorias",
             self.teams,
@@ -324,13 +362,32 @@ class GameEngine:
         )
         self.comp.generate_fixtures()
         self.current_season.add_competition(self.comp)
+        
+        # Cup
+        self.cup = CupCompetition(
+            "Protonas Cup",
+            self.teams,
+            max_subs=get_max_subs(self.season_year),
+            season_year=self.season_year,
+        )
+        self.cup.generate_fixtures()
+        self.current_season.add_competition(self.cup)
+
+        # Registry of competitions for iteration and future generalisation
+        self.competitions = [self.comp, self.cup]
 
         self.calendar = GameCalendar(self.season_year)
-        self.calendar.schedule_fixtures(self.comp)
+        available_days = get_match_days(self.season_year)
+        primary_day = available_days[0]
+        cup_day = available_days[1] if len(available_days) > 1 else primary_day
+        
+        self.calendar.schedule_fixtures(self.comp, preferred_day=primary_day)
+        # Schedule the cup towards the end of the season so the final is last
+        self.calendar.schedule_fixtures(self.cup, preferred_day=cup_day, start_from_end=True)
 
         if load_save and os.path.exists("competition_data.json"):
             self.comp, saved_date = load_competition_data(self.comp)
-            self.calendar.schedule_fixtures(self.comp)
+            self.calendar.schedule_fixtures(self.comp, preferred_day=primary_day)
             self.calendar.current_date = saved_date
 
         self._last_processed = self.calendar.current_date
@@ -397,42 +454,50 @@ class GameEngine:
 
     def _process_matchday(self) -> dict:
         """
-        Simulate all matches for today, run post-match logic, and return
-        a MATCHDAY state dict.
+        Simulate all matches for today across all active competitions, 
+        run post-match logic, and return a MATCHDAY state dict.
 
         This is the largest chunk of logic extracted from main.py.
         Every side-effect (stat updates, morale, injuries, suspensions,
         saves) happens here. The returned dict contains all the data the
         view needs to render results, standings, and notifications.
         """
-        today_fixtures = [
-            f for f in self.comp.fixtures
-            if f.get("date") == self.calendar.current_date
-        ]
+        today = self.calendar.current_date
+        
+        # Find which competitions have fixtures today
+        active_comp = None
+        today_fixtures = []
+        for comp in getattr(self, 'competitions', [self.comp, self.cup]):
+            fixtures = [f for f in comp.fixtures if f.get("date") == today]
+            if fixtures:
+                active_comp = comp
+                today_fixtures = fixtures
+                break # Only one competition can have fixtures today
+        
         if not today_fixtures:
             return self._advance_calendar()
 
         matchday_num = today_fixtures[0]["matchday"]
-        if matchday_num in self.comp.completed_matchdays:
+        if matchday_num in active_comp.completed_matchdays:
             return self._advance_calendar()
 
-        self.comp.current_matchday = matchday_num
+        active_comp.current_matchday = matchday_num
 
         # Simulate
-        if self.comp.type == "cup":
-            drawn_fixtures = self.comp.simulate_cup_round()
+        if active_comp.type == "cup":
+            drawn_fixtures = active_comp.simulate_cup_round()
         else:
-            self.comp.simulate_matchday()
+            active_comp.simulate_matchday()
             drawn_fixtures = []
 
-        recent = self.comp.results[-len(today_fixtures):]
+        recent = active_comp.results[-len(today_fixtures):]
 
         # Record-book and morale updates
         for result in recent:
             self.record_book.process_match(
                 result,
                 self.teams,
-                competition_name=self.comp.name,
+                competition_name=active_comp.name,
                 season_year=self.season_year,
             )
             home_team = next((t for t in self.teams if t.name == result["home_team"]), None)
@@ -443,7 +508,7 @@ class GameEngine:
             # ── News feed: match result ───────────────────────────────────────
             publish_match_result(
                 self.news_feed,
-                competition = self.comp.name,
+                competition = active_comp.name,
                 home_team   = result["home_team"],
                 away_team   = result["away_team"],
                 home_goals  = result["home_goals"],
@@ -475,7 +540,7 @@ class GameEngine:
                             for e in goal_events
                         ) else result["away_team"],
                         goals       = count,
-                        competition = self.comp.name,
+                        competition = active_comp.name,
                         match       = (f"{result['home_team']} {result['home_goals']}"
                                        f"-{result['away_goals']} {result['away_team']}"),
                         date        = self.calendar.current_date,
@@ -487,7 +552,7 @@ class GameEngine:
         scheduled_replays = []
         for drawn in drawn_fixtures:
             replay_date = self.calendar.schedule_replay(
-                self.comp,
+                active_comp,
                 drawn["home_team"],
                 drawn["away_team"],
                 self.calendar.current_date,
@@ -500,7 +565,7 @@ class GameEngine:
                 })
 
         # Cup: advance winners for completed replays
-        if self.comp.type == "cup":
+        if active_comp.type == "cup":
             for fixture in today_fixtures:
                 if fixture.get("is_replay"):
                     replay_result = next(
@@ -517,7 +582,7 @@ class GameEngine:
                         else:
                             winner = None
                         if winner:
-                            self.comp.advance_cup_winner(
+                            active_comp.advance_cup_winner(
                                 fixture["home_team"],
                                 fixture["away_team"],
                                 winner,
@@ -593,28 +658,42 @@ class GameEngine:
                     )
 
         # Newspaper story (probabilistic)
-        self.calendar.generate_newspaper_story(self.teams, self.comp)
+        self.calendar.generate_newspaper_story(self.teams, active_comp)
 
         # Persist
-        save_competition_to_file(self.comp, self.calendar.current_date)
+        save_competition_to_file(active_comp, self.calendar.current_date)
 
         # Next event date (for the view to display)
         next_event = self.calendar.get_next_event_date(
             self.calendar.current_date + datetime.timedelta(days=1)
         )
 
+        # Identify the user's own result this matchday (if any)
+        your_result = None
+        if self.managed_team:
+            your_result = next(
+                (r for r in recent
+                 if r["home_team"] == self.managed_team.name
+                 or r["away_team"] == self.managed_team.name),
+                None
+            )
+
         return {
             "type":               "matchday",
             "season":             self.season_year,
             "date":               self.calendar.current_date.isoformat(),
             "matchday_num":       matchday_num,
-            "competition":        self.comp.name,
+            "competition":        active_comp.name,
+            "competition_type":   active_comp.type,
             "results":            recent,
-            "standings":          self._serialise_standings(),
+            "standings":          self._serialise_standings() if active_comp.type == "league" else None,
+                "cup_bracket":        self.get_cup_bracket() if active_comp.type == "cup" else None,
             "scheduled_replays":  scheduled_replays,
             "newly_suspended":    newly_suspended,
             "new_injuries":       new_injuries,
             "next_event_date":    next_event.isoformat() if next_event else None,
+            "managed_team":       self.managed_team.name if self.managed_team else None,
+            "your_result":        your_result,
         }
 
     # ── Season end ────────────────────────────────────────────────────────────
@@ -642,8 +721,20 @@ class GameEngine:
 
         sorted_table = self._sorted_standings()
         champion_name = sorted_table[0][0]
+        
+        # Get cup winner (if cup is complete)
+        cup_winner_name = None
+        if self.cup and self.cup.results:
+            max_matchday = max((f["matchday"] for f in self.cup.fixtures), default=0)
+            final_results = [r for r in self.cup.results if r.get("matchday") == max_matchday]
+            if final_results:
+                final_result = final_results[-1]  # Should only be one final
+                if final_result["home_goals"] > final_result["away_goals"]:
+                    cup_winner_name = final_result["home_team"]
+                elif final_result["away_goals"] > final_result["home_goals"]:
+                    cup_winner_name = final_result["away_team"]
 
-        # Trophy
+        # Trophy — League
         for team in self.teams:
             if team.name == champion_name:
                 team.trophies.append({
@@ -656,6 +747,21 @@ class GameEngine:
                     player.career_trophies_by_comp[self.comp.name] = (
                         player.career_trophies_by_comp.get(self.comp.name, 0) + 1
                     )
+        
+        # Trophy — Cup
+        if cup_winner_name:
+            for team in self.teams:
+                if team.name == cup_winner_name:
+                    team.trophies.append({
+                        "competition": self.cup.name,
+                        "season":      self.season_year,
+                    })
+                    for player in team.squad:
+                        player._won_trophy_flag = True
+                        player.career_trophies += 1
+                        player.career_trophies_by_comp[self.cup.name] = (
+                            player.career_trophies_by_comp.get(self.cup.name, 0) + 1
+                        )
 
         # Records
         self.record_book.finalize_season(self.comp, self.teams, self.season_year)
@@ -679,6 +785,7 @@ class GameEngine:
             "season":           self.season_year,
             "date":             self.calendar.current_date.isoformat(),
             "champion":         champion_name,
+            "cup_winner":       cup_winner_name,
             "final_standings":  self._serialise_standings(),
             "top_scorers":      _player_rows(top_scorers),
             "top_assisters":    _player_rows(top_assisters),
@@ -797,3 +904,82 @@ class GameEngine:
             {"team": name, **stats}
             for name, stats in self._sorted_standings()
         ]
+        
+    def get_cup_bracket(self) -> dict:
+        """
+        Serialize the cup bracket for the frontend.
+        
+        Returns a dict with:
+            rounds: a list of rounds, each containing:
+                round_num: int
+                label: str (for example "Round of 16", "Quarter-finals", etc.)
+                fixtures: list of {home, away, home_goals, away_goals, winner, played}
+        """
+        # Locate the cup competition (support multiple competitions)
+        cup_comp = next((c for c in getattr(self, 'competitions', []) if c.type == 'cup'), None)
+        cup_comp = cup_comp or getattr(self, 'cup', None)
+        if not cup_comp or not cup_comp.fixtures:
+            return {"rounds": []}
+
+        # Group fixtures by matchday
+        from collections import defaultdict
+        by_round: dict = defaultdict(list)
+        for f in cup_comp.fixtures:
+            by_round[f["matchday"]].append(f)
+
+        # Build a result lookup: (home_name, away_name, matchday) -> result
+        result_lookup = {}
+        for r in cup_comp.results:
+            key = (r["home_team"], r["away_team"], r.get("matchday"))
+            result_lookup[key] = r
+
+        total_rounds = max(by_round.keys()) if by_round else 0
+        num_teams = len(cup_comp.teams)
+        
+        def round_label(round_num: int, total: int) -> str:
+            remaining = num_teams // (2 ** (round_num -1))
+            labels = {
+                2: "Final",
+                4: "Semi-Finals",
+                8: "Quarter-finals",
+                16: "Round of 16",
+                32: "Round of 32",
+                64: "Round of 64",
+                128: "Round of 128",
+            }
+            return labels.get(remaining, f"Round {round_num}")
+        
+        rounds = []
+        for round_num in sorted(by_round.keys()):
+            fixtures_out = []
+            for f in by_round[round_num]:
+                home_name = f["home_team"].name if hasattr(f.get("home_team"), "name") else f.get("home_team")
+                away_name = f["away_team"].name if hasattr(f.get("away_team"), "name") else f.get("away_team")
+                
+                result = result_lookup.get((home_name, away_name, round_num))
+                played = result is not None
+                
+                if played:
+                    hg = result["home_goals"]
+                    ag = result["away_goals"]
+                    winner = home_name if hg > ag else (away_name if ag > hg else None)
+                else:
+                    hg = ag = winner = None
+                    
+                fixtures_out.append({
+                    "home":         home_name,
+                    "away":         away_name,
+                    "home_goals":   hg,
+                    "away_goals":   ag,
+                    "winner":       winner,
+                    "played":       played,
+                    "is_draw":      played and hg == ag
+                })
+                
+            rounds.append({
+                "round_num": round_num,
+                "label":     round_label(round_num, total_rounds),
+                "fixtures":  fixtures_out
+            })
+            
+        return {"rounds": rounds}
