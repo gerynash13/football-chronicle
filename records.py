@@ -199,7 +199,7 @@ class RecordBook:
     ):
         if player_id and player_id in player_index:
             return player_index[player_id]
-        player, tname = find_player(teams, player=player_id, name=name, team_name=team_name)
+        player, tname = find_player(teams, player_id=player_id, name=name, team_name=team_name)
         return (player, tname) if player is not None else None
 
     @staticmethod

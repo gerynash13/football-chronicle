@@ -70,6 +70,7 @@ from data_manager import (
     load_competition_data,
     save_records_to_file,
     load_records_from_file,
+    save_world_state,
 )
 from data_loader import (
     load_nations,
@@ -119,6 +120,8 @@ class GameEngine:
         self._pending_event   = None         # blocking non-match event awaiting choice
         self._season_complete: bool = False  # True once end_season() has been called
         self.managed_team: str | None = None
+        self._tier_seasons: dict = {}     # Tracks which seasons each tier has been competed in, for prestige calculations
+        self._committed_tiers: dict = {}   # Tracks which tiers the player has committed to, for prestige calculations
 
     # ── Public interface ──────────────────────────────────────────────────────
 
@@ -208,7 +211,14 @@ class GameEngine:
 
     def _initialise(self, load_save: bool) -> dict:
         """Load or generate teams, then start the first season."""
-        self.record_book = load_records_from_file()
+        from data_loader import load_nations
+        from data_manager import load_world_state
+
+        self.record_book = load_records_from_file()        
+        self._nations = load_nations() # Store on engine for easy access by other modules
+        tier_seasons, committed_tiers = load_world_state(self._nations)  # For prestige calculations
+        self._tier_seasons = tier_seasons
+        self._committed_tiers = committed_tiers
 
         if os.path.exists("teams_data.json"):
             self.teams = load_teams_from_file("teams_data.json")
@@ -255,6 +265,7 @@ class GameEngine:
 
         for cfg in team_configs:
             team = Team(cfg.name, cfg.attack, cfg.midfield, cfg.defense)
+            team.nation_id   = cfg.nation_id
             team.prestige    = cfg.prestige
             team.home_region = cfg.home_region
             team.budget      = cfg.budget
@@ -353,12 +364,19 @@ class GameEngine:
 
         self.current_season = Season(self.season_year, self.teams)
 
+        # Look up competition prestige from config
+        from data_loader import load_competitions
+        comp_configs = load_competitions()
+        league_prestige = comp_configs["prote_kategorias"].prestige
+        cup_prestige = comp_configs["protonas_cup"].prestige
+        
         # League
         self.comp = Competition(
             "Prote Kategorias",
             self.teams,
             max_subs=get_max_subs(self.season_year),
             season_year=self.season_year,
+            prestige=league_prestige,
         )
         self.comp.generate_fixtures()
         self.current_season.add_competition(self.comp)
@@ -369,6 +387,7 @@ class GameEngine:
             self.teams,
             max_subs=get_max_subs(self.season_year),
             season_year=self.season_year,
+            prestige=cup_prestige,
         )
         self.cup.generate_fixtures()
         self.current_season.add_competition(self.cup)
@@ -810,9 +829,26 @@ class GameEngine:
         Called after SEASON_END has been shown.
         Ages players, saves, and either starts the next season or ends the game.
         """
+        from prestige import collect_upset_bonuses, update_team_prestige, update_nation_prestige
+        
         # Save after season
         save_teams_to_file(self.teams)
         save_records_to_file(self.record_book)
+        
+        standings = self._serialise_standings()
+        upset_bonuses = collect_upset_bonuses(self.comp.results, self.teams)
+        prestige_log = update_team_prestige(self.teams, standings, 
+                                            self.comp.prestige, upset_bonuses)
+        
+        nation_log = update_nation_prestige(
+            self._nations,
+            self.teams,
+            standings,
+            self.comp.prestige,
+            self._tier_seasons,
+            self._committed_tiers,
+        )
+        save_world_state(self._nations, self._tier_seasons, self._committed_tiers)
 
         # Player development
         development_log = []
@@ -848,6 +884,8 @@ class GameEngine:
             "completed_season": self._season_label(self._season_index - 1),
             "next_season":      self.season_year,
             "development_log":  development_log,
+            "prestige_log":     prestige_log,
+            "nation_log":       nation_log,
         }
 
     # ── Blocking event state ──────────────────────────────────────────────────
@@ -921,11 +959,15 @@ class GameEngine:
         if not cup_comp or not cup_comp.fixtures:
             return {"rounds": []}
 
-        # Group fixtures by matchday
+        # Group fixtures by their logical round. If a fixture is a replay
+        # it may have an `original_round` recorded; group those under the
+        # original round number so replays appear as part of the same round
+        # in the frontend bracket view rather than as an extra later round.
         from collections import defaultdict
         by_round: dict = defaultdict(list)
         for f in cup_comp.fixtures:
-            by_round[f["matchday"]].append(f)
+            key = f.get("original_round", f["matchday"])
+            by_round[key].append(f)
 
         # Build a result lookup: (home_name, away_name, matchday) -> result
         result_lookup = {}
@@ -952,11 +994,37 @@ class GameEngine:
         rounds = []
         for round_num in sorted(by_round.keys()):
             fixtures_out = []
-            for f in by_round[round_num]:
+            
+            # Separate original matches from replays
+            original_fixtures = [f for f in by_round[round_num] if not f.get("is_replay")]
+            replay_fixtures = [f for f in by_round[round_num] if f.get("is_replay")]
+            
+            # Process fixtures (originals first, then replays)
+            all_fixtures = original_fixtures + replay_fixtures
+            
+            for i, f in enumerate(all_fixtures):
+                # Insert separator before replays
+                if i == len(original_fixtures) and len(replay_fixtures) > 0:
+                    fixtures_out.append({
+                        "is_separator": True,
+                        "home":         None,
+                        "away":         "Replays",
+                        "home_goals":   None,
+                        "away_goals":   None,
+                        "winner":       None,
+                        "played":       False,
+                        "is_draw":      False,
+                        "score_display": "",
+                        "has_pending_replay": False
+                    })
+                
                 home_name = f["home_team"].name if hasattr(f.get("home_team"), "name") else f.get("home_team")
                 away_name = f["away_team"].name if hasattr(f.get("away_team"), "name") else f.get("away_team")
                 
-                result = result_lookup.get((home_name, away_name, round_num))
+                # For replays, use the replay's matchday to look up its result;
+                # for originals, use the grouped round number.
+                lookup_key = f.get("matchday") if f.get("is_replay") else round_num
+                result = result_lookup.get((home_name, away_name, lookup_key))
                 played = result is not None
                 
                 if played:
@@ -965,15 +1033,39 @@ class GameEngine:
                     winner = home_name if hg > ag else (away_name if ag > hg else None)
                 else:
                     hg = ag = winner = None
-                    
+                
+                is_draw = played and hg == ag
+                
+                # Check if this draw will be replayed (there's a replay fixture for this match)
+                will_be_replayed = False
+                if is_draw:
+                    will_be_replayed = any(
+                        rf.get("home_team").name == home_name and 
+                        rf.get("away_team").name == away_name
+                        for rf in replay_fixtures
+                    )
+                
+                # Build score_display
+                score_display = ""
+                if played:
+                    score_display = f"{hg}-{ag}"
+                    if will_be_replayed:
+                        score_display += "r"
+                
+                # Only mark as a draw if there's NO replay scheduled
+                # (so frontend doesn't show "Draw" text, uses score_display instead)
+                display_is_draw = is_draw and not will_be_replayed
+                
                 fixtures_out.append({
-                    "home":         home_name,
-                    "away":         away_name,
-                    "home_goals":   hg,
-                    "away_goals":   ag,
-                    "winner":       winner,
-                    "played":       played,
-                    "is_draw":      played and hg == ag
+                    "home":                 home_name,
+                    "away":                 away_name,
+                    "home_goals":           hg,
+                    "away_goals":           ag,
+                    "winner":               winner,
+                    "played":               played,
+                    "is_draw":              display_is_draw,
+                    "score_display":        score_display,
+                    "has_pending_replay":   will_be_replayed
                 })
                 
             rounds.append({

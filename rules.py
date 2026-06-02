@@ -31,3 +31,9 @@ def get_yellow_threshold(season_year):
     Yellow cards needed to trigger a one-match suspension.
     """
     return 5 # Can be changed
+
+def get_points_for_win(season_year):
+    """
+    Points awarded for a win. Changed from 2 to 3 in 1991.
+    """
+    return 3 if int(season_year.split("/")[0]) >= 1991 else 2

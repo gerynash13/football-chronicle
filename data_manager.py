@@ -15,6 +15,7 @@ def save_teams_to_file(teams, filename="teams_data.json"):
     for team in teams:
         team_data = {
             "name":             team.name,
+            "nation_id":        team.nation_id,
             "attack":           team.attack,
             "midfield":         team.midfield,
             "defense":          team.defense,
@@ -104,6 +105,7 @@ def load_teams_from_file(file_path):
         team.home_region      = team_data.get("home_region", "")
         team.budget           = team_data.get("budget", 1000)
         team.wage_budget      = team_data.get("wage_budget", 300)
+        team.nation_id        = team_data.get("nation_id", "")
 
         for player_data in team_data.get("squad", []):
             # ── Birth date — with backward-compat fallback for old saves ──────
@@ -247,3 +249,56 @@ def load_records_from_file(filename: str = "records_data.json") -> RecordBook:
     except FileNotFoundError:
         print("No records file found. Starting fresh record book.")
         return RecordBook()
+    
+def save_world_state(
+    nations: dict,
+    tier_seasons: dict,
+    committed_tiers: dict,
+    filename: str = "world_state.json",
+) -> None:
+    """
+    Persist nation prestige and tier guard state between sessions.
+
+    Why a separate file from teams_data.json?
+    Nation data is world-level; team data is club-level.
+    Keeping them separate means you can reset clubs without
+    losing world history, and vice versa.
+    """
+    data = {
+        "nation_prestige": {nid: n.prestige for nid, n in nations.items()},
+        "tier_seasons": tier_seasons,
+        "committed_tiers": committed_tiers,
+    }
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+    print(f"Saved world state to {filename}")
+    
+def load_world_state(
+    nations: dict,
+    filename: str = "world_state.json",
+) -> tuple[dict, dict]:
+    """
+    Load nation prestige and tier guard state, updating NationConfig objects in place.
+
+    Returns (tier_seasons, committed_tiers) so the engine can store them.
+    If no file exists, returns empty dicts — nations keep their YAML prestige values.
+
+    Why update NationConfig objects in place?
+    Because the rest of the codebase already holds references to them.
+    Replacing the objects would silently break every caller that did
+    `nation = get_nation("myria")` before this function ran.
+    """
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        
+        for nation_id, prestige in data.get("nation_prestige", {}).items():
+            if nation_id in nations:
+                nations[nation_id].prestige = prestige
+
+        print(f"Loaded prestige for {len(nations)} nations from {filename}")
+        return data.get("tier_seasons", {}), data.get("committed_tiers", {})
+        
+    except FileNotFoundError:
+        print("No world state file found. Starting with YAML prestige values and empty tier guards.")
+        return {}, {}

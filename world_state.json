@@ -1,0 +1,24 @@
+{
+  "nation_prestige": {
+    "myria": 4811.7,
+    "england": 8500.0,
+    "scotland": 7200.0,
+    "wales": 4800.0,
+    "ireland": 4200.0,
+    "netherlands": 2800.0,
+    "denmark": 2600.0,
+    "belgium": 2200.0,
+    "switzerland": 2100.0,
+    "germany": 1800.0,
+    "austria": 1600.0,
+    "hungary": 1500.0,
+    "bohemia": 1400.0,
+    "france": 1600.0,
+    "argentina": 1900.0,
+    "uruguay": 1700.0
+  },
+  "tier_seasons": {
+    "myria": 0
+  },
+  "committed_tiers": {}
+}

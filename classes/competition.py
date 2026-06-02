@@ -1,9 +1,11 @@
 import random
 from simulation import simulate_match
 from player_refs import xi_entry, new_competition_id
+from rules import get_max_subs, get_points_for_win
 
 class Competition:
-    def __init__(self, name, teams, competition_type="league", max_subs=0, season_year="1896/97"):
+    def __init__(self, name, teams, competition_type="league", 
+                 max_subs=0, season_year="1896/97", prestige=5000.0):
         self.id = new_competition_id()
         self.name = name
         self.teams = teams
@@ -15,6 +17,7 @@ class Competition:
         self.completed_matchdays = set()
         self.max_subs = max_subs
         self.season_year = season_year
+        self.prestige = prestige
         
     def initialize_standings(self):
         standings = {}
@@ -117,14 +120,17 @@ class Competition:
                 self.standings[away_team.name]["goal_difference"] = \
                     self.standings[away_team.name]["goals_for"] - self.standings[away_team.name]["goals_against"]
 
+
+                points_for_win = get_points_for_win(self.season_year)
+                
                 # Determine result
                 if home_goals > away_goals:
                     self.standings[home_team.name]["wins"] += 1
-                    self.standings[home_team.name]["points"] += 2
+                    self.standings[home_team.name]["points"] += points_for_win
                     self.standings[away_team.name]["losses"] += 1
                 elif away_goals > home_goals:
                     self.standings[away_team.name]["wins"] += 1
-                    self.standings[away_team.name]["points"] += 2
+                    self.standings[away_team.name]["points"] += points_for_win
                     self.standings[home_team.name]["losses"] += 1
                 else:
                     self.standings[home_team.name]["draws"] += 1
@@ -157,8 +163,10 @@ class CupCompetition(Competition):
 
     Fixtures are generated per round with `matchday` representing the round number.
     """
-    def __init__(self, name, teams, max_subs=0, season_year="1896/97"):
-        super().__init__(name, teams, competition_type="cup", max_subs=max_subs, season_year=season_year)
+    def __init__(self, name, teams, max_subs=0, season_year="1896/97", prestige=5000.0):
+        super().__init__(name, teams, competition_type="cup", 
+                         max_subs=max_subs, season_year=season_year,
+                         prestige=prestige)
 
     def _next_power_of_two(self, n):
         p = 1
@@ -283,7 +291,8 @@ class CupCompetition(Competition):
         home_team / away_team identify the original drawn fixture.
         winning_team is the Team object that won the replay.
  
-        Builds the next round's fixtures once all replay winners are known.
+        Builds the next round's fixtures, filling slots with winners as they
+        become available (allows "Team A vs TBD" style partial matches).
         """
         # Find out which round the original drawn match belonged to so we
         # can work out what the next round number should be
@@ -326,23 +335,34 @@ class CupCompetition(Competition):
                 else:
                     winners.append(fixture["away_team"])
                     
-        # Only build/fill next round when every slot in this round is decided
+        # Build/fill next round with available winners (allow partial TBD slots)
         total_slots = len(original_fixtures)
-        if len(winners) == total_slots and total_slots > 1:
-            # If placeholders were pre-created, fill them; otherwise append
+        if len(winners) > 0 and total_slots > 1:
+            # Get or create placeholders for the next round
             placeholders = [f for f in self.fixtures if f["matchday"] == next_round_num]
-            if placeholders:
-                for idx in range(0, len(winners), 2):
-                    slot = placeholders[idx // 2]
-                    slot["home_team"] = winners[idx]
-                    slot["away_team"] = winners[idx + 1]
-            else:
-                for i in range(0, len(winners), 2):
+            
+            # If no placeholders exist yet, create them
+            if not placeholders:
+                # Create empty fixture slots for next round
+                num_next_fixtures = total_slots // 2
+                for _ in range(num_next_fixtures):
                     self.fixtures.append({
                         "matchday": next_round_num,
-                        "home_team": winners[i],
-                        "away_team": winners[i + 1]
+                        "home_team": None,
+                        "away_team": None
                     })
+                placeholders = [f for f in self.fixtures if f["matchday"] == next_round_num]
+            
+            # Fill in available winners, leaving slots as None for pending opponents
+            for idx, winner in enumerate(winners):
+                slot_idx = idx // 2
+                is_home = (idx % 2 == 0)
+                
+                if slot_idx < len(placeholders):
+                    if is_home:
+                        placeholders[slot_idx]["home_team"] = winner
+                    else:
+                        placeholders[slot_idx]["away_team"] = winner
                 
     def generate_fixtures(self):
         # Build initial bracket

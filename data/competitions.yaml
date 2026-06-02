@@ -60,8 +60,8 @@
   participants:
     type: all_members
 
-- id: myria_cup
-  name: Myrian Cup
+- id: protonas_cup
+  name: Protonas Cup
   type: cup
   nation_id: myria
   founded_year: 1893

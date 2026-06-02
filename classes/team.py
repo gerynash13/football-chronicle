@@ -5,6 +5,7 @@ class Team:
     def __init__(self, name, attack, midfield, defense):
         self.id = new_team_id()
         self.name = name
+        self.nation_id = ""  # To be set when team is assigned to a nation
         self.attack = attack
         self.midfield = midfield
         self.defense = defense

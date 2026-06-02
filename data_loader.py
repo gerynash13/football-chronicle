@@ -303,6 +303,8 @@ def get_region(region_id: str) -> RegionConfig:
             if region.id == region_id:
                 return region
     raise ValueError(f"Region '{region_id}' not found in any nation in nations.yaml")
+
+def get_competition(comp_id: str) -> CompetitionConfig:
     global _competitions_cache
     if not _competitions_cache:
         _competitions_cache = load_competitions()

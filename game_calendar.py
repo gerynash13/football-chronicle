@@ -309,12 +309,22 @@ class GameCalendar:
         if candidate > self.season_end:
             return None  # No date available before the season ends
         
+        # Record which original round this replay belongs to (if available)
+        original = next(
+            (f for f in competition.fixtures
+             if f.get("home_team") is not None and f.get("away_team") is not None
+             and f.get("home_team") == home_team and f.get("away_team") == away_team),
+            None
+        )
+        original_round = original.get("matchday") if original else None
+
         competition.fixtures.append({
             "matchday": new_matchday,
             "home_team": home_team,
             "away_team": away_team,
             "date": candidate,
-            "is_replay": True
+            "is_replay": True,
+            "original_round": original_round,
         })
         
         self.add_event(Event(

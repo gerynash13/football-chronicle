@@ -52,7 +52,7 @@
                 cumulative decay with floor
                 tier change with min_seasons guard
 
-- [soon]      Cup competition wired into calendar
+- [done]      Cup competition wired into calendar
                 CupCompetition created in _start_season
                 midweek scheduling
                 cup teams drawn from teams.yaml (all_members)
@@ -153,7 +153,7 @@
 
 ## PLAYER SYSTEMS
 
-- [later]     Retirement system — probability increases after age 35,
+- [later]     Retirement system — probability increases after age 35 or after severe injury,
               triggers is_retired flag (field exists, logic not yet wired)
 - [later]     Player personality traits (professional, temperamental,
               leader, homesick, ambitious, etc.)

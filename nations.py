@@ -17,7 +17,7 @@ def get_nation_config(nation_name: str) -> dict:
         pass
     
     # Fall back to matching by display name
-    all_nations = load.nations()
+    all_nations = load_nations()
     for nation in all_nations.values():
         if nation.name.lower() == nation_name.lower():
             return nation.to_player_config()

@@ -548,18 +548,43 @@ async function refreshCupBracket() {
     show('panel-cup-bracket');
     container.innerHTML = bracket.rounds.map(round => {
       const fixtures = round.fixtures.map(f => {
+        // Handle separator fixtures specially
+        if (f.is_separator) {
+          return `
+            <div class="cup-separator">
+              <div class="separator-label">Replays</div>
+            </div>
+          `;
+        }
+
+        // Regular fixture rendering
         const home = f.home || 'TBD';
         const away = f.away || 'TBD';
-        const score = f.played
-          ? (f.is_draw ? 'Draw' : `${f.home_goals}–${f.away_goals}`)
-          : 'vs';
+        
+        // Use score_display if available (includes "r" suffix for replays)
+        // Otherwise fall back to constructed score
+        let score;
+        if (f.played) {
+          // If score_display is available, use it (e.g., "2-1r" or "2-1")
+          if (f.score_display) {
+            score = f.score_display;
+          } else if (f.is_draw) {
+            score = 'Draw';
+          } else {
+            score = `${f.home_goals}–${f.away_goals}`;
+          }
+        } else {
+          score = 'vs';
+        }
+
         const homeClass = f.winner === f.home ? ' winner' : '';
         const awayClass = f.winner === f.away ? ' winner' : '';
         const playedClass = f.played ? ' played' : ' pending';
         const drawClass = f.is_draw ? ' draw' : '';
+        const replayClass = f.has_pending_replay ? ' has-pending-replay' : '';
 
         return `
-          <div class="cup-match${playedClass}${drawClass}">
+          <div class="cup-match${playedClass}${drawClass}${replayClass}">
             <div class="cup-team${homeClass}">${home}</div>
             <div class="cup-score">${score}</div>
             <div class="cup-team${awayClass}">${away}</div>
