@@ -14,20 +14,21 @@ def save_teams_to_file(teams, filename="teams_data.json"):
 
     for team in teams:
         team_data = {
-            "name":             team.name,
-            "nation_id":        team.nation_id,
-            "league_nation_id": team.league_nation_id,
-            "attack":           team.attack,
-            "midfield":         team.midfield,
-            "defense":          team.defense,
-            "squad":            [],
-            "morale":           team.morale,
-            "board_confidence": team.board_confidence,
-            "fan_satisfaction": team.fan_satisfaction,
-            "prestige":         team.prestige,
-            "home_region":      team.home_region,
-            "budget":           team.budget,
-            "wage_budget":      team.wage_budget,
+            "name":                     team.name,
+            "nation_id":                team.nation_id,
+            "league_nation_id":         team.league_nation_id,
+            "league_nation_id_year":    team.league_nation_id_year,
+            "attack":                   team.attack,
+            "midfield":                 team.midfield,
+            "defense":                  team.defense,
+            "squad":                    [],
+            "morale":                   team.morale,
+            "board_confidence":         team.board_confidence,
+            "fan_satisfaction":         team.fan_satisfaction,
+            "prestige":                 team.prestige,
+            "home_region":              team.home_region,
+            "budget":                   team.budget,
+            "wage_budget":              team.wage_budget,
         }
 
         for player in team.squad:
@@ -99,15 +100,16 @@ def load_teams_from_file(file_path):
           defense = team_data["defense"]
           )
         
-        team.morale           = team_data.get("morale", 0.0)
-        team.board_confidence = team_data.get("board_confidence", 50.0)
-        team.fan_satisfaction = team_data.get("fan_satisfaction", 50.0)
-        team.prestige         = team_data.get("prestige", 500.0)
-        team.home_region      = team_data.get("home_region", "")
-        team.budget           = team_data.get("budget", 1000)
-        team.wage_budget      = team_data.get("wage_budget", 300)
-        team.nation_id        = team_data.get("nation_id", "")
-        team.league_nation_id = team_data.get("league_nation_id", "")
+        team.morale                 = team_data.get("morale", 0.0)
+        team.board_confidence       = team_data.get("board_confidence", 50.0)
+        team.fan_satisfaction       = team_data.get("fan_satisfaction", 50.0)
+        team.prestige               = team_data.get("prestige", 500.0)
+        team.home_region            = team_data.get("home_region", "")
+        team.budget                 = team_data.get("budget", 1000)
+        team.wage_budget            = team_data.get("wage_budget", 300)
+        team.nation_id              = team_data.get("nation_id", "")
+        team.league_nation_id       = team_data.get("league_nation_id", "")
+        team.league_nation_id_year  = team_data.get("league_nation_id_year", "")
 
         for player_data in team_data.get("squad", []):
             # ── Birth date — with backward-compat fallback for old saves ──────

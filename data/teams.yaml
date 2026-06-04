@@ -2,19 +2,20 @@
 #
 # SCHEMA
 # ======
-# id:               unique slug
-# name:             display name
-# nation_id:        foreign key → nations.yaml
-# home_region:      foreign key → regions list in nations.yaml
-# league_nation_id: foreign key → nations.yaml
-# founded_year:     engine does not generate this team before this year
-# prestige:         starting value on 0-10000 scale
-# attack:           starting attacking strength
-# midfield:         starting midfield strength
-# defense:          starting defensive strength
-# budget:           starting transfer budget (relative integer units)
-# wage_budget:      weekly wage budget (relative integer units)
-# competitions:     competition_ids this team belongs to at founding
+# id:                     unique slug
+# name:                   display name
+# nation_id:              foreign key → nations.yaml
+# home_region:            foreign key → regions list in nations.yaml
+# league_nation_id:       foreign key → nations.yaml
+# league_nation_id_year:  foreign key → nations.yaml
+# founded_year:           engine does not generate this team before this year
+# prestige:               starting value on 0-10000 scale
+# attack:                 starting attacking strength
+# midfield:               starting midfield strength
+# defense:                starting defensive strength
+# budget:                 starting transfer budget (relative integer units)
+# wage_budget:            weekly wage budget (relative integer units)
+# competitions:           competition_ids this team belongs to at founding
 
 
 # ── Myria — Prote Kategorias ──────────────────────────────────────────────────

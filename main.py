@@ -206,6 +206,7 @@ class GameEngine:
             team.prestige = cfg.prestige
             team.nation_id = cfg.nation_id
             team.league_nation_id = cfg.league_nation_id
+            team.league_nation_id_year = cfg.league_nation_id_year
 
             if cfg.id in squad_data:
                 # Pre-written squad from YAML

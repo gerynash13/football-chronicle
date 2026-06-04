@@ -265,12 +265,13 @@ class GameEngine:
 
         for cfg in team_configs:
             team = Team(cfg.name, cfg.attack, cfg.midfield, cfg.defense)
-            team.nation_id          = cfg.nation_id
-            team.league_nation_id   = cfg.league_nation_id
-            team.prestige           = cfg.prestige
-            team.home_region        = cfg.home_region
-            team.budget             = cfg.budget
-            team.wage_budget        = cfg.wage_budget
+            team.nation_id              = cfg.nation_id
+            team.league_nation_id       = cfg.league_nation_id
+            team.league_nation_id_year  = cfg.league_nation_id_year
+            team.prestige               = cfg.prestige
+            team.home_region            = cfg.home_region
+            team.budget                 = cfg.budget
+            team.wage_budget            = cfg.wage_budget
 
             if cfg.id in squad_data:
                 team.squad = self._build_squad_from_yaml(squad_data[cfg.id])
