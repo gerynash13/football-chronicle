@@ -204,6 +204,8 @@ class GameEngine:
         for cfg in team_configs:
             team = Team(cfg.name, cfg.attack, cfg.midfield, cfg.defense)
             team.prestige = cfg.prestige
+            team.nation_id = cfg.nation_id
+            team.league_nation_id = cfg.league_nation_id
 
             if cfg.id in squad_data:
                 # Pre-written squad from YAML

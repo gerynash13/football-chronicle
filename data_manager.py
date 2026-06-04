@@ -16,6 +16,7 @@ def save_teams_to_file(teams, filename="teams_data.json"):
         team_data = {
             "name":             team.name,
             "nation_id":        team.nation_id,
+            "league_nation_id": team.league_nation_id,
             "attack":           team.attack,
             "midfield":         team.midfield,
             "defense":          team.defense,
@@ -106,6 +107,7 @@ def load_teams_from_file(file_path):
         team.budget           = team_data.get("budget", 1000)
         team.wage_budget      = team_data.get("wage_budget", 300)
         team.nation_id        = team_data.get("nation_id", "")
+        team.league_nation_id = team_data.get("league_nation_id", "")
 
         for player_data in team_data.get("squad", []):
             # ── Birth date — with backward-compat fallback for old saves ──────

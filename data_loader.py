@@ -150,18 +150,19 @@ class NationConfig:
 
 @dataclass
 class TeamConfig:
-    id:           str
-    name:         str
-    nation_id:    str
-    home_region:  str
-    founded_year: int
-    prestige:     float
-    attack:       int
-    midfield:     int
-    defense:      int
-    budget:       int
-    wage_budget:  int
-    competitions: list[str] = field(default_factory=list)
+    id:                 str
+    name:               str
+    nation_id:          str
+    league_nation_id:   Optional[str]
+    home_region:        str
+    founded_year:       int
+    prestige:           float
+    attack:             int
+    midfield:           int
+    defense:            int
+    budget:             int
+    wage_budget:        int
+    competitions:       list[str] = field(default_factory=list)
 
     @property
     def avg_ca(self) -> int:
@@ -230,6 +231,7 @@ def load_teams() -> dict[str, TeamConfig]:
             id=entry["id"],
             name=entry["name"],
             nation_id=entry["nation_id"],
+            league_nation_id=entry.get("league_nation_id"),
             home_region=entry.get("home_region", ""),
             founded_year=entry.get("founded_year", 0),
             prestige=float(entry.get("prestige", 500)),

@@ -6,6 +6,7 @@
 # name:             display name
 # nation_id:        foreign key → nations.yaml
 # home_region:      foreign key → regions list in nations.yaml
+# league_nation_id: foreign key → nations.yaml
 # founded_year:     engine does not generate this team before this year
 # prestige:         starting value on 0-10000 scale
 # attack:           starting attacking strength
@@ -27,6 +28,7 @@
 - id: kluba_sulhavonos
   name: Kluba Sulhavonos
   nation_id: myria
+  league_nation_id: myria
   home_region: masia
   founded_year: 1891
   prestige: 950
@@ -42,6 +44,7 @@
 - id: kluba_maritima_thesias
   name: Kluba Maritima Thesias
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1893
   prestige: 980
@@ -57,6 +60,7 @@
 - id: mercaria_kluba
   name: Mercaria Kluba
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1894
   prestige: 920
@@ -72,6 +76,7 @@
 - id: portavar_kluba
   name: Portavar Kluba
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1895
   prestige: 870
@@ -87,6 +92,7 @@
 - id: kluba_sportika_esalumou
   name: Kluba Sportika Esalumou
   nation_id: myria
+  league_nation_id: myria
   home_region: lunia
   founded_year: 1895
   prestige: 680
@@ -102,6 +108,7 @@
 - id: kluba_sportika_mileiu
   name: Kluba Sportika Mileiu
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1895
   prestige: 780
@@ -117,6 +124,7 @@
 - id: kluba_sportika_galvononos
   name: Kluba Sportika Galvononos
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1896
   prestige: 1000
@@ -132,6 +140,7 @@
 - id: populara_kluba_galvononos
   name: Populara Kluba Galvononos
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1896
   prestige: 890
@@ -147,6 +156,7 @@
 - id: kluba_sportika_gedimou
   name: Kluba Sportika Gedimou
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1897
   prestige: 810
@@ -162,6 +172,7 @@
 - id: kluba_sportika_soleiu
   name: Kluba Sportika Soleiu
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1898
   prestige: 790
@@ -177,6 +188,7 @@
 - id: kluba_maritima_metia
   name: Kluba Maritima Metia
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1899
   prestige: 620
@@ -192,6 +204,7 @@
 - id: kluba_sportika_alentumou
   name: Kluba Sportika Alentumou
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1899
   prestige: 840
@@ -210,6 +223,7 @@
 - id: kluba_notias_thesias
   name: Kluba Notias Thesias
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1897
   prestige: 420
@@ -224,6 +238,7 @@
 - id: kluba_sportika_buriou
   name: Kluba Sportika Buriou
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1900
   prestige: 340
@@ -238,6 +253,7 @@
 - id: kluba_sportika_sufelharos
   name: Kluba Sportika Sufelharos
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1901
   prestige: 290
@@ -252,6 +268,7 @@
 - id: kluba_sportika_eleicas
   name: Kluba Sportika Eleicas
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1900
   prestige: 360
@@ -266,6 +283,7 @@
 - id: kluba_potamia_drosvon
   name: Kluba Potamia Drosvon
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1902
   prestige: 280
@@ -280,6 +298,7 @@
 - id: kluba_sportika_ancivonos
   name: Kluba Sportika Ancivonos
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1903
   prestige: 260
@@ -294,6 +313,7 @@
 - id: brakika_kluba_nalhavonos
   name: Brakika Kluba Nalhavonos
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1904
   prestige: 270
@@ -308,6 +328,7 @@
 - id: kluba_pyron_malias
   name: Kluba Pyron Malias
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1902
   prestige: 275
@@ -322,6 +343,7 @@
 - id: kluba_sportika_noviou
   name: Kluba Sportika Noviou
   nation_id: myria
+  league_nation_id: myria
   home_region: lunia
   founded_year: 1901
   prestige: 255
@@ -336,6 +358,7 @@
 - id: kluba_sportika_lunaras
   name: Kluba Sportika Lunaras
   nation_id: myria
+  league_nation_id: myria
   home_region: lunia
   founded_year: 1904
   prestige: 240
@@ -350,6 +373,7 @@
 - id: kluba_emvaria_amanas
   name: Kluba Emvaria Amanas
   nation_id: myria
+  league_nation_id: myria
   home_region: vetia_sileia
   founded_year: 1903
   prestige: 245
@@ -364,6 +388,7 @@
 - id: kluba_sportika_ircentas
   name: Kluba Sportika Ircentas
   nation_id: myria
+  league_nation_id: myria
   home_region: vetia_sileia
   founded_year: 1906
   prestige: 220
@@ -378,6 +403,7 @@
 - id: kluba_tou_skriptavonos
   name: Kluba tou Skriptavonos
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1903
   prestige: 265
@@ -392,6 +418,7 @@
 - id: kluba_sportika_coraerou
   name: Kluba Sportika Coraerou
   nation_id: myria
+  league_nation_id: myria
   home_region: bridia
   founded_year: 1904
   prestige: 258
@@ -406,6 +433,7 @@
 - id: kluba_veldhavonos
   name: Kluba Veldhavonos
   nation_id: myria
+  league_nation_id: myria
   home_region: masia
   founded_year: 1906
   prestige: 248

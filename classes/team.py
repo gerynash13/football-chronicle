@@ -6,6 +6,7 @@ class Team:
         self.id = new_team_id()
         self.name = name
         self.nation_id = ""  # To be set when team is assigned to a nation
+        self.league_nation_id = ""
         self.attack = attack
         self.midfield = midfield
         self.defense = defense
