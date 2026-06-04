@@ -402,7 +402,7 @@ class GameEngine:
         
         self.calendar.schedule_fixtures(self.comp, preferred_day=primary_day)
         # Schedule the cup towards the end of the season so the final is last
-        self.calendar.schedule_fixtures(self.cup, preferred_day=cup_day, start_from_end=True)
+        self.calendar.schedule_fixtures(self.cup, preferred_day=cup_day)
 
         if load_save and os.path.exists("competition_data.json"):
             self.comp, saved_date = load_competition_data(self.comp)
@@ -572,8 +572,7 @@ class GameEngine:
         for drawn in drawn_fixtures:
             replay_date = self.calendar.schedule_replay(
                 active_comp,
-                drawn["home_team"],
-                drawn["away_team"],
+                drawn,
                 self.calendar.current_date,
             )
             if replay_date:
@@ -583,29 +582,12 @@ class GameEngine:
                     "date":      replay_date.isoformat(),
                 })
 
-        # Cup: advance winners for completed replays
+        # After every cup matchday check if the round is complete and build the next one
         if active_comp.type == "cup":
-            for fixture in today_fixtures:
-                if fixture.get("is_replay"):
-                    replay_result = next(
-                        (r for r in recent
-                         if r["home_team"] == fixture["home_team"].name
-                         and r["away_team"] == fixture["away_team"].name),
-                        None,
-                    )
-                    if replay_result:
-                        if replay_result["home_goals"] > replay_result["away_goals"]:
-                            winner = fixture["home_team"]
-                        elif replay_result["away_goals"] > replay_result["home_goals"]:
-                            winner = fixture["away_team"]
-                        else:
-                            winner = None
-                        if winner:
-                            active_comp.advance_cup_winner(
-                                fixture["home_team"],
-                                fixture["away_team"],
-                                winner,
-                            )
+            if active_comp.build_next_round():
+                available_days = get_match_days(self.season_year)
+                cup_day = available_days[1] if len(available_days) > 1 else available_days[0]
+                self.calendar.schedule_cup_next_round(active_comp, preferred_day=cup_day)
 
         # Yellow card accumulation → suspensions
         yellow_threshold = get_yellow_threshold(self.season_year)
@@ -706,7 +688,7 @@ class GameEngine:
             "competition_type":   active_comp.type,
             "results":            recent,
             "standings":          self._serialise_standings() if active_comp.type == "league" else None,
-                "cup_bracket":        self.get_cup_bracket() if active_comp.type == "cup" else None,
+            "cup_bracket":        self.get_cup_bracket() if active_comp.type == "cup" else None,
             "scheduled_replays":  scheduled_replays,
             "newly_suspended":    newly_suspended,
             "new_injuries":       new_injuries,
@@ -944,134 +926,106 @@ class GameEngine:
         ]
         
     def get_cup_bracket(self) -> dict:
-        """
-        Serialize the cup bracket for the frontend.
-        
-        Returns a dict with:
-            rounds: a list of rounds, each containing:
-                round_num: int
-                label: str (for example "Round of 16", "Quarter-finals", etc.)
-                fixtures: list of {home, away, home_goals, away_goals, winner, played}
-        """
-        # Locate the cup competition (support multiple competitions)
-        cup_comp = next((c for c in getattr(self, 'competitions', []) if c.type == 'cup'), None)
-        cup_comp = cup_comp or getattr(self, 'cup', None)
-        if not cup_comp or not cup_comp.fixtures:
+        cup = next((c for c in getattr(self, 'competitions', [self.comp, self.cup]) if c.type == "cup"), None)
+        if not cup or not cup.fixtures:
             return {"rounds": []}
 
-        # Group fixtures by their logical round. If a fixture is a replay
-        # it may have an `original_round` recorded; group those under the
-        # original round number so replays appear as part of the same round
-        # in the frontend bracket view rather than as an extra later round.
         from collections import defaultdict
         by_round: dict = defaultdict(list)
-        for f in cup_comp.fixtures:
-            key = f.get("original_round", f["matchday"])
-            by_round[key].append(f)
+        for f in cup.fixtures:
+            by_round[f["round"]].append(f)
 
-        # Build a result lookup: (home_name, away_name, matchday) -> result
-        result_lookup = {}
-        for r in cup_comp.results:
-            key = (r["home_team"], r["away_team"], r.get("matchday"))
-            result_lookup[key] = r
+        num_teams = len(cup.teams)
 
-        total_rounds = max(by_round.keys()) if by_round else 0
-        num_teams = len(cup_comp.teams)
-        
-        def round_label(round_num: int, total: int) -> str:
-            remaining = num_teams // (2 ** (round_num -1))
-            labels = {
-                2: "Final",
-                4: "Semi-Finals",
-                8: "Quarter-finals",
-                16: "Round of 16",
-                32: "Round of 32",
-                64: "Round of 64",
-                128: "Round of 128",
-            }
-            return labels.get(remaining, f"Round {round_num}")
-        
+        def round_label(rn: int) -> str:
+            remaining = num_teams // (2 ** (rn - 1))
+            return {2: "Final", 4: "Semi-Finals", 8: "Quarter-Finals",
+                    16: "Round of 16", 32: "Round of 32"}.get(remaining, f"Round {rn}")
+
         rounds = []
-        for round_num in sorted(by_round.keys()):
+        for rn in sorted(by_round.keys()):
+            originals = [f for f in by_round[rn] if not f.get("is_replay")]
+            replays = [f for f in by_round[rn] if f.get("is_replay")]
+
             fixtures_out = []
-            
-            # Separate original matches from replays
-            original_fixtures = [f for f in by_round[round_num] if not f.get("is_replay")]
-            replay_fixtures = [f for f in by_round[round_num] if f.get("is_replay")]
-            
-            # Process fixtures (originals first, then replays)
-            all_fixtures = original_fixtures + replay_fixtures
-            
-            for i, f in enumerate(all_fixtures):
-                # Insert separator before replays
-                if i == len(original_fixtures) and len(replay_fixtures) > 0:
-                    fixtures_out.append({
-                        "is_separator": True,
-                        "home":         None,
-                        "away":         "Replays",
-                        "home_goals":   None,
-                        "away_goals":   None,
-                        "winner":       None,
-                        "played":       False,
-                        "is_draw":      False,
-                        "score_display": "",
-                        "has_pending_replay": False
-                    })
-                
-                home_name = f["home_team"].name if hasattr(f.get("home_team"), "name") else f.get("home_team")
-                away_name = f["away_team"].name if hasattr(f.get("away_team"), "name") else f.get("away_team")
-                
-                # For replays, use the replay's matchday to look up its result;
-                # for originals, use the grouped round number.
-                lookup_key = f.get("matchday") if f.get("is_replay") else round_num
-                result = result_lookup.get((home_name, away_name, lookup_key))
-                played = result is not None
-                
-                if played:
-                    hg = result["home_goals"]
-                    ag = result["away_goals"]
-                    winner = home_name if hg > ag else (away_name if ag > hg else None)
-                else:
-                    hg = ag = winner = None
-                
-                is_draw = played and hg == ag
-                
-                # Check if this draw will be replayed (there's a replay fixture for this match)
-                will_be_replayed = False
-                if is_draw:
-                    will_be_replayed = any(
-                        rf.get("home_team").name == home_name and 
-                        rf.get("away_team").name == away_name
-                        for rf in replay_fixtures
-                    )
-                
-                # Build score_display
-                score_display = ""
-                if played:
-                    score_display = f"{hg}-{ag}"
-                    if will_be_replayed:
-                        score_display += "r"
-                
-                # Only mark as a draw if there's NO replay scheduled
-                # (so frontend doesn't show "Draw" text, uses score_display instead)
-                display_is_draw = is_draw and not will_be_replayed
-                
+            for f in originals:
+                home_name = f["home_team"].name
+                away_name = f["away_team"].name
+                winner = cup._get_decided_winner(f)
+
+                # Find this fixture's result (draw or win)
+                result_obj = next(
+                    (r for r in cup.results
+                     if r["home_team"] == home_name
+                     and r["away_team"] == away_name
+                     and r.get("round") == rn
+                     and not r.get("is_replay", False)),
+                    None,
+                )
+                played = result_obj is not None
+                is_draw = played and result_obj["home_goals"] == result_obj["away_goals"]
+                has_replay = any(
+                    r for r in replays
+                    if r["home_team"].name == home_name and r["away_team"].name == away_name
+                )
+
                 fixtures_out.append({
                     "home":                 home_name,
                     "away":                 away_name,
-                    "home_goals":           hg,
-                    "away_goals":           ag,
-                    "winner":               winner,
+                    "home_goals":           result_obj["home_goals"] if played else None,
+                    "away_goals":           result_obj["away_goals"] if played else None,
+                    "winner":               winner.name if winner else None,
                     "played":               played,
-                    "is_draw":              display_is_draw,
-                    "score_display":        score_display,
-                    "has_pending_replay":   will_be_replayed
+                    "is_draw":              is_draw and not has_replay,
+                    "score_display":        (f"{result_obj['home_goals']}-{result_obj['away_goals']}"
+                                            + ("r" if is_draw and has_replay else ""))
+                                            if played else "vs",
+                    "has_pending_replay":   is_draw and has_replay,
+                    "is_separator":         False,
                 })
-                
+
+            if replays:
+                fixtures_out.append({
+                    "is_separator": True,
+                    "home": None,
+                    "away": "Replays",
+                    "played": False,
+                    "is_draw": False,
+                    "score_display": "",
+                    "has_pending_replay": False,
+                    "home_goals": None,
+                    "away_goals": None,
+                    "winner": None,
+                })
+
+                for f in replays:
+                    result_obj = next(
+                        (r for r in cup.results
+                         if r["home_team"] == f["home_team"].name
+                         and r["away_team"] == f["away_team"].name
+                         and r.get("round") == rn
+                         and r.get("matchday") == f.get("matchday")),
+                        None,
+                    )
+                    played = result_obj is not None
+                    fixtures_out.append({
+                        "home": f["home_team"].name,
+                        "away": f["away_team"].name,
+                        "home_goals": result_obj["home_goals"] if played else None,
+                        "away_goals": result_obj["away_goals"] if played else None,
+                        "winner": f["winner"].name if f["winner"] else None,
+                        "played": played,
+                        "is_draw": played and result_obj["home_goals"] == result_obj["away_goals"],
+                        "score_display": (f"{result_obj['home_goals']}-{result_obj['away_goals']}"
+                                          if played else "vs"),
+                        "has_pending_replay": False,
+                        "is_separator": False,
+                    })
+
             rounds.append({
-                "round_num": round_num,
-                "label":     round_label(round_num, total_rounds),
-                "fixtures":  fixtures_out
+                "round_num": rn,
+                "label": round_label(rn),
+                "fixtures": fixtures_out,
             })
-            
+
         return {"rounds": rounds}

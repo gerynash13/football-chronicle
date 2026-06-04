@@ -46,7 +46,7 @@
 
 - [done]      Engine smoke test — verify full season runs without errors
 
-- [soon]      Prestige runtime logic
+- [done]      Prestige runtime logic
                 season-end prestige update (league contribution)
                 upset multiplier on competition wins
                 cumulative decay with floor
@@ -68,7 +68,7 @@
                 GET  /api/state      → current state without advancing
                 GET  /api/inbox      → calendar inbox items
 
-- [done]      Basic HTML/CSS/JS frontend
+- [in-progress]      Basic HTML/CSS/JS frontend
                 Season overview page
                 Matchday results view
                 League table
@@ -178,7 +178,7 @@ Partially implemented (Event, Choice, Effect classes exist):
 
 - [later]     Transfer market events
                 AI offer for your player
-                agent calls (player wants to leave)
+                agent calls (player wants to leave, agent offers player to club, etc)
                 bargain player released
                 rival signs player you were tracking
 

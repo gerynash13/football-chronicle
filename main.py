@@ -401,8 +401,7 @@ class GameEngine:
         for drawn in drawn_fixtures:
             replay_date = self.calendar.schedule_replay(
                 self.comp,
-                drawn["home_team"],
-                drawn["away_team"],
+                drawn,
                 self.calendar.current_date,
             )
             if replay_date:

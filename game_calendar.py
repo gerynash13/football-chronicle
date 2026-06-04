@@ -1,5 +1,5 @@
 import random
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from events import Event, Effect, Choice
 from rules import get_match_days
 
@@ -99,6 +99,7 @@ class GameCalendar:
             ))
             
     def _add_event(self, event):
+        event.date = self._normalize_date(event.date)
         self.scheduled_events.append(event)
         self.scheduled_events.sort(key=lambda e: e.date)  # Ensure events are in chronological order
         
@@ -106,16 +107,30 @@ class GameCalendar:
         # Add event to inbox and schedule it
         self._add_event(event)
         
+    def _normalize_date(self, value):
+        if isinstance(value, datetime):
+            return value.date()
+        if isinstance(value, date):
+            return value
+        if isinstance(value, str):
+            return date.fromisoformat(value)
+        raise TypeError(f"Cannot normalize date from {type(value).__name__}: {value!r}")
+
     def get_events_for_date(self, target_date):
         # Return events scheduled for the target date
-        return [e for e in self.scheduled_events if e.date == target_date]
+        target_date = self._normalize_date(target_date)
+        return [e for e in self.scheduled_events if self._normalize_date(e.date) == target_date]
     
     def get_next_event_date(self, from_date=None):
         # Return the date of the next scheduled event after from_date (or current date if None)
         if from_date is None:
             from_date = self.current_date
-        future_events = [e for e in self.scheduled_events if e.date >= from_date]
-        return future_events[0].date if future_events else None
+        from_date = self._normalize_date(from_date)
+        for event in self.scheduled_events:
+            event_date = self._normalize_date(event.date)
+            if event_date >= from_date:
+                return event_date
+        return None
     
     def roll_dynamic_events(self, teams):
         """
@@ -279,63 +294,82 @@ class GameCalendar:
             ]
         ))
         
-    def schedule_replay(self, competition, home_team, away_team, from_date):
+    def schedule_replay(self, competition, drawn_fixture, from_date):
         """
-        Schedule a cup replay on the next available date after from_date.
- 
-        Adds the fixture to competition.fixtures with a new matchday number
-        and registers a blocking match event on the calendar so the game loop
-        stops and simulates it at the right time.
- 
-        Returns the scheduled date, or None if no date is available before
-        the season ends.
- 
-        Why a new matchday number instead of reusing the drawn round's number?
-        Because matchday numbers are how simulate_cup_round() finds its
-        fixtures. If the replay shared a number with an already-completed
-        round, it would be skipped by the completed_matchdays check.
+        Find the next available date, register a replay on the competition,
+        and create a blocking calendar event.
+
+        Takes the drawn fixture dict so the competition can link the replay
+        to the correct round. Returns the scheduled date or None.
         """
-        existing_matchdays = [f["matchday"] for f in competition.fixtures] if competition.fixtures else []
-        new_matchday = max(existing_matchdays) + 1 if existing_matchdays else 1
-        
-        # Find a date for the replay, skipping any day that already has a match
         candidate = from_date + timedelta(days=1)
-        match_dates = set(e.date for e in self.scheduled_events if e.category == "match")
+        match_dates = {e.date for e in self.scheduled_events if e.category == "match"}
+        
         while candidate <= self.season_end:
             if candidate not in match_dates:
                 break
             candidate += timedelta(days=1)
             
         if candidate > self.season_end:
-            return None  # No date available before the season ends
+            return None # No available date for replay
         
-        # Record which original round this replay belongs to (if available)
-        original = next(
-            (f for f in competition.fixtures
-             if f.get("home_team") is not None and f.get("away_team") is not None
-             and f.get("home_team") == home_team and f.get("away_team") == away_team),
-            None
-        )
-        original_round = original.get("matchday") if original else None
-
-        competition.fixtures.append({
-            "matchday": new_matchday,
-            "home_team": home_team,
-            "away_team": away_team,
-            "date": candidate,
-            "is_replay": True,
-            "original_round": original_round,
-        })
+        existing = [f["matchday"] for f in competition.fixtures]
+        new_matchday = max(existing) + 1 if existing else 1
         
-        self.add_event(Event(
+        competition.add_replay(drawn_fixture, new_matchday)
+        
+        # Assign the date to the newly appended replay fixture
+        for f in reversed(competition.fixtures):
+            if f.get("matchday") == new_matchday:
+                f["date"] = candidate
+                break
+            
+        home_name = drawn_fixture["home_team"].name
+        away_name = drawn_fixture["away_team"].name
+        self._add_event(Event(
             date=candidate,
             category="match",
             blocking=True,
-            title=f"Replay: {home_team.name} vs {away_team.name}",
-            description=f"Replay scheduled for {candidate.strftime('%A, %d %B %Y')}."
+            title=f"Replay: {home_name} vs {away_name}",
+            description=f"Replay scheduled for {candidate.strftime('%a, %b %d')}",
         ))
         
         return candidate
+    
+    def schedule_cup_next_round(self, competition, preferred_day: int | None = None):
+        """
+        Assign calendar dates to fixtures that have no date yet.
+        Called after build_next_round() creates the new round's fixtures.
+        """
+        available_days = get_match_days(self.season_year)
+        day = preferred_day if preferred_day is not None else available_days[0]
+        
+        unscheduled = [f for f in competition.fixtures if not f.get("date")]
+        if not unscheduled:
+            return
+        
+        new_matchday = unscheduled[0]["matchday"]
+        occupied = {e.date for e in self.scheduled_events if e.category == "match"}
+        current = self.current_date + timedelta(days=1)
+        
+        while current <= self.season_end:
+            if current.weekday() == day and current not in occupied:
+                break
+            current += timedelta(days=1)
+        
+        if current > self.season_end:
+            return
+        
+        for f in unscheduled:
+            f["date"] = current
+            
+        self._add_event(Event(
+            date=current,
+            category="match",
+            blocking=True,
+            title=f"Cup Round {competition.current_round}",
+            description=f"{len(unscheduled)} match(es) scheduled for {current.strftime('%a, %b %d')}.",
+        ))
         
     def schedule_injury_notification(self, player, team, from_date):
         # Add injury news to inbox and schedule return reminder
@@ -347,46 +381,6 @@ class GameCalendar:
         }
         label = severity_labels.get(player.injury_severity, "an injury")
         
-        def schedule_replay(self, competition, home_team, away_team, from_date):
-            """Schedule a replay for a cup match on the next available midweek date.
-
-            Adds a fixture to `competition.fixtures` with a new matchday number and
-            schedules the match event on the calendar.
-            """
-            # Determine next matchday number
-            existing_matchdays = [f["matchday"] for f in competition.fixtures] if competition.fixtures else []
-            new_matchday = max(existing_matchdays) + 1 if existing_matchdays else 1
-
-            # Find a date for the replay: prefer a midweek day (Wednesday)
-            candidate = from_date + timedelta(days=1)
-            match_dates = set(e.date for e in self.scheduled_events if e.category == "match")
-            # Limit search to season end
-            while candidate <= self.season_end:
-                # Avoid existing match dates
-                if candidate not in match_dates and candidate > from_date:
-                    break
-                candidate += timedelta(days=1)
-
-            if candidate > self.season_end:
-                return None
-
-            # Add fixture and schedule event
-            competition.fixtures.append({
-                "matchday": new_matchday,
-                "home_team": home_team,
-                "away_team": away_team,
-                "date": candidate
-            })
-
-            self._add_event(Event(
-                date=candidate,
-                category="match",
-                blocking=True,
-                title=f"Replay: {home_team.name} vs {away_team.name}",
-                description=f"Replay scheduled for {candidate.strftime('%A, %d %B %Y')}"
-            ))
-
-            return candidate
         # Immediate inbox notification (background)
         self._add_event(Event(
             date=from_date,

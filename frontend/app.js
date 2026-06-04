@@ -333,6 +333,7 @@ function renderSeasonEnd(state) {
   // Wire up next season button — this is the ONLY way to proceed.
   // Re-enables the footer button after advancing so the next season flows normally.
   const nextBtn = document.getElementById('btn-next-season');
+  nextBtn.disabled = false;
   nextBtn.onclick = async () => {
     nextBtn.disabled = true;
     disable(true);

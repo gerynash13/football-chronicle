@@ -159,67 +159,93 @@ class Competition:
 
 
 class CupCompetition(Competition):
-    """Simple knockout cup with auto-scaling to next power of two.
+    """
+    Round-based knockout cup.
 
-    Fixtures are generated per round with `matchday` representing the round number.
+    Each fixture has a 'round' (competition stage: 1, 2, 3...) and a 'winner'
+    field set directly when the match is decided. A round is complete when every
+    original fixture in it has a winner. Only then is the next round built.
+
+    Replays belong to the same round as the drawn match — they share the same
+    'round' number but get a new 'matchday' (calendar slot).
     """
     def __init__(self, name, teams, max_subs=0, season_year="1896/97", prestige=5000.0):
-        super().__init__(name, teams, competition_type="cup", 
-                         max_subs=max_subs, season_year=season_year,
-                         prestige=prestige)
-
-    def _next_power_of_two(self, n):
+        super().__init__(name, teams, competition_type="cup",
+                         max_subs=max_subs, season_year=season_year, prestige=prestige)
+        self.current_round = 1
+        self._total_rounds = 0
+        self._bye_teams = []
+        
+    @staticmethod
+    def _next_power_of_two(n: int) -> int:
+        """Returns the next power of two greater than or equal to n."""
         p = 1
         while p < n:
             p *= 2
         return p
-
-    def simulate_cup_round(self):
+    
+    # Bracket Generation
+    
+    def generate_fixtures(self):
         """
-        Simulate the current cup round and build the next round's fixtures.
- 
-        Draws are NOT resolved here. Instead, each drawn fixture is included
-        in the returned list so the caller (the game loop) can schedule a
-        calendar replay for a future date.
- 
-        Returns a list of drawn fixture dicts — empty if no draws occurred.
-        Each entry has the shape:
-            {"home_team": <Team>, "away_team": <Team>}
- 
-        Next-round fixtures are only built from matches that produced a
-        clear winner this round. Drawn bracket slots remain open until the
-        replay is simulated and advance_cup_winner() is called.
- 
-        Why return draws instead of resolving them here?
-        Separation of concerns: this class knows about matches and brackets.
-        The calendar knows about dates and scheduling. Those two
-        responsibilities should not be mixed inside one method.
+        Draw the initial bracket.
+
+        If the team count isn't a power of two, surplus teams receive byes and
+        advance automatically to round 2 without playing. Only round 1 is
+        generated here — later rounds are built by build_next_round() once
+        the previous round is fully resolved.
+        """
+        import math
+        
+        teams = self.teams[:]
+        random.shuffle(teams)
+        
+        n = len(teams)
+        target = self._next_power_of_two(n)
+        byes = target - n
+        
+        self._total_rounds = int(math.log2(target))
+        self._bye_teams = teams[:byes] # Teams that get byes to round 2
+        playing = teams[byes:]
+        
+        self.fixtures = []
+        for i in range(0, len(playing), 2):
+            self.fixtures.append({
+                "round": 1,
+                "matchday": 1, # Calendar will assign a real date
+                "home_team": playing[i],
+                "away_team": playing[i+1],
+                "is_replay": False,
+                "winner": None,
+            })
+            
+    # Simulation
+    
+    def simulate_cup_round(self) -> list:
+        """
+        Simulate all fixtures for self.current_matchday.
+
+        Sets fixture["winner"] directly for decided matches.
+        Returns drawn fixture dicts so the engine can schedule replays.
         """
         if self.current_matchday in self.completed_matchdays:
             return []
         
-        current_round_num = self.current_matchday
-        # Only consider fixtures that have both teams assigned; placeholders
-        # for future rounds may exist with None entries and should be
-        # ignored until those slots are filled.
-        current_fixtures = [f for f in self.fixtures if f["matchday"] == current_round_num and f.get("home_team") is not None and f.get("away_team") is not None]
+        today = [
+            f for f in self.fixtures
+            if f["matchday"] == self.current_matchday and f["winner"] is None
+        ]
+        drawn = []
         
-        drawn_fixtures = []
-        
-        # ——— Step 1: simulate each match ——————————————————————————————————
-        for fixture in current_fixtures:
-            home_team = fixture["home_team"]
-            away_team = fixture["away_team"]
-            
+        for fixture in today:
+            home, away = fixture["home_team"], fixture["away_team"]
             hg, ag, events, ratings, home_xi, away_xi = simulate_match(
-                home_team, away_team,
-                max_subs=self.max_subs,
-                season_year=self.season_year
+                home, away, max_subs=self.max_subs, season_year=self.season_year
             )
             
             self.results.append({
-                "home_team": home_team.name,
-                "away_team": away_team.name,
+                "home_team": home.name,
+                "away_team": away.name,
                 "home_goals": hg,
                 "away_goals": ag,
                 "events": events,
@@ -228,181 +254,120 @@ class CupCompetition(Competition):
                 "away_xi": [xi_entry(p) for p in away_xi],
                 "competition": self.name,
                 "season": self.season_year,
-                "matchday": current_round_num
+                "round": fixture["round"],
+                "matchday": self.current_matchday,
             })
             
-            if hg == ag:
-                drawn_fixtures.append({
-                    "home_team": home_team,
-                    "away_team": away_team
-                })
-                
-        # ——— Step 2: collect winners (decided matches only) ———————————————————
-        winners = []
-        for fixture in current_fixtures:
-            # Find the matching result by name for this fixture
-            result = next(
-                (r for r in self.results
-                 if r["home_team"] == fixture["home_team"].name
-                 and r["away_team"] == fixture["away_team"].name
-                 and r.get("matchday") == current_round_num),
-                None
-            )
-            if result is None:
-                continue
-            if result["home_goals"] > result["away_goals"]:
-                winners.append(fixture["home_team"])
-            elif result["away_goals"] > result["home_goals"]:
-                winners.append(fixture["away_team"])
-            # Draws produce no winner yet, bracket slots remain open
-            
-        # ——— Step 3: Pair decide winners to the next round ———————————————————
-        # We only build the next round when we have an even number of winners
-        # (i.e. no pending replays). If replays are outstanding the caller
-        # must call advance_cup_winner() for each replay result, which will
-        # trigger next-round building once all slots are filled.
-        if len(winners) > 1 and len(drawn_fixtures) == 0:
-            next_round_num = current_round_num + 1
-            # Try to fill any placeholder fixtures for the next round first
-            placeholders = [f for f in self.fixtures if f["matchday"] == next_round_num and (f.get("home_team") is None or f.get("away_team") is None)]
-            if placeholders:
-                # Fill placeholders sequentially
-                for idx in range(0, len(winners), 2):
-                    slot = placeholders[idx // 2]
-                    slot["home_team"] = winners[idx]
-                    slot["away_team"] = winners[idx + 1]
+            if hg > ag:
+                fixture["winner"] = home
+            elif ag > hg:
+                fixture["winner"] = away
             else:
-                for i in range(0, len(winners), 2):
-                    self.fixtures.append({
-                        "matchday": next_round_num,
-                        "home_team": winners[i],
-                        "away_team": winners[i + 1]
-                    })
-        
-        self.completed_matchdays.add(current_round_num)        
+                drawn.append(fixture)
+                
+        self.completed_matchdays.add(self.current_matchday)
         self.current_matchday += 1
-        return drawn_fixtures
+        return drawn
     
-    def advance_cup_winner(self, home_team, away_team, winning_team):
+    # Replay
+    
+    def add_replay(self, drawn_fixture: dict, new_matchday: int):
         """
-        Called after a replay is simulated to feed the winner into the
-        next round of the bracket.
- 
-        home_team / away_team identify the original drawn fixture.
-        winning_team is the Team object that won the replay.
- 
-        Builds the next round's fixtures, filling slots with winners as they
-        become available (allows "Team A vs TBD" style partial matches).
+        Register a replay for a drawn match.
+
+        The replay belongs to the SAME round — only the matchday (calendar slot)
+        is different. The drawn_fixture itself keeps winner=None until the replay
+        decides it, at which point simulate_cup_round sets the winner on the
+        REPLAY fixture.
+
+        is_round_complete() checks the original + its replays together.
         """
-        # Find out which round the original drawn match belonged to so we
-        # can work out what the next round number should be
+        self.fixtures.append({
+            "round": drawn_fixture["round"],
+            "matchday": new_matchday,
+            "home_team": drawn_fixture["home_team"],
+            "away_team": drawn_fixture["away_team"],
+            "is_replay": True,
+            "winner": None,
+        })
         
-        original = next(
-            (f for f in self.fixtures
-             if f.get("home_team") is not None and f.get("away_team") is not None
-             and f["home_team"].name == home_team.name
-             and f["away_team"].name == away_team.name),
-            None
-        )
-        if original is None:
-            return
-        
-        original_round = original["matchday"]
-        # Next round is the immediate successor round number
-        next_round_num = original_round + 1
+    # Round Management
+    
+    def _get_original_fixtures(self, round_num: int) -> list:
+        """Original (non-replay) fixtures for a given round."""
+        return [f for f in self.fixtures if f["round"] == round_num and not f.get("is_replay")]
+    
+    def _get_decided_winner(self, original: dict) -> object | None:
+        """
+        Return the decided winner for an original fixture, checking replays.
 
-        # Collect all winners from original round (decided + this replay)
-        original_fixtures = [f for f in self.fixtures if f["matchday"] == original_round]
-        round_results     = [r for r in self.results if r.get("matchday") == original_round]
+        If the original ended in a draw, look for the most recent replay of
+        that same match that has a winner.
+        """
+        if original["winner"] is not None:
+            return original["winner"]
         
-        winners = []
+        # Find replays for this specific pair, in order of matchday (earliest first)
+        replays = [
+            f for f in self.fixtures
+            if f.get("is_replay")
+            and f["round"] == original["round"]
+            and f["home_team"].name == original["home_team"].name
+            and f["away_team"].name == original["away_team"].name
+        ]
+        for replay in reversed(replays): # Check latest replay first
+            if replay["winner"] is not None:
+                return replay["winner"]
+            
+        return None # No winner decided yet
+    
+    def is_round_complete(self) -> bool:
+        """
+        True when every original fixture in the current round has a decided winner
+        (either directly or through a replay chain).
+        """
+        originals = self._get_original_fixtures(self.current_round)
+        if not originals:
+            return False # No fixtures means we can't say the round is complete
         
-        for fixture in original_fixtures:
-            # Is this the just resolved replay?
-            if (fixture["home_team"].name == home_team.name
-                and fixture["away_team"].name == away_team.name):
-                winners.append(winning_team)
-                continue
-            result = next(
-                (r for r in round_results
-                 if r["home_team"] == fixture["home_team"].name
-                 and r["away_team"] == fixture["away_team"].name),
-                None
-            )
-            if result and result["home_goals"] != result["away_goals"]:
-                if result["home_goals"] > result["away_goals"]:
-                    winners.append(fixture["home_team"])
-                else:
-                    winners.append(fixture["away_team"])
-                    
-        # Build/fill next round with available winners (allow partial TBD slots)
-        total_slots = len(original_fixtures)
-        if len(winners) > 0 and total_slots > 1:
-            # Get or create placeholders for the next round
-            placeholders = [f for f in self.fixtures if f["matchday"] == next_round_num]
-            
-            # If no placeholders exist yet, create them
-            if not placeholders:
-                # Create empty fixture slots for next round
-                num_next_fixtures = total_slots // 2
-                for _ in range(num_next_fixtures):
-                    self.fixtures.append({
-                        "matchday": next_round_num,
-                        "home_team": None,
-                        "away_team": None
-                    })
-                placeholders = [f for f in self.fixtures if f["matchday"] == next_round_num]
-            
-            # Fill in available winners, leaving slots as None for pending opponents
-            for idx, winner in enumerate(winners):
-                slot_idx = idx // 2
-                is_home = (idx % 2 == 0)
-                
-                if slot_idx < len(placeholders):
-                    if is_home:
-                        placeholders[slot_idx]["home_team"] = winner
-                    else:
-                        placeholders[slot_idx]["away_team"] = winner
-                
-    def generate_fixtures(self):
-        # Build initial bracket
-        teams = self.teams.copy()
-        n = len(teams)
-        target = self._next_power_of_two(n)
-        
-        # Add byes as None entries
-        while len(teams) < target:
-            teams.append(None)
-            
-        # Create fixtures placeholders for every round so the calendar
-        # can schedule cup rounds across the season. Round 1 contains
-        # the initial team pairings; later rounds are placeholders
-        # (home/away set to None) until winners are filled in.
-        import math
-        rounds = int(math.log2(target))
-        fixtures = []
+        return all(self._get_decided_winner(f) is not None for f in originals)
+    
+    def build_next_round(self) -> bool:
+        """
+        If the current round is complete, collect winners and create the next
+        round's fixtures. Returns True if a new round was built.
 
-        # Round 1: pair teams
-        round_num = 1
-        for i in range(0, len(teams), 2):
-            home = teams[i]
-            away = teams[i + 1]
-            fixtures.append({
-                "matchday": round_num,
-                "home_team": home,
-                "away_team": away
+        Called by the engine after each matchday simulation. Safe to call
+        multiple times — it does nothing if the round is not yet complete.
+        """
+        if not self.is_round_complete():
+            return False
+        
+        winners = [
+            self._get_decided_winner(f)
+            for f in self._get_original_fixtures(self.current_round)
+        ]
+        
+        # Add bye teams after round 1
+        if self.current_round == 1 and self._bye_teams:
+            winners = winners + self._bye_teams
+            random.shuffle(winners) # Shuffle in the bye teams for fairness
+            
+        if len(winners) <= 1:
+            return False # Cup is won - no further rounds needed
+        
+        next_round = self.current_round + 1
+        next_matchday = max(f["matchday"] for f in self.fixtures) + 1
+        
+        for i in range(0, len(winners), 2):
+            self.fixtures.append({
+                "round": next_round,
+                "matchday": next_matchday,
+                "home_team": winners[i],
+                "away_team": winners[i+1],
+                "is_replay": False,
+                "winner": None,
             })
-
-        # Subsequent rounds: create placeholders
-        for r in range(2, rounds + 1):
-            matches_in_round = target // (2 ** r)
-            if matches_in_round < 1:
-                matches_in_round = 1
-            for _ in range(matches_in_round):
-                fixtures.append({
-                    "matchday": r,
-                    "home_team": None,
-                    "away_team": None
-                })
-
-        self.fixtures = fixtures
+            
+        self.current_round = next_round
+        return True
