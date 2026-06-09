@@ -21,11 +21,13 @@
 #
 # timing:           when in the year the competition is resolved
 #   season:         runs across the full domestic season (league, cup)
+#   pre_season:     played at the very start of the new season, before the
+#                   league kicks off; participants are resolved from the
+#                   PREVIOUS season's results — belongs to the new season's
+#                   calendar so stats and trophies count toward that year
 #   end_of_season:  resolved at the end of the season before summer break;
 #                   used for competitions that historically ran mid-season
-#                   but are treated as end-of-season for now — marked so
-#                   the engine can switch them to mid-season later without
-#                   changing the data file
+#                   but are treated as end-of-season for now
 #   summer:         resolved in the summer between seasons (Olympics, WC)
 #
 # match_day:        preferred day type for scheduling fixtures
@@ -35,16 +37,32 @@
 #   flexible:       engine picks the next available slot
 #
 # participants:     how teams/nations qualify
-#   type:           all_members | top_n | qualified | fixed
-#   source:         competition_id to draw qualifiers from (for qualified type)
-#   count:          number of participants (for top_n type)
-#   nations:        explicit list of nation_ids (for fixed type, e.g. BHC)
+#   type:           all_members | top_n | qualified | fixed | supercup
 #
-# rounds:           for cup competitions, prestige points awarded per round
-#                   indexed from first round (index 0) to winner (last index)
-#                   teams receive points ONLY for the round they exit at,
-#                   not cumulatively — winner receives the last value
-
+#   supercup type uses:
+#     slots:        ordered list of participant slots; each slot has:
+#       source:     competition_id to resolve this slot from
+#       role:       winner | runner_up
+#     fallbacks:    list of slots to try if two resolved teams are the same club;
+#                   tried in order — first one that resolves to a new (unseen)
+#                   team replaces the duplicate slot
+#
+# draw_rules:       how a draw is resolved (supercup / cup competitions only)
+#   extra_time:     true | false — play 30 minutes of extra time before going
+#                   to penalties
+#   penalties:      true | false — use a penalty shootout if still level
+#   replay:         true | false — schedule a replay on a later date
+#   Note: only one of penalties or replay should be true; extra_time only
+#   applies when penalties is also true
+#
+# legs:             number of legs (1 = single match, 2 = home-and-away)
+#                   two-leg logic is not yet implemented; set to 1 for now
+#
+# rounds:           for cup/supercup competitions, prestige points awarded
+#                   per exit round; indexed from first round (index 0) to
+#                   winner (last index); teams receive points ONLY for the
+#                   round they exit at, not cumulatively
+ 
 # ── Domestic competitions — Myria ────────────────────────────────────────────
 
 - id: prote_kategorias
@@ -86,16 +104,26 @@
   name: Myrian Supercup
   type: supercup
   nation_id: myria
-  founded_year: 1894
+  founded_year: 1988
   prestige: 4000
   tier: null
   frequency: 1
-  timing: end_of_season
+  timing: pre_season
   match_day: flexible
+  legs: 1
   participants:
-    type: fixed
-    # participants are determined at runtime: league winner vs cup winner
-    count: 2
+    type: supercup
+    slots:
+      - { source: prote_kategorias, role: winner } # slot 0: prote_kategorias winner
+      - { source: protonas_cup,     role: winner } # slot 1: protonas_cup winner
+    fallbacks:
+      # if the two slots resolve to the same team, try these slots in order
+      - { source: protonas_cup, role: runner_up }
+      - { source: prote_kategorias, role: runner_up }
+  draw_rules:
+    extra_time: true
+    penalties: true
+    replay: false
   rounds:
     - 400   # runner-up
     - 800   # winner

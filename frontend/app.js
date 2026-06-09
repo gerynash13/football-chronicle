@@ -121,6 +121,11 @@ function renderMatchday(state) {
 
   renderStandings(state.standings, managedTeam);
 
+  const isSupercup = state.competition.type === "supercup";
+  const headingLabel = isSupercup
+    ? `<span class="supercup-badge">Supercup</span> ${state.competition}`
+    : `${state.competition} - Matchday ${state.matchday_num}`;
+
   hide('feed-placeholder');
   const feed = document.getElementById('results-feed');
   feed.innerHTML = `
@@ -135,7 +140,8 @@ function renderMatchday(state) {
 
   renderNotifications(state.new_injuries || [], state.newly_suspended || []);
 
-  setStatus(`Matchday ${state.matchday_num} complete.`);
+  const statusLabel = isSupercup ? `${state.competition} complete.` : `Matchday ${state.matchday_num} complete.`;
+  setStatus(statusLabel);
   const next = state.next_event_date
     ? `Next: ${formatDate(state.next_event_date)}`
     : 'Season ending soon…';
@@ -151,15 +157,29 @@ function renderResultCard(result, yourTeam = null) {
   const homeGoals = goalScorers(result.events, result.home_team);
   const awayGoals = goalScorers(result.events, result.away_team);
 
+  // Extra annotation for supercup results decided after 90 minutes
+  const decidedLabels = {
+    extra_time: "aet",
+    penalties: "pens",
+    draw: "draw",
+  };
+  const decidedLabel = decidedLabels[result.decided_in] || "";
+
+  // Highlight the supercup winner's name in the card
+  const winnerName = result.winner || null;
+
   return `
     <div class="result-card${isYours ? ' your-match' : ''}">
       <div class="result-team home">
-        <div class="${result.home_team === yourTeam ? 'your-team-name' : ''}">${result.home_team}</div>
+        <div class="${result.home_team === yourTeam ? 'your-team-name' : ''}${winnerName === result.home_team ? ' supercup-winner' : ''}">${result.home_team}</div>
         ${homeGoals ? `<div class="result-scorers">${homeGoals}</div>` : ''}
       </div>
-      <div class="result-score">${hg} – ${ag}</div>
+      <div class="result-score">
+        ${hg} – ${ag}
+        ${decidedLabel ? `<div class="result-decided">${decidedLabel}</div>` : ''}
+      </div>
       <div class="result-team away">
-        <div class="${result.away_team === yourTeam ? 'your-team-name' : ''}">${result.away_team}</div>
+        <div class="${result.away_team === yourTeam ? 'your-team-name' : ''}${winnerName === result.away_team ? ' supercup-winner' : ''}">${result.away_team}</div>
         ${awayGoals ? `<div class="result-scorers">${awayGoals}</div>` : ''}
       </div>
     </div>

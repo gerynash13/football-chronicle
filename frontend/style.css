@@ -401,6 +401,36 @@ body {
   margin-top: 0.1rem;
 }
 
+/* Small label under the score for aet / pens */
+.result-decided {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  color: var(--ink-light);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 0.15rem;
+}
+
+/* Supercup badge in the matchday heading */
+.supercup-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 0.08rem 0.36rem;
+  vertical-align: middle;
+}
+
+/* Winning team name in a supercup result card */
+.supercup-winner {
+  font-weight: 700;
+  color: var(--gold);
+}
+
 /* ── Blocking event panel ───────────────────────────────────────────────── */
 .event-panel {
   border: 2px solid var(--ink);

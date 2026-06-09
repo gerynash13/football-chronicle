@@ -45,7 +45,7 @@
 - id: myria
   name: Myria
   is_fictional: true
-  founded_year: 1880
+  founded_year: 1890
   prestige: 1200
   prestige_weights:
     league: 0.60
@@ -161,8 +161,8 @@
       name: The Marches
       talent_modifier: 0.9
 
-- id: ireland
-  name: Ireland
+- id: northern_ireland
+  name: Ireland # Change to Northern Ireland in 1921
   is_fictional: false
   founded_year: 1880
   prestige: 4200
@@ -296,6 +296,33 @@
       name: Alpine
       talent_modifier: 0.9
 
+- id: gibraltar
+  name: Gibraltar
+  is_fictional: false
+  founded_year: 1895
+  prestige: 900
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: gibraltar
+  eligible_for_international: true
+  regions:
+    - id: gib_north
+      name: North Gibraltar
+      talent_modifier: 1.0
+    - id: gib_central_west
+      name: Central Westside
+      talent_modifier: 1.0
+    - id: gib_rock
+      name: The Rock & Upper Gibraltar
+      talent_modifier: 1.0
+    - id: gib_south
+      name: South Gibraltar
+      talent_modifier: 1.0
+
 
 # ── Real nations — early clubs exist, no association yet at 1896 ─────────────
 #
@@ -308,6 +335,35 @@
 # Their prestige_weights lean heavily on international results since their
 # domestic leagues don't exist yet — international performance is their
 # primary route to prestige growth early on.
+#
+# Europe
+
+- id: italy
+  name: Italy
+  is_fictional: false
+  founded_year: 1898
+  prestige: 2000
+  prestige_weights:
+    league: 0.60
+    international: 0.40
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: italian
+  eligible_for_international: true
+  regions:
+    - id: ita_north
+      name: Il Nord
+      talent_modifier: 1.05
+    - id: ita_central
+      name: Centro
+      talent_modifier: 1.0
+    - id: ita_south
+      name: Il Mezzogiorno
+      talent_modifier: 1.0
+    - id: ita_islands
+      name: Le Isole
+      talent_modifier: 0.95
 
 - id: germany
   name: Germany
@@ -336,32 +392,7 @@
       name: Eastern States
       talent_modifier: 0.95
 
-- id: austria
-  name: Austria
-  is_fictional: false
-  founded_year: 1904
-  prestige: 1600
-  prestige_weights:
-    league: 0.60
-    international: 0.40
-  prestige_decay: 0.03
-  prestige_floor: 500
-  tier_change_min_seasons: 3
-  name_generator: austrian
-  eligible_for_international: true
-  regions:
-    - id: aut_vienna
-      name: Vienna
-      talent_modifier: 1.2   # Vienna dominates Austrian football entirely
-    - id: aut_alpine
-      name: Alpine West
-      talent_modifier: 0.9
-    - id: aut_styria
-      name: Styria
-      talent_modifier: 0.95
-    - id: aut_east
-      name: Burgenland
-      talent_modifier: 0.9
+# Malta (founded 1900 but not yet independent)
 
 - id: hungary
   name: Hungary
@@ -417,6 +448,197 @@
       name: Sudeten
       talent_modifier: 0.9
 
+- id: norway
+  name: Norway
+  is_fictional: false
+  founded_year: 1902
+  prestige: 1700
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: norwegian
+  eligible_for_international: true
+  regions:
+    - id: nor_oslo
+      name: The Eastern Lowlands
+      talent_modifier: 1.1
+    - id: nor_west
+      name: Fjord-West Coast
+      talent_modifier: 1.0
+    - id: nor_central
+      name: Trøndelag
+      talent_modifier: 1.0
+    - id: nor_north
+      name: The Artic North
+      talent_modifier: 0.9
+
+- id: austria
+  name: Austria
+  is_fictional: false
+  founded_year: 1904
+  prestige: 1600
+  prestige_weights:
+    league: 0.60
+    international: 0.40
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: austrian
+  eligible_for_international: true
+  regions:
+    - id: aut_vienna
+      name: Vienna
+      talent_modifier: 1.2   # Vienna dominates Austrian football entirely
+    - id: aut_alpine
+      name: Alpine West
+      talent_modifier: 0.9
+    - id: aut_styria
+      name: Styria
+      talent_modifier: 0.95
+    - id: aut_east
+      name: Burgenland
+      talent_modifier: 0.9
+
+- id: sweden
+  name: Sweden
+  is_fictional: false
+  founded_year: 1904
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: swedish
+  eligible_for_international: true
+  regions:
+    - id: swe_south
+      name: Malmö-Scania South
+      talent_modifier: 1.1
+    - id: swe_stockholm
+      name: Stockholm Hub
+      talent_modifier: 1.0
+    - id: swe_west
+      name: Gothenburg West Coast
+      talent_modifier: 1.0
+    - id: swe_north
+      name: Norrland
+      talent_modifier: 0.9
+
+# Croatia (TODO)
+
+- id: luxembourg
+  name: Luxembourg
+  is_fictional: false
+  founded_year: 1908
+  prestige: 1000
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: dutch
+  eligible_for_international: true
+  regions:
+    - id: lux_luxembourg
+      name: Luxembourg City
+      talent_modifier: 1.1
+    - id: lux_south
+      name: Süd-Guttland
+      talent_modifier: 0.9
+    - id: lux_north
+      name: Éislek
+      talent_modifier: 0.9
+    - id: lux_east
+      name: Mëttel-an Ostsäit
+      talent_modifier: 0.9
+
+- id: romania
+  name: Romania
+  is_fictional: false
+  founded_year: 1909
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: romanian
+  eligible_for_international: true
+  regions:
+    - id: rom_south
+      name: Wallachian Core
+      talent_modifier: 1.1
+    - id: rom_east
+      name: Dobrogea Coast
+      talent_modifier: 0.9
+    - id: rom_northwest
+      name: Transylvania & Western Border
+      talent_modifier: 0.9
+    - id: rom_northeast
+      name: Moldavia & Northern Maramureș
+      talent_modifier: 0.9
+
+- id: russia
+  name: Russia
+  is_fictional: false
+  founded_year: 1912
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: russian
+  eligible_for_international: true
+  regions:
+    - id: rus_moscow
+      name: Moscow Metropolitan Area
+      talent_modifier: 1.2
+    - id: rus_northwest
+      name: Baltic Northwest
+      talent_modifier: 1.0
+    - id: rus_south
+      name: Southern Caucasus Frontier
+      talent_modifier: 0.9
+    - id: rus_east
+      name: Siberia & The Tartar East
+      talent_modifier: 0.9
+
+- id: portugal
+  name: Portugal
+  is_fictional: false
+  founded_year: 1914
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: portuguese
+  eligible_for_international: true
+  regions:
+    - id: por_lisbon
+      name: Distrito de Lisboa
+      talent_modifier: 1.1
+    - id: por_north
+      name: Norte Tripeiro
+      talent_modifier: 1.1
+    - id: por_south
+      name: Alentejo & Algarve
+      talent_modifier: 0.85
+    - id: por_islands
+      name: Madeira & Azores
+      talent_modifier: 0.95
+
 - id: france
   name: France
   is_fictional: false
@@ -443,6 +665,309 @@
     - id: fra_west
       name: Brittany
       talent_modifier: 0.95
+
+- id: poland
+  name: Poland
+  is_fictional: false
+  founded_year: 1919
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: polish
+  eligible_for_international: true
+  regions:
+    - id: pol_northeast
+      name: Greater Poland & Masovia
+      talent_modifier: 1.1
+    - id: pol_southwest
+      name: Silesia
+      talent_modifier: 1.0
+    - id: pol_southeast
+      name: Pomerania & Baltic Coast
+      talent_modifier: 1.0
+    - id: pol_northwest
+      name: Lesser Poland & Galicia
+      talent_modifier: 0.9
+
+- id: yugoslavia
+  name: Yugoslavia
+  is_fictional: false
+  founded_year: 1919
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: yugoslavian
+  eligible_for_international: true
+  regions:
+    - id: yug_east
+      name: Serbian Danubian Core
+      talent_modifier: 1.15
+    - id: yug_central
+      name: Bosnian Mountain Ridge
+      talent_modifier: 1.0
+    - id: yug_northwest
+      name: Slovenian Alpine Flank
+      talent_modifier: 0.95
+    - id: yug_south
+      name: Montenegro & South Slavic Karst
+      talent_modifier: 0.9
+
+# In 1921 the Partition of Ireland was declared and the Irish League was formed (TODO)
+
+- id: czechoslovakia
+  name: Czechoslovakia
+  is_fictional: false
+  founded_year: 1921
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: czechoslovakian
+  eligible_for_international: true
+  regions:
+    - id: csl_west
+      name: Bohemia
+      talent_modifier: 1.0
+    - id: csl_central
+      name: Moravia
+      talent_modifier: 1.0
+    - id: csl_south
+      name: Western Slovakia
+      talent_modifier: 1.0
+    - id: csl_east
+      name: Eastern Slovak Highlands
+      talent_modifier: 1.0
+
+# Edge case: Soviet Union (formed in 1922, but FA was not created until 1934) TODO
+
+- id: turkey
+  name: Turkey
+  is_fictional: false
+  founded_year: 1923
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: turkish
+  eligible_for_international: true
+  regions:
+    - id: tur_istanbul
+      name: Istanbul Megacity
+      talent_modifier: 1.0
+    - id: tur_west
+      name: Aegean & Marmara Coast
+      talent_modifier: 1.0
+    - id: tur_north
+      name: Anatolian Heartland & Black Sea Coast
+      talent_modifier: 1.0
+    - id: tur_south
+      name: Southern Anatolia
+      talent_modifier: 1.0
+
+- id: albania
+  name: Albania
+  is_fictional: false
+  founded_year: 1930
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: albanian
+  eligible_for_international: true
+  regions:
+    - id: alb_tirana
+      name: Tirana Core
+      talent_modifier: 1.0
+    - id: alb_north
+      name: Shkodra & The North
+      talent_modifier: 1.0
+    - id: alb_south
+      name: Gjirokastër & Vlorë
+      talent_modifier: 1.0
+    - id: alb_east
+      name: Korçë & The East
+      talent_modifier: 1.0
+
+- id: saarland
+  name: Saarland
+  is_fictional: false
+  founded_year: 1931
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: saarlandian
+  eligible_for_international: true
+  regions:
+    - id: saa_saarbrucken
+      name: Saarbrücken Urban Center
+      talent_modifier: 1.0
+    - id: saa_southwest
+      name: Forbach Corridor
+      talent_modifier: 1.0
+    - id: saa_west
+      name: Saarlouis
+      talent_modifier: 1.0
+    - id: saa_east
+      name: Bliesgau
+      talent_modifier: 1.0
+
+- id: slovakia
+  name: Slovakia
+  is_fictional: false
+  founded_year: 1938
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: slovakian
+  eligible_for_international: true
+  regions:
+    - id: skl_west
+      name: Bratislava & Western Plain
+      talent_modifier: 1.0
+    - id: skl_north
+      name: Morava-Border North
+      talent_modifier: 1.0
+    - id: skl_central
+      name: Central Alpine Core
+      talent_modifier: 1.0
+    - id: skl_east
+      name: Košice & Eastern Frontier
+      talent_modifier: 1.0
+
+- id: kosovo
+  name: Kosovo
+  is_fictional: false
+  founded_year: 1946
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: kosovar
+  eligible_for_international: true
+  regions:
+    - id: kos_prishtina
+      name: Prishtina Core
+      talent_modifier: 1.0
+    - id: kos_west
+      name: Dukagjini West
+      talent_modifier: 1.0
+    - id: kos_north
+      name: Mitrovica Mining North
+      talent_modifier: 1.0
+    - id: kos_east
+      name: Gjilanit
+      talent_modifier: 1.0
+
+- id: iceland
+  name: Iceland
+  is_fictional: false
+  founded_year: 1947
+  prestige: 1000
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: icelandic
+  eligible_for_international: true
+  regions:
+    - id: ice_reykjavik
+      name: Reykjavik Urban Core
+      talent_modifier: 1.0
+    - id: ice_southeast
+      name: Volcanic South & East Fjords
+      talent_modifier: 1.0
+    - id: ice_north
+      name: Akureyri & Arctic North
+      talent_modifier: 1.0
+    - id: ice_west
+      name: Reykjanes Peninsula & West
+      talent_modifier: 1.0
+
+- id: east_germany
+  name: East Germany
+  is_fictional: false
+  founded_year: 1945
+  prestige: 1200
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: german
+  eligible_for_international: true
+  regions:
+    - id: ddr_berlin
+      name: Berlin-Bradenburg Axis
+      talent_modifier: 1.0
+    - id: eg_south
+      name: Saxon Heartland
+      talent_modifier: 1.0
+    - id: eg_north
+      name: Baltic Maritime Coast
+      talent_modifier: 1.0
+    - id: eg_west
+      name: Thuringia & Anhalt
+      talent_modifier: 1.0
+
+- id: cyprus
+  name: Cyprus
+  is_fictional: false
+  founded_year: 1954
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: cypriot
+  eligible_for_international: true
+  regions:
+    - id: cyp_nicosia
+      name: Nicosia Capital Hub
+      talent_modifier: 1.0
+    - id: cyp_south
+      name: Limassol & Larnaca
+      talent_modifier: 1.0
+    - id: cyp_east
+      name: Famagusta & Kyrenia
+      talent_modifier: 1.0
+    - id: cyp_west
+      name: Paphos
+      talent_modifier: 1.0
+
+# South America
 
 - id: argentina
   name: Argentina
@@ -497,3 +1022,281 @@
     - id: uru_west
       name: Western Litoral
       talent_modifier: 0.85
+
+- id: chile
+  name: Chile
+  is_fictional: false
+  founded_year: 1900
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: chilean
+  eligible_for_international: true
+  regions:
+    - id: chi_santiago
+      name: Santiago Metropolitan
+      talent_modifier: 1.25
+    - id: chi_south
+      name: Mapuche South
+      talent_modifier: 0.95
+    - id: chi_north
+      name: Mining North
+      talent_modifier: 0.9
+    - id: chi_west
+      name: Port & Coast West
+      talent_modifier: 0.9
+
+- id: brazil
+  name: Brazil
+  is_fictional: false
+  founded_year: 1914
+  prestige: 1800
+  prestige_weights:
+    league: 0.45
+    international: 0.55
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: brazilian
+  eligible_for_international: true
+  regions:
+    - id: bra_southeast
+      name: Cinturão Paulista e Costa Carioca
+      talent_modifier: 1.25
+    - id: bra_south
+      name: Motor Gaúcho
+      talent_modifier: 0.95
+    - id: bra_northeast
+      name: Nordeste Fabril
+      talent_modifier: 0.95
+    - id: bra_northwest
+      name: Amazonas
+      talent_modifier: 0.85
+
+# North America
+
+- id: canada
+  name: Canada
+  is_fictional: false
+  founded_year: 1912
+  prestige: 1500
+  prestige_weights:
+    league: 0.30
+    international: 0.70
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: canadian
+  eligible_for_international: true
+  regions:
+    - id: can_ontario
+      name: Ontario Hub
+      talent_modifier: 1.25
+    - id: can_quebec
+      name: La Belle Province
+      talent_modifier: 1.05
+    - id: can_west
+      name: Pacific Coast
+      talent_modifier: 1.0
+    - id: can_north
+      name: The Praire & Atlantic Wilderness
+      talent_modifier: 0.7
+
+- id: united_states
+  name: United States
+  is_fictional: false
+  founded_year: 1913
+  prestige: 1400
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: american
+  eligible_for_international: true
+  regions:
+    - id: usa_southwest
+      name: Southwest Corridor
+      talent_modifier: 1.2
+    - id: usa_northeast
+      name: Northeast Megalopolis
+      talent_modifier: 1.05
+    - id: usa_northwest
+      name: Cascadia & Pacific Northwest
+      talent_modifier: 0.9
+    - id: usa_south
+      name: Deep South
+      talent_modifier: 0.85
+
+# Africa
+
+- id: south_africa
+  name: South Africa
+  is_fictional: false
+  founded_year: 1892
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: south_african
+  eligible_for_international: true
+  regions:
+    - id: rsa_gauteng
+      name: Gauteng
+      talent_modifier: 1.25
+    - id: rsa_kwazulu_natal
+      name: Kwazulu-Natal Coast
+      talent_modifier: 0.9
+    - id: rsa_cape_corridor
+      name: Cape Corridor
+      talent_modifier: 0.95
+    - id: rsa_north
+      name: Northern Frontier
+      talent_modifier: 0.9
+
+- id: egypt
+  name: Egypt
+  is_fictional: false
+  founded_year: 1921
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: egyptian
+  eligible_for_international: true
+  regions:
+    - id: egy_cairo
+      name: Cairo Metro Core
+      talent_modifier: 1.1
+    - id: egy_mediterranean
+      name: Nile Delta & Mediterranean Coast
+      talent_modifier: 1.1
+    - id: egy_east
+      name: Suez Corridor and Red Sea Coast
+      talent_modifier: 0.9
+    - id: egy_south
+      name: Upper Egypt & The Sa'id
+      talent_modifier: 0.9
+
+# Asia
+
+- id: Singapore
+  name: Singapore
+  is_fictional: false
+  founded_year: 1892
+  prestige: 1100
+  prestige_weights:
+    league: 0.25
+    international: 0.75
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: singaporean
+  eligible_for_international: true
+  regions:
+    - id: sin_central
+      name: Central Urban Core
+      talent_modifier: 1.25
+    - id: sin_east
+      name: Malay Heartland
+      talent_modifier: 0.95
+    - id: sin_west
+      name: Jurong Corridor
+      talent_modifier: 0.9
+    - id: sin_global
+      name: Naturalized Zone # Double check this (TODO)
+      talent_modifier: 0.9
+
+- id: philippines
+  name: Philippines
+  is_fictional: false
+  founded_year: 1907
+  prestige: 1000
+  prestige_weights:
+    league: 0.25
+    international: 0.75
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: filipino
+  eligible_for_international: true
+  regions:
+    - id: phi_manila
+      name: Metro Manila Capital
+      talent_modifier: 1.1
+    - id: phi_west
+      name: Iloilo & Western Visayas
+      talent_modifier: 1.0
+    - id: phi_south
+      name: Mindanao Southern Frontier
+      talent_modifier: 1.0
+    - id: phi_global
+      name: Global Azkals Blueprint # Double check this (TODO)
+      talent_modifier: 0.9
+
+- id: japan
+  name: Japan
+  is_fictional: false
+  founded_year: 1921
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: japanese
+  eligible_for_international: true
+  regions:
+    - id: jap_tokyo
+      name: Tokyo Metropolitan
+      talent_modifier: 1.25
+    - id: jap_north
+      name: Touhoku & Hokkaido
+      talent_modifier: 0.80
+    - id: jap_central
+      name: Kansai & Shikoku
+      talent_modifier: 1.20
+    - id: jap_south
+      name: Kyushu & Okinawa
+      talent_modifier: 0.75
+
+# Oceania
+
+- id: new_zealand
+  name: New Zealand
+  is_fictional: false
+  founded_year: 1891
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: new_zealand
+  eligible_for_international: true
+  regions:
+    - id: nz_auckland
+      name: Auckland Metropolitan
+      talent_modifier: 1.1
+    - id: nz_wellington
+      name: Wellington Core
+      talent_modifier: 1.0
+    - id: nz_south
+      name: Te Waipounamu
+      talent_modifier: 0.9
+    - id: nz_central_north
+      name: Waikato & Bay of Plenty
+      talent_modifier: 0.9

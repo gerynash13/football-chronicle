@@ -151,12 +151,12 @@
       "secondary": null
     },
     "all:team_longest_scoring_run": {
-      "value": 14,
-      "holder": "Populara Kluba Galvononos",
+      "value": 16,
+      "holder": "Mercaria Kluba",
       "holder_id": null,
       "team": null,
-      "season": "1898/99",
-      "competition": "Prote Kategorias",
+      "season": "1896/97",
+      "competition": "Protonas Cup",
       "detail": null,
       "secondary": null
     },
@@ -381,21 +381,21 @@
       "secondary": null
     },
     "team:Kluba Maritima Thesias:team_longest_scoring_run": {
-      "value": 10,
+      "value": 13,
       "holder": "Kluba Maritima Thesias",
       "holder_id": null,
       "team": null,
-      "season": "1897/98",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
       "detail": null,
       "secondary": null
     },
     "team:Kluba Maritima Thesias:team_longest_unbeaten_run": {
-      "value": 7,
+      "value": 9,
       "holder": "Kluba Maritima Thesias",
       "holder_id": null,
       "team": null,
-      "season": "1897/98",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
       "detail": null,
       "secondary": null
@@ -441,9 +441,9 @@
       "secondary": null
     },
     "all:player_braces:most": {
-      "value": 7,
-      "holder": "Jaumelhos Boteravar",
-      "holder_id": "06f971e9-d893-4bea-8802-c8cae5464c64",
+      "value": 9,
+      "holder": "Teodvar Tameiavar",
+      "holder_id": "6729f183-0174-4650-9e1b-adf40b23523b",
       "team": null,
       "season": null,
       "competition": null,
@@ -451,9 +451,9 @@
       "secondary": null
     },
     "comp:Prote Kategorias:player_braces:most": {
-      "value": 6,
-      "holder": "Jaumelhos Boteravar",
-      "holder_id": "06f971e9-d893-4bea-8802-c8cae5464c64",
+      "value": 8,
+      "holder": "Bertavar Sartravar",
+      "holder_id": "d980c9a2-1a6e-47b3-9f9d-322c071753d0",
       "team": null,
       "season": null,
       "competition": null,
@@ -461,9 +461,9 @@
       "secondary": null
     },
     "team:Mercaria Kluba:player_braces:most": {
-      "value": 7,
-      "holder": "Jaumelhos Boteravar",
-      "holder_id": "06f971e9-d893-4bea-8802-c8cae5464c64",
+      "value": 8,
+      "holder": "Bertavar Sartravar",
+      "holder_id": "d980c9a2-1a6e-47b3-9f9d-322c071753d0",
       "team": null,
       "season": null,
       "competition": null,
@@ -481,24 +481,24 @@
       "secondary": null
     },
     "team:Mercaria Kluba:player_fastest_goal": {
-      "value": 2,
-      "holder": "Olivar Emvaravar",
-      "holder_id": "55f78737-ab11-4588-ba43-f11ef8f0bf0f",
+      "value": 1,
+      "holder": "Rikalhos Fornavar",
+      "holder_id": "7e9e7049-751b-419f-9b54-6698f03c4d09",
       "team": "Mercaria Kluba",
       "season": "1896/97",
-      "competition": "Protonas Cup",
-      "detail": "Olivar Emvaravar 2' — Mercaria Kluba 3-3 Kluba Sportika Galvononos (1896/97)",
+      "competition": "Prote Kategorias",
+      "detail": "Rikalhos Fornavar 1' — Mercaria Kluba 2-1 Kluba Sulhavonos (1896/97)",
       "secondary": null
     },
     "team:Mercaria Kluba:team_biggest_win": {
-      "value": 5,
+      "value": 6,
       "holder": "Mercaria Kluba",
       "holder_id": null,
       "team": null,
       "season": "1896/97",
       "competition": "Prote Kategorias",
-      "detail": "Portavar Kluba 0-5 Mercaria Kluba (1896/97)",
-      "secondary": "Portavar Kluba"
+      "detail": "Mercaria Kluba 6-0 Kluba Sulhavonos (1896/97)",
+      "secondary": "Kluba Sulhavonos"
     },
     "team:Kluba Sportika Mileiu:team_biggest_loss": {
       "value": 4,
@@ -541,12 +541,12 @@
       "secondary": null
     },
     "team:Mercaria Kluba:team_longest_scoring_run": {
-      "value": 13,
+      "value": 16,
       "holder": "Mercaria Kluba",
       "holder_id": null,
       "team": null,
       "season": "1896/97",
-      "competition": "Prote Kategorias",
+      "competition": "Protonas Cup",
       "detail": null,
       "secondary": null
     },
@@ -651,7 +651,7 @@
       "secondary": null
     },
     "team:Portavar Kluba:team_longest_winning_run": {
-      "value": 3,
+      "value": 4,
       "holder": "Portavar Kluba",
       "holder_id": null,
       "team": null,
@@ -661,17 +661,17 @@
       "secondary": null
     },
     "team:Portavar Kluba:team_longest_scoring_run": {
-      "value": 6,
+      "value": 14,
       "holder": "Portavar Kluba",
       "holder_id": null,
       "team": null,
-      "season": "1897/98",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
       "detail": null,
       "secondary": null
     },
     "team:Portavar Kluba:team_longest_unbeaten_run": {
-      "value": 4,
+      "value": 6,
       "holder": "Portavar Kluba",
       "holder_id": null,
       "team": null,
@@ -741,13 +741,13 @@
       "secondary": null
     },
     "comp:Protonas Cup:player_oldest_scorer": {
-      "value": 161,
-      "holder": "John Davidson",
-      "holder_id": "07caed6f-7c0d-4d6d-b2ef-dbbb3a363971",
-      "team": "Kluba Maritima Thesias",
-      "season": "1897/98",
+      "value": 162,
+      "holder": "Tolvhan Arnhelos",
+      "holder_id": "18581272-1fe9-4360-a550-d53b1423bb12",
+      "team": "Kluba Sulhavonos",
+      "season": "1896/97",
       "competition": "Protonas Cup",
-      "detail": "Mercaria Kluba 1-4 Kluba Maritima Thesias (1897/98)",
+      "detail": "Kluba Sulhavonos 1-3 Kluba Maritima Thesias (1896/97)",
       "secondary": null
     },
     "team:Populara Kluba Galvononos:player_most_goals_match": {
@@ -771,9 +771,9 @@
       "secondary": null
     },
     "team:Kluba Sulhavonos:player_braces:most": {
-      "value": 5,
-      "holder": "Emhavar Brakeiros",
-      "holder_id": "d1dbbdef-b535-4878-8b0b-2114d114f047",
+      "value": 6,
+      "holder": "Sulhon Drosvanos",
+      "holder_id": "ecffce40-f51b-4fe1-86fc-e462565e645b",
       "team": null,
       "season": null,
       "competition": null,
@@ -831,14 +831,14 @@
       "secondary": null
     },
     "team:Populara Kluba Galvononos:team_biggest_loss": {
-      "value": 3,
+      "value": 4,
       "holder": "Populara Kluba Galvononos",
       "holder_id": null,
       "team": null,
       "season": "1896/97",
-      "competition": "Prote Kategorias",
-      "detail": "Kluba Sportika Galvononos 4-1 Populara Kluba Galvononos (1896/97)",
-      "secondary": "Kluba Sportika Galvononos"
+      "competition": "Protonas Cup",
+      "detail": "Kluba Maritima Thesias 4-0 Populara Kluba Galvononos (1896/97)",
+      "secondary": "Kluba Maritima Thesias"
     },
     "comp:Protonas Cup:player_youngest_debut": {
       "value": 147,
@@ -881,8 +881,8 @@
       "secondary": null
     },
     "comp:Protonas Cup:team_longest_scoring_run": {
-      "value": 10,
-      "holder": "Kluba Sportika Galvononos",
+      "value": 16,
+      "holder": "Mercaria Kluba",
       "holder_id": null,
       "team": null,
       "season": "1896/97",
@@ -921,9 +921,9 @@
       "secondary": null
     },
     "team:Populara Kluba Galvononos:player_braces:most": {
-      "value": 2,
-      "holder": "Aristalhos Pescavar",
-      "holder_id": "d25d1873-a2b5-4a12-ae84-c67fc0c93e78",
+      "value": 4,
+      "holder": "Manolhos Galvōdēs",
+      "holder_id": "86402074-5cb9-47e6-8800-1513cc4995f1",
       "team": null,
       "season": null,
       "competition": null,
@@ -931,9 +931,9 @@
       "secondary": null
     },
     "all:player_hattricks:most": {
-      "value": 1,
-      "holder": "Nalhon Galveiros",
-      "holder_id": "06c0a989-45b8-402e-89da-f67f4c7ffda0",
+      "value": 2,
+      "holder": "Kyrialhos Notaravar",
+      "holder_id": "d25e0978-6999-476a-8890-92ece2fe172b",
       "team": null,
       "season": null,
       "competition": null,
@@ -941,9 +941,9 @@
       "secondary": null
     },
     "comp:Prote Kategorias:player_hattricks:most": {
-      "value": 1,
-      "holder": "Nalhon Galveiros",
-      "holder_id": "06c0a989-45b8-402e-89da-f67f4c7ffda0",
+      "value": 2,
+      "holder": "Kyrialhos Notaravar",
+      "holder_id": "d25e0978-6999-476a-8890-92ece2fe172b",
       "team": null,
       "season": null,
       "competition": null,
@@ -1021,9 +1021,9 @@
       "secondary": "Kluba Sportika Galvononos"
     },
     "team:Kluba Sportika Mileiu:player_braces:most": {
-      "value": 2,
-      "holder": "Cesarhos Saxavar",
-      "holder_id": "53f74d86-97ca-494f-9a23-ba1a13c103e6",
+      "value": 3,
+      "holder": "Anselmohos Vidravar",
+      "holder_id": "12b3e2b1-771d-48d0-8744-7043ab6aad3a",
       "team": null,
       "season": null,
       "competition": null,
@@ -1031,7 +1031,7 @@
       "secondary": null
     },
     "team:Kluba Sportika Esalumou:player_braces:most": {
-      "value": 2,
+      "value": 3,
       "holder": "Dominalhos Arcavar",
       "holder_id": "d278a8ad-7146-4d40-b1fd-d4e98aa3552a",
       "team": null,
@@ -1061,9 +1061,9 @@
       "secondary": "Kluba Maritima Thesias"
     },
     "team:Kluba Sportika Galvononos:player_braces:most": {
-      "value": 6,
-      "holder": "Kostanvar Grammatavar",
-      "holder_id": "6eccd66d-33b5-4c88-a133-cce57c9d09ca",
+      "value": 9,
+      "holder": "Teodvar Tameiavar",
+      "holder_id": "6729f183-0174-4650-9e1b-adf40b23523b",
       "team": null,
       "season": null,
       "competition": null,
@@ -1071,14 +1071,14 @@
       "secondary": null
     },
     "team:Kluba Sulhavonos:team_biggest_loss": {
-      "value": 4,
+      "value": 6,
       "holder": "Kluba Sulhavonos",
       "holder_id": null,
       "team": null,
-      "season": "1898/99",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
-      "detail": "Populara Kluba Galvononos 4-0 Kluba Sulhavonos (1898/99)",
-      "secondary": "Populara Kluba Galvononos"
+      "detail": "Mercaria Kluba 6-0 Kluba Sulhavonos (1896/97)",
+      "secondary": "Mercaria Kluba"
     },
     "team:Mercaria Kluba:team_biggest_loss": {
       "value": 6,
@@ -1091,17 +1091,17 @@
       "secondary": "Kluba Maritima Thesias"
     },
     "team:Kluba Sportika Galvononos:team_biggest_loss": {
-      "value": 3,
+      "value": 4,
       "holder": "Kluba Sportika Galvononos",
       "holder_id": null,
       "team": null,
-      "season": "1897/98",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
-      "detail": "Kluba Maritima Thesias 3-0 Kluba Sportika Galvononos (1897/98)",
-      "secondary": "Kluba Maritima Thesias"
+      "detail": "Kluba Sportika Galvononos 0-4 Portavar Kluba (1896/97)",
+      "secondary": "Portavar Kluba"
     },
     "team:Kluba Maritima Thesias:player_braces:most": {
-      "value": 5,
+      "value": 6,
       "holder": "Brunavar Arata",
       "holder_id": "580ca559-67f7-4028-87ac-21f33419a871",
       "team": null,
@@ -1111,9 +1111,9 @@
       "secondary": null
     },
     "team:Portavar Kluba:player_braces:most": {
-      "value": 3,
-      "holder": "Franseschos Marivar",
-      "holder_id": "f24998f6-d683-4fd6-bab0-126e7c04842f",
+      "value": 4,
+      "holder": "Gaietahos Teixavar",
+      "holder_id": "c79b7001-e3a8-41c3-a96c-8ba45f5541bd",
       "team": null,
       "season": null,
       "competition": null,
@@ -1121,14 +1121,14 @@
       "secondary": null
     },
     "team:Kluba Sportika Esalumou:team_biggest_win": {
-      "value": 3,
+      "value": 4,
       "holder": "Kluba Sportika Esalumou",
       "holder_id": null,
       "team": null,
       "season": "1896/97",
       "competition": "Prote Kategorias",
-      "detail": "Kluba Sportika Esalumou 3-0 Kluba Maritima Thesias (1896/97)",
-      "secondary": "Kluba Maritima Thesias"
+      "detail": "Kluba Sportika Esalumou 4-0 Portavar Kluba (1896/97)",
+      "secondary": "Portavar Kluba"
     },
     "team:Kluba Maritima Thesias:player_hattricks:most": {
       "value": 1,
@@ -1181,8 +1181,8 @@
       "secondary": null
     },
     "comp:Prote Kategorias:team_season_least_points": {
-      "value": 6,
-      "holder": "Kluba Sportika Mileiu",
+      "value": 5,
+      "holder": "Kluba Sportika Esalumou",
       "holder_id": null,
       "team": null,
       "season": "1896/97",
@@ -1241,11 +1241,11 @@
       "secondary": null
     },
     "comp:Prote Kategorias:team_season_most_draws": {
-      "value": 5,
-      "holder": "Kluba Sportika Mileiu",
+      "value": 6,
+      "holder": "Mercaria Kluba",
       "holder_id": null,
       "team": null,
-      "season": "1897/98",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
       "detail": null,
       "secondary": null
@@ -1331,11 +1331,11 @@
       "secondary": null
     },
     "team:Kluba Sportika Galvononos:team_season_least_goals_for": {
-      "value": 27,
+      "value": 26,
       "holder": "Kluba Sportika Galvononos",
       "holder_id": null,
       "team": null,
-      "season": "1898/99",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
       "detail": null,
       "secondary": null
@@ -1491,11 +1491,11 @@
       "secondary": null
     },
     "team:Mercaria Kluba:team_season_most_draws": {
-      "value": 4,
+      "value": 6,
       "holder": "Mercaria Kluba",
       "holder_id": null,
       "team": null,
-      "season": "1898/99",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
       "detail": null,
       "secondary": null
@@ -1811,11 +1811,11 @@
       "secondary": null
     },
     "team:Populara Kluba Galvononos:team_season_most_draws": {
-      "value": 4,
+      "value": 5,
       "holder": "Populara Kluba Galvononos",
       "holder_id": null,
       "team": null,
-      "season": "1897/98",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
       "detail": null,
       "secondary": null
@@ -1931,7 +1931,7 @@
       "secondary": null
     },
     "team:Portavar Kluba:team_season_most_points": {
-      "value": 14,
+      "value": 19,
       "holder": "Portavar Kluba",
       "holder_id": null,
       "team": null,
@@ -1951,7 +1951,7 @@
       "secondary": null
     },
     "team:Portavar Kluba:team_season_most_wins": {
-      "value": 6,
+      "value": 7,
       "holder": "Portavar Kluba",
       "holder_id": null,
       "team": null,
@@ -1971,11 +1971,11 @@
       "secondary": null
     },
     "team:Portavar Kluba:team_season_most_draws": {
-      "value": 3,
+      "value": 5,
       "holder": "Portavar Kluba",
       "holder_id": null,
       "team": null,
-      "season": "1899/00",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
       "detail": null,
       "secondary": null
@@ -2001,7 +2001,7 @@
       "secondary": null
     },
     "team:Portavar Kluba:team_season_least_losses": {
-      "value": 6,
+      "value": 2,
       "holder": "Portavar Kluba",
       "holder_id": null,
       "team": null,
@@ -2011,7 +2011,7 @@
       "secondary": null
     },
     "team:Portavar Kluba:team_season_most_goals_for": {
-      "value": 29,
+      "value": 30,
       "holder": "Portavar Kluba",
       "holder_id": null,
       "team": null,
@@ -2071,7 +2071,7 @@
       "secondary": null
     },
     "team:Portavar Kluba:team_best_league_position": {
-      "value": 5,
+      "value": 3,
       "holder": "Portavar Kluba",
       "holder_id": null,
       "team": null,
@@ -2091,7 +2091,7 @@
       "secondary": null
     },
     "team:Kluba Maritima Thesias:team_season_most_points": {
-      "value": 19,
+      "value": 21,
       "holder": "Kluba Maritima Thesias",
       "holder_id": null,
       "team": null,
@@ -2131,7 +2131,7 @@
       "secondary": null
     },
     "team:Kluba Maritima Thesias:team_season_most_draws": {
-      "value": 3,
+      "value": 5,
       "holder": "Kluba Maritima Thesias",
       "holder_id": null,
       "team": null,
@@ -2161,7 +2161,7 @@
       "secondary": null
     },
     "team:Kluba Maritima Thesias:team_season_least_losses": {
-      "value": 4,
+      "value": 1,
       "holder": "Kluba Maritima Thesias",
       "holder_id": null,
       "team": null,
@@ -2171,11 +2171,11 @@
       "secondary": null
     },
     "team:Kluba Maritima Thesias:team_season_most_goals_for": {
-      "value": 32,
+      "value": 33,
       "holder": "Kluba Maritima Thesias",
       "holder_id": null,
       "team": null,
-      "season": "1899/00",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
       "detail": null,
       "secondary": null
@@ -2211,7 +2211,7 @@
       "secondary": null
     },
     "team:Kluba Maritima Thesias:team_season_best_goal_difference": {
-      "value": 12,
+      "value": 15,
       "holder": "Kluba Maritima Thesias",
       "holder_id": null,
       "team": null,
@@ -2261,7 +2261,7 @@
       "secondary": null
     },
     "team:Kluba Sportika Esalumou:team_season_least_points": {
-      "value": 6,
+      "value": 5,
       "holder": "Kluba Sportika Esalumou",
       "holder_id": null,
       "team": null,
@@ -2281,7 +2281,7 @@
       "secondary": null
     },
     "team:Kluba Sportika Esalumou:team_season_least_wins": {
-      "value": 2,
+      "value": 1,
       "holder": "Kluba Sportika Esalumou",
       "holder_id": null,
       "team": null,
@@ -2291,7 +2291,7 @@
       "secondary": null
     },
     "team:Kluba Sportika Esalumou:team_season_most_draws": {
-      "value": 3,
+      "value": 4,
       "holder": "Kluba Sportika Esalumou",
       "holder_id": null,
       "team": null,
@@ -2571,8 +2571,8 @@
       "secondary": null
     },
     "comp:Prote Kategorias:team_most_home_goals_season": {
-      "value": 39,
-      "holder": "Kluba Sportika Galvononos",
+      "value": 80,
+      "holder": "Mercaria Kluba",
       "holder_id": null,
       "team": null,
       "season": "1896/97",
@@ -2581,7 +2581,7 @@
       "secondary": null
     },
     "comp:Prote Kategorias:team_most_away_goals_season": {
-      "value": 31,
+      "value": 78,
       "holder": "Kluba Sportika Galvononos",
       "holder_id": null,
       "team": null,
@@ -2711,7 +2711,7 @@
       "secondary": null
     },
     "all:player_most_goals_career": {
-      "value": 38,
+      "value": 50,
       "holder": "Filipalhos Logothavar",
       "holder_id": "71cd45b0-7346-4952-a1fb-5b4fa3e4f138",
       "team": "Kluba Sportika Galvononos",
@@ -2721,7 +2721,7 @@
       "secondary": null
     },
     "all:player_most_assists_career": {
-      "value": 23,
+      "value": 36,
       "holder": "Stefanhos Eforavar",
       "holder_id": "e7bada13-b136-4828-81b3-ee03eb2ef7b6",
       "team": "Kluba Sportika Galvononos",
@@ -2731,7 +2731,7 @@
       "secondary": null
     },
     "all:player_most_appearances_career": {
-      "value": 89,
+      "value": 138,
       "holder": "Demetralhos Bouleutar",
       "holder_id": "a8d96061-a419-4c7d-a949-47b511d5e60c",
       "team": "Kluba Sportika Galvononos",
@@ -2741,7 +2741,7 @@
       "secondary": null
     },
     "comp:Prote Kategorias:player_most_goals_career": {
-      "value": 38,
+      "value": 50,
       "holder": "Filipalhos Logothavar",
       "holder_id": "71cd45b0-7346-4952-a1fb-5b4fa3e4f138",
       "team": "Kluba Sportika Galvononos",
@@ -2751,7 +2751,7 @@
       "secondary": null
     },
     "comp:Prote Kategorias:player_most_assists_career": {
-      "value": 23,
+      "value": 36,
       "holder": "Stefanhos Eforavar",
       "holder_id": "e7bada13-b136-4828-81b3-ee03eb2ef7b6",
       "team": "Kluba Sportika Galvononos",
@@ -2761,7 +2761,7 @@
       "secondary": null
     },
     "comp:Prote Kategorias:player_most_appearances_career": {
-      "value": 89,
+      "value": 138,
       "holder": "Demetralhos Bouleutar",
       "holder_id": "a8d96061-a419-4c7d-a949-47b511d5e60c",
       "team": "Kluba Sportika Galvononos",
@@ -2771,7 +2771,7 @@
       "secondary": null
     },
     "all:gk_most_clean_sheets_career": {
-      "value": 28,
+      "value": 43,
       "holder": "Vasilhos Portikavar",
       "holder_id": "38a620fa-586e-42f5-9870-e00e65a56d4e",
       "team": "Kluba Sportika Galvononos",
@@ -2781,7 +2781,7 @@
       "secondary": null
     },
     "comp:Prote Kategorias:gk_most_clean_sheets_career": {
-      "value": 28,
+      "value": 43,
       "holder": "Vasilhos Portikavar",
       "holder_id": "38a620fa-586e-42f5-9870-e00e65a56d4e",
       "team": "Kluba Sportika Galvononos",
@@ -2791,7 +2791,7 @@
       "secondary": null
     },
     "team:Kluba Sulhavonos:player_club_goals": {
-      "value": 24,
+      "value": 39,
       "holder": "Sulhon Drosvanos",
       "holder_id": "ecffce40-f51b-4fe1-86fc-e462565e645b",
       "team": "Kluba Sulhavonos",
@@ -2801,7 +2801,7 @@
       "secondary": null
     },
     "team:Kluba Sulhavonos:player_club_assists": {
-      "value": 14,
+      "value": 20,
       "holder": "Tolvhan Arnhelos",
       "holder_id": "18581272-1fe9-4360-a550-d53b1423bb12",
       "team": "Kluba Sulhavonos",
@@ -2811,9 +2811,9 @@
       "secondary": null
     },
     "team:Kluba Sulhavonos:player_club_appearances": {
-      "value": 81,
-      "holder": "Sulhon Drosvanos",
-      "holder_id": "ecffce40-f51b-4fe1-86fc-e462565e645b",
+      "value": 128,
+      "holder": "Brakhor Kalveira",
+      "holder_id": "eb9b10ee-006e-47f6-9908-0498c6c15520",
       "team": "Kluba Sulhavonos",
       "season": null,
       "competition": null,
@@ -2861,9 +2861,9 @@
       "secondary": null
     },
     "team:Kluba Maritima Thesias:player_club_goals": {
-      "value": 30,
-      "holder": "Brunavar Arata",
-      "holder_id": "580ca559-67f7-4028-87ac-21f33419a871",
+      "value": 43,
+      "holder": "Thomas Austin",
+      "holder_id": "5f1a5e8e-2b06-4ce2-9e2d-1893c9f09b65",
       "team": "Kluba Maritima Thesias",
       "season": null,
       "competition": null,
@@ -2871,7 +2871,7 @@
       "secondary": null
     },
     "team:Kluba Maritima Thesias:player_club_assists": {
-      "value": 18,
+      "value": 27,
       "holder": "Alberto Repetto",
       "holder_id": "da61a744-ca3a-4f17-90c2-b5ceace15e0d",
       "team": "Kluba Maritima Thesias",
@@ -2881,9 +2881,9 @@
       "secondary": null
     },
     "team:Kluba Maritima Thesias:player_club_appearances": {
-      "value": 82,
-      "holder": "Arthur Smith",
-      "holder_id": "65ffb5a3-c375-4406-bc46-781502416cbe",
+      "value": 132,
+      "holder": "Marcalhos Fustavar",
+      "holder_id": "acd743c4-dff6-4051-9b1e-75d5ad66a768",
       "team": "Kluba Maritima Thesias",
       "season": null,
       "competition": null,
@@ -2931,7 +2931,7 @@
       "secondary": null
     },
     "team:Mercaria Kluba:player_club_goals": {
-      "value": 30,
+      "value": 46,
       "holder": "Ferranhos Vidravar",
       "holder_id": "4e446c60-9f2a-48b2-91c7-612f4c3f1ae5",
       "team": "Mercaria Kluba",
@@ -2941,9 +2941,9 @@
       "secondary": null
     },
     "team:Mercaria Kluba:player_club_assists": {
-      "value": 18,
-      "holder": "Jordavar Molnavar",
-      "holder_id": "9d702339-bb6e-4fbb-806c-225cde5af4af",
+      "value": 29,
+      "holder": "Ramhos Mercavar",
+      "holder_id": "e067a3f4-bad2-47fd-9477-89084267e636",
       "team": "Mercaria Kluba",
       "season": null,
       "competition": null,
@@ -2951,7 +2951,7 @@
       "secondary": null
     },
     "team:Mercaria Kluba:player_club_appearances": {
-      "value": 80,
+      "value": 133,
       "holder": "Olivar Emvaravar",
       "holder_id": "55f78737-ab11-4588-ba43-f11ef8f0bf0f",
       "team": "Mercaria Kluba",
@@ -2961,7 +2961,7 @@
       "secondary": null
     },
     "team:Portavar Kluba:player_most_goals_season": {
-      "value": 6,
+      "value": 8,
       "holder": "Franseschos Marivar",
       "holder_id": "f24998f6-d683-4fd6-bab0-126e7c04842f",
       "team": "Portavar Kluba",
@@ -3001,7 +3001,7 @@
       "secondary": null
     },
     "team:Portavar Kluba:player_club_goals": {
-      "value": 19,
+      "value": 34,
       "holder": "Gaietahos Teixavar",
       "holder_id": "c79b7001-e3a8-41c3-a96c-8ba45f5541bd",
       "team": "Portavar Kluba",
@@ -3011,9 +3011,9 @@
       "secondary": null
     },
     "team:Portavar Kluba:player_club_assists": {
-      "value": 13,
-      "holder": "Franseschos Marivar",
-      "holder_id": "f24998f6-d683-4fd6-bab0-126e7c04842f",
+      "value": 20,
+      "holder": "Vicenthos Brakavar",
+      "holder_id": "02fbc5c9-d360-43c3-9e87-5ddb1b80384b",
       "team": "Portavar Kluba",
       "season": null,
       "competition": null,
@@ -3021,9 +3021,9 @@
       "secondary": null
     },
     "team:Portavar Kluba:player_club_appearances": {
-      "value": 79,
-      "holder": "Perelhos Pescavar",
-      "holder_id": "ff45c81b-8b22-4f66-b30c-acec06dcd0bc",
+      "value": 123,
+      "holder": "Gaietahos Teixavar",
+      "holder_id": "c79b7001-e3a8-41c3-a96c-8ba45f5541bd",
       "team": "Portavar Kluba",
       "season": null,
       "competition": null,
@@ -3071,7 +3071,7 @@
       "secondary": null
     },
     "team:Kluba Sportika Esalumou:player_club_goals": {
-      "value": 15,
+      "value": 19,
       "holder": "Dominalhos Arcavar",
       "holder_id": "d278a8ad-7146-4d40-b1fd-d4e98aa3552a",
       "team": "Kluba Sportika Esalumou",
@@ -3081,7 +3081,7 @@
       "secondary": null
     },
     "team:Kluba Sportika Esalumou:player_club_assists": {
-      "value": 10,
+      "value": 15,
       "holder": "Silvaros Vitavar",
       "holder_id": "60286a5b-cae0-4ce4-9052-ca33334eea87",
       "team": "Kluba Sportika Esalumou",
@@ -3091,7 +3091,7 @@
       "secondary": null
     },
     "team:Kluba Sportika Esalumou:player_club_appearances": {
-      "value": 78,
+      "value": 124,
       "holder": "Nikos Sentius",
       "holder_id": "8b5bcfc9-9945-4ee6-8d1d-252d6d879106",
       "team": "Kluba Sportika Esalumou",
@@ -3141,7 +3141,7 @@
       "secondary": null
     },
     "team:Kluba Sportika Mileiu:player_club_goals": {
-      "value": 26,
+      "value": 37,
       "holder": "Cesarhos Saxavar",
       "holder_id": "53f74d86-97ca-494f-9a23-ba1a13c103e6",
       "team": "Kluba Sportika Mileiu",
@@ -3151,9 +3151,9 @@
       "secondary": null
     },
     "team:Kluba Sportika Mileiu:player_club_assists": {
-      "value": 12,
-      "holder": "Renzohos Marivavar",
-      "holder_id": "def53526-0c7c-448d-b98f-94af62bc2136",
+      "value": 18,
+      "holder": "Matteohos Portikavar",
+      "holder_id": "bfe2c541-56b1-46d9-94b7-71ab0539548f",
       "team": "Kluba Sportika Mileiu",
       "season": null,
       "competition": null,
@@ -3161,9 +3161,9 @@
       "secondary": null
     },
     "team:Kluba Sportika Mileiu:player_club_appearances": {
-      "value": 80,
-      "holder": "Cesarhos Saxavar",
-      "holder_id": "53f74d86-97ca-494f-9a23-ba1a13c103e6",
+      "value": 127,
+      "holder": "Albertohos Rioavar",
+      "holder_id": "eae46ca1-965d-4903-bea8-83f4b8c74e87",
       "team": "Kluba Sportika Mileiu",
       "season": null,
       "competition": null,
@@ -3211,7 +3211,7 @@
       "secondary": null
     },
     "team:Kluba Sportika Galvononos:player_club_goals": {
-      "value": 38,
+      "value": 50,
       "holder": "Filipalhos Logothavar",
       "holder_id": "71cd45b0-7346-4952-a1fb-5b4fa3e4f138",
       "team": "Kluba Sportika Galvononos",
@@ -3221,7 +3221,7 @@
       "secondary": null
     },
     "team:Kluba Sportika Galvononos:player_club_assists": {
-      "value": 23,
+      "value": 36,
       "holder": "Stefanhos Eforavar",
       "holder_id": "e7bada13-b136-4828-81b3-ee03eb2ef7b6",
       "team": "Kluba Sportika Galvononos",
@@ -3231,7 +3231,7 @@
       "secondary": null
     },
     "team:Kluba Sportika Galvononos:player_club_appearances": {
-      "value": 89,
+      "value": 138,
       "holder": "Demetralhos Bouleutar",
       "holder_id": "a8d96061-a419-4c7d-a949-47b511d5e60c",
       "team": "Kluba Sportika Galvononos",
@@ -3241,11 +3241,11 @@
       "secondary": null
     },
     "team:Populara Kluba Galvononos:player_most_goals_season": {
-      "value": 7,
-      "holder": "Stavralhos Kalphos",
-      "holder_id": "38e7551f-c0f2-405a-a67b-03557e1169ec",
+      "value": 8,
+      "holder": "Manolhos Galvōdēs",
+      "holder_id": "86402074-5cb9-47e6-8800-1513cc4995f1",
       "team": "Populara Kluba Galvononos",
-      "season": "1898/99",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
       "detail": null,
       "secondary": null
@@ -3261,9 +3261,9 @@
       "secondary": null
     },
     "team:Populara Kluba Galvononos:player_most_appearances_season": {
-      "value": 15,
-      "holder": "Galvhor Sulhanos",
-      "holder_id": "e2723e3c-c9ce-46b9-92d7-4b70f65590ae",
+      "value": 16,
+      "holder": "Nalhon Galveiros",
+      "holder_id": "06c0a989-45b8-402e-89da-f67f4c7ffda0",
       "team": "Populara Kluba Galvononos",
       "season": "1896/97",
       "competition": "Prote Kategorias",
@@ -3281,7 +3281,7 @@
       "secondary": null
     },
     "team:Populara Kluba Galvononos:player_club_goals": {
-      "value": 25,
+      "value": 40,
       "holder": "Manolhos Galvōdēs",
       "holder_id": "86402074-5cb9-47e6-8800-1513cc4995f1",
       "team": "Populara Kluba Galvononos",
@@ -3291,9 +3291,9 @@
       "secondary": null
     },
     "team:Populara Kluba Galvononos:player_club_assists": {
-      "value": 14,
-      "holder": "Nalhon Galveiros",
-      "holder_id": "06c0a989-45b8-402e-89da-f67f4c7ffda0",
+      "value": 23,
+      "holder": "Stavralhos Kalphos",
+      "holder_id": "38e7551f-c0f2-405a-a67b-03557e1169ec",
       "team": "Populara Kluba Galvononos",
       "season": null,
       "competition": null,
@@ -3301,9 +3301,9 @@
       "secondary": null
     },
     "team:Populara Kluba Galvononos:player_club_appearances": {
-      "value": 75,
-      "holder": "Dravon Kalveira",
-      "holder_id": "691b5d48-c9fe-426e-ab38-d6038289f940",
+      "value": 118,
+      "holder": "Nalhon Galveiros",
+      "holder_id": "06c0a989-45b8-402e-89da-f67f4c7ffda0",
       "team": "Populara Kluba Galvononos",
       "season": null,
       "competition": null,
@@ -3341,33 +3341,33 @@
       "secondary": null
     },
     "team:Kluba Maritima Thesias:gk_best_unbeaten_start": {
-      "value": 7,
+      "value": 9,
       "holder": "Arthur Smith",
       "holder_id": "65ffb5a3-c375-4406-bc46-781502416cbe",
       "team": "Kluba Maritima Thesias",
-      "season": "1897/98",
+      "season": "1896/97",
       "competition": "Prote Kategorias",
-      "detail": "7 matches from season start",
+      "detail": "9 matches from season start",
       "secondary": null
     },
     "team:Mercaria Kluba:gk_best_unbeaten_start": {
-      "value": 3,
+      "value": 5,
       "holder": "Peros Mercelhar",
       "holder_id": "9a7770a7-73e5-4244-a352-fff2497c675b",
       "team": "Mercaria Kluba",
       "season": "1896/97",
       "competition": "Prote Kategorias",
-      "detail": "3 matches from season start",
+      "detail": "5 matches from season start",
       "secondary": null
     },
     "team:Portavar Kluba:gk_best_unbeaten_start": {
-      "value": 1,
+      "value": 6,
       "holder": "Miquelhos Pescavar",
       "holder_id": "1b1fd698-d779-417b-a8a8-3932769d77ad",
       "team": "Portavar Kluba",
       "season": "1896/97",
       "competition": "Prote Kategorias",
-      "detail": "1 matches from season start",
+      "detail": "6 matches from season start",
       "secondary": null
     },
     "team:Kluba Sportika Esalumou:gk_best_unbeaten_start": {
@@ -3451,9 +3451,9 @@
       "secondary": null
     },
     "team:Kluba Sportika Galvononos:player_hattricks:most": {
-      "value": 1,
-      "holder": "Kostanvar Grammatavar",
-      "holder_id": "6eccd66d-33b5-4c88-a133-cce57c9d09ca",
+      "value": 2,
+      "holder": "Kyrialhos Notaravar",
+      "holder_id": "d25e0978-6999-476a-8890-92ece2fe172b",
       "team": null,
       "season": null,
       "competition": null,
@@ -3503,153 +3503,168 @@
   },
   "counters": {
     "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Sulhavonos": {
-      "Kluba Sulhavonos": 25
+      "Kluba Sulhavonos": 55
     },
     "comp:Prote Kategorias:season_away_goals:1896/97:Populara Kluba Galvononos": {
-      "Populara Kluba Galvononos": 18
+      "Populara Kluba Galvononos": 51
     },
     "gk_cs_streak:comp:Prote Kategorias:1896/97:d8454fd8-a1d8-48e1-a9c6-f78c9562a749": {
-      "d8454fd8-a1d8-48e1-a9c6-f78c9562a749": 1
+      "d8454fd8-a1d8-48e1-a9c6-f78c9562a749": 0
     },
     "gk_cs_streak:comp:Prote Kategorias:1896/97:e2723e3c-c9ce-46b9-92d7-4b70f65590ae": {
       "e2723e3c-c9ce-46b9-92d7-4b70f65590ae": 1
     },
     "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Maritima Thesias": {
-      "Kluba Maritima Thesias": 30
+      "Kluba Maritima Thesias": 69
     },
     "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Sportika Galvononos": {
-      "Kluba Sportika Galvononos": 31
+      "Kluba Sportika Galvononos": 78
     },
     "gk_cs_streak:comp:Prote Kategorias:1896/97:65ffb5a3-c375-4406-bc46-781502416cbe": {
-      "65ffb5a3-c375-4406-bc46-781502416cbe": 1
+      "65ffb5a3-c375-4406-bc46-781502416cbe": 0
     },
     "gk_cs_streak:comp:Prote Kategorias:1896/97:38a620fa-586e-42f5-9870-e00e65a56d4e": {
       "38a620fa-586e-42f5-9870-e00e65a56d4e": 0
     },
     "all:player_braces": {
-      "7e9e7049-751b-419f-9b54-6698f03c4d09": 2,
-      "ecffce40-f51b-4fe1-86fc-e462565e645b": 4,
-      "55f78737-ab11-4588-ba43-f11ef8f0bf0f": 2,
+      "7e9e7049-751b-419f-9b54-6698f03c4d09": 3,
+      "ecffce40-f51b-4fe1-86fc-e462565e645b": 6,
+      "55f78737-ab11-4588-ba43-f11ef8f0bf0f": 5,
       "06c0a989-45b8-402e-89da-f67f4c7ffda0": 1,
       "def53526-0c7c-448d-b98f-94af62bc2136": 1,
       "f9a415f6-d42c-409b-b3fd-12e1bc7c321d": 1,
-      "6eccd66d-33b5-4c88-a133-cce57c9d09ca": 6,
+      "6eccd66d-33b5-4c88-a133-cce57c9d09ca": 8,
       "d1dbbdef-b535-4878-8b0b-2114d114f047": 5,
-      "4e446c60-9f2a-48b2-91c7-612f4c3f1ae5": 4,
-      "6729f183-0174-4650-9e1b-adf40b23523b": 6,
-      "06f971e9-d893-4bea-8802-c8cae5464c64": 7,
+      "4e446c60-9f2a-48b2-91c7-612f4c3f1ae5": 5,
+      "6729f183-0174-4650-9e1b-adf40b23523b": 9,
+      "06f971e9-d893-4bea-8802-c8cae5464c64": 8,
       "65d25a1c-a2a6-46ee-ad2d-c9465fbd1396": 2,
-      "12b3e2b1-771d-48d0-8744-7043ab6aad3a": 2,
+      "12b3e2b1-771d-48d0-8744-7043ab6aad3a": 3,
       "d3e2f10e-85eb-47c8-bd7b-0de91bbc91b5": 1,
-      "d980c9a2-1a6e-47b3-9f9d-322c071753d0": 6,
+      "d980c9a2-1a6e-47b3-9f9d-322c071753d0": 8,
       "ceacffaa-f359-448d-8781-51f245d172d4": 3,
-      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 4,
-      "f24998f6-d683-4fd6-bab0-126e7c04842f": 3,
-      "d278a8ad-7146-4d40-b1fd-d4e98aa3552a": 2,
+      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 7,
+      "f24998f6-d683-4fd6-bab0-126e7c04842f": 4,
+      "d278a8ad-7146-4d40-b1fd-d4e98aa3552a": 3,
       "c481824e-59fe-4654-8909-ced587dc219c": 1,
       "ff45c81b-8b22-4f66-b30c-acec06dcd0bc": 2,
-      "a956759e-faeb-43ec-beb9-66c22822445e": 3,
-      "71cd45b0-7346-4952-a1fb-5b4fa3e4f138": 4,
+      "a956759e-faeb-43ec-beb9-66c22822445e": 5,
+      "71cd45b0-7346-4952-a1fb-5b4fa3e4f138": 6,
       "0348b9f0-e936-4c0b-ac59-de67083e3067": 1,
-      "d25e0978-6999-476a-8890-92ece2fe172b": 3,
+      "d25e0978-6999-476a-8890-92ece2fe172b": 5,
       "73245a87-715f-42b1-a70f-e2349273e145": 1,
-      "06782583-85ba-43c2-9e61-cfa6dab6ce67": 1,
-      "580ca559-67f7-4028-87ac-21f33419a871": 5,
-      "53f74d86-97ca-494f-9a23-ba1a13c103e6": 2,
+      "06782583-85ba-43c2-9e61-cfa6dab6ce67": 4,
+      "580ca559-67f7-4028-87ac-21f33419a871": 6,
+      "53f74d86-97ca-494f-9a23-ba1a13c103e6": 3,
       "f612a1b7-3daf-4e6b-a801-05c4d586305f": 3,
       "d25d1873-a2b5-4a12-ae84-c67fc0c93e78": 2,
-      "79ddae62-3882-41f3-b1a3-9de9e71293c3": 1,
-      "2e004171-67f5-4e6a-83aa-9d5e233a3cc4": 1,
-      "2ef19f40-4c7e-490d-9a1d-d9fa25df6d24": 1,
+      "79ddae62-3882-41f3-b1a3-9de9e71293c3": 2,
+      "2e004171-67f5-4e6a-83aa-9d5e233a3cc4": 2,
+      "2ef19f40-4c7e-490d-9a1d-d9fa25df6d24": 2,
       "a45b96a3-874f-43ce-8412-0a2081dedb13": 2,
-      "86402074-5cb9-47e6-8800-1513cc4995f1": 1,
-      "c79b7001-e3a8-41c3-a96c-8ba45f5541bd": 1,
-      "38e7551f-c0f2-405a-a67b-03557e1169ec": 1,
+      "86402074-5cb9-47e6-8800-1513cc4995f1": 4,
+      "c79b7001-e3a8-41c3-a96c-8ba45f5541bd": 4,
+      "38e7551f-c0f2-405a-a67b-03557e1169ec": 3,
       "16ec97d0-df52-401a-9657-a8d6b9575474": 1,
       "fb676c42-b609-4aef-a531-ef253b32ad06": 1,
       "60286a5b-cae0-4ce4-9052-ca33334eea87": 1,
       "59525e2f-cccd-47c5-93f9-b056a701d23c": 1,
       "3b8d1d79-1c17-49da-9e20-6a79f2e70537": 1,
-      "9e720471-d24e-4732-8e3a-a9fdfb8beda4": 1
+      "9e720471-d24e-4732-8e3a-a9fdfb8beda4": 1,
+      "5f1a5e8e-2b06-4ce2-9e2d-1893c9f09b65": 4,
+      "ee3521b8-85c3-42e0-9332-df89324654df": 3,
+      "a95e9534-3e35-4c0d-a906-ecdcf5b4762e": 1,
+      "3f9bd4d9-5055-467a-a886-65a545ce57ed": 1,
+      "e5929b79-c966-4f07-8cfd-e259d269de32": 1,
+      "da61a744-ca3a-4f17-90c2-b5ceace15e0d": 1,
+      "bd5ab352-3c3c-45bb-879f-338330e7c81f": 1
     },
     "comp:Prote Kategorias:player_braces": {
-      "7e9e7049-751b-419f-9b54-6698f03c4d09": 2,
+      "7e9e7049-751b-419f-9b54-6698f03c4d09": 3,
       "06c0a989-45b8-402e-89da-f67f4c7ffda0": 1,
       "65d25a1c-a2a6-46ee-ad2d-c9465fbd1396": 2,
-      "12b3e2b1-771d-48d0-8744-7043ab6aad3a": 2,
-      "d980c9a2-1a6e-47b3-9f9d-322c071753d0": 6,
-      "4e446c60-9f2a-48b2-91c7-612f4c3f1ae5": 2,
+      "12b3e2b1-771d-48d0-8744-7043ab6aad3a": 3,
+      "d980c9a2-1a6e-47b3-9f9d-322c071753d0": 8,
+      "4e446c60-9f2a-48b2-91c7-612f4c3f1ae5": 3,
       "ceacffaa-f359-448d-8781-51f245d172d4": 3,
-      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 4,
-      "f24998f6-d683-4fd6-bab0-126e7c04842f": 2,
-      "d278a8ad-7146-4d40-b1fd-d4e98aa3552a": 2,
+      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 7,
+      "f24998f6-d683-4fd6-bab0-126e7c04842f": 3,
+      "d278a8ad-7146-4d40-b1fd-d4e98aa3552a": 3,
       "c481824e-59fe-4654-8909-ced587dc219c": 1,
       "ff45c81b-8b22-4f66-b30c-acec06dcd0bc": 1,
       "d1dbbdef-b535-4878-8b0b-2114d114f047": 2,
-      "06f971e9-d893-4bea-8802-c8cae5464c64": 6,
-      "a956759e-faeb-43ec-beb9-66c22822445e": 2,
-      "71cd45b0-7346-4952-a1fb-5b4fa3e4f138": 4,
+      "06f971e9-d893-4bea-8802-c8cae5464c64": 7,
+      "a956759e-faeb-43ec-beb9-66c22822445e": 4,
+      "71cd45b0-7346-4952-a1fb-5b4fa3e4f138": 6,
       "0348b9f0-e936-4c0b-ac59-de67083e3067": 1,
-      "d25e0978-6999-476a-8890-92ece2fe172b": 3,
-      "6729f183-0174-4650-9e1b-adf40b23523b": 3,
+      "d25e0978-6999-476a-8890-92ece2fe172b": 5,
+      "6729f183-0174-4650-9e1b-adf40b23523b": 6,
       "73245a87-715f-42b1-a70f-e2349273e145": 1,
-      "06782583-85ba-43c2-9e61-cfa6dab6ce67": 1,
-      "580ca559-67f7-4028-87ac-21f33419a871": 5,
-      "ecffce40-f51b-4fe1-86fc-e462565e645b": 3,
-      "53f74d86-97ca-494f-9a23-ba1a13c103e6": 2,
+      "06782583-85ba-43c2-9e61-cfa6dab6ce67": 3,
+      "580ca559-67f7-4028-87ac-21f33419a871": 6,
+      "ecffce40-f51b-4fe1-86fc-e462565e645b": 5,
+      "53f74d86-97ca-494f-9a23-ba1a13c103e6": 3,
       "f612a1b7-3daf-4e6b-a801-05c4d586305f": 3,
       "d25d1873-a2b5-4a12-ae84-c67fc0c93e78": 2,
-      "6eccd66d-33b5-4c88-a133-cce57c9d09ca": 3,
-      "79ddae62-3882-41f3-b1a3-9de9e71293c3": 1,
-      "2e004171-67f5-4e6a-83aa-9d5e233a3cc4": 1,
-      "2ef19f40-4c7e-490d-9a1d-d9fa25df6d24": 1,
+      "6eccd66d-33b5-4c88-a133-cce57c9d09ca": 5,
+      "79ddae62-3882-41f3-b1a3-9de9e71293c3": 2,
+      "2e004171-67f5-4e6a-83aa-9d5e233a3cc4": 2,
+      "2ef19f40-4c7e-490d-9a1d-d9fa25df6d24": 2,
       "a45b96a3-874f-43ce-8412-0a2081dedb13": 2,
-      "86402074-5cb9-47e6-8800-1513cc4995f1": 1,
-      "c79b7001-e3a8-41c3-a96c-8ba45f5541bd": 1,
-      "38e7551f-c0f2-405a-a67b-03557e1169ec": 1,
-      "55f78737-ab11-4588-ba43-f11ef8f0bf0f": 1,
+      "86402074-5cb9-47e6-8800-1513cc4995f1": 2,
+      "c79b7001-e3a8-41c3-a96c-8ba45f5541bd": 3,
+      "38e7551f-c0f2-405a-a67b-03557e1169ec": 3,
+      "55f78737-ab11-4588-ba43-f11ef8f0bf0f": 2,
       "16ec97d0-df52-401a-9657-a8d6b9575474": 1,
       "fb676c42-b609-4aef-a531-ef253b32ad06": 1,
       "60286a5b-cae0-4ce4-9052-ca33334eea87": 1,
       "59525e2f-cccd-47c5-93f9-b056a701d23c": 1,
       "3b8d1d79-1c17-49da-9e20-6a79f2e70537": 1,
-      "9e720471-d24e-4732-8e3a-a9fdfb8beda4": 1
+      "9e720471-d24e-4732-8e3a-a9fdfb8beda4": 1,
+      "5f1a5e8e-2b06-4ce2-9e2d-1893c9f09b65": 3,
+      "ee3521b8-85c3-42e0-9332-df89324654df": 2,
+      "a95e9534-3e35-4c0d-a906-ecdcf5b4762e": 1,
+      "3f9bd4d9-5055-467a-a886-65a545ce57ed": 1,
+      "e5929b79-c966-4f07-8cfd-e259d269de32": 1,
+      "da61a744-ca3a-4f17-90c2-b5ceace15e0d": 1,
+      "bd5ab352-3c3c-45bb-879f-338330e7c81f": 1
     },
     "team:Mercaria Kluba:player_braces": {
-      "7e9e7049-751b-419f-9b54-6698f03c4d09": 2,
-      "55f78737-ab11-4588-ba43-f11ef8f0bf0f": 2,
-      "4e446c60-9f2a-48b2-91c7-612f4c3f1ae5": 4,
-      "06f971e9-d893-4bea-8802-c8cae5464c64": 7,
+      "7e9e7049-751b-419f-9b54-6698f03c4d09": 3,
+      "55f78737-ab11-4588-ba43-f11ef8f0bf0f": 5,
+      "4e446c60-9f2a-48b2-91c7-612f4c3f1ae5": 5,
+      "06f971e9-d893-4bea-8802-c8cae5464c64": 8,
       "d3e2f10e-85eb-47c8-bd7b-0de91bbc91b5": 1,
-      "d980c9a2-1a6e-47b3-9f9d-322c071753d0": 6
+      "d980c9a2-1a6e-47b3-9f9d-322c071753d0": 8,
+      "3f9bd4d9-5055-467a-a886-65a545ce57ed": 1
     },
     "comp:Prote Kategorias:season_home_goals:1896/97:Mercaria Kluba": {
-      "Mercaria Kluba": 33
+      "Mercaria Kluba": 80
     },
     "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Sportika Mileiu": {
-      "Kluba Sportika Mileiu": 20
+      "Kluba Sportika Mileiu": 48
     },
     "gk_cs_streak:comp:Prote Kategorias:1896/97:9a7770a7-73e5-4244-a352-fff2497c675b": {
       "9a7770a7-73e5-4244-a352-fff2497c675b": 0
     },
     "gk_cs_streak:comp:Prote Kategorias:1896/97:6764b559-4ae1-4361-851b-01a2690a4f57": {
-      "6764b559-4ae1-4361-851b-01a2690a4f57": 1
+      "6764b559-4ae1-4361-851b-01a2690a4f57": 0
     },
     "comp:Prote Kategorias:season_home_goals:1896/97:Portavar Kluba": {
-      "Portavar Kluba": 25
+      "Portavar Kluba": 70
     },
     "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Sportika Esalumou": {
-      "Kluba Sportika Esalumou": 9
+      "Kluba Sportika Esalumou": 28
     },
     "gk_cs_streak:comp:Prote Kategorias:1896/97:1b1fd698-d779-417b-a8a8-3932769d77ad": {
-      "1b1fd698-d779-417b-a8a8-3932769d77ad": 0
+      "1b1fd698-d779-417b-a8a8-3932769d77ad": 1
     },
     "gk_cs_streak:comp:Prote Kategorias:1896/97:8b5bcfc9-9945-4ee6-8d1d-252d6d879106": {
       "8b5bcfc9-9945-4ee6-8d1d-252d6d879106": 0
     },
     "comp:Protonas Cup:player_braces": {
       "ecffce40-f51b-4fe1-86fc-e462565e645b": 1,
-      "55f78737-ab11-4588-ba43-f11ef8f0bf0f": 1,
+      "55f78737-ab11-4588-ba43-f11ef8f0bf0f": 3,
       "def53526-0c7c-448d-b98f-94af62bc2136": 1,
       "f9a415f6-d42c-409b-b3fd-12e1bc7c321d": 1,
       "6eccd66d-33b5-4c88-a133-cce57c9d09ca": 3,
@@ -3660,10 +3675,15 @@
       "d3e2f10e-85eb-47c8-bd7b-0de91bbc91b5": 1,
       "ff45c81b-8b22-4f66-b30c-acec06dcd0bc": 1,
       "f24998f6-d683-4fd6-bab0-126e7c04842f": 1,
-      "a956759e-faeb-43ec-beb9-66c22822445e": 1
+      "a956759e-faeb-43ec-beb9-66c22822445e": 1,
+      "06782583-85ba-43c2-9e61-cfa6dab6ce67": 1,
+      "5f1a5e8e-2b06-4ce2-9e2d-1893c9f09b65": 1,
+      "ee3521b8-85c3-42e0-9332-df89324654df": 1,
+      "86402074-5cb9-47e6-8800-1513cc4995f1": 2,
+      "c79b7001-e3a8-41c3-a96c-8ba45f5541bd": 1
     },
     "team:Kluba Sulhavonos:player_braces": {
-      "ecffce40-f51b-4fe1-86fc-e462565e645b": 4,
+      "ecffce40-f51b-4fe1-86fc-e462565e645b": 6,
       "d1dbbdef-b535-4878-8b0b-2114d114f047": 5,
       "65d25a1c-a2a6-46ee-ad2d-c9465fbd1396": 2,
       "c481824e-59fe-4654-8909-ced587dc219c": 1,
@@ -3671,10 +3691,10 @@
       "9e720471-d24e-4732-8e3a-a9fdfb8beda4": 1
     },
     "comp:Protonas Cup:season_home_goals:1896/97:Kluba Sulhavonos": {
-      "Kluba Sulhavonos": 8
+      "Kluba Sulhavonos": 12
     },
     "comp:Protonas Cup:season_away_goals:1896/97:Populara Kluba Galvononos": {
-      "Populara Kluba Galvononos": 3
+      "Populara Kluba Galvononos": 5
     },
     "gk_cs_streak:comp:Protonas Cup:1896/97:d8454fd8-a1d8-48e1-a9c6-f78c9562a749": {
       "d8454fd8-a1d8-48e1-a9c6-f78c9562a749": 0
@@ -3683,10 +3703,10 @@
       "e2723e3c-c9ce-46b9-92d7-4b70f65590ae": 0
     },
     "comp:Protonas Cup:season_home_goals:1896/97:Kluba Maritima Thesias": {
-      "Kluba Maritima Thesias": 7
+      "Kluba Maritima Thesias": 18
     },
     "comp:Protonas Cup:season_away_goals:1896/97:Mercaria Kluba": {
-      "Mercaria Kluba": 10
+      "Mercaria Kluba": 13
     },
     "gk_cs_streak:comp:Protonas Cup:1896/97:65ffb5a3-c375-4406-bc46-781502416cbe": {
       "65ffb5a3-c375-4406-bc46-781502416cbe": 0
@@ -3695,22 +3715,22 @@
       "9a7770a7-73e5-4244-a352-fff2497c675b": 0
     },
     "comp:Protonas Cup:season_home_goals:1896/97:Portavar Kluba": {
-      "Portavar Kluba": 3
+      "Portavar Kluba": 10
     },
     "comp:Protonas Cup:season_away_goals:1896/97:Kluba Sportika Galvononos": {
-      "Kluba Sportika Galvononos": 21
+      "Kluba Sportika Galvononos": 28
     },
     "gk_cs_streak:comp:Protonas Cup:1896/97:1b1fd698-d779-417b-a8a8-3932769d77ad": {
       "1b1fd698-d779-417b-a8a8-3932769d77ad": 0
     },
     "gk_cs_streak:comp:Protonas Cup:1896/97:38a620fa-586e-42f5-9870-e00e65a56d4e": {
-      "38a620fa-586e-42f5-9870-e00e65a56d4e": 1
+      "38a620fa-586e-42f5-9870-e00e65a56d4e": 0
     },
     "comp:Protonas Cup:season_home_goals:1896/97:Kluba Sportika Esalumou": {
-      "Kluba Sportika Esalumou": 3
+      "Kluba Sportika Esalumou": 6
     },
     "comp:Protonas Cup:season_away_goals:1896/97:Kluba Sportika Mileiu": {
-      "Kluba Sportika Mileiu": 7
+      "Kluba Sportika Mileiu": 10
     },
     "gk_cs_streak:comp:Protonas Cup:1896/97:8b5bcfc9-9945-4ee6-8d1d-252d6d879106": {
       "8b5bcfc9-9945-4ee6-8d1d-252d6d879106": 0
@@ -3721,11 +3741,12 @@
     "team:Populara Kluba Galvononos:player_braces": {
       "06c0a989-45b8-402e-89da-f67f4c7ffda0": 1,
       "d25d1873-a2b5-4a12-ae84-c67fc0c93e78": 2,
-      "2ef19f40-4c7e-490d-9a1d-d9fa25df6d24": 1,
-      "86402074-5cb9-47e6-8800-1513cc4995f1": 1,
-      "38e7551f-c0f2-405a-a67b-03557e1169ec": 1,
+      "2ef19f40-4c7e-490d-9a1d-d9fa25df6d24": 2,
+      "86402074-5cb9-47e6-8800-1513cc4995f1": 4,
+      "38e7551f-c0f2-405a-a67b-03557e1169ec": 3,
       "16ec97d0-df52-401a-9657-a8d6b9575474": 1,
-      "3b8d1d79-1c17-49da-9e20-6a79f2e70537": 1
+      "3b8d1d79-1c17-49da-9e20-6a79f2e70537": 1,
+      "e5929b79-c966-4f07-8cfd-e259d269de32": 1
     },
     "all:player_hattricks": {
       "06c0a989-45b8-402e-89da-f67f4c7ffda0": 1,
@@ -3737,10 +3758,13 @@
       "06f971e9-d893-4bea-8802-c8cae5464c64": 1,
       "6eccd66d-33b5-4c88-a133-cce57c9d09ca": 1,
       "d1dbbdef-b535-4878-8b0b-2114d114f047": 1,
-      "d25e0978-6999-476a-8890-92ece2fe172b": 1,
+      "d25e0978-6999-476a-8890-92ece2fe172b": 2,
       "f612a1b7-3daf-4e6b-a801-05c4d586305f": 1,
       "16ec97d0-df52-401a-9657-a8d6b9575474": 1,
-      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 1
+      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 1,
+      "71cd45b0-7346-4952-a1fb-5b4fa3e4f138": 1,
+      "86402074-5cb9-47e6-8800-1513cc4995f1": 1,
+      "4e446c60-9f2a-48b2-91c7-612f4c3f1ae5": 1
     },
     "comp:Prote Kategorias:player_hattricks": {
       "06c0a989-45b8-402e-89da-f67f4c7ffda0": 1,
@@ -3751,79 +3775,87 @@
       "ceacffaa-f359-448d-8781-51f245d172d4": 1,
       "06f971e9-d893-4bea-8802-c8cae5464c64": 1,
       "d1dbbdef-b535-4878-8b0b-2114d114f047": 1,
-      "d25e0978-6999-476a-8890-92ece2fe172b": 1,
+      "d25e0978-6999-476a-8890-92ece2fe172b": 2,
       "f612a1b7-3daf-4e6b-a801-05c4d586305f": 1,
       "16ec97d0-df52-401a-9657-a8d6b9575474": 1,
-      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 1
+      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 1,
+      "71cd45b0-7346-4952-a1fb-5b4fa3e4f138": 1,
+      "4e446c60-9f2a-48b2-91c7-612f4c3f1ae5": 1
     },
     "team:Populara Kluba Galvononos:player_hattricks": {
       "06c0a989-45b8-402e-89da-f67f4c7ffda0": 1,
-      "16ec97d0-df52-401a-9657-a8d6b9575474": 1
+      "16ec97d0-df52-401a-9657-a8d6b9575474": 1,
+      "86402074-5cb9-47e6-8800-1513cc4995f1": 1
     },
     "comp:Prote Kategorias:season_home_goals:1896/97:Populara Kluba Galvononos": {
-      "Populara Kluba Galvononos": 22
+      "Populara Kluba Galvononos": 57
     },
     "comp:Prote Kategorias:season_away_goals:1896/97:Portavar Kluba": {
-      "Portavar Kluba": 24
+      "Portavar Kluba": 55
     },
     "team:Kluba Sportika Mileiu:player_braces": {
       "def53526-0c7c-448d-b98f-94af62bc2136": 1,
-      "12b3e2b1-771d-48d0-8744-7043ab6aad3a": 2,
+      "12b3e2b1-771d-48d0-8744-7043ab6aad3a": 3,
       "0348b9f0-e936-4c0b-ac59-de67083e3067": 1,
-      "53f74d86-97ca-494f-9a23-ba1a13c103e6": 2
+      "53f74d86-97ca-494f-9a23-ba1a13c103e6": 3,
+      "bd5ab352-3c3c-45bb-879f-338330e7c81f": 1
     },
     "team:Kluba Sportika Esalumou:player_braces": {
       "f9a415f6-d42c-409b-b3fd-12e1bc7c321d": 1,
-      "d278a8ad-7146-4d40-b1fd-d4e98aa3552a": 2,
+      "d278a8ad-7146-4d40-b1fd-d4e98aa3552a": 3,
       "a45b96a3-874f-43ce-8412-0a2081dedb13": 2,
-      "60286a5b-cae0-4ce4-9052-ca33334eea87": 1
+      "60286a5b-cae0-4ce4-9052-ca33334eea87": 1,
+      "a95e9534-3e35-4c0d-a906-ecdcf5b4762e": 1
     },
     "team:Kluba Sportika Galvononos:player_braces": {
-      "6eccd66d-33b5-4c88-a133-cce57c9d09ca": 6,
-      "6729f183-0174-4650-9e1b-adf40b23523b": 6,
-      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 4,
-      "71cd45b0-7346-4952-a1fb-5b4fa3e4f138": 4,
-      "d25e0978-6999-476a-8890-92ece2fe172b": 3,
+      "6eccd66d-33b5-4c88-a133-cce57c9d09ca": 8,
+      "6729f183-0174-4650-9e1b-adf40b23523b": 9,
+      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 7,
+      "71cd45b0-7346-4952-a1fb-5b4fa3e4f138": 6,
+      "d25e0978-6999-476a-8890-92ece2fe172b": 5,
       "59525e2f-cccd-47c5-93f9-b056a701d23c": 1
     },
     "comp:Protonas Cup:season_home_goals:1896/97:Kluba Sportika Galvononos": {
-      "Kluba Sportika Galvononos": 3
+      "Kluba Sportika Galvononos": 4
     },
     "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Sportika Galvononos": {
-      "Kluba Sportika Galvononos": 39
+      "Kluba Sportika Galvononos": 79
     },
     "comp:Prote Kategorias:season_away_goals:1896/97:Mercaria Kluba": {
-      "Mercaria Kluba": 28
+      "Mercaria Kluba": 64
     },
     "comp:Protonas Cup:season_home_goals:1896/97:Mercaria Kluba": {
-      "Mercaria Kluba": 8
+      "Mercaria Kluba": 29
     },
     "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Sportika Mileiu": {
-      "Kluba Sportika Mileiu": 21
+      "Kluba Sportika Mileiu": 47
     },
     "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Maritima Thesias": {
-      "Kluba Maritima Thesias": 18
+      "Kluba Maritima Thesias": 66
     },
     "comp:Prote Kategorias:season_home_goals:1896/97:Kluba Sportika Esalumou": {
-      "Kluba Sportika Esalumou": 18
+      "Kluba Sportika Esalumou": 42
     },
     "team:Kluba Maritima Thesias:player_braces": {
       "ceacffaa-f359-448d-8781-51f245d172d4": 3,
-      "a956759e-faeb-43ec-beb9-66c22822445e": 3,
-      "06782583-85ba-43c2-9e61-cfa6dab6ce67": 1,
-      "580ca559-67f7-4028-87ac-21f33419a871": 5,
-      "2e004171-67f5-4e6a-83aa-9d5e233a3cc4": 1
+      "a956759e-faeb-43ec-beb9-66c22822445e": 5,
+      "06782583-85ba-43c2-9e61-cfa6dab6ce67": 4,
+      "580ca559-67f7-4028-87ac-21f33419a871": 6,
+      "2e004171-67f5-4e6a-83aa-9d5e233a3cc4": 2,
+      "5f1a5e8e-2b06-4ce2-9e2d-1893c9f09b65": 4,
+      "da61a744-ca3a-4f17-90c2-b5ceace15e0d": 1
     },
     "comp:Prote Kategorias:season_away_goals:1896/97:Kluba Sulhavonos": {
-      "Kluba Sulhavonos": 20
+      "Kluba Sulhavonos": 45
     },
     "team:Portavar Kluba:player_braces": {
-      "f24998f6-d683-4fd6-bab0-126e7c04842f": 3,
+      "f24998f6-d683-4fd6-bab0-126e7c04842f": 4,
       "ff45c81b-8b22-4f66-b30c-acec06dcd0bc": 2,
       "73245a87-715f-42b1-a70f-e2349273e145": 1,
-      "79ddae62-3882-41f3-b1a3-9de9e71293c3": 1,
-      "c79b7001-e3a8-41c3-a96c-8ba45f5541bd": 1,
-      "fb676c42-b609-4aef-a531-ef253b32ad06": 1
+      "79ddae62-3882-41f3-b1a3-9de9e71293c3": 2,
+      "c79b7001-e3a8-41c3-a96c-8ba45f5541bd": 4,
+      "fb676c42-b609-4aef-a531-ef253b32ad06": 1,
+      "ee3521b8-85c3-42e0-9332-df89324654df": 3
     },
     "team:Kluba Maritima Thesias:player_hattricks": {
       "a956759e-faeb-43ec-beb9-66c22822445e": 1,
@@ -3831,17 +3863,18 @@
       "ceacffaa-f359-448d-8781-51f245d172d4": 1
     },
     "comp:Protonas Cup:season_away_goals:1896/97:Portavar Kluba": {
-      "Portavar Kluba": 4
+      "Portavar Kluba": 5
     },
     "comp:Protonas Cup:season_home_goals:1896/97:Kluba Sportika Mileiu": {
-      "Kluba Sportika Mileiu": 2
+      "Kluba Sportika Mileiu": 3
     },
     "team:Kluba Sportika Mileiu:player_hattricks": {
       "0348b9f0-e936-4c0b-ac59-de67083e3067": 1,
       "53f74d86-97ca-494f-9a23-ba1a13c103e6": 1
     },
     "team:Mercaria Kluba:player_hattricks": {
-      "06f971e9-d893-4bea-8802-c8cae5464c64": 1
+      "06f971e9-d893-4bea-8802-c8cae5464c64": 1,
+      "4e446c60-9f2a-48b2-91c7-612f4c3f1ae5": 1
     },
     "comp:Prote Kategorias:season_home_goals:1897/98:Kluba Sulhavonos": {
       "Kluba Sulhavonos": 11
@@ -3898,12 +3931,14 @@
       "6764b559-4ae1-4361-851b-01a2690a4f57": 0
     },
     "comp:Protonas Cup:player_hattricks": {
-      "6eccd66d-33b5-4c88-a133-cce57c9d09ca": 1
+      "6eccd66d-33b5-4c88-a133-cce57c9d09ca": 1,
+      "86402074-5cb9-47e6-8800-1513cc4995f1": 1
     },
     "team:Kluba Sportika Galvononos:player_hattricks": {
       "6eccd66d-33b5-4c88-a133-cce57c9d09ca": 1,
-      "d25e0978-6999-476a-8890-92ece2fe172b": 1,
-      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 1
+      "d25e0978-6999-476a-8890-92ece2fe172b": 2,
+      "78bd3e9c-59ed-48e5-8531-48459e2b05ea": 1,
+      "71cd45b0-7346-4952-a1fb-5b4fa3e4f138": 1
     },
     "comp:Protonas Cup:season_home_goals:1897/98:Portavar Kluba": {
       "Portavar Kluba": 0
@@ -4226,38 +4261,50 @@
     },
     "comp:Prote Kategorias:season_away_goals:1899/00:Kluba Sulhavonos": {
       "Kluba Sulhavonos": 9
+    },
+    "comp:Protonas Cup:season_away_goals:1896/97:Kluba Sulhavonos": {
+      "Kluba Sulhavonos": 3
+    },
+    "comp:Protonas Cup:season_away_goals:1896/97:Kluba Maritima Thesias": {
+      "Kluba Maritima Thesias": 15
+    },
+    "comp:Protonas Cup:season_home_goals:1896/97:Populara Kluba Galvononos": {
+      "Populara Kluba Galvononos": 7
+    },
+    "comp:Protonas Cup:season_away_goals:1896/97:Kluba Sportika Esalumou": {
+      "Kluba Sportika Esalumou": 0
     }
   },
   "streaks": {
     "streak:comp:Protonas Cup:1896/97:Kluba Sulhavonos": {
       "win": 0,
-      "scoring": 1,
+      "scoring": 3,
       "unbeaten": 0
     },
     "streak:comp:Protonas Cup:1896/97:Populara Kluba Galvononos": {
       "win": 0,
-      "scoring": 2,
+      "scoring": 0,
       "unbeaten": 0
     },
     "streak:comp:Protonas Cup:1896/97:Kluba Maritima Thesias": {
       "win": 0,
-      "scoring": 4,
+      "scoring": 7,
       "unbeaten": 0
     },
     "streak:comp:Protonas Cup:1896/97:Mercaria Kluba": {
-      "win": 0,
-      "scoring": 5,
-      "unbeaten": 0
+      "win": 1,
+      "scoring": 16,
+      "unbeaten": 4
     },
     "streak:comp:Protonas Cup:1896/97:Portavar Kluba": {
       "win": 0,
-      "scoring": 0,
+      "scoring": 1,
       "unbeaten": 0
     },
     "streak:comp:Protonas Cup:1896/97:Kluba Sportika Galvononos": {
-      "win": 2,
-      "scoring": 10,
-      "unbeaten": 5
+      "win": 0,
+      "scoring": 4,
+      "unbeaten": 0
     },
     "streak:comp:Protonas Cup:1896/97:Kluba Sportika Esalumou": {
       "win": 0,
@@ -4266,7 +4313,7 @@
     },
     "streak:comp:Protonas Cup:1896/97:Kluba Sportika Mileiu": {
       "win": 0,
-      "scoring": 5,
+      "scoring": 0,
       "unbeaten": 0
     },
     "streak:comp:Protonas Cup:1897/98:Kluba Sulhavonos": {

@@ -258,11 +258,22 @@ def save_world_state(
     nations: dict,
     tier_seasons: dict,
     committed_tiers: dict,
+    prev_season_results: dict,
     filename: str = "world_state.json",
 ) -> None:
     """
-    Persist nation prestige and tier guard state between sessions.
-
+    Persist nation prestige, tier guard state, and previous-season competition
+    results between sessions.
+ 
+    prev_season_results carries the four winner/runner-up names needed by
+    _start_season() to resolve supercup participants:
+        {
+            "league_winner":    str | None,
+            "league_runner_up": str | None,
+            "cup_winner":       str | None,
+            "cup_runner_up":    str | None,
+        }
+ 
     Why a separate file from teams_data.json?
     Nation data is world-level; team data is club-level.
     Keeping them separate means you can reset clubs without
@@ -272,6 +283,7 @@ def save_world_state(
         "nation_prestige": {nid: n.prestige for nid, n in nations.items()},
         "tier_seasons": tier_seasons,
         "committed_tiers": committed_tiers,
+        "prev_season_results": prev_season_results or {},
     }
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
@@ -280,13 +292,14 @@ def save_world_state(
 def load_world_state(
     nations: dict,
     filename: str = "world_state.json",
-) -> tuple[dict, dict]:
+) -> tuple[dict, dict, dict]:
     """
-    Load nation prestige and tier guard state, updating NationConfig objects in place.
-
-    Returns (tier_seasons, committed_tiers) so the engine can store them.
+    Load nation prestige, tier guard state, and previous-season results,
+    updating NationConfig objects in place.
+ 
+    Returns (tier_seasons, committed_tiers, prev_season_results).
     If no file exists, returns empty dicts — nations keep their YAML prestige values.
-
+ 
     Why update NationConfig objects in place?
     Because the rest of the codebase already holds references to them.
     Replacing the objects would silently break every caller that did
@@ -301,8 +314,11 @@ def load_world_state(
                 nations[nation_id].prestige = prestige
 
         print(f"Loaded prestige for {len(nations)} nations from {filename}")
-        return data.get("tier_seasons", {}), data.get("committed_tiers", {})
+        return (data.get("tier_seasons", {}), 
+                data.get("committed_tiers", {}), 
+                data.get("prev_season_results", {})
+        )
         
     except FileNotFoundError:
         print("No world state file found. Starting with YAML prestige values and empty tier guards.")
-        return {}, {}
+        return {}, {}, {}

@@ -55,12 +55,12 @@ import datetime
 try:
     # Local project structure — classes is a package
     from classes import Team, Player, Competition, Season
-    from classes.competition import CupCompetition
+    from classes.competition import CupCompetition, SupercupCompetition
 except ModuleNotFoundError:
     # Flat structure (test environment)
     from team import Team
     from player import Player
-    from competition import Competition, CupCompetition
+    from competition import Competition, CupCompetition, SupercupCompetition
     from season import Season
 from name_generator import generate_squad
 from data_manager import (
@@ -122,7 +122,14 @@ class GameEngine:
         self.managed_team: str | None = None
         self._tier_seasons: dict = {}     # Tracks which seasons each tier has been competed in, for prestige calculations
         self._committed_tiers: dict = {}   # Tracks which tiers the player has committed to, for prestige calculations
-
+        
+        # Previous season's results - used by _start_season() to resolve supercup participants.
+        # Populated at the end of _finalise_season().
+        self._prev_league_winner:       str | None = None
+        self._prev_league_runner_up:    str | None = None
+        self._prev_cup_winner:          str | None = None
+        self._prev_cup_runner_up:       str | None = None
+        
     # ── Public interface ──────────────────────────────────────────────────────
 
     def advance(self, load_save: bool = False) -> dict:
@@ -216,7 +223,7 @@ class GameEngine:
 
         self.record_book = load_records_from_file()        
         self._nations = load_nations() # Store on engine for easy access by other modules
-        tier_seasons, committed_tiers = load_world_state(self._nations)  # For prestige calculations
+        tier_seasons, committed_tiers, prev_results = load_world_state(self._nations)  # For prestige calculations
         self._tier_seasons = tier_seasons
         self._committed_tiers = committed_tiers
 
@@ -412,7 +419,178 @@ class GameEngine:
             self.calendar.current_date = saved_date
 
         self._last_processed = self.calendar.current_date
-
+        
+    # Pre-season supercup helpers
+    
+    def _setup_preseason_supercups(self, comp_configs: dict, primary_day: int):
+        """
+        For every supercup with timing=pre_season that should run this season,
+        resolve participants from last season's stored results and schedule the
+        fixture at the very start of the calendar (before league matchday 1).
+ 
+        Called from _start_season().  Adds the competition to self.competitions
+        so _process_matchday() picks it up automatically.
+ 
+        Why here and not in _finalise_season()?
+        The supercup belongs to the NEW season — its trophy, stats, and fixture
+        are all recorded under the season that is about to start.  Resolving
+        participants here (at season start) rather than at season end keeps the
+        ownership unambiguous.
+        """
+        start_year = int(self.season_year.split("/")[0])
+        for cfg in comp_configs.values():
+            if cfg.type != "supercup":
+                continue
+            if cfg.timing != "pre_season":
+                continue
+            if cfg.founded_year > start_year:
+                continue
+            years_since = start_year - cfg.founded_year
+            if cfg.frequency > 1 and years_since % cfg.frequency != 0:
+                continue # Used for competitions that only run every X years
+            
+            participants = self._resolve_supercup_participants(cfg)
+            if participants is None:
+                # Not enough teams - skip silently this season
+                # (happens on the first edition of a supercup)
+                continue
+            
+            sc = SupercupCompetition(
+                cfg.name,
+                participants,
+                draw_rules=cfg.draw_rules,
+                max_subs=get_max_subs(self.season_year),
+                season_year=self.season_year,
+                prestige=cfg.prestige,
+            )
+            sc.generate_fixtures()
+            self.current_season.add_competition(sc)
+            self.competitions.append(sc)
+            
+            # Schedule the supercup on the first available day of the season, 
+            # before any league fixture. We pick the primary matchday so it 
+            # lands on a whatever the era's primary day is.
+            self._schedule_supercup_fixture(sc, primary_day)
+            
+    def _resolve_supercup_participants(self, cfg) -> list | None:
+        """
+        Walk the slots list from the YAML config and look up each team from
+        last season's stored results.  If two slots resolve to the same club,
+        work through the fallbacks list until a distinct replacement is found.
+ 
+        Returns a list of exactly 2 Team objects, or None if resolution fails.
+ 
+        Why a fallback list in YAML rather than hardcoded logic?
+        Different nations' supercups have different rules for this situation.
+        Spain replaces the cup slot with the cup runner-up; some countries use
+        the league runner-up; others cancel.  Encoding the priority order in
+        the data file means Python never needs to know which country's rules
+        apply.
+        """
+        # Build a quick lookup from competition_id -> last season's result map
+        result_map = {
+            self.comp.name: {
+                "winner": self._prev_league_winner,
+                "runner_up": self._prev_league_runner_up,
+            }
+        }
+        if self.cup:
+            result_map[self.cup.name] = {
+                "winner": self._prev_cup_winner,
+                "runner_up": self._prev_cup_runner_up,
+            }
+            
+        # Also index by competition_id (YAML key) for direct lookup
+        # comp_configs is not in scope here, so we use a name-to-id mapping
+        # built from self.competitions.
+        id_to_name = {}
+        for comp in self.competitions:
+            # The competition is comes from YAML - match by the name we stored
+            # A future multi-nation generalization can carry the id on the
+            # Competition object itself.
+            pass
+        
+        def _lookup_slot(slot: dict) -> str | None:
+            """Return a team name for a given slot dict, or None"""
+            source_id = slot.get("source", "")
+            role = slot.get("role", "winner")
+            # Match source_id against known competition names/ids
+            # Current mapping: prote_kategorias -> league, protonas_cup -> cup
+            # When we generalize to multi-nation this will read from a registry
+            source_map = {
+                "prote_kategorias": self.comp.name,
+                "protonas_cup": self.cup.name if self.cup else None,
+            }
+            comp_name = source_map.get(source_id)
+            if comp_name is None:
+                return None
+            return result_map.get(comp_name, {}).get(role)
+        
+        slots = cfg.participants.get("slots", [])
+        fallbacks = cfg.participants.get("fallbacks", [])
+        
+        resolved: list[str] = []
+        for slot in slots:
+            name = _lookup_slot(slot)
+            if name is None:
+                return None # source competition result unavailable
+            if name not in resolved:
+                resolved.append(name)
+            else:
+                # Conflict: same club in two slots, try fallbacks in order
+                replaced = False
+                for fb in fallbacks:
+                    candidate = _lookup_slot(fb)
+                    if candidate and candidate not in resolved:
+                        resolved.append(candidate)
+                        replaced = True
+                        break
+                if not replaced:
+                    return None # No distinct replacement found
+                
+        if len(resolved) != 2:
+            return None
+        
+        # Convert names to team objects
+        team_map = {t.name: t for t in self.teams}
+        team_objs = [team_map.get(n) for n in resolved]
+        if any(t is None for t in team_objs):
+            return None
+        
+        return team_objs
+    
+    def _schedule_supercup_fixture(self, sc: SupercupCompetition, preferred_day:int):
+        """
+        Place the supercup on the first available match-day at the very start
+        of the season calendar, before the league's opening round.
+ 
+        We walk forward from season_start looking for the first occurrence of
+        preferred_day that isn't already occupied.
+        """
+        from datetime import timedelta
+        occupied = {e.date for e in self.calendar.scheduled_events if e.category == "match"}
+        candidate = self.calendar.season_start
+        # Advance to the first preferred weekday
+        while candidate.weekday() != preferred_day:
+            candidate += timedelta(days=1)
+        # Skip any already-occupied days
+        while candidate in occupied:
+            candidate += timedelta(weeks=1)
+        
+        for fixture in sc.fixtures:
+            fixture["date"] = candidate
+            
+        from events import Event
+        self.calendar.add_event(Event(
+            date=candidate,
+            category="match",
+            blocking=True,
+            title=f"{sc.name}",
+            description=(
+                f"{sc.fixtures[0]['home_team'].name} vs {sc.fixtures[0]['away_team'].name} ({sc.name})"
+            )
+        ))
+        
     # ── Calendar driving ──────────────────────────────────────────────────────
 
     def _advance_calendar(self) -> dict:
@@ -507,6 +685,9 @@ class GameEngine:
         # Simulate
         if active_comp.type == "cup":
             drawn_fixtures = active_comp.simulate_cup_round()
+        elif active_comp.type == "supercup":
+            drawn_fixture = active_comp.simulate_supercup()
+            drawn_fixtures = [drawn_fixture] if drawn_fixture else []
         else:
             active_comp.simulate_matchday()
             drawn_fixtures = []
@@ -736,6 +917,27 @@ class GameEngine:
                     cup_winner_name = final_result["home_team"]
                 elif final_result["away_goals"] > final_result["home_goals"]:
                     cup_winner_name = final_result["away_team"]
+                    
+        # Derive cup runner-up from the final fixture.
+        cup_runner_up_name = None
+        if cup_winner_name and self.cup and self.cup.fixtures:
+            max_matchday = max((f["matchday"] for f in self.cup.fixtures), default=0)
+            final_fixtures = [
+                f for f in self.cup.fixtures
+                if f["matchday"] == max_matchday and not f.get("is_replay")
+            ]
+            if final_fixtures:
+                ff = final_fixtures[-1]
+                home_name = ff["home_team"].name
+                away_name = ff["away_team"].name
+                cup_runner_up_name = away_name if cup_winner_name == home_name else home_name
+                
+        # Store season's results so _start_season() can resolve pre-season supercup
+        # participants for next season.
+        self._prev_league_winner = champion_name
+        self._prev_league_runner_up = sorted_table[1][0] if len(sorted_table) > 1 else None
+        self._prev_cup_winner = cup_winner_name
+        self._prev_cup_runner_up = cup_runner_up_name
 
         # Trophy — League
         for team in self.teams:
@@ -832,7 +1034,17 @@ class GameEngine:
             self._tier_seasons,
             self._committed_tiers,
         )
-        save_world_state(self._nations, self._tier_seasons, self._committed_tiers)
+        save_world_state(
+            self._nations,
+            self._tier_seasons,
+            self._committed_tiers,
+            prev_season_results={
+                "league_winner":    self._prev_league_winner,
+                "league_runner_up": self._prev_league_runner_up,
+                "cup_winner":       self._prev_cup_winner,
+                "cup_runner_up":    self._prev_cup_runner_up,
+            }
+        )
 
         # Player development
         development_log = []

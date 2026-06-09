@@ -184,6 +184,12 @@ class CompetitionConfig:
     match_day:    str           # primary | midweek | flexible
     participants: dict
     rounds:       list[int] = field(default_factory=list)
+    # draw_rules: how a draw is resolved in single-elimination / supercup matches
+    # Keys: extra_time (bool), penalties (bool), replay (bool)
+    # Absent for league competitions - defaults to empty dict
+    draw_rules:   dict = field(default_factory=dict)
+    # legs: 1 for single match, 2 for home-and-away (two-leg logic not yet wired)
+    legs:         int = 1
 
 
 # ── Loaders ───────────────────────────────────────────────────────────────────
@@ -265,6 +271,8 @@ def load_competitions() -> dict[str, CompetitionConfig]:
             match_day=entry.get("match_day", "primary"),
             participants=entry.get("participants", {}),
             rounds=entry.get("rounds", []),
+            draw_rules=entry.get("draw_rules", {}),
+            legs=entry.get("legs", 1),
         )
     return result
 

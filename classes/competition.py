@@ -1,6 +1,6 @@
 import random
-from simulation import simulate_match
-from player_refs import xi_entry, new_competition_id
+from simulation import simulate_match, pick_player_for_chance, pick_assister
+from player_refs import xi_entry, new_competition_id, goal_refs
 from rules import get_max_subs, get_points_for_win
 
 class Competition:
@@ -371,3 +371,299 @@ class CupCompetition(Competition):
             
         self.current_round = next_round
         return True
+    
+class SupercupCompetition(Competition):
+    """
+    Single-match (or two-leg) competition between exactly two pre-determined
+    teams — typically the league winner vs the cup winner.
+ 
+    Unlike CupCompetition, there is not always a bracket and rounds to build.
+    The fixture is created directly from the participants at construction
+    time and the result is decided in one session.
+ 
+    Draw resolution is entirely driven by the draw_rules dict read from
+    competitions.yaml, so behaviour can differ between nations without
+    touching any Python code:
+ 
+        draw_rules:
+            extra_time: true   → simulate a 30-minute extra-time period
+            penalties:  true   → penalty shootout if still level
+            replay:     true   → return the draw to the engine to reschedule
+ 
+    Only one of penalties / replay should be true.  extra_time only applies
+    when penalties is also true.
+    """
+    
+    def __init__(self, name, teams, draw_rules=None,
+                 max_subs=0, season_year="1896/97", prestige=4000.0):
+        super().__init__(name, teams, competition_type="supercup", max_subs=max_subs,
+                         season_year=season_year, prestige=prestige)
+        
+        # draw_rules comes from CompetitionConfig.draw_rules (YAML)
+        # Default: straight to penalties, no extra time, no replay
+        self.draw_rules = draw_rules or {"extra_time": False, "penalties": True, "replay": False}
+        
+    # Fixture generation
+    
+    def generate_fixtures(self):
+        """
+        Create the single fixture.  The calendar will assign a real date later.
+        Teams must be exactly two objects; this is enforced by the engine before
+        calling generate_fixtures().
+        """
+        if len(self.teams) != 2:
+            raise ValueError(f"Supercup must have exactly two teams, got {len(self.teams)}")
+        
+        self.fixtures = [{
+            "matchday": 1,
+            "home_team": home,
+            "away_team": away,
+            "winner": None,
+            "decided_in": None,
+        }]
+        
+    # Simulation
+    
+    def simulate_supercup(self) -> dict | None:
+        """
+        Simulate the supercup fixture, applying draw_rules if the match is level.
+ 
+        Returns the drawn fixture dict if a REPLAY is required (so the engine
+        can schedule it), or None if the result was fully decided here.
+ 
+        Sets fixture["winner"] and fixture["decided_in"] when a winner is found.
+        Records the full result (including any ET / penalty events) in
+        self.results.
+ 
+        Why return the fixture rather than a boolean?
+        The engine's replay machinery already accepts a fixture dict from
+        CupCompetition — keeping the same interface means the same calendar
+        scheduling code can handle supercup replays without modification.
+        """
+        if self.current_matchday in self.completed_matchdays:
+            return None # Already decided
+        
+        fixture = next(
+            (f for f in self.fixtures
+             if f["matchday"] == self.current_matchday and f["winner"] is None),
+            None,
+        )
+        if fixture is None:
+            return None # No fixture to simulate
+        
+        home, away = fixture["home_team"], fixture["away_team"]
+        hg, ag, events, ratings, home_xi, away_xi = simulate_match(
+            home, away, max_subs=self.max_subs, season_year=self.season_year
+        )
+        
+        decided_in = "normal"
+        
+        # Draw resolution
+        if hg == ag:
+            if self.draw_rules.get("extra_time"):
+                et_hg, et_ag, et_events = self._simulate_extra_time(home, away)
+                hg += et_hg
+                ag += et_ag
+                events += et_events
+                if hg != ag:
+                    decided_in = "extra_time"
+                    
+            if hg == ag and self.draw_rules.get("penalties"):
+                pk_winner, pk_events = self._simulate_penalty_shootout(home, away)
+                events += pk_events
+                fixture["winner"] = pk_winner
+                decided_in = "penalties"
+                
+            elif hg == ag and self.draw_rules.get("replay"):
+                self.results.append(self._build_result(
+                    fixture, home, away, hg, ag, events, ratings, home_xi, away_xi,
+                    decided_in="draw",
+                ))
+                self.completed_matchdays.add(self.current_matchday)
+                self.current_matchday += 1
+                return fixture # Engine will call schedule_replay()
+            
+        # Winner decided by score (or already set by penalties above)
+        if fixture["winner"] is None:
+            fixture["winner"] = home if hg > ag else away
+        fixture["decided_in"] = decided_in
+        
+        self.results.append(self._build_result(
+            fixture, home, away, hg, ag, events, ratings, home_xi, away_xi,
+            decided_in=decided_in,
+        ))
+        
+        self.completed_matchdays.add(self.current_matchday)
+        self.current_matchday += 1
+        return None # Fully decided, no replay needed
+    
+    # Extra time
+    
+    def _simulate_extra_time(self, home, away) -> tuple[int, int, list]:
+        """
+        Simulate a 30-minute extra-time period (two 15-minute halves).
+ 
+        Uses a reduced chance count — roughly 30% of a normal 90-minute match.
+        Returns (home_goals, away_goals, events_list).
+ 
+        Why not call simulate_match() again?
+        simulate_match() always runs 90 minutes and updates player stats
+        (appearances, injuries, suspensions).  Extra time is a continuation of
+        the same match — we don't want to double-count appearances.  This
+        stripped-down version generates chances only, keeping stat side-effects
+        to goals and assists.
+        """
+        et_hg = et_ag = 0
+        et_events = []
+        
+        base_chances = 10
+        midfield_bonus = (home.midfield + away.midfield) // 20
+        total_chances = int(base_chances + midfield_bonus + random.randint(-2, 2))
+        chance_minutes = sorted(
+            [random.randint(91, 120) for _ in range(total_chances)],
+        )
+        
+        home_xi = home.select_starting_xi(opponent_strength=away.get_strength())
+        away_xi = away.select_starting_xi(opponent_strength=home.get_strength())
+        
+        for minute in chance_minutes:
+            h_power = home.midfield ** 4
+            a_power = away.midfield ** 4
+            if random.random() < h_power / (h_power + a_power):
+                shot_quality = home.attack - away.defense
+                chance = max(8, min(shot_quality / 2 + home.attack / 30, 40))
+                if random.randint(1, 100) < chance:
+                    et_hg += 1
+                    scorer = pick_player_for_chance(home_xi)
+                    scorer.goals += 1
+                    assister = pick_assister(home_xi, scorer)
+                    if assister:
+                        assister.assists += 1
+                    et_events.append({
+                        "minute": minute,
+                        "team": home.name,
+                        "type": "goal",
+                        **goal_refs(scorer, assister),
+                        "period": "extra_time",
+                    })
+                    
+            else:
+                shot_quality = away.attack - home.defense
+                chance = max(8, min(shot_quality / 2 + away.attack / 30, 40))
+                if random.randint(1, 100) < chance:
+                    et_ag += 1
+                    scorer = pick_player_for_chance(away_xi)
+                    scorer.goals += 1
+                    assister = pick_assister(away_xi, scorer)
+                    if assister:
+                        assister.assists += 1
+                    et_events.append({
+                        "minute": minute,
+                        "team": away.name,
+                        "type": "goal",
+                        **goal_refs(scorer, assister),
+                        "period": "extra_time",
+                    })
+                    
+        return et_hg, et_ag, et_events
+    
+    # Penalty shootout
+    
+    def _simulate_penalty_shootout(self, home, away) -> tuple[object, list]:
+        """
+        Simulate a penalty shootout.
+ 
+        Each team takes up to 5 penalties; if still level after 5 rounds,
+        sudden death continues until someone misses while the other scores.
+        GK ability (reflexes attribute) lowers the base conversion rate slightly.
+ 
+        Returns (winning_team_object, events_list).
+ 
+        The events list carries one dict per kick so the frontend can render a
+        full shootout sequence if it wants to, but it is also perfectly fine to
+        just read the winner and ignore the individual kicks.
+        """
+        home_gk = next(
+            (p for p in home.squad if p.position == "GK"), None
+        )
+        away_gk = next(
+            (p for p in away.squad if p.position == "GK"), None
+        )
+        
+        # Base conversion rate; GK reflexes slightly reduces it
+        def _conversion(gk) -> float:
+            if gk is None:
+                return 0.75
+            reflexes = gk.attributes.get("reflexes", gk.current_ability)
+            # Every 10 points of reflexes above 50 reduces conversion by ~1%
+            return max(0.55, 0.75 - (max(reflexes - 50, 0) / 1000))
+        
+        home_conv = _conversion(away_gk)
+        away_conv = _conversion(home_gk)
+        
+        home_goals = away_goals = 0
+        events = []
+        round_num = 0
+        
+        while True:
+            round_num += 1
+            # After round 5, switch to sudden death
+            for team, conv, gk, label in (
+                (home, home_conv, away_gk, "home"),
+                (away, away_conv, home_gk, "away"),
+            ):
+                scored = random.random() < conv
+                if scored:
+                    if label == "home":
+                        home_goals += 1
+                    else:
+                        away_goals += 1
+                        
+                events.append({
+                    "type": "penalty_kick",
+                    "team": team.name,
+                    "round": round_num,
+                    "scored": scored,
+                    "period": "penalties",
+                })
+                
+            # After 5 rounds, whoever leads wins
+            if round_num >= 5 and home_goals != away_goals:
+                break
+            if round_num > 5 and home_goals != away_goals:
+                break
+            # Safety valve
+            if round_num > 30:
+                break
+            
+        winner = home if home_goals > away_goals else away
+        events.append({
+            "type": "penalty_result",
+            "home_team": home.name,
+            "away_team": away.name,
+            "home_penalties": home_goals,
+            "away_penalties": away_goals,
+            "winner": winner.name,
+            "period": "penalties",
+        })
+        return winner, events
+    
+    # Result builder
+    
+    @staticmethod
+    def _build_result(fixture, home, away, hg, ag, events, ratings,
+                      home_xi, away_xi, decided_in="normal") -> dict:
+        return {
+            "home_team": home.name,
+            "away_team": away.name,
+            "home_goals": hg,
+            "away_goals": ag,
+            "events": events,
+            "ratings": ratings,
+            "home_xi": [xi_entry(p) for p in home_xi],
+            "away_xi": [xi_entry(p) for p in away_xi],
+            "competition": fixture.get("competition", ""),
+            "season": fixture.get("season", ""),
+            "decided_in": decided_in,
+            "winner": fixture["winner"].name if fixture.get("winner") else None,
+        }
