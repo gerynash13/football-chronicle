@@ -56,17 +56,17 @@
   name_generator: myrian
   eligible_for_international: true
   regions:
-    - id: bridia
+    - id: myr_bridia
       name: Bridia
       talent_modifier: 1.0   # multiplier on PA caps for players born here
                               # starts at 1.0 — shifts dynamically at runtime
-    - id: masia
+    - id: myr_masia
       name: Masia
       talent_modifier: 1.0
-    - id: lunia
+    - id: myr_lunia
       name: Lunia
       talent_modifier: 1.0
-    - id: vetia_and_sileia
+    - id: myr_vetia_and_sileia
       name: Vetia & Sileia
       talent_modifier: 1.0
 
@@ -425,6 +425,7 @@
   name: Bohemia
   is_fictional: false
   founded_year: 1901
+  dissolved_year: 1918
   prestige: 1400
   prestige_weights:
     league: 0.55
@@ -612,6 +613,33 @@
       name: Siberia & The Tartar East
       talent_modifier: 0.9
 
+- id: spain
+  name: Spain
+  is_fictional: false
+  founded_year: 1912
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: spanish
+  eligible_for_international: true
+  regions:
+    - id: spa_east
+      name: Catalan Countries
+      talent_modifier: 1.2
+    - id: spa_north
+      name: Basque Country
+      talent_modifier: 1.0
+    - id: spa_northwest
+      name: Galicia & Atlantic Coast
+      talent_modifier: 0.9
+    - id: spa_south
+      name: Castilian Heartland, Andalusia and Canary Islands
+      talent_modifier: 0.9
+
 - id: portugal
   name: Portugal
   is_fictional: false
@@ -726,6 +754,7 @@
   name: Czechoslovakia
   is_fictional: false
   founded_year: 1921
+  dissolved_year: 1993
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -809,6 +838,7 @@
   name: Saarland
   is_fictional: false
   founded_year: 1931
+  dissolved_year: 1957
   prestige: 1500
   prestige_weights:
     league: 0.50
@@ -917,6 +947,7 @@
   name: East Germany
   is_fictional: false
   founded_year: 1945
+  dissolved_year: 1990
   prestige: 1200
   prestige_weights:
     league: 0.50
