@@ -39,13 +39,27 @@
 #                     welsh, irish, dutch, danish, belgian, swiss
 #
 # eligible_for_international: whether this nation fields a national team
+# fa_founded_year:    year the national FA/team is created; defaults to founded_year
+# fifa_membership_year: year the nation can enter FIFA/World Cup-level competitions;
+#                     defaults to fa_founded_year
+# continental_membership_year: year the nation can enter confederation tournaments;
+#                     defaults to fa_founded_year
+# dissolved_year:     optional year the nation ceases to exist in the timeline
+#
+# predecessor_id:     optional slug of the immediate predecessor nation
+#
+# successor_of:       optional list of nation slugs whose football records/statistics
+#                     this nation legally inherits
 
 # ── Fictional nations ─────────────────────────────────────────────────────────
 
 - id: myria
   name: Myria
   is_fictional: true
-  founded_year: 1890
+  founded_year: 1905
+  fa_founded_year: 1890
+  fifa_membership_year: 1950
+  continental_membership_year: 1971
   prestige: 1200
   prestige_weights:
     league: 0.60
@@ -84,6 +98,9 @@
   name: England
   is_fictional: false
   founded_year: 1863
+  fa_founded_year: 1863
+  fifa_membership_year: 1905
+  continental_membership_year: 1954
   prestige: 8500
   prestige_weights:
     league: 0.70
@@ -111,6 +128,9 @@
   name: Scotland
   is_fictional: false
   founded_year: 1873
+  fa_founded_year: 1873
+  fifa_membership_year: 1910 # Edge case: Joined in 1910, withdrew in 1928 and returned in 1946
+  continental_membership_year: 1954
   prestige: 7200
   prestige_weights:
     league: 0.65
@@ -138,6 +158,9 @@
   name: Wales
   is_fictional: false
   founded_year: 1876
+  fa_founded_year: 1876
+  fifa_membership_year: 1946 # Edge case: 1910-20, 1924-28, 1946-present
+  continental_membership_year: 1954
   prestige: 4800
   prestige_weights:
     league: 0.50
@@ -150,7 +173,7 @@
   regions:
     - id: wal_cardiff_swansea
       name: Cardiff & Swansea
-      talent_modifier: 1.1   # Cardiff, Swansea — industrial heartland
+      talent_modifier: 1.1
     - id: wal_north_west
       name: Y Fro Gymraeg (North & West Coast)
       talent_modifier: 0.95
@@ -161,10 +184,13 @@
       name: The Marches
       talent_modifier: 0.9
 
-- id: northern_ireland
-  name: Ireland # Change to Northern Ireland in 1921
+- id: ireland_pre_1922
+  name: Ireland
   is_fictional: false
   founded_year: 1880
+  fa_founded_year: 1880
+  fifa_membership_year: 1911
+  continental_membership_year: 1954
   prestige: 4200
   prestige_weights:
     league: 0.50
@@ -175,16 +201,16 @@
   name_generator: irish
   eligible_for_international: true
   regions:
-    - id: ire_leinster
+    - id: irl_leinster
       name: Leinster
-      talent_modifier: 1.1   # Dublin — most developed football region
-    - id: ire_munster
+      talent_modifier: 1.1
+    - id: irl_munster
       name: Munster
       talent_modifier: 1.0
-    - id: ire_connacht
+    - id: irl_connacht
       name: Connacht
       talent_modifier: 0.9
-    - id: ire_ulster
+    - id: irl_ulster
       name: Ulster
       talent_modifier: 0.95
 
@@ -192,6 +218,9 @@
   name: Netherlands
   is_fictional: false
   founded_year: 1889
+  fa_founded_year: 1889
+  fifa_membership_year: 1904
+  continental_membership_year: 1954
   prestige: 2800
   prestige_weights:
     league: 0.60
@@ -219,6 +248,9 @@
   name: Denmark
   is_fictional: false
   founded_year: 1889
+  fa_founded_year: 1889
+  fifa_membership_year: 1904
+  continental_membership_year: 1954
   prestige: 2600
   prestige_weights:
     league: 0.60
@@ -246,6 +278,9 @@
   name: Belgium
   is_fictional: false
   founded_year: 1895
+  fa_founded_year: 1895
+  fifa_membership_year: 1904
+  continental_membership_year: 1954
   prestige: 2200
   prestige_weights:
     league: 0.60
@@ -273,6 +308,9 @@
   name: Switzerland
   is_fictional: false
   founded_year: 1895
+  fa_founded_year: 1895
+  fifa_membership_year: 1904
+  continental_membership_year: 1954
   prestige: 2100
   prestige_weights:
     league: 0.60
@@ -300,6 +338,9 @@
   name: Gibraltar
   is_fictional: false
   founded_year: 1895
+  fa_founded_year: 1895
+  fifa_membership_year: 2016
+  continental_membership_year: 2013
   prestige: 900
   prestige_weights:
     league: 0.50
@@ -342,6 +383,9 @@
   name: Italy
   is_fictional: false
   founded_year: 1898
+  fa_founded_year: 1898
+  fifa_membership_year: 1905
+  continental_membership_year: 1954
   prestige: 2000
   prestige_weights:
     league: 0.60
@@ -365,10 +409,13 @@
       name: Le Isole
       talent_modifier: 0.95
 
-- id: germany
-  name: Germany
+- id: german_empire
+  name: [German Empire, Weimar Republic, German Reich]
   is_fictional: false
   founded_year: 1900
+  fa_founded_year: 1900
+  fifa_membership_year: 1904
+  continental_membership_year: 1954
   prestige: 1800
   prestige_weights:
     league: 0.65
@@ -379,25 +426,57 @@
   name_generator: german
   eligible_for_international: true
   regions:
-    - id: ger_west
+    - id: gee_west
       name: West Rurh Valley
       talent_modifier: 1.05  # Ruhr, Rhine — industrial heartland
-    - id: ger_south
+    - id: gee_south
       name: Bavaria & Swabia
       talent_modifier: 1.05  # Bavaria, Baden
-    - id: ger_north
+    - id: gee_north
       name: Hanseatic North
       talent_modifier: 1.0   # Hamburg, Bremen
-    - id: ger_east
+    - id: gee_east
       name: Eastern States
       talent_modifier: 0.95
 
 # Malta (founded 1900 but not yet independent)
+- id: malta
+  name: Malta
+  is_fictional: false
+  founded_year: 1900
+  fa_founded_year: 1900
+  fifa_membership_year: 1959
+  continental_membership_year: 1960
+  prestige: 900
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: maltese
+  eligible_for_international: true
+  regions:
+    - id: mal_valletta
+      name: Valletta & Harbour Region
+      talent_modifier: 1.0
+    - id: mal_south
+      name: Southern Maritime Hub
+      talent_modifier: 1.0
+    - id: mal_northwest
+      name: Golden Bay & Northern Valleys
+      talent_modifier: 1.0
+    - id: mal_islands
+      name: Gozo & Comino
+      talent_modifier: 1.0
 
 - id: hungary
   name: Hungary
   is_fictional: false
   founded_year: 1901
+  fa_founded_year: 1901
+  fifa_membership_year: 1906
+  continental_membership_year: 1954
   prestige: 1500
   prestige_weights:
     league: 0.60
@@ -434,7 +513,7 @@
   prestige_floor: 500
   tier_change_min_seasons: 3
   name_generator: czech
-  eligible_for_international: true
+  eligible_for_international: false
   regions:
     - id: boh_prague
       name: Prague
@@ -453,6 +532,9 @@
   name: Norway
   is_fictional: false
   founded_year: 1902
+  fa_founded_year: 1902
+  fifa_membership_year: 1908
+  continental_membership_year: 1954
   prestige: 1700
   prestige_weights:
     league: 0.40
@@ -480,6 +562,9 @@
   name: Austria
   is_fictional: false
   founded_year: 1904
+  fa_founded_year: 1904
+  fifa_membership_year: 1905
+  continental_membership_year: 1954
   prestige: 1600
   prestige_weights:
     league: 0.60
@@ -507,6 +592,9 @@
   name: Sweden
   is_fictional: false
   founded_year: 1904
+  fa_founded_year: 1904
+  fifa_membership_year: 1904
+  continental_membership_year: 1954
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -530,12 +618,43 @@
       name: Norrland
       talent_modifier: 0.9
 
-# Croatia (TODO)
+- id: finland
+  name: [Grand Duchy of Finland, Finland]
+  is_fictional: false
+  founded_year: 1907
+  fa_founded_year: 1907
+  fifa_membership_year: 1908
+  continental_membership_year: 1954
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: finnish
+  eligible_for_international: true
+  regions:
+    - id: fin_helsinki
+      name: Helsinki Urban Hub
+      talent_modifier: 1.1
+    - id: fin_west
+      name: Pirkanmaa & Baltic West
+      talent_modifier: 1.0
+    - id: fin_east
+      name: Savo & Carelian Forests
+      talent_modifier: 1.0
+    - id: fin_north
+      name: Arctic Lapland & Oulu
+      talent_modifier: 0.9
 
 - id: luxembourg
   name: Luxembourg
   is_fictional: false
   founded_year: 1908
+  fa_founded_year: 1908
+  fifa_membership_year: 1910
+  continental_membership_year: 1954
   prestige: 1000
   prestige_weights:
     league: 0.50
@@ -559,10 +678,43 @@
       name: Mëttel-an Ostsäit
       talent_modifier: 0.9
 
+- id: bulgaria
+  name: Bulgaria
+  is_fictional: false
+  founded_year: 1908
+  fa_founded_year: 1923
+  fifa_membership_year: 1924
+  continental_membership_year: 1954
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: bulgarian
+  eligible_for_international: true
+  regions:
+    - id: bul_south
+      name: Thracian Valley
+      talent_modifier: 1.0
+    - id: bul_north
+      name: Danubian Plain
+      talent_modifier: 1.0
+    - id: bul_west
+      name: Sofia Capital District
+      talent_modifier: 1.0
+    - id: bul_east
+      name: Black Sea Coast
+      talent_modifier: 1.0
+
 - id: romania
   name: Romania
   is_fictional: false
   founded_year: 1909
+  fa_founded_year: 1909
+  fifa_membership_year: 1923
+  continental_membership_year: 1954
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -586,10 +738,13 @@
       name: Moldavia & Northern Maramureș
       talent_modifier: 0.9
 
-- id: russia
-  name: Russia
+- id: russian_empire
+  name: Russian Empire
   is_fictional: false
   founded_year: 1912
+  fa_founded_year: 1912
+  fifa_membership_year: 1912
+  dissolved_year: 1917
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -613,10 +768,43 @@
       name: Siberia & The Tartar East
       talent_modifier: 0.9
 
+- id: croatia
+  name: Croatia
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1912
+  fifa_membership_year: 1992
+  continental_membership_year: 1993
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: croatian
+  eligible_for_international: true
+  regions:
+    - id: cro_south
+      name: Dalmatian Coast
+      talent_modifier: 1.0
+    - id: cro_north
+      name: Croatia Proper
+      talent_modifier: 1.0
+    - id: cro_west
+      name: Istria Peninsula
+      talent_modifier: 1.0
+    - id: cro_east
+      name: Slavonia
+      talent_modifier: 1.0
+
 - id: spain
   name: Spain
   is_fictional: false
-  founded_year: 1912
+  founded_year: 1913
+  fa_founded_year: 1913
+  fifa_membership_year: 1914
+  continental_membership_year: 1954
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -644,6 +832,9 @@
   name: Portugal
   is_fictional: false
   founded_year: 1914
+  fa_founded_year: 1914
+  fifa_membership_year: 1923
+  continental_membership_year: 1954
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -671,6 +862,9 @@
   name: France
   is_fictional: false
   founded_year: 1919
+  fa_founded_year: 1919
+  fifa_membership_year: 1904
+  continental_membership_year: 1954
   prestige: 1600
   prestige_weights:
     league: 0.65
@@ -698,6 +892,9 @@
   name: Poland
   is_fictional: false
   founded_year: 1919
+  fa_founded_year: 1919
+  fifa_membership_year: 1923
+  continental_membership_year: 1954
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -724,7 +921,11 @@
 - id: yugoslavia
   name: Yugoslavia
   is_fictional: false
-  founded_year: 1919
+  founded_year: 1918
+  fa_founded_year: 1919
+  fifa_membership_year: 1923
+  continental_membership_year: 1954
+  dissolved_year: 1992
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -748,12 +949,76 @@
       name: Montenegro & South Slavic Karst
       talent_modifier: 0.9
 
-# In 1921 the Partition of Ireland was declared and the Irish League was formed (TODO)
+# In 1921 the Partition of Ireland was declared and the Irish Republic was formed (TODO)
+- id: ireland
+  name: [Ireland, Republic of Ireland]
+  is_fictional: false
+  founded_year: 1922
+  fa_founded_year: 1921
+  fifa_membership_year: 1923
+  continental_membership_year: 1954
+  prestige: 4200
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: irish
+  eligible_for_international: true
+  regions:
+    - id: ire_leinster
+      name: Leinster
+      talent_modifier: 1.1
+    - id: ire_munster
+      name: Munster
+      talent_modifier: 1.0
+    - id: ire_connacht
+      name: Connacht
+      talent_modifier: 0.95
+    - id: ire_ulster
+      name: Ulster
+      talent_modifier: 0.95
+
+- id: northern_ireland
+  name: Northern Ireland
+  is_fictional: false
+  founded_year: 1922
+  fa_founded_year: 1880
+  fifa_membership_year: 1922
+  continental_membership_year: 1954
+  prestige: 4200
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: northern_irish
+  eligible_for_international: true
+  regions:
+    - id: nir_belfast
+      name: Belfast Metro Hub
+      talent_modifier: 1.1
+    - id: nir_east
+      name: Antrim & Down Coast
+      talent_modifier: 1.0
+    - id: nir_west
+      name: Derry & Tyrone Borderlands
+      talent_modifier: 0.95
+    - id: nir_south
+      name: Fermanagh & Armagh
+      talent_modifier: 0.95
 
 - id: czechoslovakia
   name: Czechoslovakia
   is_fictional: false
-  founded_year: 1921
+  founded_year: 1918
+  fa_founded_year: 1901 # Same FA as Bohemia (continuation) TODO: check
+  fifa_membership_year: 1923
+  continental_membership_year: 1954
+  predecessor_id: bohemia
+  successor_of: bohemia
   dissolved_year: 1993
   prestige: 1600
   prestige_weights:
@@ -778,12 +1043,46 @@
       name: Eastern Slovak Highlands
       talent_modifier: 1.0
 
-# Edge case: Soviet Union (formed in 1922, but FA was not created until 1934) TODO
+- id: soviet_union
+  name: Soviet Union
+  is_fictional: false
+  founded_year: 1922
+  fa_founded_year: 1934
+  fifa_membership_year: 1946
+  continental_membership_year: 1954
+  predecessor_id: russian_empire
+  successor_of: russian_empire
+  dissolved_year: 1991
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: soviet
+  eligible_for_international: true
+  regions:
+    - id: sov_northwest
+      name: Moscow & Baltic West
+      talent_modifier: 1.0
+    - id: sov_southwest
+      name: Ukraine & Southern Region
+      talent_modifier: 1.0
+    - id: sov_central
+      name: Caucasus
+      talent_modifier: 1.0
+    - id: sov_east
+      name: Siberia & Ural Mountains
+      talent_modifier: 1.0
 
 - id: turkey
   name: Turkey
   is_fictional: false
   founded_year: 1923
+  fa_founded_year: 1923
+  fifa_membership_year: 1923
+  continental_membership_year: 1962
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -807,10 +1106,43 @@
       name: Southern Anatolia
       talent_modifier: 1.0
 
+- id: greece
+  name: Greece
+  is_fictional: false
+  founded_year: 1926
+  fa_founded_year: 1926
+  fifa_membership_year: 1927
+  continental_membership_year: 1954
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: greek
+  eligible_for_international: true
+  regions:
+    - id: gre_athens
+      name: Attica Capital Region
+      talent_modifier: 1.0
+    - id: gre_north
+      name: Macedonian North
+      talent_modifier: 1.0
+    - id: gre_west
+      name: Peloponnese & Ionian Islands
+      talent_modifier: 1.0
+    - id: gre_south
+      name: Aegean Islands & Crete
+      talent_modifier: 1.0
+
 - id: albania
   name: Albania
   is_fictional: false
-  founded_year: 1930
+  founded_year: 1912
+  fa_founded_year: 1930
+  fifa_membership_year: 1932
+  continental_membership_year: 1954
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -837,7 +1169,10 @@
 - id: saarland
   name: Saarland
   is_fictional: false
-  founded_year: 1931
+  founded_year: 1948
+  fa_founded_year: 1948
+  fifa_membership_year: 1950
+  continental_membership_year: 1954
   dissolved_year: 1957
   prestige: 1500
   prestige_weights:
@@ -862,10 +1197,73 @@
       name: Bliesgau
       talent_modifier: 1.0
 
+- id: north_macedonia
+  name: [Macedonia, North Macedonia]
+  is_fictional: false
+  founded_year: 1993
+  fa_founded_year: 1949
+  fifa_membership_year: 1994
+  continental_membership_year: 1994
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: north_macedonian
+  eligible_for_international: true
+  regions:
+    - id: nma_skopje
+      name: Skopje Capital Axis
+      talent_modifier: 1.0
+    - id: nma_southwest
+      name: Pelagonija Valley
+      talent_modifier: 1.0
+    - id: nma_west
+      name: Polog Highlands
+      talent_modifier: 1.0
+    - id: nma_east
+      name: Osogovo Borderlands
+      talent_modifier: 1.0
+
+- id: germany
+  name: Germany
+  is_fictional: false
+  founded_year: 1990
+  fa_founded_year: 1900
+  fifa_membership_year: 1990
+  continental_membership_year: 1990
+  prestige: 1800 # TODO: can prestige get inherited?
+  prestige_weights:
+    league: 0.65
+    international: 0.35
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: german
+  eligible_for_international: true
+  regions:
+    - id: ger_west
+      name: West Rurh Valley
+      talent_modifier: 1.05
+    - id: ger_south
+      name: Bavaria & Swabia
+      talent_modifier: 1.05
+    - id: ger_north
+      name: Hanseatic North
+      talent_modifier: 0.95
+    - id: ger_east
+      name: Eastern States
+      talent_modifier: 0.95
+
 - id: slovakia
   name: Slovakia
   is_fictional: false
-  founded_year: 1938
+  founded_year: 1993
+  fa_founded_year: 1993
+  fifa_membership_year: 1994
+  continental_membership_year: 1993
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -892,7 +1290,10 @@
 - id: kosovo
   name: Kosovo
   is_fictional: false
-  founded_year: 1946
+  founded_year: 1991
+  fa_founded_year: 1991
+  fifa_membership_year: 2016
+  continental_membership_year: 2016
   prestige: 800
   prestige_weights:
     league: 0.50
@@ -920,6 +1321,9 @@
   name: Iceland
   is_fictional: false
   founded_year: 1947
+  fa_founded_year: 1947
+  fifa_membership_year: 1947
+  continental_membership_year: 1954
   prestige: 1000
   prestige_weights:
     league: 0.50
@@ -946,7 +1350,10 @@
 - id: east_germany
   name: East Germany
   is_fictional: false
-  founded_year: 1945
+  founded_year: 1949
+  fa_founded_year: 1958
+  fifa_membership_year: 1952
+  continental_membership_year: 1954
   dissolved_year: 1990
   prestige: 1200
   prestige_weights:
@@ -961,20 +1368,56 @@
     - id: ddr_berlin
       name: Berlin-Bradenburg Axis
       talent_modifier: 1.0
-    - id: eg_south
+    - id: ddr_south
       name: Saxon Heartland
       talent_modifier: 1.0
-    - id: eg_north
+    - id: ddr_north
       name: Baltic Maritime Coast
       talent_modifier: 1.0
-    - id: eg_west
+    - id: ddr_west
       name: Thuringia & Anhalt
+      talent_modifier: 1.0
+
+- id: west_germany
+  name: West Germany
+  is_fictional: false
+  founded_year: 1949
+  fa_founded_year: 1900 # Same FA as pre-divided Germany (TODO: check)
+  fifa_membership_year: 1950
+  continental_membership_year: 1954
+  predecessor_id: german_empire
+  successor_of: german_empire
+  dissolved_year: 1990
+  prestige: 1200
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: german
+  eligible_for_international: true
+  regions:
+    - id: frg_west
+      name: Rhine-Ruhr Industrial Basin
+      talent_modifier: 1.0
+    - id: frg_north
+      name: Lower Saxony & North Sea Coast
+      talent_modifier: 1.0
+    - id: frg_south
+      name: Bavarian & Swabian South
+      talent_modifier: 1.0
+    - id: frg_southwest
+      name: Rhenish Southwest Borderland
       talent_modifier: 1.0
 
 - id: cyprus
   name: Cyprus
   is_fictional: false
-  founded_year: 1954
+  founded_year: 1934
+  fa_founded_year: 1934
+  fifa_membership_year: 1948
+  continental_membership_year: 1962
   prestige: 800
   prestige_weights:
     league: 0.50
@@ -998,12 +1441,259 @@
       name: Paphos
       talent_modifier: 1.0
 
+- id: russia
+  name: Russia
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1992 # Legal successor to USSR and Russian Empire
+  fifa_membership_year: 1992
+  continental_membership_year: 1992
+  predecessor_id: soviet_union
+  successor_of: [russian_empire, soviet_union]
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: russian
+  eligible_for_international: true
+  regions:
+    - id: rus_moscow
+      name: Moscow Metropolitan Area
+      talent_modifier: 1.2
+    - id: rus_northwest
+      name: Baltic Northwest
+      talent_modifier: 1.0
+    - id: rus_south
+      name: Southern Caucasus Frontier
+      talent_modifier: 0.9
+    - id: rus_east
+      name: Siberia & The Tartar East
+      talent_modifier: 0.9
+
+- id: belarus
+  name: Belarus
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1991
+  fifa_membership_year: 1992
+  continental_membership_year: 1993
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: belarussian
+  eligible_for_international: true
+  regions:
+    - id: blr_minsk
+      name: Minsk Capital District
+      talent_modifier: 1.0
+    - id: blr_west
+      name: Bug River Borderland
+      talent_modifier: 1.0
+    - id: blr_east
+      name: Dnieper River Valley
+      talent_modifier: 1.0
+    - id: blr_north
+      name: Dvina Northern Lakes
+      talent_modifier: 1.0
+
+- id: moldova
+  name: Moldova
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1991
+  fifa_membership_year: 1994
+  continental_membership_year: 1993
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: moldovan
+  eligible_for_international: true
+  regions:
+    - id: mda_chisinau
+      name: Chișinău Central District
+      talent_modifier: 1.0
+    - id: mda_north
+      name: Râut River Valley
+      talent_modifier: 1.0
+    - id: mda_east
+      name: Transnistria Enclave
+      talent_modifier: 1.0
+    - id: mda_west
+      name: Bugeag Steppe
+      talent_modifier: 1.0
+
+- id: slovenia
+  name: Slovenia
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1991
+  fifa_membership_year: 1992
+  continental_membership_year: 1992
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: slovenian
+  eligible_for_international: true
+  regions:
+    - id: slv_ljubljana
+      name: Ljubljana Capital Hub
+      talent_modifier: 1.0
+    - id: slv_north
+      name: Alpine North
+      talent_modifier: 1.0
+    - id: slv_east
+      name: Styria & Drava Basin
+      talent_modifier: 1.0
+    - id: slv_west
+      name: Littoral & Italian Border
+      talent_modifier: 1.0
+
+- id: ukraine
+  name: Ukraine
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1991
+  fifa_membership_year: 1992
+  continental_membership_year: 1992
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: ukrainian
+  eligible_for_international: true
+  regions:
+    - id: ukr_kyiv
+      name: Kyiv Dnieper Hub
+      talent_modifier: 1.0
+    - id: ukr_west
+      name: Galician West
+      talent_modifier: 1.0
+    - id: ukr_east
+      name: Donbas Industrial Region
+      talent_modifier: 1.0
+    - id: ukr_south
+      name: Black Sea South
+      talent_modifier: 1.0
+
+- id: bosnia_and_herzegovina
+  name: Bosnia and Herzegovina
+  is_fictional: false
+  founded_year: 1992
+  fa_founded_year: 1992
+  fifa_membership_year: 1996
+  continental_membership_year: 1998
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: bosnian
+  eligible_for_international: true
+  regions:
+    - id: bos_sarajevo
+      name: Sarajevo Urban Basin
+      talent_modifier: 1.0
+    - id: bos_west
+      name: Neretva Valley & Mostar
+      talent_modifier: 1.0
+    - id: bos_east
+      name: Drina Borderland & Tuzla
+      talent_modifier: 1.0
+    - id: bos_north
+      name: Krajina & Banja Luka
+      talent_modifier: 1.0
+
+- id: serbia_and_montenegro
+  name: Serbia and Montenegro
+  is_fictional: false
+  founded_year: 1992
+  fa_founded_year: 1992
+  fifa_membership_year: 1992
+  continental_membership_year: 2003
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: serbian
+  eligible_for_international: true
+  regions:
+    - id: sam_belgrade
+      name: Belgrade Capital Engine
+      talent_modifier: 1.0
+    - id: sam_south
+      name: Šumadija & Southern Valleys
+      talent_modifier: 1.0
+    - id: sam_east
+      name: Dinaric Highlands
+      talent_modifier: 1.0
+    - id: sam_north
+      name: The Vojvodina Plain
+      talent_modifier: 1.0
+
+- id: czech_republic
+  name: Czech Republic
+  is_fictional: false
+  founded_year: 1993
+  fa_founded_year: 1901 # Same FA as pre-divided Czechoslovakia (TODO: check)
+  fifa_membership_year: 1994
+  continental_membership_year: 1994
+  predecessor_id: czechoslovakia
+  successor_of: [bohemia, czechoslovakia]
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: czech
+  eligible_for_international: true
+  regions:
+    - id: cze_prague
+      name: Prague Central Basin
+      talent_modifier: 1.0
+    - id: cze_west
+      name: Plzeň & Bohemian West
+      talent_modifier: 1.0
+    - id: cze_east
+      name: Moravian Industrial Region
+      talent_modifier: 1.0
+    - id: cze_south
+      name: Southern Bohemian Border
+      talent_modifier: 1.0
+
 # South America
 
 - id: argentina
   name: Argentina
   is_fictional: false
   founded_year: 1893
+  fa_founded_year: 1893
+  fifa_membership_year: 1912
+  continental_membership_year: 1916
   prestige: 1900
   prestige_weights:
     league: 0.55
@@ -1031,6 +1721,9 @@
   name: Uruguay
   is_fictional: false
   founded_year: 1900
+  fa_founded_year: 1900
+  fifa_membership_year: 1923
+  continental_membership_year: 1916
   prestige: 1700
   prestige_weights:
     league: 0.50
@@ -1057,7 +1750,10 @@
 - id: chile
   name: Chile
   is_fictional: false
-  founded_year: 1900
+  founded_year: 1895
+  fa_founded_year: 1895
+  fifa_membership_year: 1913
+  continental_membership_year: 1916
   prestige: 1600
   prestige_weights:
     league: 0.50
@@ -1081,10 +1777,73 @@
       name: Port & Coast West
       talent_modifier: 0.9
 
+- id: guyana
+  name: Guyana
+  is_fictional: false
+  founded_year: 1902
+  fa_founded_year: 1902
+  fifa_membership_year: 1968
+  continental_membership_year: 1961 # Not CONMEBOL, but CONCACAF
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: guyanese
+  eligible_for_international: true
+  regions:
+    - id: guy_georgetown
+      name: Georgetown Demerara Hub
+      talent_modifier: 1.0
+    - id: guy_north
+      name: Barima-Waini & Cuyuni-Mazaruni
+      talent_modifier: 1.0
+    - id: guy_south
+      name: Rupununi Savannah
+      talent_modifier: 1.0
+    - id: guy_east
+      name: Berbice Indo-Guianese Coast
+      talent_modifier: 1.0
+
+- id: paraguay
+  name: Paraguay
+  is_fictional: false
+  founded_year: 1906
+  fa_founded_year: 1906
+  fifa_membership_year: 1925
+  continental_membership_year: 1921
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: paraguayan
+  eligible_for_international: true
+  regions:
+    - id: par_asuncion
+      name: Asunción Capital Hub
+      talent_modifier: 1.25
+    - id: par_southeast
+      name: Paraná River Basin
+      talent_modifier: 0.95
+    - id: par_north
+      name: Paraneña Norte
+      talent_modifier: 0.85
+    - id: par_west
+      name: Gran Chaco
+      talent_modifier: 0.85
+
 - id: brazil
   name: Brazil
   is_fictional: false
   founded_year: 1914
+  fa_founded_year: 1914
+  fifa_membership_year: 1923
+  continental_membership_year: 1916
   prestige: 1800
   prestige_weights:
     league: 0.45
@@ -1108,12 +1867,200 @@
       name: Amazonas
       talent_modifier: 0.85
 
+- id: peru
+  name: Peru
+  is_fictional: false
+  founded_year: 1912
+  fa_founded_year: 1912
+  fifa_membership_year: 1924
+  continental_membership_year: 1925
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: peruvian
+  eligible_for_international: true
+  regions:
+    - id: per_lima
+      name: Lima Metropolitana
+      talent_modifier: 1.0
+    - id: per_south
+      name: Sol del Sur Region
+      talent_modifier: 1.0
+    - id: per_north
+      name: Costa Norte del Pacífico
+      talent_modifier: 1.0
+    - id: per_east
+      name: Amazonian Selva
+      talent_modifier: 1.0
+
+- id: suriname
+  name: Suriname
+  is_fictional: false
+  founded_year: 1920
+  fa_founded_year: 1920
+  fifa_membership_year: 1929
+  continental_membership_year: 1961 # Not CONMEBOL, but CONCACAF
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: surinamese
+  eligible_for_international: true
+  regions:
+    - id: sur_paramaribo
+      name: Paramaribo Plain
+      talent_modifier: 1.5  # Nearly all Surinamese football is in Paramaribo
+    - id: sur_northeast
+      name: Marowijne & Commewijne River Disctricts
+      talent_modifier: 1.0
+    - id: sur_west
+      name: Hindustani Delta
+      talent_modifier: 1.0
+    - id: sur_south
+      name: Sipaliwini District
+      talent_modifier: 0.5
+
+- id: colombia
+  name: Colombia
+  is_fictional: false
+  founded_year: 1924
+  fa_founded_year: 1924
+  fifa_membership_year: 1936
+  continental_membership_year: 1936
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: colombian
+  eligible_for_international: true
+  regions:
+    - id: col_east
+      name: Orinoquía y Amazonía
+      talent_modifier: 1.0
+    - id: col_north
+      name: Caribbean Coast
+      talent_modifier: 1.0
+    - id: col_central
+      name: Central Andes
+      talent_modifier: 1.0
+    - id: col_west
+      name: Valle del Cauca
+      talent_modifier: 1.0  
+
+- id: ecuador
+  name: Ecuador
+  is_fictional: false
+  founded_year: 1925
+  fa_founded_year: 1925
+  fifa_membership_year: 1926
+  continental_membership_year: 1927
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: ecuatorian
+  eligible_for_international: true
+  regions:
+    - id: equ_central
+      name: Sierra Region
+      talent_modifier: 1.0
+    - id: equ_east
+      name: Amazon Region
+      talent_modifier: 1.0
+    - id: equ_west
+      name: Coast Region
+      talent_modifier: 1.0
+    - id: equ_galapagos
+      name: Galapagos Archipelago
+      talent_modifier: 1.0
+
+- id: venezuela
+  name: Venezuela
+  is_fictional: false
+  founded_year: 1926
+  fa_founded_year: 1926
+  fifa_membership_year: 1938
+  continental_membership_year: 1952
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: venezuelan
+  eligible_for_international: true
+  regions:
+    - id: ven_caracas
+      name: Caracas Hub & Caribbean Coast
+      talent_modifier: 1.0
+    - id: ven_central
+      name: Llanos Plains
+      talent_modifier: 1.0
+    - id: ven_southeast
+      name: Guayana Tepuyana
+      talent_modifier: 1.0
+    - id: ven_west
+      name: Andean West
+      talent_modifier: 1.0
+
+- id: french_guiana
+  name: French Guiana
+  is_fictional: false
+  founded_year: 1962
+  fa_founded_year: 1962
+  fifa_membership_year: 9999  # No FIFA membership
+  continental_membership_year: 1978 # Not CONMEBOL, but CONCACAF
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: guianese
+  eligible_for_international: true
+  regions:
+    - id: fgu_cayenne
+      name: Cayenne Urban Hub
+      talent_modifier: 1.0
+    - id: fgu_northwest
+      name: Kourou Coastal Belt
+      talent_modifier: 1.0
+    - id: fgu_east
+      name: Oyapock River Bordeland
+      talent_modifier: 1.0
+    - id: fgu_west
+      name: Saint-Laurent-du-Maroni
+      talent_modifier: 1.0
+
+# For nations in North and Central America, maybe I should add an extra field for
+# their previous confederations (NAFC and CCCF, respectively) to track history and
+# add them to tournaments held by said confederations. There is also the CFU, so I
+# should add that too.
+#
 # North America
 
 - id: canada
   name: Canada
   is_fictional: false
   founded_year: 1912
+  fa_founded_year: 1912
+  fifa_membership_year: 1912 # Suspended from 1926 to 1948
+  continental_membership_year: 1961
   prestige: 1500
   prestige_weights:
     league: 0.30
@@ -1141,6 +2088,9 @@
   name: United States
   is_fictional: false
   founded_year: 1913
+  fa_founded_year: 1913
+  fifa_membership_year: 1914
+  continental_membership_year: 1961
   prestige: 1400
   prestige_weights:
     league: 0.40
@@ -1170,6 +2120,9 @@
   name: South Africa
   is_fictional: false
   founded_year: 1892
+  fa_founded_year: 1991
+  fifa_membership_year: 1992
+  continental_membership_year: 1992
   prestige: 1000
   prestige_weights:
     league: 0.35
@@ -1193,10 +2146,73 @@
       name: Northern Frontier
       talent_modifier: 0.9
 
+- id: dr_congo
+  name: [Belgian Congo, Zaire, DR Congo]
+  is_fictional: false
+  founded_year: 1919
+  fa_founded_year: 1919
+  fifa_membership_year: 1964
+  continental_membership_year: 1963
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: congolese
+  eligible_for_international: true
+  regions:
+    - id: drk_west
+      name: Kinshasa Capital Hub
+      talent_modifier: 1.25
+    - id: drk_south
+      name: Katanga Mining Belt
+      talent_modifier: 0.95
+    - id: drk_east
+      name: Kivu Rift
+      talent_modifier: 0.9
+    - id: drk_north
+      name: Kasai Mining Basin
+      talent_modifier: 0.9
+
+- id: ghana
+  name: [Gold Coast, Ghana]
+  is_fictional: false
+  founded_year: 1920
+  fa_founded_year: 1920
+  fifa_membership_year: 1948
+  continental_membership_year: 1960
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: ghanaian
+  eligible_for_international: true
+  regions:
+    - id: ghana_accra
+      name: Greater Accra & Coastal Hub
+      talent_modifier: 1.25
+    - id: ghana_central
+      name: Ashanti Heartland
+      talent_modifier: 0.95
+    - id: ghana_west
+      name: Brong Ahafo & Western Borderlands
+      talent_modifier: 0.9
+    - id: ghana_north
+      name: Northern Savanna
+      talent_modifier: 0.9
+
 - id: egypt
   name: Egypt
   is_fictional: false
   founded_year: 1921
+  fa_founded_year: 1921
+  fifa_membership_year: 1923
+  continental_membership_year: 1957
   prestige: 1000
   prestige_weights:
     league: 0.35
@@ -1220,12 +2236,885 @@
       name: Upper Egypt & The Sa'id
       talent_modifier: 0.9
 
+- id: uganda
+  name: Uganda
+  is_fictional: false
+  founded_year: 1922
+  fa_founded_year: 1922
+  fifa_membership_year: 1964
+  continental_membership_year: 1962
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: ugandan
+  eligible_for_international: true
+  regions:
+    - id: uga_south
+      name: Kampala & Buganda Core
+      talent_modifier: 1.1
+    - id: uga_north
+      name: Acholi & Lango
+      talent_modifier: 1.1
+    - id: uga_east
+      name: Busoga & Eastern Crescent
+      talent_modifier: 0.9
+    - id: uga_west
+      name: Albertine West
+      talent_modifier: 0.9
+
+- id: zambia
+  name: [Northern Rhodesia, Zambia]
+  is_fictional: false
+  founded_year: 1929
+  fa_founded_year: 1929
+  fifa_membership_year: 1964
+  continental_membership_year: 1964
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: zambian
+  eligible_for_international: true
+  regions:
+    - id: zam_west
+      name: Lozi Barotseland
+      talent_modifier: 1.1
+    - id: zam_north
+      name: Copperbelt Mining Hub
+      talent_modifier: 1.1
+    - id: zam_south
+      name: Lusaka Capital Basin
+      talent_modifier: 0.9
+    - id: zam_east
+      name: Muchinga Region
+      talent_modifier: 0.9
+
+- id: liberia
+  name: Liberia
+  is_fictional: false
+  founded_year: 1936
+  fa_founded_year: 1936
+  fifa_membership_year: 1964
+  continental_membership_year: 1962
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: liberian
+  eligible_for_international: true
+  regions:
+    - id: lib_monrovia
+      name: Monrovia Metro Hub
+      talent_modifier: 1.1
+    - id: lib_north
+      name: Nimba Mountain Region
+      talent_modifier: 1.1
+    - id: lib_southeast
+      name: Kru Coast
+      talent_modifier: 0.9
+    - id: lib_central
+      name: Grand Bassa & Rivercess
+      talent_modifier: 0.9
+
+- id: ethiopia
+  name: Ethiopia
+  is_fictional: false
+  founded_year: 1943
+  fa_founded_year: 1943
+  fifa_membership_year: 1952
+  continental_membership_year: 1957
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: ethiopian
+  eligible_for_international: true
+  regions:
+    - id: eth_addis
+      name: Addis Ababa Capital Basin
+      talent_modifier: 1.1
+    - id: eth_east
+      name: Oromia Highlands & Somali Eastern Gateway
+      talent_modifier: 1.1
+    - id: eth_north
+      name: Tigray & Amhara North
+      talent_modifier: 0.9
+    - id: eth_west
+      name: Gambela & South West Ethiopia
+      talent_modifier: 0.9
+
+- id: nigeria
+  name: Nigeria
+  is_fictional: false
+  founded_year: 1945
+  fa_founded_year: 1945
+  fifa_membership_year: 1960
+  continental_membership_year: 1959
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: nigerian
+  eligible_for_international: true
+  regions:
+    - id: ngi_southwest
+      name: Lagos Metro Hub
+      talent_modifier: 1.1
+    - id: ngi_north
+      name: Hausa Region
+      talent_modifier: 1.1
+    - id: ngi_southeast
+      name: Southeast Core
+      talent_modifier: 0.9
+    - id: ngi_central
+      name: Middle Belt Axis
+      talent_modifier: 0.9
+
+- id: gambia
+  name: [British Gambia, Gambia]
+  is_fictional: false
+  founded_year: 1952
+  fa_founded_year: 1952
+  fifa_membership_year: 1968
+  continental_membership_year: 1961
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: gambian
+  eligible_for_international: true
+  regions:
+    - id: gamb_banjul
+      name: Banjul Urban Core
+      talent_modifier: 1.1
+    - id: gamb_west
+      name: Gambia River Delta
+      talent_modifier: 1.1
+    - id: gamb_central
+      name: North Bank & Lower River
+      talent_modifier: 0.9
+    - id: gamb_east
+      name: Central & Upper River
+      talent_modifier: 0.9
+
+- id: morocco
+  name: Morocco
+  is_fictional: false
+  founded_year: 1956
+  fa_founded_year: 1956
+  fifa_membership_year: 1960
+  continental_membership_year: 1960
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: moroccan
+  eligible_for_international: true
+  regions:
+    - id: mor_west
+      name: Casablanca-Rabat Axis
+      talent_modifier: 1.1
+    - id: mor_east
+      name: Atlas Mountain Interior
+      talent_modifier: 1.1
+    - id: mor_north
+      name: Rif & Mediterranean Coast
+      talent_modifier: 0.9
+    - id: mor_south
+      name: Souss Valley & Sahara
+      talent_modifier: 0.9
+
+- id: tunisia
+  name: Tunisia
+  is_fictional: false
+  founded_year: 1957
+  fa_founded_year: 1957
+  fifa_membership_year: 1960
+  continental_membership_year: 1960
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: tunisian
+  eligible_for_international: true
+  regions:
+    - id: tun_north
+      name: Tunis & Northeast Gulf
+      talent_modifier: 1.1
+    - id: tun_west
+      name: Gafsa Mining Basin
+      talent_modifier: 1.1
+    - id: tun_south
+      name: Sahara Desert
+      talent_modifier: 0.9
+    - id: tun_east
+      name: Sahel Coastal Strip
+      talent_modifier: 0.9
+
+- id: cameroon
+  name: Cameroon
+  is_fictional: false
+  founded_year: 1959
+  fa_founded_year: 1959
+  fifa_membership_year: 1962
+  continental_membership_year: 1963
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: cameroonian
+  eligible_for_international: true
+  regions:
+    - id: cam_north
+      name: Grand Nord Savanna
+      talent_modifier: 0.9
+    - id: cam_south
+      name: Centre-Sud Highlands
+      talent_modifier: 1.1
+    - id: cam_east
+      name: Bertoua Region
+      talent_modifier: 0.9
+    - id: cam_west
+      name: Littoral Coastal Strip
+      talent_modifier: 1.1
+
+- id: burkina_faso
+  name: [Upper Volta, Burkina Faso]
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1960
+  fifa_membership_year: 1964
+  continental_membership_year: 1964
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: burkinian
+  eligible_for_international: true
+  regions:
+    - id: bur_north
+      name: Sahelian Drylands
+      talent_modifier: 1.1
+    - id: bur_central
+      name: Ougadougou Capital Center
+      talent_modifier: 1.1
+    - id: bur_east
+      name: Fada N'Gourma Region
+      talent_modifier: 0.9
+    - id: bur_west
+      name: Bobo-Dioulasso Flank
+      talent_modifier: 0.9
+
+- id: guinea
+  name: Guinea
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1960
+  fifa_membership_year: 1962
+  continental_membership_year: 1963
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: guinean
+  eligible_for_international: true
+  regions:
+    - id: gin_conakry
+      name: Conakry Peninsula
+      talent_modifier: 1.0
+    - id: gin_northwest
+      name: Fouta Djallon Highlands
+      talent_modifier: 1.0
+    - id: gin_northeast
+      name: Upper Guinea Savanna
+      talent_modifier: 1.0
+    - id: gin_southeast
+      name: Guinée Forestière
+      talent_modifier: 1.0
+
+- id: ivory_coast
+  name: Ivory Coast
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1960
+  fifa_membership_year: 1964
+  continental_membership_year: 1965
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: ivorian
+  eligible_for_international: true
+  regions:
+    - id: ivo_abidjan
+      name: Abidjan Lagoon Hub
+      talent_modifier: 1.3
+    - id: ivo_north
+      name: Northern Savanna
+      talent_modifier: 0.9
+    - id: ivo_west
+      name: Sassandra Forest
+      talent_modifier: 0.9
+    - id: ivo_east
+      name: Cocoa Belt
+      talent_modifier: 0.9
+
+- id: mali
+  name: Mali
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1960
+  fifa_membership_year: 1964
+  continental_membership_year: 1963
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: malian
+  eligible_for_international: true
+  regions:
+    - id: mali_bamako
+      name: Bamako Capital District
+      talent_modifier: 1.1
+    - id: mali_west
+      name: Kayes Basin
+      talent_modifier: 1.1
+    - id: mali_central
+      name: Niger River Delta
+      talent_modifier: 0.9
+    - id: mali_north
+      name: Sahelian Desert
+      talent_modifier: 0.9
+
+- id: mauritania
+  name: Mauritania
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1960
+  fifa_membership_year: 1964
+  continental_membership_year: 1963
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: mauritanian
+  eligible_for_international: true
+  regions:
+    - id: maur_west
+      name: Nouakchott Atlantic District
+      talent_modifier: 1.1
+    - id: maur_south
+      name: Senegal River Valley
+      talent_modifier: 1.1
+    - id: maur_north
+      name: Tiris Zemmour Mining Belt
+      talent_modifier: 0.9
+    - id: maur_east
+      name: Hodh Ech Chargui & Sahelian East
+      talent_modifier: 0.9
+
+- id: senegal
+  name: Senegal
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1960
+  fifa_membership_year: 1964
+  continental_membership_year: 1963
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: senegalese
+  eligible_for_international: true
+  regions:
+    - id: sen_west
+      name: Dakar Peninsula & Thiès Hub
+      talent_modifier: 1.1
+    - id: sen_north
+      name: Saint-Louis & Senegal River Valley
+      talent_modifier: 1.1
+    - id: sen_south
+      name: Casamance Region
+      talent_modifier: 0.9
+    - id: sen_east
+      name: Tambacounda Region
+      talent_modifier: 0.9
+
+- id: sierra_leone
+  name: Sierra Leone
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1960
+  fifa_membership_year: 1960
+  continental_membership_year: 1960
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: sierra_leonean
+  eligible_for_international: true
+  regions:
+    - id: sle_west
+      name: Freetown Peninsula
+      talent_modifier: 1.1
+    - id: sle_east
+      name: Diamond Belt
+      talent_modifier: 1.1
+    - id: sle_north
+      name: Temne Region
+      talent_modifier: 0.9
+    - id: sle_south
+      name: Mende Province
+      talent_modifier: 0.9
+
+- id: togo
+  name: Togo
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1960
+  fifa_membership_year: 1964
+  continental_membership_year: 1963
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: togolese
+  eligible_for_international: true
+  regions:
+    - id: togo_central_south
+      name: Plateaux Interior
+      talent_modifier: 1.1
+    - id: togo_north
+      name: Savanes Region
+      talent_modifier: 0.9
+    - id: togo_south
+      name: Lomé Maritime Hub
+      talent_modifier: 1.1
+    - id: togo_central_north
+      name: Kara Highlands
+      talent_modifier: 0.9
+
+- id: kenya
+  name: Kenya
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1960
+  fifa_membership_year: 1964
+  continental_membership_year: 1963
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: kenyan
+  eligible_for_international: true
+  regions:
+    - id: ken_north
+      name: Rift Valley Highlands
+      talent_modifier: 0.9
+    - id: ken_south
+      name: Nairobi Metro Hub
+      talent_modifier: 1.1
+    - id: ken_east
+      name: Coastal Strip
+      talent_modifier: 0.9
+    - id: ken_west
+      name: Nyanza & Western Hub
+      talent_modifier: 1.1
+
+- id: niger
+  name: Niger
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1961
+  fifa_membership_year: 1964
+  continental_membership_year: 1965
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: nigerian
+  eligible_for_international: true
+  regions:
+    - id: nig_west
+      name: Niamey Capital Basin
+      talent_modifier: 1.1
+    - id: nig_north
+      name: Aïr Mountains
+      talent_modifier: 1.1
+    - id: nig_south
+      name: Maradi & Zinder
+      talent_modifier: 0.9
+    - id: nig_east
+      name: Diffa Lake Chad Fringe
+      talent_modifier: 0.9
+
+- id: chad
+  name: Chad
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1961
+  fifa_membership_year: 1964
+  continental_membership_year: 1965
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: chadian
+  eligible_for_international: true
+  regions:
+    - id: tch_north
+      name: Saharan Tibestian Plateau
+      talent_modifier: 0.9
+    - id: tch_south
+      name: Logone Valley
+      talent_modifier: 0.9
+    - id: tch_west
+      name: N'Djamena Capital Basin
+      talent_modifier: 1.1    
+    - id: tch_east
+      name: Sahelian Central Belt
+      talent_modifier: 0.9
+
+- id: algeria
+  name: Algeria
+  is_fictional: false
+  founded_year: 1962
+  fa_founded_year: 1962
+  fifa_membership_year: 1963
+  continental_membership_year: 1964
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: algerian
+  eligible_for_international: true
+  regions:
+    - id: alg_algiers
+      name: Algiers Coastal Metropolis
+      talent_modifier: 1.1
+    - id: alg_northeast
+      name: Kabylie Berber Highlands
+      talent_modifier: 1.1
+    - id: alg_central
+      name: Saharan Atlas
+      talent_modifier: 0.9
+    - id: alg_south
+      name: Saharan Algeria
+      talent_modifier: 0.9
+
+- id: benin
+  name: [Republic of Dahomey, Benin]
+  is_fictional: false
+  founded_year: 1962
+  fa_founded_year: 1962
+  fifa_membership_year: 1962
+  continental_membership_year: 1969
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: beninese
+  eligible_for_international: true
+  regions:
+    - id: ben_south
+      name: Atlantic Coast
+      talent_modifier: 1.1
+    - id: ben_central
+      name: Central Belt
+      talent_modifier: 1.1
+    - id: ben_northeast
+      name: Northeast Plains
+      talent_modifier: 0.9
+    - id: ben_northwest
+      name: Nortwest Highlands
+      talent_modifier: 0.9
+
+- id: libya
+  name: Libya
+  is_fictional: false
+  founded_year: 1962
+  fa_founded_year: 1962
+  fifa_membership_year: 1964
+  continental_membership_year: 1965
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: libyan
+  eligible_for_international: true
+  regions:
+    - id: lib_tripoli
+      name: Tripolitania
+      talent_modifier: 1.0
+    - id: lib_northwest
+      name: Jabal Nafusa
+      talent_modifier: 1.0
+    - id: lib_south
+      name: Fezzan Desert Oasis
+      talent_modifier: 1.0
+    - id: lib_east
+      name: Benghazi & Cyrenaica
+      talent_modifier: 1.0
+      
+- id: gabon
+  name: Gabon
+  is_fictional: false
+  founded_year: 1962
+  fa_founded_year: 1962
+  fifa_membership_year: 1966
+  continental_membership_year: 1967
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: gabonese
+  eligible_for_international: true
+  regions:
+    - id: gab_south
+      name: Ogooué-Maritime Oil Strip
+      talent_modifier: 1.0
+    - id: gab_west
+      name: Estuaire Estuary
+      talent_modifier: 1.0
+    - id: gab_east
+      name: Haut-Ogooué Mining Interior
+      talent_modifier: 1.0
+    - id: gab_north
+      name: Woleu-Ntem Plateau
+      talent_modifier: 1.0
+
+- id: zimbabwe
+  name: Zimbabwe
+  is_fictional: false
+  founded_year: 1965
+  fa_founded_year: 1965
+  fifa_membership_year: 1965
+  continental_membership_year: 1980
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: zimbabwean
+  eligible_for_international: true
+  regions:
+    - id: zim_east
+      name: Manicaland Highlands
+      talent_modifier: 1.0
+    - id: zim_west      
+      name: Bulawayo & Matabeleland
+      talent_modifier: 1.0
+    - id: zim_north
+      name: Harare Metro Core
+      talent_modifier: 1.0
+    - id: zim_south
+      name: Midlands Mining Belt
+      talent_modifier: 1.0
+
+- id: equatorial_guinea
+  name: Equatorial Guinea
+  is_fictional: false
+  founded_year: 1968
+  fa_founded_year: 1975
+  fifa_membership_year: 1986
+  continental_membership_year: 1986
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: equatorial_guinean
+  eligible_for_international: true
+  regions:
+    - id: eqg_west
+      name: Kie-Ntem Borderland
+      talent_modifier: 1.0
+    - id: eqg_central
+      name: Bata Littoral Mainland
+      talent_modifier: 1.0
+    - id: eqg_south
+      name: Wele-Nzas Jungle
+      talent_modifier: 1.0
+    - id: eqg_east
+      name: Malabo Insular Core
+      talent_modifier: 1.0
+
+- id: guinea_bissau
+  name: Guinea-Bissau
+  is_fictional: false
+  founded_year: 1976
+  fa_founded_year: 1976
+  fifa_membership_year: 1976
+  continental_membership_year: 1976
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: guinean
+  eligible_for_international: true
+  regions:
+    - id: gbs_bissau
+      name: Bissau Sector
+      talent_modifier: 1.0
+    - id: gbs_east
+      name: Bafatá & Gabú Highlands
+      talent_modifier: 1.0
+    - id: gbs_north
+      name: Oio & Cacheu Plains
+      talent_modifier: 1.0
+    - id: gbs_south
+      name: Tombali & Quinara Wetlands
+      talent_modifier: 1.0
+
+- id: angola
+  name: Angola
+  is_fictional: false
+  founded_year: 1979
+  fa_founded_year: 1979
+  fifa_membership_year: 1980
+  continental_membership_year: 1980
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: angolan
+  eligible_for_international: true
+  regions:
+    - id: ang_west
+      name: Huambo Highlands
+      talent_modifier: 1.0
+    - id: ang_north
+      name: Luanda Metro District
+      talent_modifier: 1.0
+    - id: ang_south
+      name: Benguela & Lobito Coast
+      talent_modifier: 1.0
+    - id: ang_east
+      name: Moxico & Cuando Cubango
+      talent_modifier: 1.0
+
+- id: cabo_verde
+  name: Cabo Verde
+  is_fictional: false
+  founded_year: 1982
+  fa_founded_year: 1982
+  fifa_membership_year: 1986
+  continental_membership_year: 1986
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: cabo_verdean
+  eligible_for_international: true
+  regions:
+    - id: cab_southwest
+      name: Santiago & Maio
+      talent_modifier: 1.1
+    - id: cab_southwest
+      name: Fogo & Brava
+      talent_modifier: 1.1
+    - id: cab_northwest
+      name: Ilhas do Noroeste
+      talent_modifier: 0.9
+    - id: cab_northeast
+      name: Boa Vista & Sal
+      talent_modifier: 0.9
+
 # Asia
 
 - id: Singapore
   name: Singapore
   is_fictional: false
   founded_year: 1892
+  fa_founded_year: 1892
+  fifa_membership_year: 1952
+  continental_membership_year: 1954
   prestige: 1100
   prestige_weights:
     league: 0.25
@@ -1253,6 +3142,9 @@
   name: Philippines
   is_fictional: false
   founded_year: 1907
+  fa_founded_year: 1907
+  fifa_membership_year: 1930
+  continental_membership_year: 1954
   prestige: 1000
   prestige_weights:
     league: 0.25
@@ -1280,6 +3172,9 @@
   name: Japan
   is_fictional: false
   founded_year: 1921
+  fa_founded_year: 1921
+  fifa_membership_year: 1929
+  continental_membership_year: 1954
   prestige: 1100
   prestige_weights:
     league: 0.40
@@ -1309,6 +3204,9 @@
   name: New Zealand
   is_fictional: false
   founded_year: 1891
+  fa_founded_year: 1891
+  fifa_membership_year: 1948
+  continental_membership_year: 1966
   prestige: 1100
   prestige_weights:
     league: 0.20
