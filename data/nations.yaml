@@ -2836,6 +2836,96 @@
       name: Sahelian Central Belt
       talent_modifier: 0.9
 
+- id: central_african_republic
+  name: Central African Republic
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1961
+  fifa_membership_year: 1964
+  continental_membership_year: 1965
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: central_african
+  eligible_for_international: true
+  regions:
+    - id: caf_east
+      name: Haute-Kotto Borderlands
+      talent_modifier: 0.9
+    - id: caf_north
+      name: Ouham Savannah
+      talent_modifier: 0.9
+    - id: caf_south
+      name: Bangui Ubangi Core
+      talent_modifier: 1.1
+    - id: caf_west
+      name: Lobaye Rainforest
+      talent_modifier: 1.1
+
+- id: madagascar
+  name: Madagascar
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1961
+  fifa_membership_year: 1962
+  continental_membership_year: 1963
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: madagascar
+  eligible_for_international: true
+  regions:
+    - id: mad_central
+      name: Antananarivo Highlands
+      talent_modifier: 1.1
+    - id: mad_north
+      name: Mahajanga Bay
+      talent_modifier: 1.1
+    - id: mad_south
+      name: Toliara Arid Region
+      talent_modifier: 0.9
+    - id: mad_east
+      name: Toamasina Rainforest
+      talent_modifier: 0.9
+
+- id: congo
+  name: Congo
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1962
+  fifa_membership_year: 1962
+  continental_membership_year: 1963
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: congolese
+  eligible_for_international: true
+  regions:
+    - id: con_north
+      name: Cuvette Basin
+      talent_modifier: 0.9
+    - id: con_central
+      name: Niari Valley
+      talent_modifier: 0.9
+    - id: con_east
+      name: Brazzaville Capital Pool
+      talent_modifier: 1.1
+    - id: con_west
+      name: Pointe-Noire Coastal Strip
+      talent_modifier: 1.1
+
 - id: algeria
   name: Algeria
   is_fictional: false
