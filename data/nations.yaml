@@ -8,7 +8,7 @@
 # is_fictional:       fictional nations use Myrian name generators and are
 #                     fully playable; real nations host generated squads for
 #                     international competitions
-# founded_year:       year the national football association was founded;
+# founded_year:       year the nation was founded;
 #                     the nation does not participate in international
 #                     competitions before this year
 # prestige:           starting value on the 0-10000 scale; tier is derived
@@ -56,7 +56,7 @@
 - id: myria
   name: Myria
   is_fictional: true
-  founded_year: 1905
+  founded_year: 1896
   fa_founded_year: 1890
   fifa_membership_year: 1950
   continental_membership_year: 1971
@@ -191,6 +191,7 @@
   fa_founded_year: 1880
   fifa_membership_year: 1911
   continental_membership_year: 1954
+  dissolved_year: 1922
   prestige: 4200
   prestige_weights:
     league: 0.50
@@ -2296,6 +2297,36 @@
       name: Muchinga Region
       talent_modifier: 0.9
 
+- id: tanzania
+  name: [Tanganyika, Tanzania]
+  is_fictional: false
+  founded_year: 1930
+  fa_founded_year: 1930
+  fifa_membership_year: 1964
+  continental_membership_year: 1964
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: tanzanian
+  eligible_for_international: true
+  regions:
+    - id: tan_east
+      name: Dar es Salaam Coastal Core
+      talent_modifier: 1.1
+    - id: tan_north
+      name: Kilimanjaro & Arusha
+      talent_modifier: 1.1
+    - id: tan_south
+      name: Mbeya Highlands
+      talent_modifier: 0.9
+    - id: tan_northwest
+      name: Mwanza Lake Victoria Hub
+      talent_modifier: 0.9
+
 - id: liberia
   name: Liberia
   is_fictional: false
@@ -2325,6 +2356,36 @@
     - id: lib_central
       name: Grand Bassa & Rivercess
       talent_modifier: 0.9
+
+- id: sudan
+  name: Sudan
+  is_fictional: false
+  founded_year: 1936
+  fa_founded_year: 1936
+  fifa_membership_year: 1948
+  continental_membership_year: 1957
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: sudanese
+  eligible_for_international: true
+  regions:
+    - id: sud_north
+      name: Port Sudan Red Sea Coast
+      talent_modifier: 1.1
+    - id: sud_west
+      name: Darfur Region
+      talent_modifier: 0.9
+    - id: sud_south
+      name: Kurdufan High Steppe
+      talent_modifier: 0.9
+    - id: sud_east
+      name: Khartoum-Omdurman Confluence
+      talent_modifier: 1.1
 
 - id: ethiopia
   name: Ethiopia
@@ -2386,6 +2447,66 @@
       name: Middle Belt Axis
       talent_modifier: 0.9
 
+- id: burundi
+  name: Burundi
+  is_fictional: false
+  founded_year: 1962
+  fa_founded_year: 1948
+  fifa_membership_year: 1972
+  continental_membership_year: 1972
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: burundian
+  eligible_for_international: true
+  regions:
+    - id: bur_south
+      name: Rumonge & Makamba
+      talent_modifier: 1.1
+    - id: bur_north
+      name: Ngozi & Muyinga Highlands
+      talent_modifier: 0.9
+    - id: bur_east
+      name: Gitega Plateau
+      talent_modifier: 0.9
+    - id: bur_west
+      name: Bujumbura Waterfront
+      talent_modifier: 1.1
+
+- id: somalia
+  name: Somalia
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1951
+  fifa_membership_year: 1962
+  continental_membership_year: 1968
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: somali
+  eligible_for_international: true
+  regions:
+    - id: som_central
+      name: Mogadishu Coastal Crescent
+      talent_modifier: 1.1
+    - id: som_north
+      name: Somaliland
+      talent_modifier: 1.1
+    - id: som_northeast
+      name: Puntland Axis
+      talent_modifier: 0.9
+    - id: som_south
+      name: Jubaland Valley
+      talent_modifier: 0.9
+
 - id: gambia
   name: [British Gambia, Gambia]
   is_fictional: false
@@ -2415,6 +2536,36 @@
     - id: gamb_east
       name: Central & Upper River
       talent_modifier: 0.9
+
+- id: mauritius
+  name: Mauritius
+  is_fictional: false
+  founded_year: 1968
+  fa_founded_year: 1952
+  fifa_membership_year: 1964
+  continental_membership_year: 1953
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: mauritian
+  eligible_for_international: true
+  regions:
+    - id: mau_south
+      name: Curepipe & Plaines Wilhems Highlands
+      talent_modifier: 1.0
+    - id: mau_west
+      name: Port Louis Metro Core
+      talent_modifier: 1.0
+    - id: mau_east
+      name: Rodrigues Island
+      talent_modifier: 1.0
+    - id: mau_north
+      name: Flacq & Rivière du Rempart
+      talent_modifier: 1.0
 
 - id: morocco
   name: Morocco
@@ -3046,8 +3197,68 @@
       name: Woleu-Ntem Plateau
       talent_modifier: 1.0
 
+- id: rwanda
+  name: Rwanda
+  is_fictional: false
+  founded_year: 1962
+  fa_founded_year: 1972
+  fifa_membership_year: 1978
+  continental_membership_year: 1978
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: rwandan
+  eligible_for_international: true
+  regions:
+    - id: rwa_north
+      name: Kigali Capital &Volcano Highlands
+      talent_modifier: 1.0
+    - id: rwa_south
+      name: Huye Savannah
+      talent_modifier: 1.0
+    - id: rwa_east
+      name: Iburasirazuba
+      talent_modifier: 1.0
+    - id: rwa_west
+      name: Rubavu & Rift Lake Zone
+      talent_modifier: 1.0
+
+- id: malawi
+  name: Malawi
+  is_fictional: false
+  founded_year: 1964
+  fa_founded_year: 1966
+  fifa_membership_year: 1967
+  continental_membership_year: 1968
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: malawian
+  eligible_for_international: true
+  regions:
+    - id: mwi_west
+      name: Lilongwe Plateau
+      talent_modifier: 1.0
+    - id: mwi_north
+      name: Mzuzu Highlands
+      talent_modifier: 1.0
+    - id: mwi_south
+      name: Blantyre-Limbe Industrial Hub
+      talent_modifier: 1.0
+    - id: mwi_east
+      name: Zomba Plateau
+      talent_modifier: 1.0
+
 - id: zimbabwe
-  name: Zimbabwe
+  name: [Southern Rhodesia, Zimbabwe]
   is_fictional: false
   founded_year: 1965
   fa_founded_year: 1965
@@ -3074,6 +3285,96 @@
       talent_modifier: 1.0
     - id: zim_south
       name: Midlands Mining Belt
+      talent_modifier: 1.0
+
+- id: botswana
+  name: Botswana
+  is_fictional: false
+  founded_year: 1966
+  fa_founded_year: 1966
+  fifa_membership_year: 1978
+  continental_membership_year: 1976
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: botswanan
+  eligible_for_international: true
+  regions:
+    - id: bot_south
+      name: Gaborone Metro Core
+      talent_modifier: 1.0
+    - id: bot_west
+      name: Kgalagadi Desert Fringe
+      talent_modifier: 1.0
+    - id: bot_north
+      name: Ngamiland & Chobe Area
+      talent_modifier: 1.0
+    - id: bot_east
+      name: Francistown Corridor
+      talent_modifier: 1.0
+
+- id: lesotho
+  name: Lesotho
+  is_fictional: false
+  founded_year: 1966
+  fa_founded_year: 1932
+  fifa_membership_year: 1964
+  continental_membership_year: 1963
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: lesothoan
+  eligible_for_international: true
+  regions:
+    - id: les_south
+      name: Mafeteng & Mohale's Hoek
+      talent_modifier: 1.0
+    - id: les_west
+      name: Maseru Metro Hub
+      talent_modifier: 1.0
+    - id: les_north
+      name: Leribe Corridor
+      talent_modifier: 1.0
+    - id: les_east
+      name: Maloti Mountain Highlands
+      talent_modifier: 1.0
+
+- id: eswatini
+  name: [Swaziland, Eswatini]
+  is_fictional: false
+  founded_year: 1968
+  fa_founded_year: 1968
+  fifa_membership_year: 1978
+  continental_membership_year: 1976
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: swazi
+  eligible_for_international: true
+  regions:
+    - id: esw_west
+      name: Manzini
+      talent_modifier: 1.0
+    - id: esw_north
+      name: Hhohho
+      talent_modifier: 1.0
+    - id: esw_east
+      name: Lubombo
+      talent_modifier: 1.0
+    - id: esw_south
+      name: Shiselweni
       talent_modifier: 1.0
 
 - id: equatorial_guinea
@@ -3106,6 +3407,36 @@
       name: Malabo Insular Core
       talent_modifier: 1.0
 
+- id: mozambique
+  name: Mozambique
+  is_fictional: false
+  founded_year: 1975
+  fa_founded_year: 1976
+  fifa_membership_year: 1980
+  continental_membership_year: 1978
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: mozambican
+  eligible_for_international: true
+  regions:
+    - id: moz_south
+      name: Maputo Greater Estuary
+      talent_modifier: 1.0
+    - id: moz_north
+      name: Nampula & Pemba
+      talent_modifier: 1.0
+    - id: moz_west
+      name: Tete Zambezi Interior
+      talent_modifier: 1.0
+    - id: moz_east
+      name: Beira & Sofala Coastal Corridor
+      talent_modifier: 1.0
+
 - id: guinea_bissau
   name: Guinea-Bissau
   is_fictional: false
@@ -3134,6 +3465,66 @@
       talent_modifier: 1.0
     - id: gbs_south
       name: Tombali & Quinara Wetlands
+      talent_modifier: 1.0
+
+- id: seychelles
+  name: Seychelles
+  is_fictional: false
+  founded_year: 1976
+  fa_founded_year: 1976
+  fifa_membership_year: 1976
+  continental_membership_year: 1976
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: seychellois
+  eligible_for_international: true
+  regions:
+    - id: sey_south
+      name: Takamaka & Southern Coast
+      talent_modifier: 1.0
+    - id: sey_north
+      name: Victoria Greater Hub
+      talent_modifier: 1.0
+    - id: sey_east
+      name: Praslin & La Digue Islands
+      talent_modifier: 1.0
+    - id: sey_west
+      name: Bel Ombre & Port Glaud
+      talent_modifier: 1.0
+
+- id: djibouti
+  name: Djibouti
+  is_fictional: false
+  founded_year: 1979
+  fa_founded_year: 1979
+  fifa_membership_year: 1994
+  continental_membership_year: 1986
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: djiboutian
+  eligible_for_international: true
+  regions:
+    - id: dji_north
+      name: Tadjoura & Obock
+      talent_modifier: 1.0
+    - id: dji_south
+      name: Dikhil & Ali Sabieh Highlands
+      talent_modifier: 1.0
+    - id: dji_central
+      name: Red Sea Littoral Pipeline
+      talent_modifier: 1.0
+    - id: dji_east
+      name: Djibouti City Urban Crescent
       talent_modifier: 1.0
 
 - id: angola
@@ -3166,6 +3557,36 @@
       name: Moxico & Cuando Cubango
       talent_modifier: 1.0
 
+- id: comoros
+  name: Comoros
+  is_fictional: false
+  founded_year: 1979
+  fa_founded_year: 1979
+  fifa_membership_year: 2005
+  continental_membership_year: 2003
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: comoran
+  eligible_for_international: true
+  regions:
+    - id: com_south
+      name: Mohéli Island
+      talent_modifier: 1.0
+    - id: com_north
+      name: Grande Comore
+      talent_modifier: 1.0
+    - id: com_west
+      name: Moroni Capital Hub
+      talent_modifier: 1.0
+    - id: com_east
+      name: Anjouan Island
+      talent_modifier: 1.0
+
 - id: cabo_verde
   name: Cabo Verde
   is_fictional: false
@@ -3195,6 +3616,96 @@
     - id: cab_northeast
       name: Boa Vista & Sal
       talent_modifier: 0.9
+
+- id: namibia
+  name: Namibia
+  is_fictional: false
+  founded_year: 1990
+  fa_founded_year: 1990
+  fifa_membership_year: 1992
+  continental_membership_year: 1992
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: namibian
+  eligible_for_international: true
+  regions:
+    - id: nam_north
+      name: Oshakati Oshana Belt
+      talent_modifier: 1.0
+    - id: nam_south
+      name: Keetmanshoop Arid South
+      talent_modifier: 1.0
+    - id: nam_west
+      name: Walvis Bay & Swakopmund Strip
+      talent_modifier: 1.0
+    - id: nam_east
+      name: Windhoek Khomas Core
+      talent_modifier: 1.0
+
+- id: eritrea
+  name: Eritrea
+  is_fictional: false
+  founded_year: 1993
+  fa_founded_year: 1996
+  fifa_membership_year: 1998
+  continental_membership_year: 1998
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: eritrean
+  eligible_for_international: true
+  regions:
+    - id: eri_north
+      name: Keren & Anseba
+      talent_modifier: 1.0
+    - id: eri_south
+      name: Asmara Central Plateau
+      talent_modifier: 1.0
+    - id: eri_west
+      name: Gash-Barka Lowlands
+      talent_modifier: 1.0
+    - id: eri_east
+      name: Massawa Red Sea Littoral
+      talent_modifier: 1.0
+
+- id: south_sudan
+  name: South Sudan
+  is_fictional: false
+  founded_year: 2011
+  fa_founded_year: 2011
+  fifa_membership_year: 2012
+  continental_membership_year: 2012
+  prestige: 1000
+  prestige_weights:
+    league: 0.35
+    international: 0.65
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: south_sudanese
+  eligible_for_international: true
+  regions:
+    - id: ssd_north
+      name: Malakal & Greater Upper Nile Region
+      talent_modifier: 1.0
+    - id: ssd_south
+      name: Juba White Nile & Equatoria
+      talent_modifier: 1.0
+    - id: ssd_west
+      name: Wau & Western Bahr el Ghazal Axis
+      talent_modifier: 1.0
+    - id: ssd_east
+      name: Pibor Administrative Area
+      talent_modifier: 1.0
 
 # Asia
 
@@ -3258,6 +3769,96 @@
       name: Global Azkals Blueprint # Double check this (TODO)
       talent_modifier: 0.9
 
+- id: thailand
+  name: [Siam, Thailand]
+  is_fictional: false
+  founded_year: 1900
+  fa_founded_year: 1900
+  fifa_membership_year: 1954
+  continental_membership_year: 1954
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: thai
+  eligible_for_international: true
+  regions:
+    - id: tha_north
+      name: Lan Na
+      talent_modifier: 1.0
+    - id: tha_south
+      name: Kra Isthmus & Southern Region
+      talent_modifier: 1.0
+    - id: tha_northeast
+      name: Isan Plains
+      talent_modifier: 1.0
+    - id: tha_central
+      name: Siam Proper
+      talent_modifier: 1.0
+
+- id: hong_kong
+  name: Hong Kong
+  is_fictional: false
+  founded_year: 1914
+  fa_founded_year: 1914
+  fifa_membership_year: 1954
+  continental_membership_year: 1954
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: hong_kongese
+  eligible_for_international: true
+  regions:
+    - id: hkg_south
+      name: Hong Kong Island
+      talent_modifier: 0.9
+    - id: hkg_north
+      name: New Territories Frontier
+      talent_modifier: 1.0
+    - id: hkg_west
+      name: Lantau Island
+      talent_modifier: 1.0
+    - id: hkg_east
+      name: Kowloon Core
+      talent_modifier: 1.0
+
+- id: iran
+  name: Iran
+  is_fictional: false
+  founded_year: 1920
+  fa_founded_year: 1920
+  fifa_membership_year: 1948
+  continental_membership_year: 1958
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: iranian
+  eligible_for_international: true
+  regions:
+    - id: irn_north
+      name: Tehran Region
+      talent_modifier: 1.0
+    - id: irn_south
+      name: Persian Heartland
+      talent_modifier: 1.0
+    - id: irn_east
+      name: Khorasan Region
+      talent_modifier: 1.0
+    - id: irn_west
+      name: Azeri & Kurdish Belt
+      talent_modifier: 1.0
+
 - id: japan
   name: Japan
   is_fictional: false
@@ -3287,6 +3888,1123 @@
     - id: jap_south
       name: Kyushu & Okinawa
       talent_modifier: 0.75
+
+- id: afghanistan
+  name: Afghanistan
+  is_fictional: false
+  founded_year: 1919
+  fa_founded_year: 1922
+  fifa_membership_year: 1948
+  continental_membership_year: 1954
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: afghan
+  eligible_for_international: true
+  regions:
+    - id: afg_north
+      name: Mazar-i-Sharif Hub
+      talent_modifier: 1.0
+    - id: afg_south
+      name: Jih Region
+      talent_modifier: 1.0
+    - id: afg_east
+      name: Kabul Urban Ring
+      talent_modifier: 1.0
+    - id: afg_west
+      name: Herat Corridor
+      talent_modifier: 1.0
+
+- id: china
+  name: China
+  is_fictional: false
+  founded_year: 1924
+  fa_founded_year: 1924
+  fifa_membership_year: 1931
+  continental_membership_year: 1974
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: chinese
+  eligible_for_international: true
+  regions:
+    - id: chi_east
+      name: Shandong & Bohai Rim Axis
+      talent_modifier: 1.0
+    - id: chi_north
+      name: Liaoning & Dalian Belt
+      talent_modifier: 1.0
+    - id: chi_west
+      name: Xinjiang Frontier
+      talent_modifier: 1.0
+    - id: chi_south
+      name: Guangdong Pearl River Delta
+      talent_modifier: 1.0
+
+- id: chinese_taipei
+  name: Chinese Taipei
+  is_fictional: false
+  founded_year: 1945
+  fa_founded_year: 1945
+  fifa_membership_year: 1945
+  continental_membership_year: 1945
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: chinese_taipei
+  eligible_for_international: true
+  regions:
+    - id: tpe_north
+      name: Taipei Metro Core
+      talent_modifier: 1.0
+    - id: tpe_east
+      name: Hualien & Taitung Indigenous Belt
+      talent_modifier: 1.0
+    - id: tpe_west
+      name: Taichung Region
+      talent_modifier: 1.0
+    - id: tpe_south
+      name: Kaohsiung & Tainan Corridor
+      talent_modifier: 1.0
+
+- id: india
+  name: India
+  is_fictional: false
+  founded_year: 1937
+  fa_founded_year: 1937
+  fifa_membership_year: 1948
+  continental_membership_year: 1954
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: indian
+  eligible_for_international: true
+  regions:
+    - id: ind_north
+      name: Punjab & Northern Plains
+      talent_modifier: 1.0
+    - id: ind_south
+      name: Kerala South
+      talent_modifier: 1.0
+    - id: ind_east
+      name: Manipur & Mizoram Frontier
+      talent_modifier: 1.0
+    - id: ind_west
+      name: Goa & West Coast Belt
+      talent_modifier: 1.0
+
+- id: south_korea
+  name: South Korea
+  is_fictional: false
+  founded_year: 1945
+  fa_founded_year: 1933
+  fifa_membership_year: 1948
+  continental_membership_year: 1954 
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: south_korean
+  eligible_for_international: true
+  regions:
+    - id: skr_northeast
+      name: Gangwon Mountain Axis
+      talent_modifier: 1.0
+    - id: skr_northwest
+      name: Seoul-Gyeonggi Capital Matrix
+      talent_modifier: 1.0
+    - id: skr_southeast
+      name: Gyeongsang Yeongnam Belt
+      talent_modifier: 1.0
+    - id: skr_southwest
+      name: Jeolla Honam Region
+      talent_modifier: 1.0
+
+- id: north_korea
+  name: North Korea
+  is_fictional: false
+  founded_year: 1945
+  fa_founded_year: 1945
+  fifa_membership_year: 1958
+  continental_membership_year: 1954
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: north_korean
+  eligible_for_international: true
+  regions:
+    - id: nkr_north
+      name: Baekdu Mountains
+      talent_modifier: 1.0
+    - id: nkr_south
+      name: Hwanghae Region
+      talent_modifier: 1.0
+    - id: nkr_west
+      name: Pyongan Region
+      talent_modifier: 1.0
+    - id: nkr_east
+      name: Donghae Coast
+      talent_modifier: 1.0
+
+- id: myanmar
+  name: [Burma, Myanmar]
+  is_fictional: false
+  founded_year: 1948
+  fa_founded_year: 1947
+  fifa_membership_year: 1948
+  continental_membership_year: 1954
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: myanmar
+  eligible_for_international: true
+  regions:
+    - id: mya_north
+      name: Kachin Highlands
+      talent_modifier: 1.0
+    - id: mya_south
+      name: Yangon Delta Hub
+      talent_modifier: 1.0
+    - id: mya_central
+      name: Mandalay & Central Arid Zone
+      talent_modifier: 1.0
+    - id: mya_east
+      name: Shan State Highlands & Coastal Strip
+      talent_modifier: 1.0
+
+- id: malaysia
+  name: [Malaya, Malaysia]
+  is_fictional: false
+  founded_year: 1950
+  fa_founded_year: 1950
+  fifa_membership_year: 1952
+  continental_membership_year: 1954
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: malaysian
+  eligible_for_international: true
+  regions:
+    - id: mas_north
+      name: Kedah & Kelantan Rice Belt
+      talent_modifier: 1.0
+    - id: mas_south
+      name: Johor Syndicate
+      talent_modifier: 1.0
+    - id: mas_west
+      name: Klang Valley
+      talent_modifier: 0.9
+    - id: mas_east
+      name: Borneo Frontiers
+      talent_modifier: 1.0
+
+# TODO: Add Indonesia's predecessor (Dutch East Indies)
+
+- id: indonesia
+  name: Indonesia
+  is_fictional: false
+  founded_year: 1945
+  fa_founded_year: 1930
+  fifa_membership_year: 1952
+  continental_membership_year: 1954
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: indonesian
+  eligible_for_international: true
+  regions:
+    - id: ind_north
+      name: Kalimantan Region
+      talent_modifier: 1.0
+    - id: ind_south
+      name: Java Island & Nusa Tenggara
+      talent_modifier: 1.0
+    - id: ind_east
+      name: Sulawesi, Maluku & Papua
+      talent_modifier: 1.0
+    - id: ind_west
+      name: Sumatra Island
+      talent_modifier: 1.0
+
+- id: iraq
+  name: Iraq
+  is_fictional: false
+  founded_year: 1932
+  fa_founded_year: 1948
+  fifa_membership_year: 1950
+  continental_membership_year: 1970
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: iraqi
+  eligible_for_international: true
+  regions:
+    - id: irq_north
+      name: Iraqi Kurdistan
+      talent_modifier: 1.0
+    - id: irq_south
+      name: Basra Gulf Corridor
+      talent_modifier: 1.0
+    - id: irq_east
+      name: Baghdad Urban Cradle
+      talent_modifier: 1.0
+    - id: irq_west
+      name: Iraqi Desert
+      talent_modifier: 1.0
+
+- id: saudi_arabia
+  name: Saudi Arabia
+  is_fictional: false
+  founded_year: 1932
+  fa_founded_year: 1955
+  fifa_membership_year: 1956
+  continental_membership_year: 1972
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: saudi
+  eligible_for_international: true
+  regions:
+    - id: saudi_north
+      name: Riyadh Core and Northern Region
+      talent_modifier: 1.0
+    - id: saudi_south
+      name: Asir Highlands
+      talent_modifier: 1.0
+    - id: saudi_east
+      name: Al-Ahsa Oasis District
+      talent_modifier: 1.0
+    - id: saudi_west
+      name: Jeddah Hejaz Coastal Hub
+      talent_modifier: 1.0
+
+- id: lebanon
+  name: Lebanon
+  is_fictional: false
+  founded_year: 1933
+  fa_founded_year: 1933
+  fifa_membership_year: 1936
+  continental_membership_year: 1964
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: lebanese
+  eligible_for_international: true
+  regions:
+    - id: leb_north
+      name: Tripoli & Northern District
+      talent_modifier: 1.0
+    - id: leb_south
+      name: Sydon & Tyre Coast
+      talent_modifier: 1.0
+    - id: leb_east
+      name: Bekaa Region
+      talent_modifier: 1.0
+    - id: leb_west
+      name: Beirut Urban Core
+      talent_modifier: 1.0
+
+- id: syria
+  name: Syria
+  is_fictional: false
+  founded_year: 1936
+  fa_founded_year: 1936
+  fifa_membership_year: 1937
+  continental_membership_year: 1970
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: syrian
+  eligible_for_international: true
+  regions:
+    - id: syr_north
+      name: Aleppo Corridor
+      talent_modifier: 1.0
+    - id: syr_south
+      name: Damascus Oasis Hub
+      talent_modifier: 1.0
+    - id: syr_east
+      name: Syrian Desert & Euphrates River Valley
+      talent_modifier: 1.0
+    - id: syr_west
+      name: Orontes Valley & Latakia Coastal Strip
+      talent_modifier: 1.0
+
+- id: macau
+  name: Macau
+  is_fictional: false
+  founded_year: 1939
+  fa_founded_year: 1939
+  fifa_membership_year: 1978
+  continental_membership_year: 1978
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: macau
+  eligible_for_international: true
+  regions:
+    - id: mac_north
+      name: Macau Peninsula Core
+      talent_modifier: 1.0
+    - id: mac_south
+      name: Coloane
+      talent_modifier: 1.0
+    - id: mac_central_north
+      name: Taipa
+      talent_modifier: 1.0
+    - id: mac_central_south
+      name: Cotai
+      talent_modifier: 1.0
+
+- id: jordan
+  name: Jordan
+  is_fictional: false
+  founded_year: 1946
+  fa_founded_year: 1949
+  fifa_membership_year: 1956
+  continental_membership_year: 1975
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: jordanian
+  eligible_for_international: true
+  regions:
+    - id: jor_north
+      name: Amman Urban Ring
+      talent_modifier: 1.0
+    - id: jor_south
+      name: Petra Desert Region
+      talent_modifier: 1.0
+    - id: jor_east
+      name: Eastern Desert
+      talent_modifier: 1.0
+    - id: jor_west
+      name: King's Highway
+      talent_modifier: 1.0
+
+- id: sri_lanka
+  name: [Ceylon, Sri Lanka]
+  is_fictional: false
+  founded_year: 1939
+  fa_founded_year: 1948
+  fifa_membership_year: 1952
+  continental_membership_year: 1954
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: sri_lankan
+  eligible_for_international: true
+  regions:
+    - id: sri_north
+      name: Jaffna Corridor
+      talent_modifier: 1.0
+    - id: sri_south
+      name: Galle & Matara Coast
+      talent_modifier: 1.0
+    - id: sri_east
+      name: Bay of Bengal Coastline
+      talent_modifier: 1.0
+    - id: sri_west
+      name: Colombo Metro Hub
+      talent_modifier: 1.0
+
+- id: cambodia
+  name: Cambodia
+  is_fictional: false
+  founded_year: 1953
+  fa_founded_year: 1933
+  fifa_membership_year: 1953
+  continental_membership_year: 1954
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: cambodian
+  eligible_for_international: true
+  regions:
+    - id: cam_north
+      name: Northwestern Cambodia
+      talent_modifier: 1.0
+    - id: cam_south
+      name: Mekong Lowlands & Central Plains
+      talent_modifier: 1.0
+    - id: cam_east
+      name: Eastern Cambodia
+      talent_modifier: 1.0
+    - id: cam_west
+      name: Cardamom & Elephant Mountains
+      talent_modifier: 1.0
+
+- id: laos
+  name: Laos
+  is_fictional: false
+  founded_year: 1953
+  fa_founded_year: 1951
+  fifa_membership_year: 1952
+  continental_membership_year: 1968
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: lao
+  eligible_for_international: true
+  regions:
+    - id: lao_north
+      name: Luang Prabang Highlands
+      talent_modifier: 1.0
+    - id: lao_south
+      name: Champasak Corridor
+      talent_modifier: 1.0
+    - id: lao_east
+      name: Savannakhet & Central Plains
+      talent_modifier: 1.0
+    - id: lao_west
+      name: Vientiane Capital Basin
+      talent_modifier: 1.0
+
+- id: brunei
+  name: Brunei
+  is_fictional: false
+  founded_year: 1984
+  fa_founded_year: 1952
+  fifa_membership_year: 1972
+  continental_membership_year: 1969
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: bruneian
+  eligible_for_international: true
+  regions:
+    - id: bru_north
+      name: Brunei-Muara Capital Core
+      talent_modifier: 1.0
+    - id: bru_south
+      name: Belait Oil Corridor
+      talent_modifier: 1.0
+    - id: bru_east
+      name: Temburong Frontier
+      talent_modifier: 1.0
+    - id: bru_central
+      name: Tutong Strip
+      talent_modifier: 1.0
+
+- id: nepal
+  name: Nepal
+  is_fictional: false
+  founded_year: 1953
+  fa_founded_year: 1953
+  fifa_membership_year: 1953
+  continental_membership_year: 1953
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: nepalese
+  eligible_for_international: true
+  regions:
+    - id: nep_north
+      name: Kathmandu Valley Core & Himalayas
+      talent_modifier: 1.0
+    - id: nep_south
+      name: Terai Plains
+      talent_modifier: 1.0
+    - id: nep_east
+      name: Eastern Himalayan Highlands
+      talent_modifier: 1.0
+    - id: nep_west
+      name: Pokhara Gandaki Belt
+      talent_modifier: 1.0
+
+- id: mongolia
+  name: Mongolia
+  is_fictional: false
+  founded_year: 1911
+  fa_founded_year: 1959
+  fifa_membership_year: 1998
+  continental_membership_year: 1998
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: mongolian
+  eligible_for_international: true
+  regions:
+    - id: mon_north
+      name: Erdenet & Darkhan Industrial Belt
+      talent_modifier: 1.0
+    - id: mon_south
+      name: Ulanbaatar Hub & Gobi Desert
+      talent_modifier: 1.0
+    - id: mon_east
+      name: Mongolian Steppe
+      talent_modifier: 1.0
+    - id: mon_west
+      name: Tavan Bogd Mountains
+      talent_modifier: 1.0
+
+# TODO: South Vietnam
+
+- id: vietnam
+  name: [North Vietnam, Vietnam]
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1960
+  fifa_membership_year: 1964
+  continental_membership_year: 1976
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: vietnamese
+  eligible_for_international: true
+  regions:
+    - id: vie_north
+      name: Red River Delta Core
+      talent_modifier: 1.0
+    - id: vie_south
+      name: Mekong Delta & Urban Hub
+      talent_modifier: 1.0
+    - id: vie_east
+      name: Nghe An & Central Coast Crucible
+      talent_modifier: 1.0
+    - id: vie_west
+      name: Central Highlands
+      talent_modifier: 1.0
+
+- id: kuwait
+  name: Kuwait
+  is_fictional: false
+  founded_year: 1961
+  fa_founded_year: 1952
+  fifa_membership_year: 1962
+  continental_membership_year: 1964
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: kuwaiti
+  eligible_for_international: true
+  regions:
+    - id: kwt_north
+      name: Jahra Corridor
+      talent_modifier: 1.0
+    - id: kwt_south
+      name: Ahmadi Oil Belt
+      talent_modifier: 1.0
+    - id: kwt_east
+      name: Al Farwaniyah Coastal Strip
+      talent_modifier: 1.0
+    - id: kwt_central
+      name: Kuwait City Capital Core
+      talent_modifier: 1.0
+
+- id: palestine
+  name: Palestine
+  is_fictional: false
+  founded_year: 1962
+  fa_founded_year: 1962
+  fifa_membership_year: 1998
+  continental_membership_year: 1998
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: palestinian
+  eligible_for_international: true
+  regions:
+    - id: pal_north
+      name: Galilee & Interior Core
+      talent_modifier: 1.0
+    - id: pal_south
+      name: Gaza District
+      talent_modifier: 1.0
+    - id: pal_east
+      name: West Bank
+      talent_modifier: 1.0
+    - id: pal_west
+      name: Lydda, Samaria & Haifa
+      talent_modifier: 1.0
+
+- id: bahrain
+  name: Bahrain
+  is_fictional: false
+  founded_year: 1971
+  fa_founded_year: 1959
+  fifa_membership_year: 1968
+  continental_membership_year: 1968
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: bahraini
+  eligible_for_international: true
+  regions:
+    - id: bah_north
+      name: Capital Governorate
+      talent_modifier: 1.0
+    - id: bah_south
+      name: Southern Governorate
+      talent_modifier: 1.0
+    - id: bah_west
+      name: Northern Governorate
+      talent_modifier: 1.0
+    - id: bah_east
+      name: Muharraq Governorate
+      talent_modifier: 1.0
+
+- id: qatar
+  name: Qatar
+  is_fictional: false
+  founded_year: 1971
+  fa_founded_year: 1960
+  fifa_membership_year: 1970
+  continental_membership_year: 1972
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: qatari
+  eligible_for_international: true
+  regions:
+    - id: qat_north
+      name: Ash Shamal & Northern Region
+      talent_modifier: 1.0
+    - id: qat_south
+      name: Jariyan al Batnah & Southern Region
+      talent_modifier: 1.0
+    - id: qat_west
+      name: Al Jumaliyah
+      talent_modifier: 1.0
+    - id: qat_east
+      name: Doha Urban Hub
+      talent_modifier: 1.0
+
+- id: uae
+  name: United Arab Emirates
+  is_fictional: false
+  founded_year: 1971
+  fa_founded_year: 1971
+  fifa_membership_year: 1974
+  continental_membership_year: 1974
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: emirati
+  eligible_for_international: true
+  regions:
+    - id: uae_south
+      name: Abu Dhabi Oasis Syndicate
+      talent_modifier: 1.0
+    - id: uae_central
+      name: Dubai Urban Strip
+      talent_modifier: 1.0
+    - id: uae_north
+      name: Sharjah Region
+      talent_modifier: 1.0
+    - id: uae_east
+      name: Al Ain Interior
+      talent_modifier: 1.0
+
+- id: bangladesh
+  name: Bangladesh
+  is_fictional: false
+  founded_year: 1971
+  fa_founded_year: 1971
+  fifa_membership_year: 1974
+  continental_membership_year: 1974
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: bangladeshi
+  eligible_for_international: true
+  regions:
+    - id: ban_north
+      name: Rangpur & Northeastern Region
+      talent_modifier: 1.0
+    - id: ban_south
+      name: Dhaka Division & Southern Region
+      talent_modifier: 1.0
+    - id: ban_east
+      name: Chittagong Division
+      talent_modifier: 1.0
+    - id: bd_west
+      name: Rajshahi Division
+      talent_modifier: 1.0
+
+- id: oman
+  name: Oman
+  is_fictional: false
+  founded_year: 1978
+  fa_founded_year: 1978
+  fifa_membership_year: 1978
+  continental_membership_year: 1980
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: omani
+  eligible_for_international: true
+  regions:
+    - id: oman_east
+      name: Muscat Metro Core
+      talent_modifier: 1.0
+    - id: oman_north
+      name: Al Batinah Coastal Strip
+      talent_modifier: 1.0
+    - id: oman_south
+      name: Dhofar Region
+      talent_modifier: 1.0
+    - id: oman_west
+      name: Ad Dakhiliyah Interior Highlands
+      talent_modifier: 1.0
+
+- id: maldives
+  name: Maldives
+  is_fictional: false
+  founded_year: 1965
+  fa_founded_year: 1982
+  fifa_membership_year: 1986
+  continental_membership_year: 1984
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: maldivian
+  eligible_for_international: true
+  regions:
+    - id: mvd_north
+      name: Northern Atolls
+      talent_modifier: 1.0
+    - id: mvd_south
+      name: Southern Deep Atolls
+      talent_modifier: 1.0
+    - id: mvd_east
+      name: Malé Urban Atoll
+      talent_modifier: 1.0
+    - id: mvd_west
+      name: Western Atolls
+      talent_modifier: 1.0
+
+- id: bhutan
+  name: Bhutan
+  is_fictional: false
+  founded_year: 1949
+  fa_founded_year: 1983
+  fifa_membership_year: 2000
+  continental_membership_year: 1993
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: bhutanese
+  eligible_for_international: true
+  regions:
+    - id: bth_north
+      name: Thimphu Capital Core
+      talent_modifier: 1.0
+    - id: bth_south
+      name: Phuentsholing Gateway
+      talent_modifier: 1.0
+    - id: bth_east
+      name: Sharchop Frontiers
+      talent_modifier: 1.0
+    - id: bth_west
+      name: Paro Highlands
+      talent_modifier: 1.0
+
+# TODO: South Yemen
+
+- id: yemen
+  name: [North Yemen, Yemen]
+  is_fictional: false
+  founded_year: 1990
+  fa_founded_year: 1961
+  fifa_membership_year: 1980
+  continental_membership_year: 1980
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: yemeni
+  eligible_for_international: true
+  regions:
+    - id: yem_north
+      name: Sana'a Highland Core
+      talent_modifier: 1.0
+    - id: yem_south
+      name: Aden & Southern Coastal Hub
+      talent_modifier: 1.0
+    - id: yem_east
+      name: Hadramaut Oasis District
+      talent_modifier: 1.0
+    - id: yem_west
+      name: Tihamah Plains
+      talent_modifier: 1.0
+
+- id: tajikistan
+  name: Tajikistan
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1936
+  fifa_membership_year: 1994
+  continental_membership_year: 1994
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: tajikistani
+  eligible_for_international: true
+  regions:
+    - id: tjk_west
+      name: Dushanbe Capital Hub
+      talent_modifier: 1.0
+    - id: tjk_east
+      name: Pamir Highlands
+      talent_modifier: 1.0
+    - id: tjk_south
+      name: Khatlon Plains
+      talent_modifier: 1.0
+    - id: tjk_north
+      name: Sughd Valley
+      talent_modifier: 1.0
+
+- id: uzbekistan
+  name: Uzbekistan
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1946
+  fifa_membership_year: 1994
+  continental_membership_year: 1994
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: uzbekistani
+  eligible_for_international: true
+  regions:
+    - id: uzb_east
+      name: Tashkent Central Hub & Fergana Valley
+      talent_modifier: 1.0
+    - id: uzb_west
+      name: Samarkand & Bukhara
+      talent_modifier: 1.0
+    - id: uzb_south
+      name: Termez & Southern Region
+      talent_modifier: 1.0
+    - id: uzb_north
+      name: Karakalpakstan & Kyzylkum Desert
+      talent_modifier: 1.0
+
+- id: turkmenistan
+  name: Turkmenistan
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1992
+  fifa_membership_year: 1994
+  continental_membership_year: 1994
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: turkmenistani
+  eligible_for_international: true
+  regions:
+    - id: tkm_east
+      name: Mary Oasis & Lebap Province
+      talent_modifier: 1.0
+    - id: tkm_west
+      name: Balkan Coastal District
+      talent_modifier: 1.0
+    - id: tkm_south
+      name: Ashgabat Capital Core
+      talent_modifier: 1.0
+    - id: tkm_north
+      name: Dashoguz Borderlands
+      talent_modifier: 1.0
+
+- id: kyrgyzastan
+  name: Kyrgyzstan
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1992
+  fifa_membership_year: 1994
+  continental_membership_year: 1994
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: kyrgyzistani
+  eligible_for_international: true
+  regions:
+    - id: kgz_west
+      name: Ferghana Valley
+      talent_modifier: 1.0
+    - id: kgz_east
+      name: Issyk-Kul & Tian Shan
+      talent_modifier: 1.0
+    - id: kgz_south
+      name: Naryn Region
+      talent_modifier: 1.0
+    - id: kgz_north
+      name: Bishkek & The Northwest
+      talent_modifier: 1.0
+
+- id: timor_leste
+  name: Timor-Leste
+  is_fictional: false
+  founded_year: 2002
+  fa_founded_year: 2002
+  fifa_membership_year: 2005
+  continental_membership_year: 2002
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: timor_leste
+  eligible_for_international: true
+  regions:
+    - id: tim_north
+      name: Dilli Capital Hub & Ermera Highlands
+      talent_modifier: 1.0
+    - id: tim_south
+      name: Ainaro & Manufahi Coast
+      talent_modifier: 1.0
+    - id: tim_west
+      name: Oecusse Enclave & Western Frontier
+      talent_modifier: 1.0
+    - id: tim_east
+      name: Baucau Axis
+      talent_modifier: 1.0
+    
 
 # Oceania
 
