@@ -1,6 +1,6 @@
 {
   "nation_prestige": {
-    "myria": 5434.7,
+    "myria": 5481.7,
     "england": 8500.0,
     "scotland": 7200.0,
     "wales": 4800.0,
@@ -226,9 +226,9 @@
   },
   "committed_tiers": {},
   "prev_season_results": {
-    "league_winner": "Populara Kluba Galvononos",
-    "league_runner_up": "Mercaria Kluba",
+    "league_winner": "Mercaria Kluba",
+    "league_runner_up": "Populara Kluba Galvononos",
     "cup_winner": "Kluba Sportika Galvononos",
-    "cup_runner_up": "Kluba Maritima Thesias"
+    "cup_runner_up": null
   }
 }

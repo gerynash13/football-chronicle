@@ -217,7 +217,6 @@ def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_
                     "reason": "violent tackle",
                 })
                 tackler.red_cards += 1
-                tackler.career_red_cards += 1
                 tackler.is_suspended = True
                 tackler.suspension_matches_left = 3
             elif card_roll < 0.30:
@@ -240,7 +239,6 @@ def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_
                         "reason": "second_yellow",
                     })
                     tackler.red_cards += 1
-                    tackler.career_red_cards += 1
                     tackler.is_suspended = True
                     tackler.suspension_matches_left = 1
                     
