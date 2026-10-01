@@ -53,13 +53,23 @@ GET /api/player/<player_id>
 
 import sys
 import json
+import datetime
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
+from flask.json.provider import DefaultJSONProvider
 
 from classes import GameEngine
 
+class CustomJSONProvider(DefaultJSONProvider):
+    @staticmethod
+    def default(obj):
+        if isinstance(obj, datetime.date):
+            return obj.isoformat()
+        return super().default(obj)
+
 # App setup
 app = Flask(__name__)
+app.json = CustomJSONProvider()
 CORS(app) # Allow all origins for local development
 
 # Single engine instance for the lifetime of the server process
@@ -68,22 +78,6 @@ engine = GameEngine(start_year=1896, num_seasons=50)
 
 # Cache the last state so GET /api/state is always available without advancing
 _last_state: dict | None = None
-
-# JSON serialization helper
-
-class _SafeEncoder(json.JSONEncoder):
-    """
-    Handles types that Flask's default encoder can't serialize.
-    Currently: datetime.date and datetime.datetime
-    Add cases here as new types appear, never in the engine or game logic.
-    """
-    def default(self, obj):
-        if isinstance(obj, (datetime.date, datetime.datetime)):
-            return obj.isoformat()
-        return super().default(obj)
-    
-app.json_encoder = _SafeEncoder
-
 
 # Core game loop endpoints
 

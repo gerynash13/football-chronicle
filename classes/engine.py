@@ -90,7 +90,7 @@ from records import RecordBook
 from player_refs import find_player
 from events import Event, Choice
 from game_calendar import GameCalendar, apply_effects, apply_match_morale
-from rules import get_max_subs, get_yellow_threshold, get_match_days
+from rules import get_max_subs, get_yellow_threshold, get_match_days, get_card_bucket
 from simulation import roll_injury_severity
 
 
@@ -775,14 +775,14 @@ class GameEngine:
         # Yellow card accumulation → suspensions
         yellow_threshold = get_yellow_threshold(self.season_year)
         newly_suspended  = []
+        bucket = get_card_bucket(active_comp.name)
         for team in self.teams:
             for player in team.squad:
-                if (player.yellow_cards > 0
-                        and player.yellow_cards % yellow_threshold == 0
-                        and not player.is_suspended):
+                count = player.yellow_cards_by_comp.get(bucket, 0)
+                if count > 0 and count % yellow_threshold == 0 and not player.is_suspended:
                     player.is_suspended = True
                     player.suspension_matches_left = 1
-                    player.yellow_cards -= yellow_threshold
+                    player.yellow_cards_by_comp[bucket] = count - yellow_threshold
                     newly_suspended.append({"player": player.name, "team": team.name})
 
         # Suspension and injury countdown

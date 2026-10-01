@@ -57,7 +57,7 @@
                 midweek scheduling
                 cup teams drawn from teams.yaml (all_members)
 
-- [soon]      Supercup — league winner vs cup winner, end of season
+- [done]      Supercup — league winner vs cup winner, end of season
 
 
 ## UI LAYER

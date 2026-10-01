@@ -1412,6 +1412,36 @@
       name: Rhenish Southwest Borderland
       talent_modifier: 1.0
 
+- id: san_marino
+  name: San Marino
+  is_fictional: false
+  founded_year: 1947
+  fa_founded_year: 1947
+  fifa_membership_year: 1947
+  continental_membership_year: 1954
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: sanmarinese
+  eligible_for_international: true
+  regions:
+    - id: smr_east
+      name: Faetano & Montegiardino
+      talent_modifier: 1.0
+    - id: smr_south
+      name: Fiorentino & Chiesanouva
+      talent_modifier: 1.0
+    - id: smr_north
+      name: Serravalle & Domagnano
+      talent_modifier: 1.0
+    - id: smr_west
+      name: Cittá di San Marino, Borgo Maggiore & Acquaviva
+      talent_modifier: 1.0
+
 - id: cyprus
   name: Cyprus
   is_fictional: false
@@ -1440,6 +1470,66 @@
       talent_modifier: 1.0
     - id: cyp_west
       name: Paphos
+      talent_modifier: 1.0
+
+- id: liechtenstein
+  name: Liechtenstein
+  is_fictional: false
+  founded_year: 1934
+  fa_founded_year: 1934
+  fifa_membership_year: 1974
+  continental_membership_year: 1974
+  prestige: 500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: liechtenstein
+  eligible_for_international: true
+  regions:
+    - id: lie_north
+      name: Upper Central Plain
+      talent_modifier: 1.0
+    - id: lie_west
+      name: Vaduz Capital Core
+      talent_modifier: 1.0
+    - id: lie_east
+      name: Southeastern Austrian Borderlands
+      talent_modifier: 1.0
+    - id: lie_south
+      name: Unterland Lowlands
+      talent_modifier: 1.0
+
+- id: georgia
+  name: Georgia
+  is_fictional: false
+  founded_year: 1990
+  fa_founded_year: 1990
+  fifa_membership_year: 1992
+  continental_membership_year: 1992
+  prestige: 1400
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: georgian
+  eligible_for_international: true
+  regions:
+    - id: geo_east
+      name: Kakheti Interior
+      talent_modifier: 1.0
+    - id: geo_west
+      name: Samegrelo & Black Sea Coast
+      talent_modifier: 1.0
+    - id: geo_north
+      name: Imereti & Racha-Lechkhumi-Kvemo Svaneti
+      talent_modifier: 1.0
+    - id: geo_south
+      name: Tbilisi Capital Hub & Southern Borderlands
       talent_modifier: 1.0
 
 - id: russia
@@ -1594,6 +1684,66 @@
       name: Black Sea South
       talent_modifier: 1.0
 
+- id: kosovo
+  name: Kosovo
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1991
+  fifa_membership_year: 2016
+  continental_membership_year: 2016
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: kosovar
+  eligible_for_international: true
+  regions:
+    - id: kos_south
+      name: Anamorava Region & South Kosovo
+      talent_modifier: 1.0
+    - id: kos_west
+      name: Dukagjini Plain
+      talent_modifier: 1.0
+    - id: kos_north
+      name: Drenica Region & Mitrovica Border
+      talent_modifier: 1.0
+    - id: kos_east
+      name: Pristina Capital Metro
+      talent_modifier: 1.0
+
+- id: azerbaijan
+  name: Azerbaijan
+  is_fictional: false
+  founded_year: 1991
+  fa_founded_year: 1992
+  fifa_membership_year: 1994
+  continental_membership_year: 1994
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: azerbaijani
+  eligible_for_international: true
+  regions:
+    - id: aze_south
+      name: Nagorno-Karabakh & Nakhchivan
+      talent_modifier: 1.0
+    - id: aze_west
+      name: Ganja Region
+      talent_modifier: 1.0
+    - id: aze_east
+      name: Absheron Peninsula & Caspian Coast
+      talent_modifier: 1.0
+    - id: aze_north
+      name: Shaki-Zaqatala Borderlands
+      talent_modifier: 1.0
+
 - id: bosnia_and_herzegovina
   name: Bosnia and Herzegovina
   is_fictional: false
@@ -1654,6 +1804,66 @@
       name: The Vojvodina Plain
       talent_modifier: 1.0
 
+- id: armenia
+  name: Armenia
+  is_fictional: false
+  founded_year: 1992
+  fa_founded_year: 1992
+  fifa_membership_year: 1992
+  continental_membership_year: 1992
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: armenian
+  eligible_for_international: true
+  regions:
+    - id: arm_south
+      name: Vayots Dzor & Syunik
+      talent_modifier: 1.0
+    - id: arm_west
+      name: Yerevan Metro Hub
+      talent_modifier: 1.0
+    - id: arm_east
+      name: Lake Sevan Area
+      talent_modifier: 1.0
+    - id: arm_north
+      name: Shirak Valley Corridor
+      talent_modifier: 1.0
+
+- id: kazakhstan
+  name: Kazakhstan
+  is_fictional: false
+  founded_year: 1992
+  fa_founded_year: 1992
+  fifa_membership_year: 1992
+  continental_membership_year: 1992 # TODO: Joined AFC first, then FIFA in 2002
+  prestige: 800
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: kazakh
+  eligible_for_international: true
+  regions:
+    - id: kaz_north
+      name: Astana & Northern Plains
+      talent_modifier: 1.0
+    - id: kaz_south
+      name: Southern Foothills
+      talent_modifier: 1.0
+    - id: kaz_west
+      name: Aktobe & Western Caspian Steppe
+      talent_modifier: 1.0
+    - id: kaz_east
+      name: Karaganda & Industrial East
+      talent_modifier: 1.0
+
 - id: czech_republic
   name: Czech Republic
   is_fictional: false
@@ -1684,6 +1894,36 @@
       talent_modifier: 1.0
     - id: cze_south
       name: Southern Bohemian Border
+      talent_modifier: 1.0
+
+- id: andorra
+  name: Andorra
+  is_fictional: false
+  founded_year: 1993
+  fa_founded_year: 1994
+  fifa_membership_year: 1996
+  continental_membership_year: 1996
+  prestige: 1600
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: andorran
+  eligible_for_international: true
+  regions:
+    - id: and_central
+      name: Andorra La Vella & Escaldes-Engordany
+      talent_modifier: 1.0
+    - id: and_west
+      name: La Massana & Ordino
+      talent_modifier: 1.0
+    - id: and_south
+      name: Sant Julià de Lòria
+      talent_modifier: 1.0
+    - id: and_north
+      name: Encamp & Canillo
       talent_modifier: 1.0
 
 # South America
@@ -2053,6 +2293,998 @@
 # add them to tournaments held by said confederations. There is also the CFU, so I
 # should add that too.
 #
+# Central America & Caribbean
+
+- id: haiti
+  name: Haiti
+  is_fictional: false
+  founded_year: 1904
+  fa_founded_year: 1904
+  fifa_membership_year: 1934
+  continental_membership_year: 1961
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: haitian
+  eligible_for_international: true
+  regions:
+    - id: hat_central
+      name: Saint-Marc & Artibonite Valley
+      talent_modifier: 1.0
+    - id: hat_north
+      name: Cap-Haïtien & Nord Department
+      talent_modifier: 1.0
+    - id: hat_south
+      name: Port-au-Prince Department
+      talent_modifier: 1.0
+    - id: hat_west
+      name: Les Cayes & Sud Department
+      talent_modifier: 1.0
+
+- id: guatemala
+  name: Guatemala
+  is_fictional: false
+  founded_year: 1919
+  fa_founded_year: 1919
+  fifa_membership_year: 1946
+  continental_membership_year: 1961
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: guatemalan
+  eligible_for_international: true
+  regions:
+    - id: gua_south
+      name: Pacific Coastline
+      talent_modifier: 1.0
+    - id: gua_east
+      name: Guatemala City & Golfo de Honduras
+      talent_modifier: 1.0
+    - id: gua_north
+      name: Petén Region
+      talent_modifier: 1.0
+    - id: gua_west
+      name: Western Highlands
+      talent_modifier: 1.0
+
+- id: costa_rica
+  name: Costa Rica
+  is_fictional: false
+  founded_year: 1921
+  fa_founded_year: 1921
+  fifa_membership_year: 1927
+  continental_membership_year: 1961
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: costarican
+  eligible_for_international: true
+  regions:
+    - id: cos_east
+      name: Limón Caribbean Coast
+      talent_modifier: 1.0
+    - id: cos_north
+      name: Guanacaste Pampas
+      talent_modifier: 1.0
+    - id: cos_south
+      name: South Pacific Reserve
+      talent_modifier: 1.0
+    - id: cos_west
+      name: Central Valley Ring & Puntarenas
+      talent_modifier: 1.0
+
+- id: cuba
+  name: Cuba
+  is_fictional: false
+  founded_year: 1902
+  fa_founded_year: 1902
+  fifa_membership_year: 1902
+  continental_membership_year: 1902
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: cuban
+  eligible_for_international: true
+  regions:
+    - id: cub_central_west
+      name: Havana Metro Core
+      talent_modifier: 1.0
+    - id: cub_central_east
+      name: Ciego de Ávila & Camagüey
+      talent_modifier: 1.0
+    - id: cub_east
+      name: Santiago de Cuba & Holguín
+      talent_modifier: 1.0
+    - id: cub_west
+      name: Pinar del Río & Artemira
+      talent_modifier: 1.0
+
+- id: trinidad_and_tobago
+  name: Trinidad and Tobago
+  is_fictional: false
+  founded_year: 1962
+  fa_founded_year: 1908
+  fifa_membership_year: 1964
+  continental_membership_year: 1964
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: trinidadian
+  eligible_for_international: true
+  regions:
+    - id: tra_south
+      name: San Fernando & Industrial Belt
+      talent_modifier: 1.0
+    - id: tra_east
+      name: Sangre Grande & Río Claro-Mayaro
+      talent_modifier: 1.0
+    - id: tra_north
+      name: Tobago Island
+      talent_modifier: 1.0
+    - id: tra_west
+      name: Port of Spain Corridor
+      talent_modifier: 1.0
+
+- id: jamaica
+  name: Jamaica
+  is_fictional: false
+  founded_year: 1962
+  fa_founded_year: 1910
+  fifa_membership_year: 1962
+  continental_membership_year: 1963
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: jamaican
+  eligible_for_international: true
+  regions:
+    - id: jam_east
+      name: Kingston Urban Crucible
+      talent_modifier: 1.0
+    - id: jam_north
+      name: St. James & North Coast Corridor
+      talent_modifier: 1.0
+    - id: jam_south
+      name: Clarendon Plains & South Coast
+      talent_modifier: 1.0
+    - id: jam_west
+      name: Westmoreland & Western Tip
+      talent_modifier: 1.0
+
+- id: barbados
+  name: Barbados
+  is_fictional: false
+  founded_year: 1966
+  fa_founded_year: 1910
+  fifa_membership_year: 1968
+  continental_membership_year: 1967
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: barbadian
+  eligible_for_international: true
+  regions:
+    - id: bar_south
+      name: Christ Church & Southern Coast
+      talent_modifier: 1.0
+    - id: bar_east
+      name: St. Phillip & Eastern Coast
+      talent_modifier: 1.0
+    - id: bar_west
+      name: St. Michael & Bridgetown Capital Hub
+      talent_modifier: 1.0
+    - id: bar_north
+      name: St. Lucy & Northern Districts
+      talent_modifier: 1.0
+
+- id: curacao
+  name: [Curaçao, Netherlands Antilles, Curaçao]
+  is_fictional: false
+  founded_year: 1921
+  fa_founded_year: 1921
+  fifa_membership_year: 1932
+  continental_membership_year: 1961
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: curacian
+  eligible_for_international: true
+  regions:
+    - id: cur_south
+      name: Nieuwport South Coast
+      talent_modifier: 1.0
+    - id: cur_east
+      name: Bándariba
+      talent_modifier: 1.0
+    - id: cur_north
+      name: Westpunt Coast
+      talent_modifier: 1.0
+    - id: cur_west
+      name: Willemstad & Bándabou
+      talent_modifier: 1.0
+
+- id: grenada
+  name: Grenada
+  is_fictional: false
+  founded_year: 1974
+  fa_founded_year: 1924
+  fifa_membership_year: 1978
+  continental_membership_year: 1978
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: grenadian
+  eligible_for_international: true
+  regions:
+    - id: gre_south
+      name: St. George's Capital Core
+      talent_modifier: 1.0
+    - id: gre_east
+      name: St. Andrew & Eastern Coast
+      talent_modifier: 1.0
+    - id: gre_north
+      name: Carriacou & Petite Martinique Dependencies
+      talent_modifier: 1.0
+    - id: gre_west
+      name: St. John & St. Mark Spice Belt
+      talent_modifier: 1.0
+
+- id: antigua_and_barbuda
+  name: Antigua and Barbuda
+  is_fictional: false
+  founded_year: 1981
+  fa_founded_year: 1928
+  fifa_membership_year: 1972
+  continental_membership_year: 1972
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: antiguan
+  eligible_for_international: true
+  regions:
+    - id: ant_south
+      name: St. Mary & St Paul
+      talent_modifier: 1.0
+    - id: ant_north
+      name: Barbuda
+      talent_modifier: 1.0
+    - id: ant_east
+      name: St. Phillip & St. Peter Plains
+      talent_modifier: 1.0
+    - id: ant_west
+      name: St. John's Capital Core
+      talent_modifier: 1.0
+
+- id: nicaragua
+  name: Nicaragua
+  is_fictional: false
+  founded_year: 1931
+  fa_founded_year: 1931
+  fifa_membership_year: 1950
+  continental_membership_year: 1961
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: nicaraguan
+  eligible_for_international: true
+  regions:
+    - id: nic_south
+      name: Nicaragua Lake
+      talent_modifier: 1.0
+    - id: nic_north
+      name: Estelí Corridor
+      talent_modifier: 1.0
+    - id: nic_east
+      name: Caribbean Nicaragua
+      talent_modifier: 1.0
+    - id: nic_west
+      name: Managua Metro Hub
+      talent_modifier: 1.0
+
+- id: saint_kitts_and_nevis
+  name: Saint Kitts and Nevis
+  is_fictional: false
+  founded_year: 1983
+  fa_founded_year: 1932
+  fifa_membership_year: 1992
+  continental_membership_year: 1992
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: st_kittsian
+  eligible_for_international: true
+  regions:
+    - id: skn_south
+      name: Nevis Island
+      talent_modifier: 1.0
+    - id: skn_north
+      name: St. John Capisterre Belt
+      talent_modifier: 1.0
+    - id: skn_central_north
+      name: St. Mary Cayon Coast
+      talent_modifier: 1.0
+    - id: skn_west
+      name: Basseterre Capital Core
+      talent_modifier: 1.0
+
+- id: aruba
+  name: Aruba
+  is_fictional: false
+  founded_year: 1986
+  fa_founded_year: 1932
+  fifa_membership_year: 1988
+  continental_membership_year: 1986
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: aruban
+  eligible_for_international: true
+  regions:
+    - id: aru_south
+      name: San Nicolas Industrial Hub
+      talent_modifier: 1.0
+    - id: aru_north
+      name: Noord Belt
+      talent_modifier: 1.0
+    - id: aru_west
+      name: Oranjestad Urban Core
+      talent_modifier: 1.0
+    - id: aru_east
+      name: Santa Cruz & Paradera
+      talent_modifier: 1.0
+
+- id: honduras
+  name: Honduras
+  is_fictional: false
+  founded_year: 1935
+  fa_founded_year: 1935
+  fifa_membership_year: 1946
+  continental_membership_year: 1961
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: honduran
+  eligible_for_international: true
+  regions:
+    - id: hon_north
+      name: Atlántida Caribbean Coast
+      talent_modifier: 1.0
+    - id: hon_south
+      name: Tegucigalpa Hub & Pacific Coast
+      talent_modifier: 1.0
+    - id: hon_east
+      name: Olancho Interior Plains
+      talent_modifier: 1.0
+    - id: hon_west
+      name: San Pedro Sula & Western Borderlands
+      talent_modifier: 1.0
+
+- id: el_salvador
+  name: El Salvador
+  is_fictional: false
+  founded_year: 1935
+  fa_founded_year: 1935
+  fifa_membership_year: 1936
+  continental_membership_year: 1961
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: salvadorean
+  eligible_for_international: true
+  regions:
+    - id: els_north
+      name: Chalatenango Highlands
+      talent_modifier: 1.0
+    - id: els_south
+      name: San Salvador Metro Core
+      talent_modifier: 1.0
+    - id: els_east
+      name: San Miguel Plains
+      talent_modifier: 1.0
+    - id: els_west
+      name: Santa Ana District
+      talent_modifier: 1.0
+
+- id: panama
+  name: Panama
+  is_fictional: false
+  founded_year: 1937
+  fa_founded_year: 1937
+  fifa_membership_year: 1938
+  continental_membership_year: 1961
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: panamanian
+  eligible_for_international: true
+  regions:
+    - id: pan_north
+      name: Panamá City Urban Strip & The Canal
+      talent_modifier: 1.0
+    - id: pan_south
+      name: Los Santos & Veraguas Pacific Coast
+      talent_modifier: 1.0
+    - id: pan_east
+      name: Eastern Panama
+      talent_modifier: 1.0
+    - id: pan_west
+      name: Western Borderlands
+      talent_modifier: 1.0
+
+- id: puerto_rico
+  name: Puerto Rico
+  is_fictional: false
+  founded_year: 1940
+  fa_founded_year: 1940
+  fifa_membership_year: 1960
+  continental_membership_year: 1964
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: puerto_rican
+  eligible_for_international: true
+  regions:
+    - id: pur_north
+      name: San Juan Metro Area & Cordillera Central
+      talent_modifier: 1.0
+    - id: pur_south
+      name: Ponce & Coastal Plain
+      talent_modifier: 1.0
+    - id: pur_east
+      name: Porta Antillas
+      talent_modifier: 1.0
+    - id: pur_west
+      name: Mayagüez Coast
+      talent_modifier: 1.0
+
+- id: dominican_republic
+  name: Dominican Republic
+  is_fictional: false
+  founded_year: 1953
+  fa_founded_year: 1953
+  fifa_membership_year: 1958
+  continental_membership_year: 1964
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: dominican
+  eligible_for_international: true
+  regions:
+    - id: dom_north
+      name: Cibao Valley & Santiago de los Caballeros
+      talent_modifier: 1.0
+    - id: dom_south
+      name: Santo Domingo Distrito Nacional
+      talent_modifier: 1.0
+    - id: dom_east
+      name: El Seibo & Eastern Sugar Cane Belt
+      talent_modifier: 1.0
+    - id: dom_west
+      name: San Cristóbal & Southern Coast
+      talent_modifier: 1.0
+
+- id: martinique
+  name: Martinique
+  is_fictional: false
+  founded_year: 1953
+  fa_founded_year: 1953
+  fifa_membership_year: 9999 # No FIFA membership
+  continental_membership_year: 2002
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: martiniquan
+  eligible_for_international: true
+  regions:
+    - id: mtq_north
+      name: Grand Case & Northern Coast
+      talent_modifier: 1.0
+    - id: mtq_south
+      name: Marigot Capital Core
+      talent_modifier: 1.0
+    - id: mtq_east
+      name: Quartier-d'Orléans
+      talent_modifier: 1.0
+    - id: mtq_west
+      name: Terres Basses & Sandy Lowlands
+      talent_modifier: 1.0
+
+- id: guadeloupe
+  name: Guadeloupe
+  is_fictional: false
+  founded_year: 1958
+  fa_founded_year: 1958
+  fifa_membership_year: 9999 # No FIFA membership
+  continental_membership_year: 1964
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: guadeloupian
+  eligible_for_international: true
+  regions:
+    - id: gdl_north
+      name: Pointe-à-Pitre Urban Engine
+      talent_modifier: 1.0
+    - id: gdl_south
+      name: Marie-Galante & Les Saintes
+      talent_modifier: 1.0
+    - id: gdl_east
+      name: Grande-Terre Agricultural Belt
+      talent_modifier: 1.0
+    - id: gdl_west
+      name: Basse-Terre Capital Region
+      talent_modifier: 1.0
+
+- id: bonaire
+  name: Bonaire
+  is_fictional: false
+  founded_year: 1960
+  fa_founded_year: 1960
+  fifa_membership_year: 9999  # No FIFA membership
+  continental_membership_year: 2013
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: bonaian
+  eligible_for_international: true
+  regions:
+    - id: bon_north
+      name: Rincon
+      talent_modifier: 1.0
+    - id: bon_south
+      name: Nikiboko Flats
+      talent_modifier: 1.0
+    - id: bon_east
+      name: Spelonk Coastline
+      talent_modifier: 1.0
+    - id: bon_west
+      name: Kralendijk Coast
+      talent_modifier: 1.0
+
+- id: cayman_islands
+  name: Cayman Islands
+  is_fictional: false
+  founded_year: 1966
+  fa_founded_year: 1966
+  fifa_membership_year: 1992
+  continental_membership_year: 1990
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: caymanian
+  eligible_for_international: true
+  regions:
+    - id: cay_north
+      name: Cayman Brac & Little Cayman Islands
+      talent_modifier: 1.0
+    - id: cay_south
+      name: Bodden Town & South Sound District
+      talent_modifier: 1.0
+    - id: cay_east
+      name: East End District
+      talent_modifier: 1.0
+    - id: cay_west
+      name: Gerogetown & West Bay District
+      talent_modifier: 1.0
+
+- id: bahamas
+  name: Bahamas
+  is_fictional: false
+  founded_year: 1973
+  fa_founded_year: 1967
+  fifa_membership_year: 1968
+  continental_membership_year: 1981
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: bahamian
+  eligible_for_international: true
+  regions:
+    - id: bah_north
+      name: Grand Bahama & Abacos
+      talent_modifier: 1.0
+    - id: bah_south
+      name: Inagua, Mayaguana, Acklins & Crooked Island
+      talent_modifier: 1.0
+    - id: bah_east
+      name: Central Eastern Cays
+      talent_modifier: 1.0
+    - id: bah_west
+      name: New Providence & Surrounding Islands
+      talent_modifier: 1.0
+
+- id: dominica
+  name: Dominica
+  is_fictional: false
+  founded_year: 1978
+  fa_founded_year: 1970
+  fifa_membership_year: 1994
+  continental_membership_year: 1990
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: dominican
+  eligible_for_international: true
+  regions:
+    - id: dma_north
+      name: Portsmouth Axis
+      talent_modifier: 1.0
+    - id: dma_south
+      name: St. Patrick & Southern District
+      talent_modifier: 1.0
+    - id: dma_east
+      name: Kalinago Territory
+      talent_modifier: 1.0
+    - id: dma_west
+      name: Roseau Urban Core
+      talent_modifier: 1.0
+
+- id: british_virgin_islands
+  name: British Virgin Islands
+  is_fictional: false
+  founded_year: 1974
+  fa_founded_year: 1974
+  fifa_membership_year: 1996
+  continental_membership_year: 1994
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: british_virginian
+  eligible_for_international: true
+  regions:
+    - id: bvi_north
+      name: Anegada
+      talent_modifier: 1.0
+    - id: bvi_south
+      name: Tortola & Southern Islands
+      talent_modifier: 1.0
+    - id: bvi_east
+      name: Virgin Gorda
+      talent_modifier: 1.0
+    - id: bvi_west
+      name: Jost Van Dyke
+      talent_modifier: 1.0
+
+- id: saint_lucia
+  name: Saint Lucia
+  is_fictional: false
+  founded_year: 1979
+  fa_founded_year: 1979
+  fifa_membership_year: 1988
+  continental_membership_year: 1986
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: saint_lucian
+  eligible_for_international: true
+  regions:
+    - id: slu_north
+      name: Castries Northern Hub
+      talent_modifier: 1.0
+    - id: slu_south
+      name: Vieux Fort Plain
+      talent_modifier: 1.0
+    - id: slu_east
+      name: Dennery Windward Coast
+      talent_modifier: 1.0
+    - id: slu_west
+      name: Soufrière Volcanic Coast
+      talent_modifier: 1.0
+
+- id: saint_vincent_grenadines
+  name: Saint Vincent and the Grenadines
+  is_fictional: false
+  founded_year: 1979
+  fa_founded_year: 1979
+  fifa_membership_year: 1988
+  continental_membership_year: 1986
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: saint_vincentian
+  eligible_for_international: true
+  regions:
+    - id: stv_northeast
+      name: Leeward Coast
+      talent_modifier: 1.0
+    - id: stv_south
+      name: The Grenadines
+      talent_modifier: 1.0
+    - id: stv_northwest
+      name: Charlotte Parish
+      talent_modifier: 1.0
+    - id: stv_central
+      name: Kingstown Capital Core
+      talent_modifier: 1.0
+
+- id: belize
+  name: Belize
+  is_fictional: false
+  founded_year: 1980
+  fa_founded_year: 1980
+  fifa_membership_year: 1986
+  continental_membership_year: 1986
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: belizan
+  eligible_for_international: true
+  regions:
+    - id: bel_north
+      name: Corozal & Orange Walk Districts
+      talent_modifier: 1.0
+    - id: bel_south
+      name: Stann Creek & Toledo
+      talent_modifier: 1.0
+    - id: bel_east
+      name: Belize City Core
+      talent_modifier: 1.0
+    - id: bel_west
+      name: Cayo District
+      talent_modifier: 1.0
+
+- id: sint_maarten
+  name: Sint Maarten
+  is_fictional: false
+  founded_year: 1986
+  fa_founded_year: 1986
+  fifa_membership_year: 9999 # No FIFA membership
+  continental_membership_year: 2002
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: sint_martenian
+  eligible_for_international: true
+  regions:
+    - id: smt_north
+      name: Cul-de-Sac & Northern Valleys
+      talent_modifier: 1.0
+    - id: smt_south
+      name: Cole Bay
+      talent_modifier: 1.0
+    - id: smt_east
+      name: Phillipsburg Capital Hub
+      talent_modifier: 1.0
+    - id: smt_west
+      name: Simpson Bay & Lagoon Sector
+      talent_modifier: 1.0
+
+- id: us_virgin_islands
+  name: U.S. Virgin Islands
+  is_fictional: false
+  founded_year: 1987
+  fa_founded_year: 1987
+  fifa_membership_year: 1998
+  continental_membership_year: 1987
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: us_virginian
+  eligible_for_international: true
+  regions:
+    - id: usv_northwest
+      name: Charlotte Amalie Urban Core
+      talent_modifier: 1.0
+    - id: usv_northeast
+      name: Cruz Bay & Coral Bay
+      talent_modifier: 1.0
+    - id: usv_southwest
+      name: Frederiksted & West End
+      talent_modifier: 1.0
+    - id: usv_southeast
+      name: Christiansted & Eastern Plains
+      talent_modifier: 1.0
+
+- id: anguilla
+  name: Anguilla
+  is_fictional: false
+  founded_year: 1990
+  fa_founded_year: 1990
+  fifa_membership_year: 1996
+  continental_membership_year: 1994
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: anguillian
+  eligible_for_international: true
+  regions:
+    - id: ang_east
+      name: Island Harbour
+      talent_modifier: 1.0
+    - id: ang_central_south
+      name: Sandy Ground & Salt Pond Sector
+      talent_modifier: 1.0
+    - id: ang_west
+      name: West End District
+      talent_modifier: 1.0
+    - id: ang_central_north
+      name: The Valley
+      talent_modifier: 1.0
+
+- id: montserrat
+  name: Montserrat
+  is_fictional: false
+  founded_year: 1994
+  fa_founded_year: 1994
+  fifa_membership_year: 1996
+  continental_membership_year: 1996
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: montserratian
+  eligible_for_international: true
+  regions:
+    - id: mon_northwest
+      name: Davy Hill & Brades
+      talent_modifier: 1.0
+    - id: mon_central
+      name: St John's & Highland Ridge
+      talent_modifier: 1.0
+    - id: mon_northeast
+      name: Lookout Safe Zone
+      talent_modifier: 1.0
+    - id: mon_southwest
+      name: Salem & Western Fringe
+      talent_modifier: 1.0
+
+- id: turks_and_caicos
+  name: Turks and Caicos Islands
+  is_fictional: false
+  founded_year: 1996
+  fa_founded_year: 1996
+  fifa_membership_year: 1998
+  continental_membership_year: 1996
+  prestige: 1500
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: turks_and_caicosian
+  eligible_for_international: true
+  regions:
+    - id: tci_north
+      name: North & Middle Caicos
+      talent_modifier: 1.0
+    - id: tci_south
+      name: South & East Caicos
+      talent_modifier: 1.0
+    - id: tci_east
+      name: Grand Turk Capital District
+      talent_modifier: 1.0
+    - id: tci_west
+      name: Providenciales & West Caicos
+      talent_modifier: 1.0
+
 # North America
 
 - id: canada
@@ -2114,6 +3346,36 @@
     - id: usa_south
       name: Deep South
       talent_modifier: 0.85
+
+- id: mexico
+  name: Mexico
+  is_fictional: false
+  founded_year: 1927
+  fa_founded_year: 1927
+  fifa_membership_year: 1929
+  continental_membership_year: 1961
+  prestige: 1700
+  prestige_weights:
+    league: 0.50
+    international: 0.50
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: mexican
+  eligible_for_international: true
+  regions:
+    - id: mex_north
+      name: El Norte
+      talent_modifier: 1.0
+    - id: mex_central
+      name: Valle de México
+      talent_modifier: 1.0
+    - id: mex_south
+      name: El Sur & El Yucatán
+      talent_modifier: 1.0
+    - id: mex_west
+      name: El Bajío & Occidente
+      talent_modifier: 1.0
 
 # Africa
 
@@ -3709,7 +4971,7 @@
 
 # Asia
 
-- id: Singapore
+- id: singapore
   name: Singapore
   is_fictional: false
   founded_year: 1892
@@ -4311,6 +5573,36 @@
       name: Cotai
       talent_modifier: 1.0
 
+- id: pakistan
+  name: Pakistan
+  is_fictional: false
+  founded_year: 1947
+  fa_founded_year: 1947
+  fifa_membership_year: 1948
+  continental_membership_year: 1954
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: pakistani
+  eligible_for_international: true
+  regions:
+    - id: pak_north
+      name: Islamabad & Khyber Pakhtunkhwa Highlands
+      talent_modifier: 1.0
+    - id: pak_south
+      name: Lyari & Karachi Coastal Core
+      talent_modifier: 1.0
+    - id: pak_east
+      name: Punjab Plains
+      talent_modifier: 1.0
+    - id: pak_west
+      name: Balochistan Plateau
+      talent_modifier: 1.0
+
 - id: jordan
   name: Jordan
   is_fictional: false
@@ -4733,6 +6025,36 @@
       name: Rajshahi Division
       talent_modifier: 1.0
 
+- id: guam
+  name: Guam
+  is_fictional: false
+  founded_year: 1975
+  fa_founded_year: 1975
+  fifa_membership_year: 1996
+  continental_membership_year: 1991
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: guamanian
+  eligible_for_international: true
+  regions:
+    - id: gua_east
+      name: Pacific Coastline
+      talent_modifier: 1.0
+    - id: gua_west
+      name: Hagåtña & Urban Core
+      talent_modifier: 1.0
+    - id: gua_north
+      name: Northern Plateau Corridor
+      talent_modifier: 1.0
+    - id: gua_south
+      name: Southern Maritime Matrix
+      talent_modifier: 1.0
+
 - id: oman
   name: Oman
   is_fictional: false
@@ -4945,7 +6267,7 @@
       name: Dashoguz Borderlands
       talent_modifier: 1.0
 
-- id: kyrgyzastan
+- id: kyrgyzstan
   name: Kyrgyzstan
   is_fictional: false
   founded_year: 1991
@@ -5005,6 +6327,35 @@
       name: Baucau Axis
       talent_modifier: 1.0
     
+- id: northern_mariana
+  name: Northern Mariana Islands
+  is_fictional: false
+  founded_year: 2005
+  fa_founded_year: 2005
+  fifa_membership_year: 9999 # No FIFA membership
+  continental_membership_year: 2009
+  prestige: 1100
+  prestige_weights:
+    league: 0.40
+    international: 0.60
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: northern_mariana
+  eligible_for_international: true
+  regions:
+    - id: mar_north
+      name: Agrihan & Alamagan Islands
+      talent_modifier: 1.0
+    - id: mar_south
+      name: Rota Island
+      talent_modifier: 1.0
+    - id: mar_central_north
+      name: Saipan Capital Core
+      talent_modifier: 1.0
+    - id: mar_central_south
+      name: Tinian Island
+      talent_modifier: 1.0
 
 # Oceania
 
@@ -5037,3 +6388,365 @@
     - id: nz_central_north
       name: Waikato & Bay of Plenty
       talent_modifier: 0.9
+
+- id: australia
+  name: Australia
+  is_fictional: false
+  founded_year: 1911
+  fa_founded_year: 1911
+  fifa_membership_year: 1956
+  continental_membership_year: 1966 # Todo: Left OFC in 2006 to join AFC
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: australian
+  eligible_for_international: true
+  regions:
+    - id: aus_north
+      name: Queensland & Northern Territory
+      talent_modifier: 1.0
+    - id: aus_south
+      name: Victoria & Tasmania
+      talent_modifier: 1.0
+    - id: aus_east
+      name: New South Wales & Australian Capital Territory
+      talent_modifier: 1.0
+    - id: aus_west
+      name: Western Australia & South Australia
+      talent_modifier: 1.0
+
+- id: new_caledonia
+  name: New Caledonia
+  is_fictional: false
+  founded_year: 1928
+  fa_founded_year: 1928
+  fifa_membership_year: 2004
+  continental_membership_year: 1999
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: new_caledonian
+  eligible_for_international: true
+  regions:
+    - id: ncl_north
+      name: Province Nord & Belep Archipelago
+      talent_modifier: 1.0
+    - id: ncl_south
+      name: Nouméa Hub & Île des Pins
+      talent_modifier: 1.0
+    - id: ncl_west
+      name: Bourail & Western Coast
+      talent_modifier: 1.0    
+    - id: ncl_east
+      name: Loyalty Islands
+      talent_modifier: 1.0
+
+- id: fiji
+  name: Fiji
+  is_fictional: false
+  founded_year: 1938
+  fa_founded_year: 1938
+  fifa_membership_year: 1964
+  continental_membership_year: 1966
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: fiji
+  eligible_for_international: true
+  regions:
+    - id: fij_north
+      name: Labasa & Vanua Levu
+      talent_modifier: 1.0
+    - id: fij_south
+      name: Suva Urban Hub
+      talent_modifier: 1.0
+    - id: fij_east
+      name: Maritime Provinces
+      talent_modifier: 1.0
+    - id: fij_west
+      name: Ba & Lautoka Sugar Belt
+      talent_modifier: 1.0
+
+- id: papua_new_guinea
+  name: Papua New Guinea
+  is_fictional: false
+  founded_year: 1962
+  fa_founded_year: 1962
+  fifa_membership_year: 1962
+  continental_membership_year: 1962
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: papua_new_guinea
+  eligible_for_international: true
+  regions:
+    - id: png_north
+      name: Madang & Sepik Provinces
+      talent_modifier: 1.0
+    - id: png_south
+      name: Port Moresby & Central Province
+      talent_modifier: 1.0
+    - id: png_east
+      name: New Ireland & Bougainville Islands
+      talent_modifier: 1.0    
+    - id: png_west
+      name: Western Highlands & Fly River Basin
+      talent_modifier: 1.0
+
+- id: tonga
+  name: Tonga
+  is_fictional: false
+  founded_year: 1965
+  fa_founded_year: 1965
+  fifa_membership_year: 1994
+  continental_membership_year: 1994
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: tonga
+  eligible_for_international: true
+  regions:
+    - id: ton_north
+      name: Vava'u & Niuas Island Groups
+      talent_modifier: 1.0
+    - id: ton_south
+      name: "'Eua Island"
+      talent_modifier: 1.0
+    - id: ton_central_north
+      name: Ha'apai Island Group
+      talent_modifier: 1.0    
+    - id: ton_central_south
+      name: Nuku'Alofa Capital Hub
+      talent_modifier: 1.0
+
+- id: samoa
+  name: [German Samoa, Western Samoa, Samoa]
+  is_fictional: false
+  founded_year: 1968
+  fa_founded_year: 1968
+  fifa_membership_year: 1986
+  continental_membership_year: 1986
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: samoa
+  eligible_for_international: true
+  regions:
+    - id: sam_north
+      name: Fa'asaleleaga & Eastern Plains
+      talent_modifier: 1.0
+    - id: sam_south
+      name: Upolu Western Coastal Strip
+      talent_modifier: 1.0
+    - id: sam_east
+      name: Apia Urban Core
+      talent_modifier: 1.0    
+    - id: sam_west
+      name: Salega & Savai'i Wildlands
+      talent_modifier: 1.0
+
+- id: cook_islands
+  name: Cook Islands
+  is_fictional: false
+  founded_year: 1971
+  fa_founded_year: 1971
+  fifa_membership_year: 1994
+  continental_membership_year: 1994
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: cook_islands
+  eligible_for_international: true
+  regions:
+    - id: cki_north
+      name: Northern Cook Islands
+      talent_modifier: 1.0
+    - id: cki_south
+      name: Avarua Hub
+      talent_modifier: 1.0
+    - id: cki_east
+      name: Managaia & Eastern Islands
+      talent_modifier: 1.0    
+    - id: cki_central
+      name: Aitutaki Lagoon Enclave & Palmerston Island
+      talent_modifier: 1.0
+
+- id: solomon_islands
+  name: Solomon Islands
+  is_fictional: false
+  founded_year: 1978
+  fa_founded_year: 1979
+  fifa_membership_year: 1988
+  continental_membership_year: 1988
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: solomon_islands
+  eligible_for_international: true
+  regions:
+    - id: sol_north
+      name: Malaita Province
+      talent_modifier: 1.0
+    - id: sol_south
+      name: Guadalcanal Hub
+      talent_modifier: 1.0
+    - id: sol_east
+      name: Makira & Temotu Provinces
+      talent_modifier: 1.0    
+    - id: sol_west
+      name: Western Province
+      talent_modifier: 1.0
+
+- id: tuvalu
+  name: Tuvalu
+  is_fictional: false
+  founded_year: 1978
+  fa_founded_year: 1979
+  fifa_membership_year: 9999 # No FIFA membership
+  continental_membership_year: 2019
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: tuvaluan
+  eligible_for_international: true
+  regions:
+    - id: tuv_north
+      name: Northern Atolls
+      talent_modifier: 1.0
+    - id: tuv_south
+      name: Southern Atolls
+      talent_modifier: 1.0
+    - id: tuv_central_north
+      name: Vaitupu Hub
+      talent_modifier: 1.0    
+    - id: tuv_central_south
+      name: Funafuti Urban Axis
+      talent_modifier: 1.0
+
+- id: kiribati
+  name: Kiribati
+  is_fictional: false
+  founded_year: 1979
+  fa_founded_year: 1980
+  fifa_membership_year: 9999 # No FIFA membership
+  continental_membership_year: 2007
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: kiribati
+  eligible_for_international: true
+  regions:
+    - id: kir_north
+      name: Tarawa Atoll
+      talent_modifier: 1.0
+    - id: kir_south
+      name: Phoenix Islands
+      talent_modifier: 1.0
+    - id: kir_east
+      name: Line Islands
+      talent_modifier: 1.0    
+    - id: kir_west
+      name: South Gilbert Islands & Banaba
+      talent_modifier: 1.0
+
+- id: american_samoa
+  name: American Samoa
+  is_fictional: false
+  founded_year: 1984
+  fa_founded_year: 1984
+  fifa_membership_year: 1998
+  continental_membership_year: 1998
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: american_samoa
+  eligible_for_international: true
+  regions:
+    - id: ams_north
+      name: Eastern District Coastal Fringe
+      talent_modifier: 1.0
+    - id: ams_south
+      name: Leone & Western District
+      talent_modifier: 1.0
+    - id: ams_east
+      name: Manu'a Islands
+      talent_modifier: 1.0    
+    - id: ams_west
+      name: Pago Pago Capital Hub
+      talent_modifier: 1.0
+
+- id: tahiti
+  name: Tahiti
+  is_fictional: false
+  founded_year: 1989
+  fa_founded_year: 1989
+  fifa_membership_year: 1990
+  continental_membership_year: 1990
+  prestige: 1100
+  prestige_weights:
+    league: 0.20
+    international: 0.80
+  prestige_decay: 0.03
+  prestige_floor: 500
+  tier_change_min_seasons: 3
+  name_generator: tahitian
+  eligible_for_international: true
+  regions:
+    - id: tah_north
+      name: Marquesas Islands
+      talent_modifier: 1.0
+    - id: tah_south
+      name: Austral Islands
+      talent_modifier: 1.0
+    - id: tah_east
+      name: Tuamotu Archipelago & Gambier Islands
+      talent_modifier: 1.0    
+    - id: tah_west
+      name: Society Islands & Bora Bora
+      talent_modifier: 1.0
+
+# Todo: Nauru is not a FIFA or continental member. Is there need to add it for friendlies?

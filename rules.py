@@ -37,3 +37,12 @@ def get_points_for_win(season_year):
     Points awarded for a win. Changed from 2 to 3 in 1991.
     """
     return 3 if int(season_year.split("/")[0]) >= 1991 else 2
+
+def get_card_bucket(competition_name: str):
+    """
+    Which bucket a booking files under for season-long suspension tracking.
+    Every competition tracks its own cards separately for now — this is the
+    one place to change that later, for a nation whose disciplinary body
+    pools league and cup cards together.
+    """
+    return competition_name

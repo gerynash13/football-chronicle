@@ -37,19 +37,19 @@ class Player:
         self.manager_relationship = 0.0 # -5 to +5
 
         # Season stats (reset each season)
-        self.goals                    = 0
-        self.assists                  = 0
-        self.appearances              = 0
-        self.clean_sheets             = 0
-        self.season_avg_rating        = 0.0
-        self.season_rating_appearances = 0
-        self.yellow_cards             = 0
-        self.red_cards                = 0
-        self.is_suspended             = False
-        self.suspension_matches_left  = 0
-        self.is_injured               = False
-        self.injury_matches_left      = 0
-        self.injury_severity          = None  # minor | moderate | severe | critical
+        self.goals                      = 0
+        self.assists                    = 0
+        self.appearances                = 0
+        self.clean_sheets               = 0
+        self.season_avg_rating          = 0.0
+        self.season_rating_appearances  = 0
+        self.yellow_cards_by_comp       = {}
+        self.red_cards                  = 0
+        self.is_suspended               = False
+        self.suspension_matches_left    = 0
+        self.is_injured                 = False
+        self.injury_matches_left        = 0
+        self.injury_severity            = None  # minor | moderate | severe | critical
 
         # Career stats (cumulative)
         self.career_goals        = 0
@@ -74,6 +74,11 @@ class Player:
         self.is_wonderkid = False
 
     # ── Derived properties ────────────────────────────────────────────────────
+    
+    @property
+    def yellow_cards(self) -> int:
+        """Season total yellow cards, summed across competitions."""
+        return sum(self.yellow_cards_by_comp.values())
 
     def age_on(self, reference_date: datetime.date) -> int:
         """
@@ -202,7 +207,7 @@ class Player:
         self.assists                  = 0
         self.appearances              = 0
         self.clean_sheets             = 0
-        self.yellow_cards             = 0
+        self.yellow_cards_by_comp     = {}
         self.red_cards                = 0
         self.is_suspended             = False
         self.suspension_matches_left  = 0

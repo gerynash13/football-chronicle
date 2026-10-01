@@ -222,8 +222,13 @@ def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_
                 tackler.suspension_matches_left = 3
             elif card_roll < 0.30:
                 in_match_yellows[tackler.id] = in_match_yellows.get(tackler.id, 0) + 1
-                tackler.yellow_cards += 1
-                tackler.career_yellow_cards += 1
+                
+                extra_events.append({
+                    "minute": minute,
+                    "team": defending_team_name,
+                    "type": "yellow_card",
+                    **player_ref(tackler),
+                })
                 
                 if in_match_yellows[tackler.id] >= 2:
                     # Second yellow card --> direct red card
@@ -238,13 +243,6 @@ def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_
                     tackler.career_red_cards += 1
                     tackler.is_suspended = True
                     tackler.suspension_matches_left = 1
-                else:
-                    extra_events.append({
-                        "minute": minute,
-                        "team": defending_team_name,
-                        "type": "yellow_card",
-                        **player_ref(tackler),
-                    })
                     
     # Injury check (independent or foul)
     if random.random() < 0.03:

@@ -77,6 +77,29 @@ class Competition:
     def get_current_fixtures(self):
         return [f for f in self.fixtures if f["matchday"] == self.current_matchday]
     
+    def _apply_match_cards(self, result: dict) -> None:
+        """
+        Walk a finished match's events for bookings and file them under this
+        competition's bucket. Called once per match, right after the result
+        is recorded.
+        """
+        from player_refs import find_player
+        from rules import get_card_bucket
+
+        bucket = get_card_bucket(self.name)
+        for evt in result.get("events", []):
+            if evt["type"] != "yellow_card":
+                continue
+            player, _ = find_player(
+                self.teams,
+                player_id=evt.get("player_id"),
+                name=evt.get("player"),
+                team_name=evt.get("team"),
+            )
+            if player:
+                player.yellow_cards_by_comp[bucket] = (
+                    player.yellow_cards_by_comp.get(bucket, 0) + 1
+                )
     
     def simulate_matchday(self):
         # Check if matchday has already been simulated
@@ -93,7 +116,7 @@ class Competition:
                     home_team, away_team, max_subs=self.max_subs, season_year=self.season_year
                 )
                 
-                self.results.append({
+                result = {
                     "home_team": home_team.name,
                     "away_team": away_team.name,
                     "home_goals": home_goals,
@@ -104,7 +127,9 @@ class Competition:
                     "away_xi": [xi_entry(p) for p in away_xi],
                     "competition": self.name,
                     "season": self.season_year,
-                })
+                }
+                self.results.append(result)
+                self._apply_match_cards(result)
                 
                 # Update standings
                 self.standings[home_team.name]["played"] += 1
@@ -149,7 +174,7 @@ class Competition:
     
     def get_standings(self):
         return self.standings
-    
+
     @property
     def total_rounds(self):
         """Total rounds/matchdays in the competition"""
@@ -243,7 +268,7 @@ class CupCompetition(Competition):
                 home, away, max_subs=self.max_subs, season_year=self.season_year
             )
             
-            self.results.append({
+            result = {
                 "home_team": home.name,
                 "away_team": away.name,
                 "home_goals": hg,
@@ -256,7 +281,9 @@ class CupCompetition(Competition):
                 "season": self.season_year,
                 "round": fixture["round"],
                 "matchday": self.current_matchday,
-            })
+            }
+            self.results.append(result)
+            self._apply_match_cards(result)
             
             if hg > ag:
                 fixture["winner"] = home

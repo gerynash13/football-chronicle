@@ -50,19 +50,19 @@ def save_teams_to_file(teams, filename="teams_data.json"):
                 "manager_relationship": player.manager_relationship,
 
                 # Season stats
-                "goals":                    player.goals,
-                "assists":                  player.assists,
-                "appearances":              player.appearances,
-                "clean_sheets":             player.clean_sheets,
-                "season_avg_rating":        player.season_avg_rating,
+                "goals":                     player.goals,
+                "assists":                   player.assists,
+                "appearances":               player.appearances,
+                "clean_sheets":              player.clean_sheets,
+                "season_avg_rating":         player.season_avg_rating,
                 "season_rating_appearances": player.season_rating_appearances,
-                "yellow_cards":             player.yellow_cards,
-                "red_cards":                player.red_cards,
-                "is_suspended":             player.is_suspended,
-                "suspension_matches_left":  player.suspension_matches_left,
-                "is_injured":               player.is_injured,
-                "injury_matches_left":      player.injury_matches_left,
-                "injury_severity":          player.injury_severity,
+                "yellow_cards_by_comp":      player.yellow_cards_by_comp,
+                "red_cards":                 player.red_cards,
+                "is_suspended":              player.is_suspended,
+                "suspension_matches_left":   player.suspension_matches_left,
+                "is_injured":                player.is_injured,
+                "injury_matches_left":       player.injury_matches_left,
+                "injury_severity":           player.injury_severity,
 
                 # Career stats
                 "career_goals":        player.career_goals,
@@ -157,7 +157,10 @@ def load_teams_from_file(file_path):
             player.clean_sheets              = player_data.get("clean_sheets", 0)
             player.season_avg_rating         = player_data.get("season_avg_rating", 0.0)
             player.season_rating_appearances = player_data.get("season_rating_appearances", 0)
-            player.yellow_cards              = player_data.get("yellow_cards", 0)
+            player.yellow_cards_by_comp      = player_data.get("yellow_cards_by_comp")
+            if player.yellow_cards_by_comp is None:
+                legacy_count = player_data.get("yellow_cards", 0)
+                player.yellow_cards_by_comp = {"legacy": legacy_count} if legacy_count > 0 else {}
             player.red_cards                 = player_data.get("red_cards", 0)
             player.is_suspended              = player_data.get("is_suspended", False)
             player.suspension_matches_left   = player_data.get("suspension_matches_left", 0)
