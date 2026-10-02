@@ -48,6 +48,7 @@ def save_teams_to_file(teams, filename="teams_data.json"):
                 "is_retired":           player.is_retired,
                 "morale":               player.morale,
                 "manager_relationship": player.manager_relationship,
+                "personality":          player.personality,
 
                 # Season stats
                 "goals":                     player.goals,
@@ -149,6 +150,7 @@ def load_teams_from_file(file_path):
             player.is_retired           = player_data.get("is_retired", False)
             player.morale               = player_data.get("morale", 0.0)
             player.manager_relationship = player_data.get("manager_relationship", 0.0)
+            player.personality          = player_data.get("personality", player.personality)  # Fallback to generated personality if missing
 
             # Season stats
             player.goals                     = player_data.get("goals", 0)

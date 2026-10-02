@@ -2,6 +2,18 @@ import random
 import datetime
 from player_refs import new_player_id
 
+PERSONALITY_TRAITS = [
+    "ambition",
+    "loyalty",
+    "professionalism",
+    "ego",
+    "money_motivation",
+    "home_attachment",
+    "big_club_attraction",
+    "patience",
+    "composure",
+]
+
 class Player:
     def __init__(self, name, position, birth_date, current_ability,
                  potential_ability, player_id=None,
@@ -33,6 +45,7 @@ class Player:
 
         self.attributes         = self._generate_attributes()
         self.role               = self._determine_role()
+        self.personality        = self._generate_personality()
         self.morale             = 0.0   # -10 to +10
         self.manager_relationship = 0.0 # -5 to +5
 
@@ -161,6 +174,19 @@ class Player:
             return "CB"
         elif self.position == "GK":
             return "GK"
+        
+    def _generate_personality(self):
+        """
+        Roll this player's personality traits, independent of position or
+        ability — a brilliant prospect and a journeyman can be equally
+        ambitious. Gaussian around 50 so most players cluster toward the
+        middle and extremes near 0 or 100 are rare, same shape as how CA
+        gets rolled in name_generator.py.
+        """
+        return {
+            trait: max(0, min(100, int(random.gauss(50, 20))))
+            for trait in PERSONALITY_TRAITS
+        }
 
     # ── Season lifecycle ──────────────────────────────────────────────────────
 
