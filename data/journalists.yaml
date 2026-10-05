@@ -1,0 +1,22 @@
+- id: evangelos_kastelli
+  name: Evangelos Kastelli
+  tier: national
+  style: analytical
+  reliability: 0.95
+  nation_id: myria
+
+- id: the_daily_sulhavon
+  name: The Daily Sulhavon (staff)
+  tier: local
+  style: dramatic
+  reliability: 0.55
+  favorite_team: Kluba Sulhavonos
+  nation_id: myria
+
+- id: pitchside_whispers
+  name: Pitchside Whispers
+  tier: national
+  style: gossip
+  nation_id: myria
+  reliability: 0.3
+  active_from: 2005   # social-media-era voice — stays dormant until the sim reaches it

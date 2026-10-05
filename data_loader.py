@@ -190,7 +190,17 @@ class CompetitionConfig:
     draw_rules:   dict = field(default_factory=dict)
     # legs: 1 for single match, 2 for home-and-away (two-leg logic not yet wired)
     legs:         int = 1
-
+    
+@dataclass
+class Journalist:
+    id:                    str
+    name:                  str
+    tier:                  str            # global | continental | national | regional | local
+    style:                 str            # investigative | analytical | gossip | opinionated | dramatic
+    reliability:           float          # 0.0-1.0 - lower leans toward spun tone
+    favorite_team:         Optional[str] = None # team *name*, biases coverage toward that team
+    active_from:           Optional[int] = None # year journalist started covering football. None means always active.
+    nation_id:             Optional[str] = None # home nation - jurisdiction anchor for tier="national"
 
 # ── Loaders ───────────────────────────────────────────────────────────────────
 
@@ -276,6 +286,23 @@ def load_competitions() -> dict[str, CompetitionConfig]:
         )
     return result
 
+def load_journalists() -> dict[str, Journalist]:
+    """Parse journalists.yaml and return a dict keyed by journalist id."""
+    raw = _read_yaml("journalists.yaml")
+    result = {}
+    for entry in raw:
+        result[entry["id"]] = Journalist(
+            id=entry["id"],
+            name=entry["name"],
+            tier=entry["tier"],
+            style=entry["style"],
+            reliability=float(entry.get("reliability", 0.7)),
+            favorite_team=entry.get("favorite_team"),
+            active_from=entry.get("active_from"),
+            nation_id=entry.get("nation_id")
+        )
+    return result
+
 
 # ── Convenience accessors ─────────────────────────────────────────────────────
 #
@@ -286,6 +313,7 @@ def load_competitions() -> dict[str, CompetitionConfig]:
 _nations_cache:      dict[str, NationConfig]      = {}
 _teams_cache:        dict[str, TeamConfig]         = {}
 _competitions_cache: dict[str, CompetitionConfig] = {}
+_journalists_cache:  dict[str, Journalist]        = {}
 
 
 def get_nation(nation_id: str) -> NationConfig:
@@ -324,6 +352,14 @@ def get_competition(comp_id: str) -> CompetitionConfig:
         raise ValueError(f"Competition '{comp_id}' not found in competitions.yaml")
     return _competitions_cache[comp_id]
 
+def get_journalist(journalist_id: str) -> Journalist:
+    global _journalists_cache
+    if not _journalists_cache:
+        _journalists_cache = load_journalists()
+    if journalist_id not in _journalists_cache:
+        raise ValueError(f"Journalist '{journalist_id}' not found in journalists.yaml")
+    return _journalists_cache[journalist_id]
+
 
 def teams_for_season(season_year: str) -> list[TeamConfig]:
     """
@@ -351,6 +387,19 @@ def competitions_for_season(season_year: str) -> list[CompetitionConfig]:
         if comp.frequency > 1 and years_since % comp.frequency != 0:
             continue
         result.append(comp)
+    return result
+
+def journalists_for_season(season_year: str) -> list[Journalist]:
+    """
+    Return all journalists that are active in this season year, respecting
+    active_from (e.g. a journalist may not have started covering football yet).
+    """
+    start_year   = int(season_year.split("/")[0])
+    all_journalists = load_journalists()
+    result       = [
+        j for j in all_journalists.values()
+        if j.active_from is None or j.active_from <= start_year
+    ]
     return result
 
 

@@ -149,6 +149,9 @@
               leading to inflated expectations and potential disappointment
 - [later]     Club-controlled media — user can leak stories,
               unsettle rivals, announce scouting interest strategically
+- [later]     Outlet system - actual newspapers, radio, TV, websites, social platforms,
+              each with a founding era, a lifecycle, maybe even going out of business.
+              Journalists can move between outlets, an outlet can outlive any individual byline.
 
 
 ## PLAYER SYSTEMS
