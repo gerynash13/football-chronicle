@@ -242,11 +242,13 @@ def publish_match_result(
     season: str,
     home_region: str = "",
     away_region: str = "",
+    matchday: int | None = None,
+    scorers: list[dict] | None = None,
     relevance: list[str] | None = None,
-) -> None:
+) -> dict:
     if relevance is None:
         relevance = ["local"]
-    feed.publish({
+    event = {
         "type":        "match_result",
         "date":        date.isoformat(),
         "season":      season,
@@ -258,7 +260,11 @@ def publish_match_result(
         "away_goals":  away_goals,
         "home_region": home_region,
         "away_region": away_region,
-    })
+        "matchday": matchday,
+        "scorers": scorers or [],
+    }
+    feed.publish(event)
+    return event  # return the event dict for convenience (e.g. to pass to write_article)
 
 
 def publish_hat_trick(
@@ -273,10 +279,10 @@ def publish_hat_trick(
     date: datetime.date,
     season: str,
     relevance: list[str] | None = None,
-) -> None:
+) -> dict:
     if relevance is None:
         relevance = ["local", "regional"]
-    feed.publish({
+    event = {
         "type":        "hat_trick",
         "date":        date.isoformat(),
         "season":      season,
@@ -287,7 +293,9 @@ def publish_hat_trick(
         "goals":       goals,
         "competition": competition,
         "match":       match,
-    })
+    }
+    feed.publish(event)
+    return event  # return the event dict for convenience (e.g. to pass to write_article)
 
 
 def publish_competition_winner(
@@ -299,10 +307,10 @@ def publish_competition_winner(
     date: datetime.date,
     season: str,
     relevance: list[str] | None = None,
-) -> None:
+) -> dict:
     if relevance is None:
         relevance = ["regional"]
-    feed.publish({
+    event = {
         "type":        "competition_winner",
         "date":        date.isoformat(),
         "season":      season,
@@ -310,7 +318,9 @@ def publish_competition_winner(
         "competition": competition,
         "winner":      winner,
         "runner_up":   runner_up,
-    })
+    }
+    feed.publish(event)
+    return event  # return the event dict for convenience (e.g. to pass to write_article)
 
 
 def publish_record_broken(
@@ -324,10 +334,10 @@ def publish_record_broken(
     date: datetime.date,
     season: str,
     relevance: list[str] | None = None,
-) -> None:
+) -> dict:
     if relevance is None:
         relevance = ["global"]
-    feed.publish({
+    event = {
         "type":           "record_broken",
         "date":           date.isoformat(),
         "season":         season,
@@ -337,4 +347,6 @@ def publish_record_broken(
         "value":          value,
         "previous_value": previous_value,
         "competition":    competition,
-    })
+    }
+    feed.publish(event)
+    return event  # return the event dict for convenience (e.g. to pass to write_article)

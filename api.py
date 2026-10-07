@@ -54,6 +54,7 @@ GET /api/player/<player_id>
 import sys
 import json
 import datetime
+import dataclasses
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
 from flask.json.provider import DefaultJSONProvider
@@ -69,7 +70,7 @@ class CustomJSONProvider(DefaultJSONProvider):
 
 # App setup
 app = Flask(__name__)
-app.json = CustomJSONProvider()
+app.json = CustomJSONProvider(app)
 CORS(app) # Allow all origins for local development
 
 # Single engine instance for the lifetime of the server process
@@ -155,6 +156,33 @@ def get_news():
         limit=limit,
     )
     return jsonify(events)
+
+@app.route("/api/articles", methods=["GET"])
+def get_articles():
+    """
+    Return generated news articles with optional filtering.
+
+    Query parameters:
+        team          — team name (matches either side of the story)
+        player        — player name
+        journalist_id — filter to one journalist's byline
+        tier          — "local" | "regional" | "national" | "continental" | "global"
+        limit         — integer, max articles to return (default 20, max 100)
+    """
+    team          = request.args.get("team")
+    player        = request.args.get("player")
+    journalist_id = request.args.get("journalist_id")
+    tier          = request.args.get("tier")
+    limit         = min(int(request.args.get("limit", 20)), 100)
+    
+    articles = engine.newsroom.get_articles(
+        team=team,
+        player=player,
+        journalist_id=journalist_id,
+        tier=tier,
+        limit=limit,
+    )
+    return jsonify([dataclasses.asdict(a) for a in articles])
 
 @app.route("/api/inbox", methods=["GET"])
 def get_inbox():

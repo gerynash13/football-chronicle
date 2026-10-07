@@ -76,6 +76,7 @@ from data_loader import (
     load_nations,
     teams_in_competition,
     competitions_for_season,
+    journalists_for_season,
     get_nation,
     TeamConfig,
 )
@@ -85,6 +86,13 @@ from news_feed import (
     publish_hat_trick,
     publish_competition_winner,
     publish_record_broken,
+)
+from newsroom import (
+    ArticleStore,
+    Article,
+    write_article,
+    covers_event,
+    MATCH_REPORT_TEMPLATES,
 )
 from records import RecordBook
 from player_refs import find_player
@@ -106,6 +114,7 @@ class GameEngine:
         self.teams:       list       = []
         self.record_book: RecordBook = RecordBook()
         self.news_feed:   NewsFeed   = NewsFeed()
+        self.newsroom:    ArticleStore = ArticleStore()
 
         # Per-season objects, set in _start_season()
         self.season_year:    str         = ""
@@ -372,6 +381,7 @@ class GameEngine:
         self._season_complete = False
 
         self.current_season = Season(self.season_year, self.teams)
+        self._journalist_roster = journalists_for_season(self.season_year)
 
         # Look up competition prestige from config
         from data_loader import load_competitions
@@ -694,6 +704,8 @@ class GameEngine:
 
         recent = active_comp.results[-len(today_fixtures):]
 
+        matchday_events = []
+        
         # Record-book and morale updates
         for result in recent:
             self.record_book.process_match(
@@ -707,8 +719,12 @@ class GameEngine:
             if home_team and away_team:
                 apply_match_morale(home_team, away_team, result["home_goals"], result["away_goals"])
 
+            scorers = [
+                {"player": e.get("player"), "team": e.get("team"), "minute": e.get("minute")}
+                for e in result.get("events", []) if e.get("type") == "goal"
+            ]
             # ── News feed: match result ───────────────────────────────────────
-            publish_match_result(
+            event = publish_match_result(
                 self.news_feed,
                 competition = active_comp.name,
                 home_team   = result["home_team"],
@@ -719,9 +735,12 @@ class GameEngine:
                 season      = self.season_year,
                 home_region = home_team.home_region if home_team else "",
                 away_region = away_team.home_region if away_team else "",
+                matchday    = matchday_num,
+                scorers     = scorers,
                 relevance   = ["local"],
             )
-
+            matchday_events.append(event)
+            
             # ── News feed: hat tricks ─────────────────────────────────────────
             from collections import Counter
             goal_events  = [e for e in result.get("events", []) if e["type"] == "goal"]
@@ -733,7 +752,7 @@ class GameEngine:
                 pid_to_name[pid] = evt.get("player", "")
             for pid, count in goals_by_pid.items():
                 if count >= 3:
-                    publish_hat_trick(
+                    ht_event = publish_hat_trick(
                         self.news_feed,
                         player      = pid_to_name[pid],
                         player_id   = pid,
@@ -749,7 +768,15 @@ class GameEngine:
                         season      = self.season_year,
                         relevance   = ["local", "regional"],
                     )
-
+                    matchday_events.append(ht_event)
+                    
+        for event in matchday_events:
+            for journalist in self._journalist_roster:
+                if covers_event(journalist, event, self.teams):
+                    article = write_article(journalist, event, self.season_year)
+                    if article:
+                        self.newsroom.publish(article)
+                    
         # Cup: schedule replays for draws
         scheduled_replays = []
         for drawn in drawn_fixtures:
