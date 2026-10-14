@@ -94,6 +94,7 @@ function render(state) {
   hide('panel-event');
   hide('panel-season-end');
   hide('panel-cup-bracket');
+  hide('panel-layer');
 
   const type = state.type;
 
@@ -192,7 +193,7 @@ function goalScorers(events, teamName) {
     .filter(e => e.type === 'goal' && e.team === teamName)
     .map(e => {
       const assist = e.assister ? ` (${e.assister})` : '';
-      return `${e.player}${assist} ${e.minute}'`;
+      return `<span class="player-link" data-player-id="${e.player_id}">${e.player}</span>${assist} ${e.minute}'`;
     })
     .join(' · ');
 }
@@ -679,6 +680,14 @@ function formatDate(iso) {
   });
   setPage('newspaper');
 
+  document.getElementById('results-feed').addEventListener('click', e => {
+    const link = e.target.closest('[data-player-id]');
+    if (link) openPlayer(link.dataset.playerId);
+  });
+  document.querySelectorAll('#panel-player .tab-btn').forEach(b =>
+    b.addEventListener('click', () => showTab(b.dataset.tab)));
+  document.getElementById('btn-close-player').addEventListener('click', () => hide('panel-player'));
+
   // On load, check if the engine has already been started
   // (e.g. server was restarted but game data exists)
   try {
@@ -736,3 +745,52 @@ function formatDate(iso) {
     setStatus('Cannot reach API. Is api.py running?');
   }
 })();
+
+async function openPlayer(playerId) {
+  const id = encodeURIComponent(playerId);
+  try {
+    const [player, articles] = await Promise.all([
+      api('GET', `/api/player/${id}`),
+      api('GET', `/api/articles?player_id=${id}&limit=100`),
+    ]);
+    renderPlayerCard(player, articles);
+  } catch (e) {
+    setStatus(`Could not load player: ${e.message}`);
+  }
+}
+
+function renderPlayerCard(player, articles) {
+  setText('player-name', player.name);
+  setText('player-subline',
+    `${player.position} · ${player.team} · born ${player.birth_date.slice(0, 4)}`);
+
+  document.getElementById('tab-profile').innerHTML = `
+    <p class="player-stats"> This season: ${player.appearances} apps · ${player.goals} goals · ${player.assists} assists</p>
+    <p class="player-stats"> Career: ${player.career_appearances + player.appearances} apps · ${player.career_goals + player.goals} goals · ${player.career_assists + player.assists} assists</p>
+  `;
+
+  const newestFirst = [...articles].reverse();
+  document.getElementById('tab-media').innerHTML = newestFirst.length
+    ? newestFirst.map(articleCard).join('')
+    : '<p class="empty-state">Nothing written about this player yet.</p>';
+
+  showTab('profile');
+  show('panel-player');
+}
+
+function articleCard(a) {
+  return `
+    <article class="article-card">
+      <div class="article-meta">${formatDate(a.date)} · ${a.journalist_name} · ${a.tier}</div>
+      <h4 class="article-headline">${a.headline}</h4>
+      <p class="article-body">${a.body}</p>
+    </article>
+  `;
+}
+
+function showTab(name) {
+  document.querySelectorAll('#panel-player .tab-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('#panel-player .tab-content').forEach(el =>
+    el.classList.toggle('hidden', el.id !== `tab-${name}`));
+}

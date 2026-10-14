@@ -69,7 +69,7 @@ class CustomJSONProvider(DefaultJSONProvider):
         return super().default(obj)
 
 # App setup
-app = Flask(__name__)
+app = Flask(__name__, static_folder="frontend", static_url_path="")
 app.json = CustomJSONProvider(app)
 CORS(app) # Allow all origins for local development
 
@@ -79,6 +79,10 @@ engine = GameEngine(start_year=1896, num_seasons=50)
 
 # Cache the last state so GET /api/state is always available without advancing
 _last_state: dict | None = None
+
+@app.route("/")
+def index():
+    return app.send_static_file("index.html")
 
 # Core game loop endpoints
 
@@ -164,20 +168,20 @@ def get_articles():
 
     Query parameters:
         team          — team name (matches either side of the story)
-        player        — player name
+        player_id     — player ID
         journalist_id — filter to one journalist's byline
         tier          — "local" | "regional" | "national" | "continental" | "global"
         limit         — integer, max articles to return (default 20, max 100)
     """
     team          = request.args.get("team")
-    player        = request.args.get("player")
+    player_id     = request.args.get("player_id")
     journalist_id = request.args.get("journalist_id")
     tier          = request.args.get("tier")
     limit         = min(int(request.args.get("limit", 20)), 100)
     
     articles = engine.newsroom.get_articles(
         team=team,
-        player=player,
+        player_id=player_id,
         journalist_id=journalist_id,
         tier=tier,
         limit=limit,
@@ -259,7 +263,7 @@ def get_player(player_id: str):
     for team in engine.teams:
         for player in team.squad:
             if player.id == player_id:
-                return jsonify(_serialize_player(player, team.name))
+                return jsonify(_serialize_player(player, team.name, _sim_today()))
             
     abort(404)
     
@@ -272,12 +276,22 @@ def get_squad(team_name: str):
     team = next((t for t in engine.teams if t.name == team_name), None)
     if team is None:
         abort(404)
-    return jsonify([_serialize_player(p, team.name) for p in team.squad])
+    reference_date = _sim_today()
+    return jsonify([
+        _serialize_player(player, team.name, reference_date)
+        for player in team.squad
+    ])
 
 
 # Serialization helpers
 
-def _serialize_player(player, team_name: str) -> dict:
+def _sim_today() -> datetime.date | None:
+    """The game's current date, or None before the game has started."""
+    return engine.calendar.current_date if engine.calendar else None
+
+def _serialize_player(
+    player, team_name: str, reference_date: datetime.date | None
+) -> dict:
     """
     Convert a player object to a JSON-friendly dict.
     Called by get_player() and get_squad().
@@ -288,7 +302,7 @@ def _serialize_player(player, team_name: str) -> dict:
         "position":                 player.position,
         "role":                     player.role,
         "birth_date":               player.birth_date.isoformat(),
-        "age":                      player.age,
+        "age":                      player.age_on(reference_date) if reference_date else None,
         "nationality":              player.nationality,
         "birth_region":             player.birth_region,
         "preferred_foot":           player.preferred_foot,

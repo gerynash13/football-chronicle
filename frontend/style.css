@@ -869,3 +869,126 @@ body {
   margin-top: 0.4rem;
   text-transform: uppercase;
 }
+
+/* ── Player card ──────────────────────────────────────────────────────── */
+.player-panel { 
+  border: 2px solid var(--ink); 
+  padding: var(--panel-pad); 
+  background: var(--paper-dark);
+  animation: fadeIn 0.3s ease;
+}
+
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.player_name {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.player-subline {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--ink-faded);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+}
+
+.close-btn {
+  background: none;
+  border: 1px solid var(--rule);
+  padding: 0.25rem 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-faded);
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-dim);
+}
+
+.tab-bar {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.tab-btn {
+  background: var(--paper);
+  border: 1px solid var(--rule-light);
+  padding: 0.4rem 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.tab-btn.active, .tab-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-dim);
+}
+
+#tab-media {
+  max-height: 28rem;
+  overflow-y: auto;
+}
+
+.player-link {
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
+
+.player-link:hover {
+  color: var(--accent);
+}
+
+.player-stats {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-faded);
+  margin-bottom: 0.4rem;
+}
+
+.article-card {
+  padding: 0.7rem 0;
+  border-bottom: 1x dotted var(--rule-light);
+}
+
+.article-card:last-child {
+  border-bottom: none;
+}
+
+.article-meta {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-light);
+  margin-bottom: 0.2rem;
+}
+
+.article-headline {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.article-body {
+  font-family: var(--fell);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--ink-faded);
+}

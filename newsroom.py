@@ -34,7 +34,7 @@ class ArticleStore:
         self,
         *,
         team: str | None = None,
-        player: str | None = None,
+        player_id: str | None = None,
         journalist_id: str | None = None,
         tier: str | None = None,
         limit: int | None = None,
@@ -43,7 +43,7 @@ class ArticleStore:
         for art in self._articles:
             if team and team not in art.teams:
                 continue
-            if player and player not in art.players:
+            if player_id and player_id not in art.players:
                 continue
             if journalist_id and journalist_id != art.journalist_id:
                 continue
@@ -63,6 +63,7 @@ class ArticleStore:
 @dataclass
 class Article:
     journalist_id: str
+    journalist_name: str
     headline: str
     body: str
     date: str
@@ -296,6 +297,7 @@ def _write_match_report(journalist: Journalist, event: dict, season: str) -> Art
     
     return Article(
         journalist_id=journalist.id,
+        journalist_name=journalist.name,
         headline=headline,
         body=body,
         date=event["date"],
@@ -303,5 +305,5 @@ def _write_match_report(journalist: Journalist, event: dict, season: str) -> Art
         event_type=event["type"],
         tier=journalist.tier,
         teams=[home, away],
-        players=[s["player"] for s in scorers if s.get("player")],
+        players=list(dict.fromkeys(s["player_id"] for s in scorers if s.get("player_id"))),
     )

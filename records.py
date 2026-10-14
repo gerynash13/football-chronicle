@@ -20,6 +20,8 @@ from player_refs import (
     sub_on_id,
 )
 
+import datetime
+
 
 def _scope_all() -> str:
     return "all"
@@ -243,6 +245,7 @@ class RecordBook:
         *,
         competition_name: str,
         season_year: str,
+        match_date: datetime.time,
     ) -> None:
         """Update records from a single completed match."""
         player_index = build_player_index(teams)
@@ -311,7 +314,7 @@ class RecordBook:
                 )
 
             # Youngest / oldest scorer
-            age = player.age
+            age = player.age_on(match_date)
             for scope, rec_young, rec_old in (
                 (all_scope, "player_youngest_scorer", "player_oldest_scorer"),
                 (comp_scope, "player_youngest_scorer", "player_oldest_scorer"),
@@ -429,7 +432,7 @@ class RecordBook:
 
         # Appearances / debuts — youngest & oldest to play
         for player, team_name in self._players_in_match(result, player_index, teams):
-            age = player.age
+            age = player.age_on(match_date)
             for scope, rec_young, rec_old in (
                 (all_scope, "player_youngest_debut", "player_oldest_debut"),
                 (comp_scope, "player_youngest_debut", "player_oldest_debut"),

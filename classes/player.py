@@ -103,6 +103,9 @@ class Player:
         would have to assume "today", which means different things in a
         game running across simulated decades. Passing the date explicitly
         makes the calculation unambiguous.
+        
+        There is deliberately no plain 'age' property: "now" means the game's 
+        date, which only the engine knows, so callers must pass it in.
         """
         bd = self.birth_date
         age = reference_date.year - bd.year
@@ -110,17 +113,6 @@ class Player:
         if (reference_date.month, reference_date.day) < (bd.month, bd.day):
             age -= 1
         return age
-
-    @property
-    def age(self) -> int:
-        """
-        Convenience property — returns age as of today's real date.
-        
-        During gameplay, prefer age_on(season_date) for accuracy.
-        This property exists so any code that reads player.age still
-        works without modification during the transition period.
-        """
-        return self.age_on(datetime.date.today())
 
     # ── Attributes and role ───────────────────────────────────────────────────
 
@@ -240,36 +232,35 @@ class Player:
         self.season_avg_rating        = 0.0
         self.season_rating_appearances = 0
 
-    def start_new_season(self):
+    def start_new_season(self, reference_date: datetime.date):
         """Called at season transition — develops the player."""
-        self.develop()
+        self.develop(reference_date)
 
-    def develop(self):
+    def develop(self, reference_date: datetime.date):
         """
-        Apply off-season development.
-        Age is no longer incremented here — it is derived from birth_date.
-        The development curve still uses age, read via the age property.
+        Apply off-season development, using the player's age on
+        reference_date (the game's clock, passed in by the engine).
         """
-        ca_change = self._calculate_ca_change()
+        age = self.age_on(reference_date)
+        ca_change = self._calculate_ca_change(age)
         self.current_ability = max(
             1,
             min(self.current_ability + ca_change, self.potential_ability)
         )
         self.attributes = self._generate_attributes()
         self.role       = self._determine_role()
-
-        # Retirement check — players over 38 have increasing chance to retire
-        if self.age >= 35:
-            retire_chance = min(0.8, (self.age - 34) * 0.15)
+        
+        # Retirement check - players 35+ have an increasing chance to retire
+        if age >= 35:
+            retire_chance = min(0.8, (age - 34) * 0.15)
             if random.random() < retire_chance:
                 self.is_retired = True
 
-    def _calculate_ca_change(self):
+    def _calculate_ca_change(self, age: int):
         """
         CA change for the off-season, based on age and room left to grow.
         """
         room_for_growth = self.potential_ability - self.current_ability
-        age = self.age  # use derived age
 
         if age <= 20:
             change = random.randint(1, 4)

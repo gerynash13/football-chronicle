@@ -713,6 +713,7 @@ class GameEngine:
                 self.teams,
                 competition_name=active_comp.name,
                 season_year=self.season_year,
+                match_date=self.calendar.current_date
             )
             home_team = next((t for t in self.teams if t.name == result["home_team"]), None)
             away_team = next((t for t in self.teams if t.name == result["away_team"]), None)
@@ -720,7 +721,7 @@ class GameEngine:
                 apply_match_morale(home_team, away_team, result["home_goals"], result["away_goals"])
 
             scorers = [
-                {"player": e.get("player"), "team": e.get("team"), "minute": e.get("minute")}
+                {"player_id": e.get("player_id"), "player": e.get("player"), "team": e.get("team"), "minute": e.get("minute")}
                 for e in result.get("events", []) if e.get("type") == "goal"
             ]
             # ── News feed: match result ───────────────────────────────────────
@@ -1078,7 +1079,7 @@ class GameEngine:
         for team in self.teams:
             for player in team.squad:
                 old_ca = player.current_ability
-                player.start_new_season()
+                player.start_new_season(self.calendar.season_end)
                 ca_change = player.current_ability - old_ca
                 if abs(ca_change) >= 2:
                     development_log.append({

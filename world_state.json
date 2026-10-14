@@ -1,6 +1,6 @@
 {
   "nation_prestige": {
-    "myria": 5476.4,
+    "myria": 2168.7,
     "england": 8500.0,
     "scotland": 7200.0,
     "wales": 4800.0,
@@ -228,7 +228,7 @@
   "prev_season_results": {
     "league_winner": "Kluba Sportika Galvononos",
     "league_runner_up": "Mercaria Kluba",
-    "cup_winner": "Kluba Sportika Alentumou",
-    "cup_runner_up": "Kluba Sulhavonos"
+    "cup_winner": "Kluba Sportika Galvononos",
+    "cup_runner_up": "Kluba Sportika Mileiu"
   }
 }
