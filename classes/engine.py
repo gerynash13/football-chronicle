@@ -101,6 +101,7 @@ from events import Event, Choice
 from game_calendar import GameCalendar, apply_effects, apply_match_morale
 from rules import get_max_subs, get_yellow_threshold, get_match_days, get_card_bucket
 from simulation import roll_injury_severity
+from availability import tick_availability
 
 
 class GameEngine:
@@ -695,6 +696,14 @@ class GameEngine:
             return self._advance_calendar()
 
         active_comp.current_matchday = matchday_num
+        
+        # Who was already out before this match? Only they serve a match today
+        playing_names = {f[side].name for f in today_fixtures
+                         for side in ("home_team", "away_team")}
+        sitting_out = [
+            p for t in self.teams if t.name in playing_names for p in t.squad
+            if p.suspension_matches_left > 0 or p.injury_matches_left > 0
+        ]
 
         # Simulate
         if active_comp.type == "cup":
@@ -818,17 +827,7 @@ class GameEngine:
                     newly_suspended.append({"player": player.name, "team": team.name})
 
         # Suspension and injury countdown
-        for team in self.teams:
-            for player in team.squad:
-                if player.suspension_matches_left > 0:
-                    player.suspension_matches_left -= 1
-                    if player.suspension_matches_left == 0:
-                        player.is_suspended = False
-                if player.injury_matches_left > 0:
-                    player.injury_matches_left -= 1
-                    if player.injury_matches_left == 0:
-                        player.is_injured      = False
-                        player.injury_severity = None
+        tick_availability(sitting_out)
 
         # Off-match injury roll
         new_injuries = []
