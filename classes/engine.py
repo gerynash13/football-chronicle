@@ -230,24 +230,37 @@ class GameEngine:
 
     def _initialise(self, load_save: bool) -> dict:
         """Load or generate teams, then start the first season."""
-        from data_loader import load_nations
-        from data_manager import load_world_state
-
-        self.record_book = load_records_from_file()        
-        self._nations = load_nations() # Store on engine for easy access by other modules
-        tier_seasons, committed_tiers, prev_results = load_world_state(self._nations)  # For prestige calculations
-        self._tier_seasons = tier_seasons
-        self._committed_tiers = committed_tiers
-
-        if os.path.exists("teams_data.json"):
-            self.teams = load_teams_from_file("teams_data.json")
+        self._nations = load_nations()
+        
+        resuming = load_save and self.slot.exists()
+        if resuming:
+            m = self.slot.read_manifest()
+            self.seed, self._season_index, self.managed_team = (
+                m["seed"], m["season_index"], m["managed_team"])
+        else:
+            self.slot.reset() # New Game wipes the slot
+            
+        rng.seed(f"{self.seed}: setup")
+        
+        self.record_book = load_records_from_file(self.slot.path("records_data.json"))
+        self._tier_seasons, self._committed_tiers, prev = load_world_state(
+            self.nations, self.slot.path("world_state.json"))
+        self._prev_league_winner = prev.get("league_winner")
+        self._prev_league_runner_up = prev.get("league_runner_up")
+        self._prev_cup_winner = prev.get("cup_winner")
+        self._prev_cup_runner_up = prev.get("cup_runner_up")
+        
+        if resuming:
+            self.teams = load_teams_from_file(self.slot.path("teams_data.json"))
         else:
             self.teams = self._bootstrap_teams()
-            save_teams_to_file(self.teams)
-
-        self._start_season(load_save=load_save)
-        self._pending_event = self._build_team_selection_event()
-        return self._state_blocking_event(self._pending_event)
+            
+        self._start_season()
+        
+        if self.managed_team is None:
+            self._pending_event = self._build_team_selection_event()
+            return self._state_blocking_event(self._pending_event)
+        return self._advance_calendar()
 
     def _build_team_selection_event(self) -> Event:
         choices = [Choice(text=team.name) for team in sorted(self.teams, key=lambda t: t.name)]
@@ -426,11 +439,6 @@ class GameEngine:
         self.calendar.schedule_fixtures(self.comp, preferred_day=primary_day)
         # Schedule the cup towards the end of the season so the final is last
         self.calendar.schedule_fixtures(self.cup, preferred_day=cup_day)
-
-        if load_save and os.path.exists("competition_data.json"):
-            self.comp, saved_date = load_competition_data(self.comp)
-            self.calendar.schedule_fixtures(self.comp, preferred_day=primary_day)
-            self.calendar.current_date = saved_date
 
         self._last_processed = self.calendar.current_date
         
@@ -876,9 +884,6 @@ class GameEngine:
         # Newspaper story (probabilistic)
         self.calendar.generate_newspaper_story(self.teams, active_comp)
 
-        # Persist
-        save_competition_to_file(active_comp, self.calendar.current_date)
-
         # Next event date (for the view to display)
         next_event = self.calendar.get_next_event_date(
             self.calendar.current_date + datetime.timedelta(days=1)
@@ -1033,11 +1038,25 @@ class GameEngine:
         self.current_season.end_season()
         self._season_complete = True
 
-        # Clean up save file
-        if os.path.exists("competition_data.json"):
-            os.remove("competition_data.json")
-
         return season_end_state
+    
+    def _save_world(self):
+        save_teams_to_file(self.teams, self.slot.path("teams_data.json"))
+        save_records_to_file(self.record_book, self.slot.path("records_data.json"))
+        save_world_state(
+            self._nations, self._tier_seasons, self._committed_tiers,
+            prev_season_results={
+                "league_winner":    self._prev_league_winner,
+                "league_runner_up": self._prev_league_runner_up,
+                "cup_winner":       self._prev_cup_winner,
+                "cup_runner_up":    self._prev_cup_runner_up,
+            },
+            filename=self.slot.path("world_state.json"),
+        )
+        self.slot.write_manifest(
+            seed=self.seed, start_year=self.start_year,
+            season_index=self._season_index, managed_team=self.managed_team
+        )
 
     # ── Between seasons ───────────────────────────────────────────────────────
 
@@ -1049,8 +1068,6 @@ class GameEngine:
         from prestige import collect_upset_bonuses, update_team_prestige, update_nation_prestige
         
         # Save after season
-        save_teams_to_file(self.teams)
-        save_records_to_file(self.record_book)
         
         standings = self._serialise_standings()
         upset_bonuses = collect_upset_bonuses(self.comp.results, self.teams)
@@ -1064,17 +1081,6 @@ class GameEngine:
             self.comp.prestige,
             self._tier_seasons,
             self._committed_tiers,
-        )
-        save_world_state(
-            self._nations,
-            self._tier_seasons,
-            self._committed_tiers,
-            prev_season_results={
-                "league_winner":    self._prev_league_winner,
-                "league_runner_up": self._prev_league_runner_up,
-                "cup_winner":       self._prev_cup_winner,
-                "cup_runner_up":    self._prev_cup_runner_up,
-            }
         )
 
         # Player development
@@ -1094,6 +1100,7 @@ class GameEngine:
                     })
 
         self._season_index   += 1
+        self._save_world()
         self._season_complete = False
 
         if self._season_index >= self.num_seasons:

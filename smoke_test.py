@@ -1,9 +1,5 @@
 import os, datetime, statistics
 
-for f in ["teams_data.json", "competition_data.json", "records_data.json", "world_state.json"]:
-    if os.path.exists(f):
-        os.remove(f)
-
 from classes import GameEngine
 
 engine = GameEngine(start_year=1896, num_seasons=6)

@@ -15,6 +15,7 @@ def save_teams_to_file(teams, filename="teams_data.json"):
     for team in teams:
         team_data = {
             "name":                     team.name,
+            "id":                       team.id,
             "nation_id":                team.nation_id,
             "league_nation_id":         team.league_nation_id,
             "league_nation_id_year":    team.league_nation_id_year,
@@ -29,6 +30,7 @@ def save_teams_to_file(teams, filename="teams_data.json"):
             "home_region":              team.home_region,
             "budget":                   team.budget,
             "wage_budget":              team.wage_budget,
+            "trophies":                 team.trophies
         }
 
         for player in team.squad:
@@ -36,6 +38,9 @@ def save_teams_to_file(teams, filename="teams_data.json"):
                 "id":                   player.id,
                 "name":                 player.name,
                 "position":             player.position,
+                "attributes":           player.attributes,
+                "role":                 player.role,
+                "squad_number":         player.squad_number,
                 "birth_date":           player.birth_date.isoformat(),
                 "current_ability":      player.current_ability,
                 "potential_ability":    player.potential_ability,
@@ -66,13 +71,15 @@ def save_teams_to_file(teams, filename="teams_data.json"):
                 "injury_severity":           player.injury_severity,
 
                 # Career stats
-                "career_goals":        player.career_goals,
-                "career_assists":      player.career_assists,
-                "career_appearances":  player.career_appearances,
-                "career_clean_sheets": player.career_clean_sheets,
-                "career_yellow_cards": player.career_yellow_cards,
-                "career_red_cards":    player.career_red_cards,
-                "career_injuries":     player.career_injuries,
+                "career_goals":             player.career_goals,
+                "career_assists":           player.career_assists,
+                "career_appearances":       player.career_appearances,
+                "career_clean_sheets":      player.career_clean_sheets,
+                "career_yellow_cards":      player.career_yellow_cards,
+                "career_red_cards":         player.career_red_cards,
+                "career_injuries":          player.career_injuries,
+                "career_trophies":          player.career_trophies,
+                "career_trophies_by_comp":  player.career_trophies_by_comp,
 
                 # Career history and flags
                 "career_history":  player.career_history,
@@ -108,9 +115,11 @@ def load_teams_from_file(file_path):
         team.home_region            = team_data.get("home_region", "")
         team.budget                 = team_data.get("budget", 1000)
         team.wage_budget            = team_data.get("wage_budget", 300)
+        team.id                     = team_data.get("id")
         team.nation_id              = team_data.get("nation_id", "")
         team.league_nation_id       = team_data.get("league_nation_id", "")
         team.league_nation_id_year  = team_data.get("league_nation_id_year", "")
+        team.trophies               = team_data.get("trophies", [])
 
         for player_data in team_data.get("squad", []):
             # ── Birth date — with backward-compat fallback for old saves ──────
@@ -134,6 +143,9 @@ def load_teams_from_file(file_path):
             player = Player(
                 name              = player_data["name"],
                 position          = player_data["position"],
+                attributes        = player_data.get("attributes"),
+                role              = player_data.get("role"),
+                squad_number      = player_data.get("squad_number"),
                 birth_date        = birth_date,
                 current_ability   = player_data["current_ability"],
                 potential_ability = player_data["potential_ability"],
@@ -144,6 +156,8 @@ def load_teams_from_file(file_path):
                 preferred_foot    = player_data.get("preferred_foot"),
                 contract_expires  = player_data.get("contract_expires"),
                 wage              = player_data.get("wage", 0),
+                career_trophies   = player_data.get("career_trophies"),
+                career_trophies_by_comp = player_data.get("career_trophies_by_comp"),
             )
 
             # Status fields

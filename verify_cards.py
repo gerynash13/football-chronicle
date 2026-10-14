@@ -1,7 +1,4 @@
 import os
-for f in ["teams_data.json", "competition_data.json", "records_data.json"]:
-    if os.path.exists(f):
-        os.remove(f)
 
 from classes import GameEngine
 

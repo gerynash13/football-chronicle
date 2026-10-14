@@ -3,6 +3,7 @@ teams_data.json
 competition_data.json
 league_table.txt
 match_results.json
+saves/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

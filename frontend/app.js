@@ -710,6 +710,7 @@ function formatDate(iso) {
     const contBtn = document.getElementById('btn-continue');
     const menuStatus = document.getElementById('menu-status');
     if (newBtn) newBtn.addEventListener('click', async () => {
+      confirm('Start a new game? This will erase any existing game data.');
       menuStatus.textContent = 'Starting new game…';
       disable(true);
       try {
