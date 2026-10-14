@@ -1,4 +1,4 @@
-import random
+from rng import rng
 import datetime
 from player_refs import new_player_id
 
@@ -32,7 +32,7 @@ class Player:
         self.nationality        = nationality
         self.parent_nationality = parent_nationality
         self.birth_region       = birth_region       # region_id string
-        self.preferred_foot     = preferred_foot or random.choice(
+        self.preferred_foot     = preferred_foot or rng.choice(
             ["right", "right", "right", "left", "left", "both"]
         )  # weighted: ~50% right, ~33% left, ~17% both
 
@@ -119,31 +119,31 @@ class Player:
     def _generate_attributes(self):
         if self.position == "FWD":
             return {
-                "finishing":   self.current_ability + random.randint(-5, 5),
-                "pace":        self.current_ability + random.randint(-5, 5),
-                "dribbling":   self.current_ability + random.randint(-5, 5),
-                "positioning": self.current_ability + random.randint(-5, 5),
+                "finishing":   self.current_ability + rng.randint(-5, 5),
+                "pace":        self.current_ability + rng.randint(-5, 5),
+                "dribbling":   self.current_ability + rng.randint(-5, 5),
+                "positioning": self.current_ability + rng.randint(-5, 5),
             }
         elif self.position == "MID":
             return {
-                "passing":  self.current_ability + random.randint(-5, 5),
-                "vision":   self.current_ability + random.randint(-5, 5),
-                "stamina":  self.current_ability + random.randint(-5, 5),
-                "tackling": self.current_ability + random.randint(-5, 5),
+                "passing":  self.current_ability + rng.randint(-5, 5),
+                "vision":   self.current_ability + rng.randint(-5, 5),
+                "stamina":  self.current_ability + rng.randint(-5, 5),
+                "tackling": self.current_ability + rng.randint(-5, 5),
             }
         elif self.position == "DEF":
             return {
-                "tackling":    self.current_ability + random.randint(-5, 5),
-                "positioning": self.current_ability + random.randint(-5, 5),
-                "heading":     self.current_ability + random.randint(-5, 5),
-                "pace":        self.current_ability + random.randint(-5, 5),
+                "tackling":    self.current_ability + rng.randint(-5, 5),
+                "positioning": self.current_ability + rng.randint(-5, 5),
+                "heading":     self.current_ability + rng.randint(-5, 5),
+                "pace":        self.current_ability + rng.randint(-5, 5),
             }
         elif self.position == "GK":
             return {
-                "reflexes":    self.current_ability + random.randint(-5, 5),
-                "positioning": self.current_ability + random.randint(-5, 5),
-                "handling":    self.current_ability + random.randint(-5, 5),
-                "command":     self.current_ability + random.randint(-5, 5),
+                "reflexes":    self.current_ability + rng.randint(-5, 5),
+                "positioning": self.current_ability + rng.randint(-5, 5),
+                "handling":    self.current_ability + rng.randint(-5, 5),
+                "command":     self.current_ability + rng.randint(-5, 5),
             }
 
     def _determine_role(self):
@@ -176,7 +176,7 @@ class Player:
         gets rolled in name_generator.py.
         """
         return {
-            trait: max(0, min(100, int(random.gauss(50, 20))))
+            trait: max(0, min(100, int(rng.gauss(50, 20))))
             for trait in PERSONALITY_TRAITS
         }
 
@@ -253,7 +253,7 @@ class Player:
         # Retirement check - players 35+ have an increasing chance to retire
         if age >= 35:
             retire_chance = min(0.8, (age - 34) * 0.15)
-            if random.random() < retire_chance:
+            if rng.random() < retire_chance:
                 self.is_retired = True
 
     def _calculate_ca_change(self, age: int):
@@ -263,17 +263,17 @@ class Player:
         room_for_growth = self.potential_ability - self.current_ability
 
         if age <= 20:
-            change = random.randint(1, 4)
+            change = rng.randint(1, 4)
         elif age <= 23:
-            change = random.randint(1, 3)
+            change = rng.randint(1, 3)
         elif age <= 27:
-            change = random.randint(-1, 2)
+            change = rng.randint(-1, 2)
         elif age <= 30:
-            change = random.randint(-2, 1)
+            change = rng.randint(-2, 1)
         elif age <= 33:
-            change = random.randint(-3, 0)
+            change = rng.randint(-3, 0)
         else:
-            change = random.randint(-4, -1)
+            change = rng.randint(-4, -1)
 
         if change > 0:
             change = min(change, room_for_growth)

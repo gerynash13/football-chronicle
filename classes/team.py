@@ -1,4 +1,4 @@
-import random
+from rng import rng
 from player_refs import new_team_id
 
 class Team:
@@ -44,7 +44,7 @@ class Team:
             # Sort by CA with randomness
             # Add random variance
             position_players.sort(
-                key=lambda p: p.current_ability + p.morale + random.randint(-3, 3),
+                key=lambda p: p.current_ability + p.morale + rng.randint(-3, 3),
                 reverse=True
             )
             

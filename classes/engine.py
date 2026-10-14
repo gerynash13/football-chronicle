@@ -49,7 +49,7 @@ The game moves through these states in order:
 """
 
 import os
-import random
+from rng import rng
 import datetime
 
 try:
@@ -347,8 +347,8 @@ class GameEngine:
             if birth_year:
                 birth_date = datetime.date(
                     int(birth_year),
-                    random.randint(1, 12),
-                    random.randint(1, 28),
+                    rng.randint(1, 12),
+                    rng.randint(1, 28),
                 )
             else:
                 # Fallback: derive birth year from age if provided
@@ -356,8 +356,8 @@ class GameEngine:
                 start_year = int(self.season_year.split("/")[0])
                 birth_date = datetime.date(
                     start_year - age,
-                    random.randint(1, 12),
-                    random.randint(1, 28),
+                    rng.randint(1, 12),
+                    rng.randint(1, 28),
                 )
 
             player = Player(
@@ -830,7 +830,7 @@ class GameEngine:
         new_injuries = []
         for team in self.teams:
             for player in team.squad:
-                if not player.is_injured and random.random() < 0.01:
+                if not player.is_injured and rng.random() < 0.01:
                     severity, matches_out = roll_injury_severity()
                     player.is_injured          = True
                     player.injury_matches_left = matches_out

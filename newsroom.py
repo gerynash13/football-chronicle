@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 
 from data_loader import Journalist
 
-import random
+from rng import rng
 
 SCOPE_ORDER = ["local", "regional", "national", "continental", "global"]
 
@@ -236,7 +236,7 @@ WIN_VERBS = {
 def _win_verb(reliability: float) -> str:
     """Pick a verb for a winning team, based on how reliable the journalist is. Low reliability = more exaggerated verbs."""
     pool = WIN_VERBS["exaggerated"] if reliability < 0.5 else WIN_VERBS["measured"]
-    return random.choice(pool)
+    return rng.choice(pool)
 
 def _select_outcome(journalist: Journalist, winner, loser, outcome: str) -> str:
     """
@@ -276,7 +276,7 @@ def _write_match_report(journalist: Journalist, event: dict, season: str) -> Art
     score = loser_score if bucket == "favorite_loss" else winner_score
     
     pool = MATCH_REPORT_TEMPLATES.get(journalist.style, MATCH_REPORT_TEMPLATES["analytical"])[bucket]
-    body = random.choice(pool).format(
+    body = rng.choice(pool).format(
         winner=winner, loser=loser, home_team=home, away_team=away, 
         score=score, competition=event.get("competition", "the league"),
         matchday=event.get("matchday"), verb=verb

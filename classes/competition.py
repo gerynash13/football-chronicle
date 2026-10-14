@@ -1,4 +1,4 @@
-import random
+from rng import rng
 from simulation import simulate_match, pick_player_for_chance, pick_assister
 from player_refs import xi_entry, new_competition_id, goal_refs
 from rules import get_max_subs, get_points_for_win
@@ -223,7 +223,7 @@ class CupCompetition(Competition):
         import math
         
         teams = self.teams[:]
-        random.shuffle(teams)
+        rng.shuffle(teams)
         
         n = len(teams)
         target = self._next_power_of_two(n)
@@ -378,7 +378,7 @@ class CupCompetition(Competition):
         # Add bye teams after round 1
         if self.current_round == 1 and self._bye_teams:
             winners = winners + self._bye_teams
-            random.shuffle(winners) # Shuffle in the bye teams for fairness
+            rng.shuffle(winners) # Shuffle in the bye teams for fairness
             
         if len(winners) <= 1:
             return False # Cup is won - no further rounds needed
@@ -545,9 +545,9 @@ class SupercupCompetition(Competition):
         
         base_chances = 10
         midfield_bonus = (home.midfield + away.midfield) // 20
-        total_chances = int(base_chances + midfield_bonus + random.randint(-2, 2))
+        total_chances = int(base_chances + midfield_bonus + rng.randint(-2, 2))
         chance_minutes = sorted(
-            [random.randint(91, 120) for _ in range(total_chances)],
+            [rng.randint(91, 120) for _ in range(total_chances)],
         )
         
         home_xi = home.select_starting_xi(opponent_strength=away.get_strength())
@@ -556,10 +556,10 @@ class SupercupCompetition(Competition):
         for minute in chance_minutes:
             h_power = home.midfield ** 4
             a_power = away.midfield ** 4
-            if random.random() < h_power / (h_power + a_power):
+            if rng.random() < h_power / (h_power + a_power):
                 shot_quality = home.attack - away.defense
                 chance = max(8, min(shot_quality / 2 + home.attack / 30, 40))
-                if random.randint(1, 100) < chance:
+                if rng.randint(1, 100) < chance:
                     et_hg += 1
                     scorer = pick_player_for_chance(home_xi)
                     scorer.goals += 1
@@ -577,7 +577,7 @@ class SupercupCompetition(Competition):
             else:
                 shot_quality = away.attack - home.defense
                 chance = max(8, min(shot_quality / 2 + away.attack / 30, 40))
-                if random.randint(1, 100) < chance:
+                if rng.randint(1, 100) < chance:
                     et_ag += 1
                     scorer = pick_player_for_chance(away_xi)
                     scorer.goals += 1
@@ -639,7 +639,7 @@ class SupercupCompetition(Competition):
                 (home, home_conv, away_gk, "home"),
                 (away, away_conv, home_gk, "away"),
             ):
-                scored = random.random() < conv
+                scored = rng.random() < conv
                 if scored:
                     if label == "home":
                         home_goals += 1

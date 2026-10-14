@@ -1,4 +1,4 @@
-import random
+from rng import rng
 from datetime import date, datetime, timedelta
 from events import Event, Effect, Choice
 from rules import get_match_days
@@ -189,10 +189,10 @@ class GameCalendar:
         and schedules it for the next day if successful. The story's effects 
         are based on the team's current situation.
         """
-        if random.random() > probability:
+        if rng.random() > probability:
             return  # No event this time
         
-        team = random.choice(teams)
+        team = rng.choice(teams)
         context = self._assess_team_context(team, competition)
         
         # Pick a template category based on context
@@ -215,7 +215,7 @@ class GameCalendar:
             pool = NEWSPAPER_TEMPLATES["neutral"]  # Decent run - neutral story
         
         # Pick a template and apply it to the team
-        template, morale_delta = random.choice(pool)
+        template, morale_delta = rng.choice(pool)
         headline = template.format(team=team.name)
         
         # Schedule the vent for the next day, avoiding match days
@@ -259,7 +259,7 @@ class GameCalendar:
 
         match_dates = set(e.date for e in self.scheduled_events if e.category == "match")
 
-        meeting_date = from_date + timedelta(days=random.randint(2, 4))
+        meeting_date = from_date + timedelta(days=rng.randint(2, 4))
         while meeting_date in match_dates or meeting_date > self.season_end:
             meeting_date += timedelta(days=1)
 

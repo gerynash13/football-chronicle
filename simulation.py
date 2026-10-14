@@ -1,4 +1,4 @@
-import random
+from rng import rng
 
 from player_refs import (
     event_assister_matches,
@@ -38,13 +38,13 @@ def pick_player_for_chance(starting_xi):
         weighted_players = [p for p in starting_xi if p.position != "GK"]  # Fallback to any outfield player if something goes wrong
         
     if not weighted_players:
-        return random.choice(starting_xi)  # Last resort, pick any player
+        return rng.choice(starting_xi)  # Last resort, pick any player
 
-    return random.choice(weighted_players)
+    return rng.choice(weighted_players)
 
 def pick_assister(starting_xi, scorer):
     """Pick a player to credit with an assist (70% chance of assist)"""
-    roll = random.randint(1, 100)
+    roll = rng.randint(1, 100)
     
     # 30% chance no assist
     if roll <= 30:
@@ -70,12 +70,12 @@ def pick_assister(starting_xi, scorer):
     if not weighted_players:
         return None
 
-    chosen = random.choice(weighted_players)
+    chosen = rng.choice(weighted_players)
     return chosen
 
 def resolve_tackle(defending_xi, defending_team_name, minute):
     # 35% chance a tackle is attempted at any given minute (add foul events later)
-    if random.random() > 0.35:
+    if rng.random() > 0.35:
         return None, 1.0  # No tackle, no change to chances
     
     candidates = []
@@ -88,11 +88,11 @@ def resolve_tackle(defending_xi, defending_team_name, minute):
     if not candidates:
         return None, 1.0  # No defenders or midfielders available, no change to chances
     
-    tackler = random.choice(candidates)
+    tackler = rng.choice(candidates)
     tackling = tackler.attributes.get("tackling", tackler.current_ability)
     
     success_chance = max(25, min(65, 30 + (tackling / 5)))
-    success = random.randint(1, 100) < success_chance
+    success = rng.randint(1, 100) < success_chance
     
     event = {
         "minute": minute,
@@ -179,12 +179,12 @@ INJURY_TIERS = [
 ]
 
 def roll_injury_severity():
-    roll = random.random()
+    roll = rng.random()
     cumulative = 0.0
     for severity, min_m, max_m, weight in INJURY_TIERS:
         cumulative += weight
         if roll <= cumulative:
-            return severity, random.randint(min_m, max_m)
+            return severity, rng.randint(min_m, max_m)
     return "minor", 1
     
 def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_team_name,
@@ -197,7 +197,7 @@ def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_
     
     # Foul check
     foul_chance = 0.05 if tackle_event["success"] else 0.20
-    if random.random() < foul_chance:
+    if rng.random() < foul_chance:
         extra_events.append({
             "minute": minute,
             "team": defending_team_name,
@@ -206,7 +206,7 @@ def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_
         })
         
         if cards_enabled:
-            card_roll = random.random()
+            card_roll = rng.random()
             if card_roll < 0.05:
                 # Direct red card
                 extra_events.append({
@@ -243,11 +243,11 @@ def process_tackle_aftermath(tackle_event, tackler, attacking_active, attacking_
                     tackler.suspension_matches_left = 1
                     
     # Injury check (independent or foul)
-    if random.random() < 0.03:
+    if rng.random() < 0.03:
         # 70/30 - attacker or tackler gets hurt
-        if random.random() < 0.7 and attacking_active:
+        if rng.random() < 0.7 and attacking_active:
             candidates = [p for p in attacking_active if p.position != "GK"]
-            injured = random.choice(candidates) if candidates else None
+            injured = rng.choice(candidates) if candidates else None
             inj_team = attacking_team_name
         else:
             injured = tackler
@@ -381,9 +381,9 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
 
     base_chances  = 32
     midfield_bonus = ((team1.midfield + home_boost) + team2.midfield) / 20
-    total_chances  = base_chances + midfield_bonus + random.randint(-5, 5)
+    total_chances  = base_chances + midfield_bonus + rng.randint(-5, 5)
 
-    chance_minutes = sorted([random.randint(1, 90) for _ in range(int(total_chances))])
+    chance_minutes = sorted([rng.randint(1, 90) for _ in range(int(total_chances))])
 
     events      = []
     team1_goals = 0
@@ -441,7 +441,7 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
         total_power  = team1_midfield_power + team2_midfield_power
         team1_chance = team1_midfield_power / total_power
 
-        if random.random() < team1_chance:
+        if rng.random() < team1_chance:
             tackle_event, chance_modifier = resolve_tackle(team2_active, team2.name, current_minute)
             if tackle_event:
                 events.append(tackle_event)
@@ -472,7 +472,7 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
             if len(team1_active) < 11:
                 scoring_chance *= len(team1_active) / 11
 
-            if random.randint(1, 100) < scoring_chance:
+            if rng.randint(1, 100) < scoring_chance:
                 team1_goals += 1
                 scorer   = pick_player_for_chance(team1_active)
                 scorer.goals += 1
@@ -494,7 +494,7 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
             else:
                 shooter  = pick_player_for_chance(team1_active)
                 accuracy = 20 + (team1.attack / 5)
-                if random.randint(1, 100) < accuracy:
+                if rng.randint(1, 100) < accuracy:
                     gk = next((p for p in team2_active if p.position == "GK"), None)
                     if gk:
                         events.append({
@@ -547,7 +547,7 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
             if len(team2_active) < 11:
                 scoring_chance *= len(team2_active) / 11
 
-            if random.randint(1, 100) < scoring_chance:
+            if rng.randint(1, 100) < scoring_chance:
                 team2_goals += 1
                 scorer   = pick_player_for_chance(team2_active)
                 scorer.goals += 1
@@ -569,7 +569,7 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
             else:
                 shooter  = pick_player_for_chance(team2_active)
                 accuracy = 20 + (team2.attack / 5)
-                if random.randint(1, 100) < accuracy:
+                if rng.randint(1, 100) < accuracy:
                     gk = next((p for p in team1_active if p.position == "GK"), None)
                     if gk:
                         events.append({

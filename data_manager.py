@@ -1,6 +1,6 @@
 import json
 import datetime
-import random
+from rng import rng
 try:
     from classes import Team, Player
 except ModuleNotFoundError:
@@ -127,8 +127,8 @@ def load_teams_from_file(file_path):
                 approx_year = datetime.date.today().year - age
                 birth_date  = datetime.date(
                     approx_year,
-                    random.randint(1, 12),
-                    random.randint(1, 28),
+                    rng.randint(1, 12),
+                    rng.randint(1, 28),
                 )
 
             player = Player(
