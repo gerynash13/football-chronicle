@@ -9,21 +9,19 @@ from __future__ import annotations
 
 import uuid
 from typing import Any
+from rng import rng
 
+def _new_id() -> str:
+    return str(uuid.UUID(int=rng.getrandbits(128), version=4))
 
-def new_player_id() -> str:
-    return str(uuid.uuid4())
+def new_player_id():
+    return _new_id()
 
+def new_team_id():
+    return _new_id()
 
-def new_team_id() -> str:
-    """Generate a unique ID for a team."""
-    return str(uuid.uuid4())
-
-
-def new_competition_id() -> str:
-    """Generate a unique ID for a competition."""
-    return str(uuid.uuid4())
-
+def new_competition_id():
+    return _new_id()
 
 def player_ref(player) -> dict[str, str]:
     return {"player_id": player.id, "player": player.name}

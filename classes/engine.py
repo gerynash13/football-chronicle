@@ -49,6 +49,7 @@ The game moves through these states in order:
 """
 
 import os
+import secrets
 from rng import rng
 import datetime
 
@@ -106,9 +107,11 @@ class GameEngine:
 
     # ── Construction ──────────────────────────────────────────────────────────
 
-    def __init__(self, start_year: int = 1896, num_seasons: int = 3):
+    def __init__(self, start_year=1896, num_seasons=3, seed=None, slot=None):
         self.start_year  = start_year
         self.num_seasons = num_seasons
+        self.seed = seed if seed is not None else secrets.randbelow(2**32)
+        self.slot = slot or SaveSlot("default")
 
         # Persisted across seasons
         self.teams:       list       = []
@@ -375,8 +378,9 @@ class GameEngine:
             squad.append(player)
         return squad
 
-    def _start_season(self, load_save: bool = False):
+    def _start_season(self):
         """Initialise all per-season objects."""
+        rng.seed(f"{self.seed}:{self._season_index}")
         self.season_year    = self._season_label(self._season_index)
         self._season_complete = False
 
