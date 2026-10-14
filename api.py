@@ -59,6 +59,9 @@ from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
 from flask.json.provider import DefaultJSONProvider
 
+import threading
+_lock = threading.Lock()
+
 from classes import GameEngine
 
 class CustomJSONProvider(DefaultJSONProvider):
@@ -92,10 +95,11 @@ def advance():
     The main driver. We call this repeatedly to advance the game forward.
     """
     global _last_state
-    body        = request.get_json(silent=True) or {}
-    load_save   = bool(body.get("load_save", False))
-    state       = engine.advance(load_save=load_save)
-    _last_state = state
+    with _lock:
+        body        = request.get_json(silent=True) or {}
+        load_save   = bool(body.get("load_save", False))
+        state       = engine.advance(load_save=load_save)
+        _last_state = state
     
     return jsonify(state)
 
@@ -106,8 +110,9 @@ def choose():
     Passing an invalid index returns a 400 error.
     """
     global _last_state
-    body  = request.get_json(silent=True) or {}
-    index = body.get("index")
+    with _lock:
+        body  = request.get_json(silent=True) or {}
+        index = body.get("index")
     
     if index is None:
         return jsonify({"error": "Request body missing 'index' field."}), 400

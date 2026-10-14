@@ -524,8 +524,8 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
                 if tackler:
                     extra, team1_in_match_yellows = process_tackle_aftermath(
                         tackle_event, tackler, team2_active,
-                        team1.name, team2.name,
-                        current_minute, team2_in_match_yellows, cards_enabled
+                        team2.name, team1.name,
+                        current_minute, team1_in_match_yellows, cards_enabled
                     )
                     for evt in extra:
                         events.append(evt)
@@ -534,7 +534,7 @@ def simulate_match(team1, team2, max_subs=0, is_home_game=True, season_year="189
                             if sent_off:
                                 team1_active = [p for p in team1_active if p.id != sent_off.id]
                         elif evt["type"] == "injury":
-                            _handle_injury_event(evt, team1, team2,
+                            team1_subs_used, team2_subs_used = _handle_injury_event(evt, team1, team2,
                                 team1_active, team1_bench, team1_played,
                                 team2_active, team2_bench, team2_played,
                                 entry_minute, exit_minute,

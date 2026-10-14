@@ -196,12 +196,11 @@ class GameEngine:
                     "message": f"Invalid choice. Pick 0–{len(event.choices) - 1}.",
                 }
             chosen = event.choices[index]
+            team = next((t for t in self.teams if t.name == chosen.text), None)
             # Resolve name → Team object so the rest of the engine
             # can compare by identity rather than string matching
-            self.managed_team = next(
-                (t for t in self.teams if t.name == chosen.text),
-                None
-            )
+            self.managed_team = team.name if team else None
+            self._save_world()
             event.resolution = chosen.text
             event.is_read    = True
             self._pending_event = None
@@ -627,7 +626,7 @@ class GameEngine:
                 return self._finalise_season()
 
             # Apply weekly morale/relationship decay
-            d = self._last_processed
+            d = self._last_processed + datetime.timedelta(days=1)
             while d <= next_date:
                 if d.weekday() == 0:
                     self.calendar.apply_weekly_decay(self.teams)
@@ -866,6 +865,8 @@ class GameEngine:
 
         # Low-morale player meetings
         for team in self.teams:
+            if team.name != self.managed_team:
+                continue
             for player in team.squad:
                 if player.morale < -2.0:
                     self.calendar.schedule_player_meeting(
@@ -888,9 +889,8 @@ class GameEngine:
         if self.managed_team:
             your_result = next(
                 (r for r in recent
-                 if r["home_team"] == self.managed_team.name
-                 or r["away_team"] == self.managed_team.name),
-                None
+                 if self.managed_team in ([r["home_team"], r["away_team"]])),
+                None,
             )
 
         return {
@@ -907,7 +907,7 @@ class GameEngine:
             "newly_suspended":    newly_suspended,
             "new_injuries":       new_injuries,
             "next_event_date":    next_event.isoformat() if next_event else None,
-            "managed_team":       self.managed_team.name if self.managed_team else None,
+            "managed_team":       self.managed_team,
             "your_result":        your_result,
         }
 

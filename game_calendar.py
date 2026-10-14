@@ -383,7 +383,7 @@ class GameCalendar:
         
         # Immediate inbox notification (background)
         self._add_event(Event(
-            date=from_date,
+            date=from_date + timedelta(days=1),
             category="injury",
             blocking=False,
             title=f"{player.name} - Injury Update",

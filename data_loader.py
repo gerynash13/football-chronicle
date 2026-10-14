@@ -336,8 +336,9 @@ def get_team(team_id: str) -> TeamConfig:
 
 def get_region(region_id: str) -> RegionConfig:
     """Find a region by id across all nations."""
+    global _nations_cache
     if not _nations_cache:
-        load_nations()
+        _nations_cache = load_nations()
     for nation in _nations_cache.values():
         for region in nation.regions:
             if region.id == region_id:
