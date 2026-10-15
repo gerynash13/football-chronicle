@@ -1,0 +1,99 @@
+import datetime
+import pytest
+from classes import GameEngine, Team, Player
+from player_refs import find_player
+from save_slot import SaveSlot
+from validate_data import validate
+
+def make_engine(tmp_path, start_year=1896, seasons=1, seed=123):
+    return GameEngine(start_year=start_year, num_seasons=seasons, seed=seed,
+                      slot=SaveSlot("test", root=tmp_path))
+
+
+def play(engine, until=("game_over",), load_save=False):
+    """Yield every state; always picks option 0 for choices."""
+    state = engine.advance(load_save=load_save)
+    while True:
+        yield state
+        if state["type"] in until or state["type"] == "error":
+            return
+        state = engine.choose(0) if state["type"] == "blocking_event" else engine.advance()
+
+
+def test_same_seed_gives_same_world(tmp_path):
+    def summary(engine):
+        return [(s["season"], s["champion"],
+                 [(r["team"], r["points"]) for r in s["final_standings"]])
+                for s in play(engine) if s["type"] == "season_end"]
+    a = summary(make_engine(tmp_path / "a", seasons=2))
+    b = summary(make_engine(tmp_path / "b", seasons=2))
+    assert len(a) == 2
+    assert a == b    # if this fails, some file still uses the global `random`
+
+
+def test_bans_and_injuries_are_actually_served(tmp_path, monkeypatch):
+    monkeypatch.setattr("classes.engine.get_yellow_threshold", lambda season: 2)
+    engine = make_engine(tmp_path, start_year=1970)   # cards exist from 1970
+    must_miss = {}   # player_id -> [team_name, matches still to miss]
+    served = 0
+
+    def register(pid, team, n):
+        if pid:
+            must_miss[pid] = [team, n]
+
+    for state in play(engine, until=("season_end",)):
+        if state["type"] != "matchday":
+            continue
+        for r in state["results"]:
+            for team, xi_key in ((r["home_team"], "home_xi"), (r["away_team"], "away_xi")):
+                in_xi = {p["id"] for p in r[xi_key]}
+                for pid, entry in list(must_miss.items()):
+                    if entry[0] != team:
+                        continue
+                    assert pid not in in_xi, f"{pid} played for {team} while out"
+                    entry[1] -= 1
+                    served += 1
+                    if entry[1] == 0:
+                        del must_miss[pid]
+        # register new absences AFTER checking today's matches
+        for r in state["results"]:
+            for evt in r["events"]:
+                if evt["type"] == "injury":
+                    register(evt["player_id"], evt["team"], evt["matches_out"])
+                elif evt["type"] == "red_card":
+                    n = 1 if evt.get("reason") == "second_yellow" else 3
+                    register(evt["player_id"], evt["team"], n)
+        for s in state["newly_suspended"]:
+            p, _ = find_player(engine.teams, name=s["player"], team_name=s["team"])
+            if p:
+                register(p.id, s["team"], 1)
+        for i in state["new_injuries"]:
+            p, _ = find_player(engine.teams, name=i["player"], team_name=i["team"])
+            if p:
+                register(p.id, i["team"], i["matches"])
+    assert served > 0   # otherwise the test proved nothing
+
+
+def test_resume_continues_from_saved_season(tmp_path):
+    a = make_engine(tmp_path, seasons=3)
+    list(play(a, until=("between_seasons",)))
+    b = make_engine(tmp_path, seasons=3)
+    b.advance(load_save=True)
+    assert b.season_year == a.season_year == "1897/98"
+    assert b.managed_team == a.managed_team
+    assert [t.prestige for t in b.teams] == [t.prestige for t in a.teams]
+    
+def test_data_files_are_consistent():
+    assert validate() == []
+
+
+@pytest.mark.xfail(strict=True, reason="Phase 1: retirement lifecycle not built yet")
+def test_retired_player_is_not_selected():
+    team = Team("T", 60, 60, 60)
+    for pos, n in (("GK", 1), ("DEF", 3), ("MID", 4), ("FWD", 6)):
+        for i in range(n):
+            team.add_player(Player(f"{pos}{i}", pos, datetime.date(1870, 1, 1), 60, 60))
+    star = team.squad[-1]
+    star.current_ability = 99
+    star.is_retired = True
+    assert star not in team.select_starting_xi()

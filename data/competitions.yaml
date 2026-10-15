@@ -65,8 +65,8 @@
  
 # ── Domestic competitions — Myria ────────────────────────────────────────────
 
-- id: prote_kategorias
-  name: Prote Kategorias
+- id: lhiga_alhika
+  name: Lhiga Alhika
   type: league
   nation_id: myria
   founded_year: 1891
@@ -78,8 +78,8 @@
   participants:
     type: all_members
 
-- id: protonas_cup
-  name: Protonas Cup
+- id: kopa_protonas
+  name: Kopa Protonas
   type: cup
   nation_id: myria
   founded_year: 1893

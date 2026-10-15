@@ -72,6 +72,7 @@ from data_manager import (
     save_records_to_file,
     load_records_from_file,
     save_world_state,
+    load_world_state,
 )
 from data_loader import (
     load_nations,
@@ -102,6 +103,7 @@ from game_calendar import GameCalendar, apply_effects, apply_match_morale
 from rules import get_max_subs, get_yellow_threshold, get_match_days, get_card_bucket
 from simulation import roll_injury_severity
 from availability import tick_availability
+from save_slot import SaveSlot
 
 
 class GameEngine:
@@ -244,7 +246,7 @@ class GameEngine:
         
         self.record_book = load_records_from_file(self.slot.path("records_data.json"))
         self._tier_seasons, self._committed_tiers, prev = load_world_state(
-            self.nations, self.slot.path("world_state.json"))
+            self._nations, self.slot.path("world_state.json"))
         self._prev_league_winner = prev.get("league_winner")
         self._prev_league_runner_up = prev.get("league_runner_up")
         self._prev_cup_winner = prev.get("cup_winner")
@@ -290,7 +292,7 @@ class GameEngine:
         from name_generator import generate_squad
 
         season_year = self._season_label(0)
-        team_configs = teams_in_competition("prote_kategorias", season_year)
+        team_configs = teams_in_competition("lhiga_alhika", season_year)
 
         teams = []
         squad_data = self._load_squad_file(season_year)
@@ -403,12 +405,12 @@ class GameEngine:
         # Look up competition prestige from config
         from data_loader import load_competitions
         comp_configs = load_competitions()
-        league_prestige = comp_configs["prote_kategorias"].prestige
-        cup_prestige = comp_configs["protonas_cup"].prestige
+        league_prestige = comp_configs["lhiga_alhika"].prestige
+        cup_prestige = comp_configs["kopa_protonas"].prestige
         
         # League
         self.comp = Competition(
-            "Prote Kategorias",
+            "Lhiga Alhika",
             self.teams,
             max_subs=get_max_subs(self.season_year),
             season_year=self.season_year,
@@ -419,7 +421,7 @@ class GameEngine:
         
         # Cup
         self.cup = CupCompetition(
-            "Protonas Cup",
+            "Kopa Protonas",
             self.teams,
             max_subs=get_max_subs(self.season_year),
             season_year=self.season_year,

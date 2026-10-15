@@ -30,7 +30,7 @@
   name: Kluba Sulhavonos
   nation_id: myria
   league_nation_id: myria
-  home_region: masia
+  home_region: myr_masia
   founded_year: 1891
   prestige: 950
   attack: 64
@@ -39,14 +39,14 @@
   budget: 5000
   wage_budget: 800
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 - id: kluba_maritima_thesias
   name: Kluba Maritima Thesias
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1893
   prestige: 980
   attack: 65
@@ -55,14 +55,14 @@
   budget: 6000
   wage_budget: 900
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 - id: mercaria_kluba
   name: Mercaria Kluba
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1894
   prestige: 920
   attack: 63
@@ -71,14 +71,14 @@
   budget: 5500
   wage_budget: 850
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 - id: portavar_kluba
   name: Portavar Kluba
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1895
   prestige: 870
   attack: 60
@@ -87,14 +87,14 @@
   budget: 4500
   wage_budget: 750
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 - id: kluba_sportika_esalumou
   name: Kluba Sportika Esalumou
   nation_id: myria
   league_nation_id: myria
-  home_region: lunia
+  home_region: myr_lunia
   founded_year: 1895
   prestige: 680
   attack: 51
@@ -103,14 +103,14 @@
   budget: 2000
   wage_budget: 450
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 - id: kluba_sportika_mileiu
   name: Kluba Sportika Mileiu
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1895
   prestige: 780
   attack: 58
@@ -119,14 +119,14 @@
   budget: 3000
   wage_budget: 600
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 - id: kluba_sportika_galvononos
   name: Kluba Sportika Galvononos
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1896
   prestige: 1000
   attack: 66
@@ -135,14 +135,14 @@
   budget: 7000
   wage_budget: 1000
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 - id: populara_kluba_galvononos
   name: Populara Kluba Galvononos
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1896
   prestige: 890
   attack: 61
@@ -151,14 +151,14 @@
   budget: 4500
   wage_budget: 750
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 - id: kluba_sportika_gedimou
   name: Kluba Sportika Gedimou
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1897
   prestige: 810
   attack: 58
@@ -167,14 +167,14 @@
   budget: 3500
   wage_budget: 650
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 - id: kluba_sportika_soleiu
   name: Kluba Sportika Soleiu
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1898
   prestige: 790
   attack: 57
@@ -183,14 +183,14 @@
   budget: 3000
   wage_budget: 600
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 - id: kluba_maritima_metia
   name: Kluba Maritima Metia
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1899
   prestige: 620
   attack: 50
@@ -199,14 +199,14 @@
   budget: 1500
   wage_budget: 400
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 - id: kluba_sportika_alentumou
   name: Kluba Sportika Alentumou
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1899
   prestige: 840
   attack: 60
@@ -215,8 +215,8 @@
   budget: 4000
   wage_budget: 700
   competitions:
-    - prote_kategorias
-    - myria_cup
+    - lhiga_alhika
+    - kopa_protonas
 
 
 # ── Myria — lower divisions ───────────────────────────────────────────────────
@@ -225,7 +225,7 @@
   name: Kluba Notias Thesias
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1897
   prestige: 420
   attack: 48
@@ -234,13 +234,13 @@
   budget: 800
   wage_budget: 250
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_sportika_buriou
   name: Kluba Sportika Buriou
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1900
   prestige: 340
   attack: 43
@@ -249,13 +249,13 @@
   budget: 500
   wage_budget: 180
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_sportika_sufelharos
   name: Kluba Sportika Sufelharos
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1901
   prestige: 290
   attack: 40
@@ -264,13 +264,13 @@
   budget: 400
   wage_budget: 150
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_sportika_eleicas
   name: Kluba Sportika Eleicas
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1900
   prestige: 360
   attack: 44
@@ -279,13 +279,13 @@
   budget: 550
   wage_budget: 190
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_potamia_drosvon
   name: Kluba Potamia Drosvon
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1902
   prestige: 280
   attack: 40
@@ -294,13 +294,13 @@
   budget: 350
   wage_budget: 140
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_sportika_ancivonos
   name: Kluba Sportika Ancivonos
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1903
   prestige: 260
   attack: 39
@@ -309,13 +309,13 @@
   budget: 300
   wage_budget: 130
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: brakika_kluba_nalhavonos
   name: Brakika Kluba Nalhavonos
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1904
   prestige: 270
   attack: 41
@@ -324,13 +324,13 @@
   budget: 320
   wage_budget: 135
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_pyron_malias
   name: Kluba Pyron Malias
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1902
   prestige: 275
   attack: 40
@@ -339,13 +339,13 @@
   budget: 330
   wage_budget: 138
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_sportika_noviou
   name: Kluba Sportika Noviou
   nation_id: myria
   league_nation_id: myria
-  home_region: lunia
+  home_region: myr_lunia
   founded_year: 1901
   prestige: 255
   attack: 40
@@ -354,13 +354,13 @@
   budget: 280
   wage_budget: 125
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_sportika_lunaras
   name: Kluba Sportika Lunaras
   nation_id: myria
   league_nation_id: myria
-  home_region: lunia
+  home_region: myr_lunia
   founded_year: 1904
   prestige: 240
   attack: 38
@@ -369,13 +369,13 @@
   budget: 260
   wage_budget: 120
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_emvaria_amanas
   name: Kluba Emvaria Amanas
   nation_id: myria
   league_nation_id: myria
-  home_region: vetia_sileia
+  home_region: myr_vetia_and_sileia
   founded_year: 1903
   prestige: 245
   attack: 38
@@ -384,13 +384,13 @@
   budget: 270
   wage_budget: 122
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_sportika_ircentas
   name: Kluba Sportika Ircentas
   nation_id: myria
   league_nation_id: myria
-  home_region: vetia_sileia
+  home_region: myr_vetia_and_sileia
   founded_year: 1906
   prestige: 220
   attack: 37
@@ -399,13 +399,13 @@
   budget: 240
   wage_budget: 115
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_tou_skriptavonos
   name: Kluba tou Skriptavonos
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1903
   prestige: 265
   attack: 41
@@ -414,13 +414,13 @@
   budget: 310
   wage_budget: 132
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_sportika_coraerou
   name: Kluba Sportika Coraerou
   nation_id: myria
   league_nation_id: myria
-  home_region: bridia
+  home_region: myr_bridia
   founded_year: 1904
   prestige: 258
   attack: 40
@@ -429,13 +429,13 @@
   budget: 295
   wage_budget: 128
   competitions:
-    - myria_cup
+    - kopa_protonas
 
 - id: kluba_veldhavonos
   name: Kluba Veldhavonos
   nation_id: myria
   league_nation_id: myria
-  home_region: masia
+  home_region: myr_masia
   founded_year: 1906
   prestige: 248
   attack: 39
@@ -444,4 +444,4 @@
   budget: 275
   wage_budget: 124
   competitions:
-    - myria_cup
+    - kopa_protonas

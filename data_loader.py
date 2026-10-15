@@ -223,7 +223,7 @@ def load_nations() -> dict[str, NationConfig]:
 
         result[entry["id"]] = NationConfig(
             id=entry["id"],
-            name=entry["name"],
+            name=entry["name"][-1] if isinstance(entry["name"], list) else entry["name"],
             is_fictional=entry.get("is_fictional", False),
             founded_year=entry.get("founded_year", 0),
             prestige=float(entry.get("prestige", 1000)),

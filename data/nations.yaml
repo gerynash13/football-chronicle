@@ -756,16 +756,16 @@
   name_generator: russian
   eligible_for_international: true
   regions:
-    - id: rus_moscow
+    - id: rem_moscow
       name: Moscow Metropolitan Area
       talent_modifier: 1.2
-    - id: rus_northwest
+    - id: rem_northwest
       name: Baltic Northwest
       talent_modifier: 1.0
-    - id: rus_south
+    - id: rem_south
       name: Southern Caucasus Frontier
       talent_modifier: 0.9
-    - id: rus_east
+    - id: rem_east
       name: Siberia & The Tartar East
       talent_modifier: 0.9
 
@@ -1288,36 +1288,6 @@
       name: Košice & Eastern Frontier
       talent_modifier: 1.0
 
-- id: kosovo
-  name: Kosovo
-  is_fictional: false
-  founded_year: 1991
-  fa_founded_year: 1991
-  fifa_membership_year: 2016
-  continental_membership_year: 2016
-  prestige: 800
-  prestige_weights:
-    league: 0.50
-    international: 0.50
-  prestige_decay: 0.03
-  prestige_floor: 500
-  tier_change_min_seasons: 3
-  name_generator: kosovar
-  eligible_for_international: true
-  regions:
-    - id: kos_prishtina
-      name: Prishtina Core
-      talent_modifier: 1.0
-    - id: kos_west
-      name: Dukagjini West
-      talent_modifier: 1.0
-    - id: kos_north
-      name: Mitrovica Mining North
-      talent_modifier: 1.0
-    - id: kos_east
-      name: Gjilanit
-      talent_modifier: 1.0
-
 - id: iceland
   name: Iceland
   is_fictional: false
@@ -1791,16 +1761,16 @@
   name_generator: serbian
   eligible_for_international: true
   regions:
-    - id: sam_belgrade
+    - id: scg_belgrade
       name: Belgrade Capital Engine
       talent_modifier: 1.0
-    - id: sam_south
+    - id: scg_south
       name: Šumadija & Southern Valleys
       talent_modifier: 1.0
-    - id: sam_east
+    - id: scg_east
       name: Dinaric Highlands
       talent_modifier: 1.0
-    - id: sam_north
+    - id: scg_north
       name: The Vojvodina Plain
       talent_modifier: 1.0
 
@@ -2552,16 +2522,16 @@
   name_generator: grenadian
   eligible_for_international: true
   regions:
-    - id: gre_south
+    - id: grn_south
       name: St. George's Capital Core
       talent_modifier: 1.0
-    - id: gre_east
+    - id: grn_east
       name: St. Andrew & Eastern Coast
       talent_modifier: 1.0
-    - id: gre_north
+    - id: grn_north
       name: Carriacou & Petite Martinique Dependencies
       talent_modifier: 1.0
-    - id: gre_west
+    - id: grn_west
       name: St. John & St. Mark Spice Belt
       talent_modifier: 1.0
 
@@ -3212,16 +3182,16 @@
   name_generator: anguillian
   eligible_for_international: true
   regions:
-    - id: ang_east
+    - id: aia_east
       name: Island Harbour
       talent_modifier: 1.0
-    - id: ang_central_south
+    - id: aia_central_south
       name: Sandy Ground & Salt Pond Sector
       talent_modifier: 1.0
-    - id: ang_west
+    - id: aia_west
       name: West End District
       talent_modifier: 1.0
-    - id: ang_central_north
+    - id: aia_central_north
       name: The Valley
       talent_modifier: 1.0
 
@@ -3726,16 +3696,16 @@
   name_generator: burundian
   eligible_for_international: true
   regions:
-    - id: bur_south
+    - id: bdi_south
       name: Rumonge & Makamba
       talent_modifier: 1.1
-    - id: bur_north
+    - id: bdi_north
       name: Ngozi & Muyinga Highlands
       talent_modifier: 0.9
-    - id: bur_east
+    - id: bdi_east
       name: Gitega Plateau
       talent_modifier: 0.9
-    - id: bur_west
+    - id: bdi_west
       name: Bujumbura Waterfront
       talent_modifier: 1.1
 
@@ -3906,16 +3876,16 @@
   name_generator: cameroonian
   eligible_for_international: true
   regions:
-    - id: cam_north
+    - id: cmr_north
       name: Grand Nord Savanna
       talent_modifier: 0.9
-    - id: cam_south
+    - id: cmr_south
       name: Centre-Sud Highlands
       talent_modifier: 1.1
-    - id: cam_east
+    - id: cmr_east
       name: Bertoua Region
       talent_modifier: 0.9
-    - id: cam_west
+    - id: cmr_west
       name: Littoral Coastal Strip
       talent_modifier: 1.1
 
@@ -3936,16 +3906,16 @@
   name_generator: burkinian
   eligible_for_international: true
   regions:
-    - id: bur_north
+    - id: bfa_north
       name: Sahelian Drylands
       talent_modifier: 1.1
-    - id: bur_central
+    - id: bfa_central
       name: Ougadougou Capital Center
       talent_modifier: 1.1
-    - id: bur_east
+    - id: bfa_east
       name: Fada N'Gourma Region
       talent_modifier: 0.9
-    - id: bur_west
+    - id: bfa_west
       name: Bobo-Dioulasso Flank
       talent_modifier: 0.9
 
@@ -4866,7 +4836,7 @@
   name_generator: cabo_verdean
   eligible_for_international: true
   regions:
-    - id: cab_southwest
+    - id: cab_southeast
       name: Santiago & Maio
       talent_modifier: 1.1
     - id: cab_southwest
@@ -5198,16 +5168,16 @@
   name_generator: chinese
   eligible_for_international: true
   regions:
-    - id: chi_east
+    - id: chn_east
       name: Shandong & Bohai Rim Axis
       talent_modifier: 1.0
-    - id: chi_north
+    - id: chn_north
       name: Liaoning & Dalian Belt
       talent_modifier: 1.0
-    - id: chi_west
+    - id: chn_west
       name: Xinjiang Frontier
       talent_modifier: 1.0
-    - id: chi_south
+    - id: chn_south
       name: Guangdong Pearl River Delta
       talent_modifier: 1.0
 
@@ -5410,16 +5380,16 @@
   name_generator: indonesian
   eligible_for_international: true
   regions:
-    - id: ind_north
+    - id: idn_north
       name: Kalimantan Region
       talent_modifier: 1.0
-    - id: ind_south
+    - id: idn_south
       name: Java Island & Nusa Tenggara
       talent_modifier: 1.0
-    - id: ind_east
+    - id: idn_east
       name: Sulawesi, Maluku & Papua
       talent_modifier: 1.0
-    - id: ind_west
+    - id: idn_west
       name: Sumatra Island
       talent_modifier: 1.0
 
@@ -5922,16 +5892,16 @@
   name_generator: bahraini
   eligible_for_international: true
   regions:
-    - id: bah_north
+    - id: bhr_north
       name: Capital Governorate
       talent_modifier: 1.0
-    - id: bah_south
+    - id: bhr_south
       name: Southern Governorate
       talent_modifier: 1.0
-    - id: bah_west
+    - id: bhr_west
       name: Northern Governorate
       talent_modifier: 1.0
-    - id: bah_east
+    - id: bhr_east
       name: Muharraq Governorate
       talent_modifier: 1.0
 
@@ -6042,16 +6012,16 @@
   name_generator: guamanian
   eligible_for_international: true
   regions:
-    - id: gua_east
+    - id: gum_east
       name: Pacific Coastline
       talent_modifier: 1.0
-    - id: gua_west
+    - id: gum_west
       name: Hagåtña & Urban Core
       talent_modifier: 1.0
-    - id: gua_north
+    - id: gum_north
       name: Northern Plateau Corridor
       talent_modifier: 1.0
-    - id: gua_south
+    - id: gum_south
       name: Southern Maritime Matrix
       talent_modifier: 1.0
 

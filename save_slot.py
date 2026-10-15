@@ -19,8 +19,19 @@ class SaveSlot:
         
     def write_manifest(self, **fields):
         os.makedirs(self.dir, exist_ok=True)
-        with open(self.path("manifest.json"), encoding="utf-8") as f:
-            json.dump({"schema_version": SCHEMA_VERSION, **fields,}, f, indent=2)
+        path = self.path("manifest.json")
+        
+        try:
+            with open(path, encoding="utf-8") as f:
+                manifest = json.load(f)
+        except FileNotFoundError:
+            manifest = {}
+            
+        manifest.update(fields)
+        manifest["schema_version"] = SCHEMA_VERSION
+        
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(manifest, f, indent=2, ensure_ascii=False)
             
     def read_manifest(self):
         with open(self.path("manifest.json"), encoding="utf-8") as f:

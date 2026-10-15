@@ -143,21 +143,24 @@ def load_teams_from_file(file_path):
             player = Player(
                 name              = player_data["name"],
                 position          = player_data["position"],
-                attributes        = player_data.get("attributes"),
-                role              = player_data.get("role"),
-                squad_number      = player_data.get("squad_number"),
                 birth_date        = birth_date,
                 current_ability   = player_data["current_ability"],
                 potential_ability = player_data["potential_ability"],
                 player_id         = player_data.get("id") or new_player_id(),
-                nationality        = player_data.get("nationality"),
+                nationality       = player_data.get("nationality"),
                 parent_nationality= player_data.get("parent_nationality"),
                 birth_region      = player_data.get("birth_region"),
                 preferred_foot    = player_data.get("preferred_foot"),
                 contract_expires  = player_data.get("contract_expires"),
                 wage              = player_data.get("wage", 0),
-                career_trophies   = player_data.get("career_trophies"),
-                career_trophies_by_comp = player_data.get("career_trophies_by_comp"),
+            )
+
+            player.attributes = player_data.get("attributes", player.attributes)
+            player.role = player_data.get("role", player.role)
+            player.squad_number = player_data.get("squad_number")
+            player.career_trophies = player_data.get("career_trophies", 0)
+            player.career_trophies_by_comp = player_data.get(
+                "career_trophies_by_comp", {}
             )
 
             # Status fields
