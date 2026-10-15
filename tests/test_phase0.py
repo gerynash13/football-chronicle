@@ -1,9 +1,12 @@
 import datetime
 import pytest
-from classes import GameEngine, Team, Player
+from classes.team import Team
+from classes.player import Player
+from classes.engine import GameEngine
 from player_refs import find_player
 from save_slot import SaveSlot
 from validate_data import validate
+from rng import rng
 
 def make_engine(tmp_path, start_year=1896, seasons=1, seed=123):
     return GameEngine(start_year=start_year, num_seasons=seasons, seed=seed,
@@ -97,3 +100,30 @@ def test_retired_player_is_not_selected():
     star.current_ability = 99
     star.is_retired = True
     assert star not in team.select_starting_xi()
+    
+def test_mid_season_save_resumes_exactly(tmp_path):
+    a = make_engine(tmp_path, seasons=3)
+    seen_boundary, matchdays_after = False, 0
+    last = None
+    for s in play(a):
+        last = s
+        if s["type"] == "between_seasons":
+            seen_boundary = True
+        elif seen_boundary and s["type"] == "matchday":
+            matchdays_after += 1
+            if matchdays_after == 3:
+                break                     # "quit" three matchdays into season 2
+
+    b = make_engine(tmp_path, seasons=3)
+    resumed = b.advance(load_save=True)
+
+    assert resumed == last
+    stats = lambda e: [(p.id, p.goals, p.appearances) for t in e.teams for p in t.squad]
+    assert stats(a) == stats(b)
+    rng_state = rng.getstate()
+    next_a = a.advance()
+    
+    rng.setstate(rng_state)
+    next_b = b.advance()
+    
+    assert next_a == next_b

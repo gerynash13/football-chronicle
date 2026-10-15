@@ -108,6 +108,7 @@ function render(state) {
   else if (type === 'game_over')      renderGameOver(state);
   else if (type === 'not_started')    setStatus('Ready. Press Advance to begin.');
   else if (type === 'error')          setStatus(`Error: ${state.message}`);
+  else if (type === 'resumed')        setStatus('Save loaded. Press Advance to resume.');
 }
 
 // ── Matchday renderer ─────────────────────────────────────────────────────────

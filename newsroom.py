@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-import uuid
 from dataclasses import dataclass, field
-
 from data_loader import Journalist
-
 from rng import rng
+from player_refs import new_id
 
 SCOPE_ORDER = ["local", "regional", "national", "continental", "global"]
 
@@ -70,7 +68,7 @@ class Article:
     season: str
     event_type: str
     tier: str
-    id: str = field(default_factory=lambda: str(uuid.uuid4())[:8])
+    id: str = field(default_factory=lambda: new_id()[:8])
     teams: list = field(default_factory=list)
     players: list = field(default_factory=list)
     

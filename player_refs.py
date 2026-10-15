@@ -17,6 +17,8 @@ def _new_id() -> str:
 def new_player_id():
     return _new_id()
 
+new_id = new_player_id
+
 def new_team_id():
     return _new_id()
 

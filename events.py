@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import date
 from typing import List
-import uuid
+from player_refs import new_id
 
 @dataclass
 class Effect:
@@ -22,7 +22,7 @@ class Event:
     blocking: bool      # If true, player must choose an option before proceeding
     title: str
     description: str
-    id: str = field(default_factory=lambda: str(uuid.uuid4())[:8])  # Unique identifier for the event
+    id: str = field(default_factory=lambda: new_id()[:8])  # Unique identifier for the event
     choices: List[Choice] = field(default_factory=list)
     effects: List[Effect] = field(default_factory=list)  # Effects that apply regardless of choice
     is_read: bool = False  # Track if the event has been read by the player

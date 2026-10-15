@@ -103,7 +103,7 @@ from game_calendar import GameCalendar, apply_effects, apply_match_morale
 from rules import get_max_subs, get_yellow_threshold, get_match_days, get_card_bucket
 from simulation import roll_injury_severity
 from availability import tick_availability
-from save_slot import SaveSlot
+from save_slot import SaveSlot, ENGINE_VERSION
 
 
 class GameEngine:
@@ -145,6 +145,13 @@ class GameEngine:
         self._prev_cup_winner:          str | None = None
         self._prev_cup_runner_up:       str | None = None
         
+        self._replaying = False
+        self._manifest_version = ENGINE_VERSION
+        
+    def _log_action(self, action: dict):
+        if not self._replaying:
+            self.slot.append_action(action)
+        
     # ── Public interface ──────────────────────────────────────────────────────
 
     def advance(self, load_save: bool = False) -> dict:
@@ -171,6 +178,8 @@ class GameEngine:
         # ── A blocking event is waiting for a choice ──────────────────────────
         if self._pending_event is not None:
             return self._state_blocking_event(self._pending_event)
+        
+        self._log_action({"op": "advance"})
 
         # ── Season is fully complete — move between seasons ───────────────────
         if self._season_complete:
@@ -210,6 +219,7 @@ class GameEngine:
 
         if not event.choices:
             # Acknowledgement-only event — any input dismisses it
+            self._log_action({"op": "choose", "index": index})
             apply_effects(event.effects, self.teams)
             event.is_read = True
             self._pending_event = None
@@ -222,6 +232,7 @@ class GameEngine:
             }
 
         chosen = event.choices[index]
+        self._log_action({"op": "choose", "index": index})
         apply_effects(chosen.effects, self.teams)
         event.resolution = chosen.text
         event.is_read    = True
@@ -239,6 +250,7 @@ class GameEngine:
             m = self.slot.read_manifest()
             self.seed, self._season_index, self.managed_team = (
                 m["seed"], m["season_index"], m["managed_team"])
+            self._manifest_version = m.get("engine_version")
         else:
             self.slot.reset() # New Game wipes the slot
             
@@ -262,7 +274,27 @@ class GameEngine:
         if self.managed_team is None:
             self._pending_event = self._build_team_selection_event()
             return self._state_blocking_event(self._pending_event)
-        return self._advance_calendar()
+        return self._replay_saved_actions()
+
+    def _replay_saved_actions(self) -> dict:
+        version_ok = self._manifest_version == ENGINE_VERSION
+        actions = self.slot.read_actions() if version_ok else []
+        if not version_ok:
+            self.slot.clear_actions()      # old moves would replay differently
+        state = {
+            "type": "resumed", "season": self.season_year,
+            "date": self.calendar.current_date.isoformat(),
+            "managed_team": self.managed_team,
+            "replayed_actions": len(actions),
+            "version_mismatch": not version_ok,
+        }
+        self._replaying = True
+        try:
+            for a in actions:
+                state = self.advance() if a["op"] == "advance" else self.choose(a["index"])
+        finally:
+            self._replaying = False
+        return state
 
     def _build_team_selection_event(self) -> Event:
         choices = [Choice(text=team.name) for team in sorted(self.teams, key=lambda t: t.name)]
@@ -1057,8 +1089,10 @@ class GameEngine:
         )
         self.slot.write_manifest(
             seed=self.seed, start_year=self.start_year,
-            season_index=self._season_index, managed_team=self.managed_team
+            season_index=self._season_index, managed_team=self.managed_team,
+            engine_version=ENGINE_VERSION,
         )
+        self.slot.clear_actions()
 
     # ── Between seasons ───────────────────────────────────────────────────────
 
@@ -1144,6 +1178,7 @@ class GameEngine:
         return {
             "type":        "blocking_event",
             "season":      self.season_year,
+            "managed_team": self.managed_team,
             "date":        self.calendar.current_date.isoformat(),
             "event_id":    event.id,
             "category":    event.category,
