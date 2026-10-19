@@ -102,8 +102,11 @@ from events import Event, Choice
 from game_calendar import GameCalendar, apply_effects, apply_match_morale
 from rules import get_max_subs, get_yellow_threshold, get_match_days, get_card_bucket
 from simulation import roll_injury_severity
-from availability import tick_availability
+from availability import tick_suspensions, heal_injuries
 from save_slot import SaveSlot, ENGINE_VERSION
+from match_model import OFF_MATCH_INJURY_RATE, INJURY_DAYS_PER_MATCH
+import lifecycle
+from facilities import facilities_from_config
 
 
 class GameEngine:
@@ -338,6 +341,7 @@ class GameEngine:
             team.home_region            = cfg.home_region
             team.budget                 = cfg.budget
             team.wage_budget            = cfg.wage_budget
+            team.facilities             = facilities_from_config(cfg.facilities)
 
             if cfg.id in squad_data:
                 team.squad = self._build_squad_from_yaml(squad_data[cfg.id])
@@ -675,6 +679,7 @@ class GameEngine:
                 d += datetime.timedelta(days=1)
 
             self.calendar.current_date = next_date
+            heal_injuries(self.teams, next_date)
             events_today = self.calendar.get_events_for_date(self.calendar.current_date)
             dynamic      = self.calendar.roll_dynamic_events(self.teams)
             all_events   = events_today + dynamic
@@ -743,7 +748,7 @@ class GameEngine:
                          for side in ("home_team", "away_team")}
         sitting_out = [
             p for t in self.teams if t.name in playing_names for p in t.squad
-            if p.suspension_matches_left > 0 or p.injury_matches_left > 0
+            if p.suspension_matches_left > 0
         ]
 
         # Simulate
@@ -868,17 +873,20 @@ class GameEngine:
                     newly_suspended.append({"player": player.name, "team": team.name})
 
         # Suspension and injury countdown
-        tick_availability(sitting_out)
+        tick_suspensions(sitting_out)
 
         # Off-match injury roll
         new_injuries = []
         for team in self.teams:
             for player in team.squad:
-                if not player.is_injured and rng.random() < 0.01:
+                if not player.is_injured and rng.random() < OFF_MATCH_INJURY_RATE:
                     severity, matches_out = roll_injury_severity()
                     player.is_injured          = True
                     player.injury_matches_left = matches_out
                     player.injury_severity     = severity
+                    player.injury_until        = self.calendar.current_date + datetime.timedelta(
+                        days=INJURY_DAYS_PER_MATCH * matches_out
+                    )
                     player.career_injuries    += 1
                     self.calendar.schedule_injury_notification(
                         player, team, self.calendar.current_date
@@ -901,6 +909,10 @@ class GameEngine:
                 )
                 if player:
                     team = next(t for t in self.teams if t.name == team_name)
+                    player_injury_until = self.calendar.current_date + datetime.timedelta(
+                        days=INJURY_DAYS_PER_MATCH * inj_evt["matches_out"]
+                    )
+                    player.injury_until = player_injury_until
                     self.calendar.schedule_injury_notification(
                         player, team, self.calendar.current_date
                     )
@@ -1136,8 +1148,22 @@ class GameEngine:
                     })
 
         self._season_index   += 1
-        self._save_world()
         self._season_complete = False
+        # Lifecycle: retirements leave, youth intake arrives
+        completed_label = self._season_label(self._season_index - 1)
+        next_label = self._season_label(self._season_index)
+        league_lvl = lifecycle.league_level(self.teams)
+        retirement_log = []
+        for team in self.teams:
+            gone = lifecycle.retire_players(team, completed_label)
+            nation_config = self._nations[team.nation_id].to_player_config()
+            arrivals = lifecycle.youth_intake(team, nation_config, league_lvl, next_label)
+            retirement_log.append({
+                "team":        team.name,
+                "retired":     [p.name for p in gone],
+                "arrived":     [p.name for p in arrivals],
+            })
+        self._save_world()
 
         if self._season_index >= self.num_seasons:
             return {
@@ -1156,6 +1182,7 @@ class GameEngine:
             "development_log":  development_log,
             "prestige_log":     prestige_log,
             "nation_log":       nation_log,
+            "retirement_log":   retirement_log,
         }
 
     # ── Blocking event state ──────────────────────────────────────────────────
@@ -1318,3 +1345,8 @@ class GameEngine:
             })
 
         return {"rounds": rounds}
+    
+    def all_players(self):
+        for t in self.teams:
+            yield from t.squad
+            yield from t.retired

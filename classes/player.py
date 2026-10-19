@@ -42,12 +42,14 @@ class Player:
 
         # Status
         self.is_retired         = False
+        self.retired_season     = None
 
         self.attributes         = self._generate_attributes()
         self.role               = self._determine_role()
         self.personality        = self._generate_personality()
         self.morale             = 0.0   # -10 to +10
         self.manager_relationship = 0.0 # -5 to +5
+        self.playing_as         = None
 
         # Season stats (reset each season)
         self.goals                      = 0
@@ -63,6 +65,7 @@ class Player:
         self.is_injured                 = False
         self.injury_matches_left        = 0
         self.injury_severity            = None  # minor | moderate | severe | critical
+        self.injury_until               = None  # last day that the player is unavailable
 
         # Career stats (cumulative)
         self.career_goals        = 0
@@ -242,13 +245,14 @@ class Player:
         reference_date (the game's clock, passed in by the engine).
         """
         age = self.age_on(reference_date)
-        ca_change = self._calculate_ca_change(age)
+        old_ca = self.current_ability
         self.current_ability = max(
-            1,
-            min(self.current_ability + ca_change, self.potential_ability)
+            1, min(old_ca + self._calculate_ca_change(age), self.potential_ability)
         )
-        self.attributes = self._generate_attributes()
-        self.role       = self._determine_role()
+        delta = self.current_ability - old_ca
+        # Every attribute moves by the same amount, so the player keeps his shape.
+        self.attributes = {k: max(1, v + delta) for k, v in self.attributes.items()}
+        self.role = self._determine_role()
         
         # Retirement check - players 35+ have an increasing chance to retire
         if age >= 35:

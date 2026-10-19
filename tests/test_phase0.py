@@ -7,6 +7,7 @@ from player_refs import find_player
 from save_slot import SaveSlot
 from validate_data import validate
 from rng import rng
+from lifecycle import youth_intake
 
 def make_engine(tmp_path, start_year=1896, seasons=1, seed=123):
     return GameEngine(start_year=start_year, num_seasons=seasons, seed=seed,
@@ -34,47 +35,54 @@ def test_same_seed_gives_same_world(tmp_path):
     assert a == b    # if this fails, some file still uses the global `random`
 
 
+import datetime
+from match_model import INJURY_DAYS_PER_MATCH
+
+
 def test_bans_and_injuries_are_actually_served(tmp_path, monkeypatch):
     monkeypatch.setattr("classes.engine.get_yellow_threshold", lambda season: 2)
-    engine = make_engine(tmp_path, start_year=1970)   # cards exist from 1970
-    must_miss = {}   # player_id -> [team_name, matches still to miss]
-    served = 0
-
-    def register(pid, team, n):
-        if pid:
-            must_miss[pid] = [team, n]
+    engine = make_engine(tmp_path, start_year=1970)
+    banned = {}    # player_id -> [team, matches still to miss]
+    hurt = {}      # player_id -> last day he must sit out
+    served = registered = 0
 
     for state in play(engine, until=("season_end",)):
         if state["type"] != "matchday":
             continue
+        today = datetime.date.fromisoformat(state["date"])
         for r in state["results"]:
             for team, xi_key in ((r["home_team"], "home_xi"), (r["away_team"], "away_xi")):
                 in_xi = {p["id"] for p in r[xi_key]}
-                for pid, entry in list(must_miss.items()):
-                    if entry[0] != team:
-                        continue
-                    assert pid not in in_xi, f"{pid} played for {team} while out"
-                    entry[1] -= 1
-                    served += 1
-                    if entry[1] == 0:
-                        del must_miss[pid]
+                for pid, entry in list(banned.items()):
+                    if entry[0] == team:
+                        assert pid not in in_xi, f"{pid} played while banned"
+                        entry[1] -= 1
+                        served += 1
+                        if entry[1] == 0:
+                            del banned[pid]
+                for pid, until in list(hurt.items()):
+                    if pid in in_xi:
+                        assert today > until, f"{pid} played while injured"
         # register new absences AFTER checking today's matches
         for r in state["results"]:
             for evt in r["events"]:
                 if evt["type"] == "injury":
-                    register(evt["player_id"], evt["team"], evt["matches_out"])
+                    hurt[evt["player_id"]] = today + datetime.timedelta(
+                        days=INJURY_DAYS_PER_MATCH * evt["matches_out"])
+                    registered += 1
                 elif evt["type"] == "red_card":
-                    n = 1 if evt.get("reason") == "second_yellow" else 3
-                    register(evt["player_id"], evt["team"], n)
+                    banned[evt["player_id"]] = [evt["team"],
+                                                1 if evt.get("reason") == "second_yellow" else 3]
         for s in state["newly_suspended"]:
             p, _ = find_player(engine.teams, name=s["player"], team_name=s["team"])
             if p:
-                register(p.id, s["team"], 1)
+                banned[p.id] = [s["team"], 1]
         for i in state["new_injuries"]:
             p, _ = find_player(engine.teams, name=i["player"], team_name=i["team"])
             if p:
-                register(p.id, i["team"], i["matches"])
-    assert served > 0   # otherwise the test proved nothing
+                hurt[p.id] = today + datetime.timedelta(days=INJURY_DAYS_PER_MATCH * i["matches"])
+                registered += 1
+    assert served > 0 and registered > 0
 
 
 def test_resume_continues_from_saved_season(tmp_path):
@@ -127,3 +135,17 @@ def test_mid_season_save_resumes_exactly(tmp_path):
     next_b = b.advance()
     
     assert next_a == next_b
+    
+def test_better_youth_facilities_produce_better_prospects():
+    cfg = {"pa_cap": 200, "wonderkid_pa_cap": 200, "wonderkid_chance": 0.0}
+
+    def mean_pa(youth_facility):
+        team = Team("T", 60, 60, 60)
+        team.facilities["youth"] = youth_facility
+        pas = []
+        for _ in range(60):
+            team.squad = []
+            pas += [p.potential_ability for p in youth_intake(team, cfg, 60.0, "1897/98")]
+        return sum(pas) / len(pas)
+
+    assert mean_pa(90) > mean_pa(10) + 8

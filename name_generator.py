@@ -148,3 +148,25 @@ def generate_squad(team_name, average_ca=70, nation="Myria",
             p.squad_number = n
 
     return squad
+
+YOUTH_PA_OFFSET = 10
+
+def generate_youth(position, level, nation_id, nation_config, ref_year, home_region=None):
+    wonderkid_multiplier = 1.0
+    age = rng.randint(16, 18)
+    pa = max(30, int(rng.gauss(level + YOUTH_PA_OFFSET, 8)))
+    is_wonderkid = False
+    if rng.random() < nation_config["wonderkid_chance"] * wonderkid_multiplier:
+        pa = min(pa + rng.randint(15, 30), nation_config["wonderkid_pa_cap"])
+        is_wonderkid = True
+    else:
+        pa = min(pa, nation_config["pa_cap"])
+    ca = max(1, pa - rng.randint(15, 30))
+    player = Player(
+        name=generate_myrian_name(), position=position,
+        birth_date=_random_birth_date(ref_year - age),
+        current_ability=ca, potential_ability=pa,
+        nationality=nation_id, birth_region=home_region
+    )
+    player.is_wonderkid = is_wonderkid
+    return player

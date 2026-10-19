@@ -164,6 +164,7 @@ class TeamConfig:
     wage_budget:            int
     competitions:           list[str] = field(default_factory=list)
     league_nation_id_year:  Optional[int] = None
+    facilities:             dict = field(default_factory=dict)
 
     @property
     def avg_ca(self) -> int:
@@ -259,6 +260,7 @@ def load_teams() -> dict[str, TeamConfig]:
             budget=int(entry.get("budget", 1000)),
             wage_budget=int(entry.get("wage_budget", 300)),
             competitions=entry.get("competitions", []),
+            facilities=entry.get("facilities", {}),
         )
     return result
 

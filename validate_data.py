@@ -1,6 +1,7 @@
 from collections import Counter
 from data_loader import (_read_yaml, load_nations, load_teams,
                          load_competitions, load_journalists)
+from facilities import DEFAULT_FACILITIES
 
 def validate() -> list[str]:
     errors = []
@@ -31,6 +32,13 @@ def validate() -> list[str]:
             errors.append(f"journalist {j.id}: unknown nation '{j.nation_id}'")
         if j.favorite_team and j.favorite_team not in team_names:
             errors.append(f"journalist {j.id}: unknown favorite team '{j.favorite_team}'")
+            
+    for t in load_teams().values():
+        for key, value in t.facilities.items():
+            if key not in DEFAULT_FACILITIES:
+                errors.append(f"team {t.id}: unknown facility '{key}'")
+            elif not 0 <= value <= 100:
+                errors.append(f"team {t.id}: facility '{key}' must be between 0 and 100")
 
     return errors
 

@@ -266,7 +266,7 @@ def get_player(player_id: str):
     Returns: player dict or 404 if not found
     """
     for team in engine.teams:
-        for player in team.squad:
+        for player in team.squad + team.retired:
             if player.id == player_id:
                 return jsonify(_serialize_player(player, team.name, _sim_today()))
             
@@ -321,7 +321,7 @@ def _serialize_player(
         "wage":                     player.wage,
         "is_injured":               player.is_injured,
         "injury_severity":          player.injury_severity,
-        "injury_matches_left":      player.injury_matches_left,
+        "injury_until":             player.injury_until.isoformat() if player.injury_until else None,
         "is_suspended":             player.is_suspended,
         "suspension_matches_left":  player.suspension_matches_left,
         "is_retired":               player.is_retired,
