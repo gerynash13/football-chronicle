@@ -25,7 +25,8 @@ class Team:
         self.wage_budget = 300
         self.retired = []
         self.facilities = dict(DEFAULT_FACILITIES)
-        self.youth = list[Player]
+        self.youth = []  # Academy players
+        self.released = []  # Let go from the academy
 
     def add_player(self, player):
         self.squad.append(player)

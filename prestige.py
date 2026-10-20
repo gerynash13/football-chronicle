@@ -36,6 +36,7 @@ from data_loader import prestige_to_tier
 # CONSTANTS
 TEAM_DECAY_RATE = 0.05 
 TEAM_PRESTIGE_FLOOR = 100.0
+UPSET_SHARE = 0.15  # Share of each season's pot paid out for upsets
 
 # Upset bonus
 
@@ -103,45 +104,46 @@ def update_team_prestige(
     upset_bonuses: dict[str, float] | None= None,
 ) -> list[dict]:
     """
-    Apply the three prestige stages to every team in the competition.
+    Zero-sum prestige. Every club pays a tax into a pot; the pot is paid out by
+    league position (plus a slice for upsets). Total prestige never changes, so
+    it cannot inflate: clubs only gain at each other's expense.
 
-    standings     : serialized standings list from engine._serialize_standings()
-    comp_prestige : the competition's prestige value (stored on the Competition object)
-    upset_bonuses : result of collect_upset_bonuses(), or None
-
-    Returns a log list so the between_seasons state can display changes.
+    comp_prestige is kept for the call signature. Later it will decide how the
+    pot is split between competitions (league, cup, ...).
     """
     upset_bonuses   = upset_bonuses or {}
     position_map    = {row["team"]: i + 1 for i, row in enumerate(standings)}
     total_teams     = len(standings)
-    log             = []
+    total_before    = sum(t.prestige for t in teams)
+    old             = {t.name: t.prestige for t in teams}
+    
+    pot = TEAM_DECAY_RATE * total_before
+    total_bonus = sum(upset_bonuses.get(t.name, 0.0) for t in teams)
+    upset_pot = pot * UPSET_SHARE if total_bonus > 0 else 0.0
+    position_pot = pot - upset_pot
+    total_weight = total_teams * (total_teams + 1) / 2
     
     for team in teams:
-        old = round(team.prestige, 1)
-        
-        # Stage 1: Decay
-        team.prestige *= (1.0 - TEAM_DECAY_RATE)
-        
-        # Stage 2: Position Award
+        new = team.prestige * (1.0 - TEAM_DECAY_RATE)
         pos = position_map.get(team.name)
         if pos is not None:
-            team.prestige += _position_award(pos, total_teams, comp_prestige)
-            
-        # Stage 3: Upset Bonus
-        team.prestige += upset_bonuses.get(team.name, 0.0)
+            new += position_pot * (total_teams - pos + 1) / total_weight
+        if total_bonus > 0:
+            new += upset_pot * upset_bonuses.get(team.name, 0.0) / total_bonus
+        team.prestige = max(new, TEAM_PRESTIGE_FLOOR)
         
-        # Stage 4: Floor
-        team.prestige = max(team.prestige, TEAM_PRESTIGE_FLOOR)
-        team.prestige = round(team.prestige, 1)
-        
+    # the floor can add a little, so scale everyone to keep the total exactly constant
+    factor = total_before / sum(t.prestige for t in teams)
+    log = []
+    for team in teams:
+        team.prestige = round(team.prestige * factor, 1)
         log.append({
-            "team":         team.name,
-            "old_prestige": old,
+            "team": team.name,
+            "old_prestige": round(old[team.name], 1),
             "new_prestige": team.prestige,
-            "delta":        round(team.prestige - old, 1),
-            "position":     pos,
+            "delta": round(team.prestige - old[team.name], 1),
+            "position": position_map.get(team.name),
         })
-        
     return log
 
 
@@ -180,6 +182,9 @@ def update_nation_prestige(
         nid = getattr(team, "nation_id", None)
         if nid:
             nation_teams.setdefault(nid, []).append(team)
+            
+    if len(nation_teams) < 2:
+        return []
             
     position_map = {row["team"]: i + 1 for i, row in enumerate(standings)}
     total_teams = len(standings)

@@ -1,0 +1,726 @@
+No records file found. Starting fresh record book.
+No world state file found. Starting with YAML prestige values and empty tier guards.
+season   goals/g  home%  draw%  away% r(str,pts)  avgCA  avgAge   alumni  minSquad minAvail forfeits  youth released
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1896/97 completed!
+================================================================================
+
+1896/97     3.45   48.2   19.6   32.1       0.43   58.4    23.9        0        13        9        0   25.6        0
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1897/98 completed!
+================================================================================
+
+1897/98     3.59   48.2   19.6   32.1       0.44   61.8    22.9        0        17       15        0   22.0       11
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1898/99 completed!
+================================================================================
+
+1898/99     3.21   39.3   33.9   26.8       0.72   63.3    23.9        0        18       17        0   24.5       31
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1899/00 completed!
+================================================================================
+
+1899/00     3.55   51.8   17.9   30.4       0.72   64.4    24.9        0        18       16        0   26.4       57
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1900/01 completed!
+================================================================================
+
+1900/01     3.68   62.5   25.0   12.5       0.50   65.0    25.8        1        18       16        0   27.2       90
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1901/02 completed!
+================================================================================
+
+1901/02     3.59   50.0   21.4   28.6      -0.57   65.5    26.6        2        20       18        0   25.8      140
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1902/03 completed!
+================================================================================
+
+1902/03     3.88   44.6   17.9   37.5      -0.13   65.8    27.4        4        20       17        0   23.2      199
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1903/04 completed!
+================================================================================
+
+1903/04     4.02   33.9   21.4   44.6       0.47   66.1    28.2        6        20       16        0   23.4      237
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1904/05 completed!
+================================================================================
+
+1904/05     3.86   41.1   21.4   37.5       0.26   65.9    29.1        7        20       17        0   22.6      283
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1905/06 completed!
+================================================================================
+
+1905/06     3.50   53.6   25.0   21.4      -0.10   65.7    29.8        9        20       18        0   22.0      326
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1906/07 completed!
+================================================================================
+
+1906/07     3.55   46.4   21.4   32.1       0.32   65.9    30.1       17        20       16        0   21.8      363
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1907/08 completed!
+================================================================================
+
+1907/08     3.48   39.3   23.2   37.5       0.28   65.8    30.3       24        20       18        0   21.6      397
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1908/09 completed!
+================================================================================
+
+1908/09     3.20   41.1   21.4   37.5       0.33   65.8    30.7       31        20       17        0   21.4      436
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1909/10 completed!
+================================================================================
+
+1909/10     3.29   44.6   21.4   33.9       0.39   66.2    30.5       41        20       18        0   22.0      461
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1910/11 completed!
+================================================================================
+
+1910/11     3.52   46.4   16.1   37.5       0.53   67.0    30.4       51        20       18        0   21.9      493
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1911/12 completed!
+================================================================================
+
+1911/12     3.96   53.6   23.2   23.2       0.55   67.6    29.9       65        20       16        0   20.5      532
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1912/13 completed!
+================================================================================
+
+1912/13     3.46   50.0   23.2   26.8       0.34   69.8    29.0       81        20       17        0   20.8      555
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1913/14 completed!
+================================================================================
+
+1913/14     3.59   50.0    7.1   42.9       0.79   70.2    29.0       91        20       18        0   20.5      589
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1914/15 completed!
+================================================================================
+
+1914/15     3.52   46.4   23.2   30.4       0.65   71.8    28.0      110        17       16        0   20.9      610
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1915/16 completed!
+================================================================================
+
+1915/16     3.73   53.6   26.8   19.6       0.70   72.0    26.9      128        18       15        0   20.4      636
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1916/17 completed!
+================================================================================
+
+1916/17     3.45   35.7   30.4   33.9       0.55   73.4    26.5      140        18       15        0   21.2      660
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1917/18 completed!
+================================================================================
+
+1917/18     4.12   55.4   17.9   26.8       0.85   74.7    25.5      157        18       14        0   20.2      696
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1918/19 completed!
+================================================================================
+
+1918/19     3.70   42.9   23.2   33.9       0.89   75.5    25.5      165        18       16        0   20.4      727
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1919/20 completed!
+================================================================================
+
+1919/20     3.57   44.6   14.3   41.1       0.72   76.3    25.9      169        17       14        0   21.8      753
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1920/21 completed!
+================================================================================
+
+1920/21     3.45   48.2   21.4   30.4       0.59   76.7    26.8      170        18       17        0   22.2      788
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1921/22 completed!
+================================================================================
+
+1921/22     3.59   57.1   16.1   26.8       0.79   76.6    27.5      172        18       16        0   23.4      816
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1922/23 completed!
+================================================================================
+
+1922/23     3.68   53.6    8.9   37.5       0.71   76.1    28.0      175        19       15        0   22.8      857
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1923/24 completed!
+================================================================================
+
+1923/24     4.09   46.4   17.9   35.7       0.42   75.9    28.5      179        19       16        0   22.5      895
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1924/25 completed!
+================================================================================
+
+1924/25     3.79   48.2   30.4   21.4       0.77   75.4    28.8      184        20       17        0   23.0      925
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1925/26 completed!
+================================================================================
+
+1925/26     3.55   41.1   26.8   32.1       0.67   75.1    29.4      188        20       15        0   22.1      969
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1926/27 completed!
+================================================================================
+
+1926/27     3.88   35.7   19.6   44.6       0.62   74.9    29.8      194        20       17        0   21.6     1008
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1927/28 completed!
+================================================================================
+
+1927/28     3.48   35.7   14.3   50.0       0.40   74.3    30.1      202        20       16        0   22.0     1041
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1928/29 completed!
+================================================================================
+
+1928/29     3.29   50.0   19.6   30.4       0.75   74.0    30.0      211        20       18        0   21.2     1078
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1929/30 completed!
+================================================================================
+
+1929/30     3.55   42.9   19.6   37.5       0.73   73.3    29.7      223        19       15        0   22.6     1097
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1930/31 completed!
+================================================================================
+
+1930/31     3.27   32.1   25.0   42.9       0.66   72.2    29.4      232        20       16        0   21.6     1133
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1931/32 completed!
+================================================================================
+
+1931/32     3.62   50.0   12.5   37.5       0.51   73.0    28.6      249        20       16        0   20.4     1170
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1932/33 completed!
+================================================================================
+
+1932/33     3.91   41.1   17.9   41.1       0.71   72.7    28.6      258        20       18        0   21.0     1198
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1933/34 completed!
+================================================================================
+
+1933/34     3.71   55.4   17.9   26.8       0.40   72.4    27.9      272        20       17        0   20.6     1226
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1934/35 completed!
+================================================================================
+
+1934/35     3.70   39.3   16.1   44.6       0.12   72.6    26.9      290        20       17        0   19.6     1257
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1935/36 completed!
+================================================================================
+
+1935/36     3.39   41.1   32.1   26.8       0.86   73.2    26.6      300        20       16        0   19.9     1285
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1936/37 completed!
+================================================================================
+
+1936/37     3.64   44.6   14.3   41.1       0.70   73.7    26.9      307        20       17        0   22.1     1303
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1937/38 completed!
+================================================================================
+
+1937/38     3.16   60.7   14.3   25.0       0.85   74.4    27.0      315        20       18        0   22.2     1335
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1938/39 completed!
+================================================================================
+
+1938/39     3.46   44.6   21.4   33.9       0.50   74.9    27.2      321        20       17        0   21.6     1374
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1939/40 completed!
+================================================================================
+
+1939/40     3.70   35.7   17.9   46.4       0.80   75.3    27.2      330        20       18        0   22.6     1399
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1940/41 completed!
+================================================================================
+
+1940/41     3.54   53.6   12.5   33.9       0.80   75.6    27.6      335        20       17        0   23.0     1433
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1941/42 completed!
+================================================================================
+
+1941/42     3.82   57.1   14.3   28.6       0.51   75.6    28.0      340        20       18        0   23.4     1465
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1942/43 completed!
+================================================================================
+
+1942/43     3.75   48.2   23.2   28.6       0.96   75.8    28.4      345        20       17        0   22.2     1509
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1943/44 completed!
+================================================================================
+
+1943/44     3.68   48.2   21.4   30.4       0.73   75.1    28.7      352        20       16        0   22.5     1541
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1944/45 completed!
+================================================================================
+
+1944/45     3.64   42.9   17.9   39.3       0.58   74.8    29.3      356        20       17        0   23.8     1569
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1945/46 completed!
+================================================================================
+
+1945/46     3.93   42.9   14.3   42.9       0.82   74.4    29.2      366        20       16        0   23.1     1605
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1946/47 completed!
+================================================================================
+
+1946/47     3.55   42.9   25.0   32.1       0.70   74.1    29.5      373        20       18        0   21.9     1650
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1947/48 completed!
+================================================================================
+
+1947/48     4.18   41.1   17.9   41.1       0.86   73.8    29.9      379        20       16        0   22.4     1682
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1948/49 completed!
+================================================================================
+
+1948/49     3.30   44.6   28.6   26.8       0.40   73.3    29.6      389        20       17        0   21.8     1716
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1949/50 completed!
+================================================================================
+
+1949/50     3.30   55.4   19.6   25.0       0.49   72.6    29.0      401        20       17        0   22.0     1740
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1950/51 completed!
+================================================================================
+
+1950/51     3.91   44.6   28.6   26.8       0.46   72.6    29.1      410        20       17        0   21.9     1775
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1951/52 completed!
+================================================================================
+
+1951/52     3.98   51.8   16.1   32.1       0.24   72.9    28.0      428        19       16        0   20.8     1807
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1952/53 completed!
+================================================================================
+
+1952/53     3.84   50.0   23.2   26.8       0.51   72.5    27.7      440        19       16        0   21.0     1833
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1953/54 completed!
+================================================================================
+
+1953/54     3.70   46.4   21.4   32.1       0.70   72.4    27.7      448        20       17        0   21.5     1861
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1954/55 completed!
+================================================================================
+
+1954/55     3.12   37.5   21.4   41.1       0.90   72.5    27.5      460        18       14        0   22.0     1888
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1955/56 completed!
+================================================================================
+
+1955/56     3.29   41.1   16.1   42.9       0.61   72.9    27.6      468        19       15        0   22.2     1921
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1956/57 completed!
+================================================================================
+
+1956/57     3.61   53.6   19.6   26.8       0.64   73.9    27.2      479        20       15        0   21.9     1952
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1957/58 completed!
+================================================================================
+
+1957/58     3.84   42.9   16.1   41.1       0.69   74.2    27.6      484        20       15        0   21.9     1988
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1958/59 completed!
+================================================================================
+
+1958/59     3.77   51.8   28.6   19.6       0.62   75.1    27.5      494        20       18        0   21.6     2022
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1959/60 completed!
+================================================================================
+
+1959/60     3.71   42.9   28.6   28.6       0.68   75.1    27.7      500        20       17        0   21.8     2055
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1960/61 completed!
+================================================================================
+
+1960/61     3.82   44.6   23.2   32.1       0.92   75.3    28.2      505        19       18        0   22.5     2086
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1961/62 completed!
+================================================================================
+
+1961/62     3.48   50.0   17.9   32.1       0.79   75.9    28.5      511        19       15        0   22.9     2119
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1962/63 completed!
+================================================================================
+
+1962/63     3.64   37.5   25.0   37.5       0.64   75.8    29.0      516        20       16        0   22.9     2156
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1963/64 completed!
+================================================================================
+
+1963/64     3.29   30.4   44.6   25.0       0.70   75.7    29.3      521        20       16        0   23.0     2190
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1964/65 completed!
+================================================================================
+
+1964/65     3.61   57.1   10.7   32.1       0.39   75.4    29.1      532        20       15        0   21.8     2230
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1965/66 completed!
+================================================================================
+
+1965/66     3.61   58.9   16.1   25.0       0.55   76.0    28.6      545        19       14        0   21.5     2260
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1966/67 completed!
+================================================================================
+
+1966/67     3.88   41.1   28.6   30.4       0.70   75.8    28.4      555        20       15        0   21.5     2288
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1967/68 completed!
+================================================================================
+
+1967/68     3.34   42.9   12.5   44.6       0.64   76.0    28.8      562        19       16        0   21.1     2328
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1968/69 completed!
+================================================================================
+
+1968/69     3.71   44.6   17.9   37.5       0.64   75.9    28.5      573        20       17        0   21.2     2356
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1969/70 completed!
+================================================================================
+
+1969/70     3.61   41.1   23.2   35.7       0.54   76.3    28.4      586        18       16        0   22.5     2380
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1970/71 completed!
+================================================================================
+
+1970/71     3.80   58.9   26.8   14.3       0.26   76.3    27.8      599        19       14        0   21.5     2415
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1971/72 completed!
+================================================================================
+
+1971/72     3.91   42.9   25.0   32.1       0.75   75.8    27.8      606        20       15        0   22.0     2441
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1972/73 completed!
+================================================================================
+
+1972/73     3.73   46.4   14.3   39.3       0.81   77.0    27.7      619        17       15        0   21.8     2479
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1973/74 completed!
+================================================================================
+
+1973/74     3.36   48.2   14.3   37.5       0.69   76.3    27.3      629        17       16        0   21.8     2508
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1974/75 completed!
+================================================================================
+
+1974/75     3.38   35.7   19.6   44.6       0.89   76.2    27.5      637        17       14        0   22.2     2538
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json
+
+================================================================================
+Season 1975/76 completed!
+================================================================================
+
+1975/76     3.57   44.6   17.9   37.5       0.70   76.1    27.6      642        19       16        0   22.4     2567
+Saved 8 teams to /tmp/tmp_07svbmm/calib/teams_data.json
+Saved records to /tmp/tmp_07svbmm/calib/records_data.json
+Saved world state to /tmp/tmp_07svbmm/calib/world_state.json

@@ -1,7 +1,7 @@
 import json, os, shutil
 
 SCHEMA_VERSION = 2
-ENGINE_VERSION = 5
+ENGINE_VERSION = 7
 
 class SaveSlot:
     """A folder holding one saved world"""

@@ -266,7 +266,7 @@ def get_player(player_id: str):
     Returns: player dict or 404 if not found
     """
     for team in engine.teams:
-        for player in team.squad + team.retired:
+        for player in team.squad + team.retired + team.youth + team.released:
             if player.id == player_id:
                 return jsonify(_serialize_player(player, team.name, _sim_today()))
             
@@ -286,6 +286,14 @@ def get_squad(team_name: str):
         _serialize_player(player, team.name, reference_date)
         for player in team.squad
     ])
+    
+@app.route("/api/youth/<team_name>", methods=["GET"])
+def get_youth(team_name: str):
+    team = next((t for t in engine.teams if t.name == team_name), None)
+    if team is None:
+        abort(404)
+    ref = _sim_today()
+    return jsonify([_serialize_player(p, team.name, ref) for p in team.youth])
 
 
 # Serialization helpers

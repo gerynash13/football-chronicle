@@ -41,7 +41,7 @@
   competitions:
     - lhiga_alhika
     - kopa_protonas
-  facilities: { stadium: 50, training: 50, youth: 50, youth_recruitment: 50 }
+  facilities: { stadium: 50, training: 50, youth: 55, youth_recruitment: 55 }
 
 - id: kluba_maritima_thesias
   name: Kluba Maritima Thesias
@@ -58,7 +58,7 @@
   competitions:
     - lhiga_alhika
     - kopa_protonas
-  facilities: { stadium: 50, training: 50, youth: 50, youth_recruitment: 50 }
+  facilities: { stadium: 50, training: 50, youth: 75, youth_recruitment: 60 }
 
 - id: mercaria_kluba
   name: Mercaria Kluba
@@ -75,7 +75,7 @@
   competitions:
     - lhiga_alhika
     - kopa_protonas
-  facilities: { stadium: 50, training: 50, youth: 50, youth_recruitment: 50 }
+  facilities: { stadium: 50, training: 50, youth: 60, youth_recruitment: 55 }
 
 - id: portavar_kluba
   name: Portavar Kluba
@@ -92,7 +92,7 @@
   competitions:
     - lhiga_alhika
     - kopa_protonas
-  facilities: { stadium: 50, training: 50, youth: 50, youth_recruitment: 50 }
+  facilities: { stadium: 50, training: 50, youth: 40, youth_recruitment: 45 }
 
 - id: kluba_sportika_esalumou
   name: Kluba Sportika Esalumou
@@ -109,7 +109,7 @@
   competitions:
     - lhiga_alhika
     - kopa_protonas
-  facilities: { stadium: 50, training: 50, youth: 50, youth_recruitment: 50 }
+  facilities: { stadium: 50, training: 50, youth: 85, youth_recruitment: 70 }
 
 - id: kluba_sportika_mileiu
   name: Kluba Sportika Mileiu
@@ -126,7 +126,7 @@
   competitions:
     - lhiga_alhika
     - kopa_protonas
-  facilities: { stadium: 50, training: 50, youth: 50, youth_recruitment: 50 }
+  facilities: { stadium: 50, training: 50, youth: 30, youth_recruitment: 40 }
 
 - id: kluba_sportika_galvononos
   name: Kluba Sportika Galvononos
@@ -143,7 +143,7 @@
   competitions:
     - lhiga_alhika
     - kopa_protonas
-  facilities: { stadium: 50, training: 50, youth: 50, youth_recruitment: 50 }
+  facilities: { stadium: 50, training: 50, youth: 45, youth_recruitment: 50 }
 
 - id: populara_kluba_galvononos
   name: Populara Kluba Galvononos

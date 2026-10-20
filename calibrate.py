@@ -2,7 +2,7 @@
 import sys, tempfile, statistics
 from classes import GameEngine
 from save_slot import SaveSlot
-from lifecycle import top11_level
+from lifecycle import _top_level
 
 def pearson(xs, ys):
     mx, my = statistics.mean(xs), statistics.mean(ys)
@@ -19,7 +19,8 @@ def run(seasons=30, seed=1, start_year=1896):
         strength = {}
         print(f"{'season':8}{'goals/g':>8}{'home%':>7}{'draw%':>7}{'away%':>7}"
               f"{'r(str,pts)':>11}{'avgCA':>7}{'avgAge':>8}{'alumni':>9}{'minSquad':>10}"
-              f"{'minAvail':>9}{'forfeits':>9}")
+              f"{'minAvail':>9}{'forfeits':>9}{'youth':>7}{'released':>9}"
+              f"{'myria':>8}{'tier':>11}")
         while state["type"] not in ("game_over", "error"):
             if state["type"] == "blocking_event":
                 state = engine.choose(0)
@@ -30,7 +31,7 @@ def run(seasons=30, seed=1, start_year=1896):
                                 for e in r["events"] if e["type"] == "forfeit")
             if state["type"] == "matchday" and state["competition_type"] == "league":
                 if not strength:
-                    strength = {t.name: top11_level(t) for t in engine.teams}
+                    strength = {t.name: _top_level(t.squad) for t in engine.teams}
                 for r in state["results"]:
                     matches += 1
                     goals += r["home_goals"] + r["away_goals"]
@@ -51,7 +52,10 @@ def run(seasons=30, seed=1, start_year=1896):
                       f"{statistics.mean(p.age_on(end) for p in players):8.1f}"
                       f"{sum(len(t.retired) for t in engine.teams):9d}"
                       f"{min(sum(not p.is_retired for p in t.squad) for t in engine.teams):10d}"
-                      f"{min_avail:9d}{forfeits:9d}")
+                      f"{min_avail:9d}{forfeits:9d}"
+                      f"{statistics.mean(len(t.youth) for t in engine.teams):7.1f}"
+                      f"{sum(len(t.released) for t in engine.teams):9d}"
+                      f"{engine._nations['myria'].prestige:8.0f}{engine._nations['myria'].tier:11d}")
                 matches = goals = home = draw = away = 0
                 min_avail, forfeits = 99, 0
                 strength = {}

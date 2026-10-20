@@ -63,7 +63,6 @@ except ModuleNotFoundError:
     from player import Player
     from competition import Competition, CupCompetition, SupercupCompetition
     from season import Season
-from name_generator import generate_squad
 from data_manager import (
     save_teams_to_file,
     load_teams_from_file,
@@ -271,6 +270,7 @@ class GameEngine:
             self.teams = load_teams_from_file(self.slot.path("teams_data.json"))
         else:
             self.teams = self._bootstrap_teams()
+            self._seed_youth()
             
         self._start_season()
         
@@ -1149,20 +1149,29 @@ class GameEngine:
 
         self._season_index   += 1
         self._season_complete = False
-        # Lifecycle: retirements leave, youth intake arrives
+        
+        # Lifecycle: retire, promote, release, new academy intake
         completed_label = self._season_label(self._season_index - 1)
         next_label = self._season_label(self._season_index)
+        on_date = self.calendar.season_end
         league_lvl = lifecycle.league_level(self.teams)
         retirement_log = []
         for team in self.teams:
-            gone = lifecycle.retire_players(team, completed_label)
-            nation_config = self._nations[team.nation_id].to_player_config()
-            arrivals = lifecycle.youth_intake(team, nation_config, league_lvl, next_label)
+            for p in team.youth:
+                p.start_new_season(on_date)
+            retired = lifecycle.retire_players(team, completed_label)
+            promoted = lifecycle.ai_promotions(team, on_date)
+            released = lifecycle.release_overage(team, on_date)
+            cfg = self._nations[team.nation_id].to_player_config()
+            arrivals = lifecycle.youth_intake(team, cfg, league_lvl, next_label)
             retirement_log.append({
-                "team":        team.name,
-                "retired":     [p.name for p in gone],
-                "arrived":     [p.name for p in arrivals],
+                "team": team.name,
+                "retired":  [p.name for p in retired],
+                "promoted": [p.name for p in promoted],
+                "released": [p.name for p in released],
+                "arrived":  [p.name for p in arrivals],
             })
+            
         self._save_world()
 
         if self._season_index >= self.num_seasons:
@@ -1216,6 +1225,13 @@ class GameEngine:
                 for i, c in enumerate(event.choices)
             ],
         }
+        
+    def _seed_youth(self):
+        label = self._season_label(self._season_index)
+        league_lvl = lifecycle.league_level(self.teams)
+        for team in self.teams:
+            cfg = self._nations[team.nation_id].to_player_config()
+            lifecycle.seed_youth(team, cfg, league_lvl, label)
 
     # ── Helpers ───────────────────────────────────────────────────────────────
 
@@ -1350,3 +1366,5 @@ class GameEngine:
         for t in self.teams:
             yield from t.squad
             yield from t.retired
+            yield from t.youth
+            yield from t.released
