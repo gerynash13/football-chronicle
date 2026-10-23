@@ -18,7 +18,7 @@ class Season:
         
         for team in self.teams:
             for player in team.squad:
-                player.end_season(self.year, team.name)
+                player.end_season(self.year, team.name, team_id=team.id)
                 
         self.is_complete = True
         print(f"\n{'='*80}")

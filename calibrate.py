@@ -3,6 +3,7 @@ import sys, tempfile, statistics
 from classes import GameEngine
 from save_slot import SaveSlot
 from lifecycle import _top_level
+from collections import Counter
 
 def pearson(xs, ys):
     mx, my = statistics.mean(xs), statistics.mean(ys)
@@ -55,11 +56,13 @@ def run(seasons=30, seed=1, start_year=1896):
                       f"{min_avail:9d}{forfeits:9d}"
                       f"{statistics.mean(len(t.youth) for t in engine.teams):7.1f}"
                       f"{sum(len(t.released) for t in engine.teams):9d}"
-                      f"{engine._nations['myria'].prestige:8.0f}{engine._nations['myria'].tier:11d}")
+                      f"{engine._nations['myria'].prestige:8.0f}{engine._nations['myria'].tier:11}")
                 matches = goals = home = draw = away = 0
                 min_avail, forfeits = 99, 0
                 strength = {}
             state = engine.advance()
+        titles = Counter(c["winner"] for c in engine.archive.champions("lhiga_alhika"))
+        print("Titles:", titles.most_common())
             
 def available(team):
     return sum(not (p.is_retired or p.is_injured or p.is_suspended) for p in team.squad)

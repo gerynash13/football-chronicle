@@ -18,6 +18,7 @@ class Competition:
         self.max_subs = max_subs
         self.season_year = season_year
         self.prestige = prestige
+        self.key = None
         
     def initialize_standings(self):
         standings = {}
@@ -119,6 +120,8 @@ class Competition:
                 result = {
                     "home_team": home_team.name,
                     "away_team": away_team.name,
+                    "home_team_id": home_team.id,
+                    "away_team_id": away_team.id,
                     "home_goals": home_goals,
                     "away_goals": away_goals,
                     "events": events,
@@ -271,6 +274,8 @@ class CupCompetition(Competition):
             result = {
                 "home_team": home.name,
                 "away_team": away.name,
+                "home_team_id": home.id,
+                "away_team_id": away.id,
                 "home_goals": hg,
                 "away_goals": ag,
                 "events": events,
@@ -683,6 +688,8 @@ class SupercupCompetition(Competition):
         return {
             "home_team": home.name,
             "away_team": away.name,
+            "home_team_id": home.id,
+            "away_team_id": away.id,
             "home_goals": hg,
             "away_goals": ag,
             "events": events,

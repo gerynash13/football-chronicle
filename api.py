@@ -236,6 +236,7 @@ def get_teams():
         row = standings.get(team.name, {})
         teams.append({
             "name": team.name,
+            "id": team.id,
             "prestige": team.prestige,
             "home_region": team.home_region,
             "morale": team.morale,
@@ -278,7 +279,7 @@ def get_squad(team_name: str):
     Return full squad details by team name.
     Returns: squad dict or 404 if not found
     """
-    team = next((t for t in engine.teams if t.name == team_name), None)
+    team = _find_team(team_name)
     if team is None:
         abort(404)
     reference_date = _sim_today()
@@ -289,7 +290,7 @@ def get_squad(team_name: str):
     
 @app.route("/api/youth/<team_name>", methods=["GET"])
 def get_youth(team_name: str):
-    team = next((t for t in engine.teams if t.name == team_name), None)
+    team = _find_team(team_name)
     if team is None:
         abort(404)
     ref = _sim_today()
@@ -349,6 +350,8 @@ def _serialize_player(
         "career_history":           player.career_history,
     }
     
+def _find_team(key: str):
+    return next((t for t in engine.teams if t.id == key or t.name == key), None)
     
 # Dev utilities
 
@@ -368,6 +371,35 @@ def ping():
         "managed_team": engine.managed_team
     })
     
+def _archive():
+    return engine.archive
+
+@app.route("/api/history/champions", methods=["GET"])
+def history_champions():
+    if _archive() is None:
+        return jsonify([])
+    return jsonify(_archive().champions(request.args.get("competition")))
+
+@app.route("/api/history/table", methods=["GET"])
+def history_table():
+    season = request.args.get("season")
+    if not season or _archive() is None:
+        return jsonify({"error": "pass ?season=1896/97&competition=lhiga_alhika"}), 400
+    return jsonify(_archive().table(season, request.args.get("competition", "lhiga_alhika")))
+
+@app.route("/api/history/team/<team_id>", methods=["GET"])
+def history_team(team_id: str):
+    return jsonify(_archive().team_history(team_id) if _archive() else [])
+
+@app.route("/api/history/leaders", methods=["GET"])
+def history_leaders():
+    if _archive() is None:
+        return jsonify([])
+    category = request.args.get("category", "goals")
+    if category not in ("goals", "assists", "appearances", "clean_sheets"):
+        return jsonify({"error": "unknown category"}), 400
+    limit = min(int(request.args.get("limit", 10)), 100)
+    return jsonify(_archive().leaders(category, limit, request.args.get("team_id")))
     
 # Entry point
 

@@ -185,7 +185,7 @@ class Player:
 
     # ── Season lifecycle ──────────────────────────────────────────────────────
 
-    def end_season(self, season_name, team_name, season_date=None):
+    def end_season(self, season_name, team_name, season_date=None, team_id=None):
         """
         Roll season stats into career totals, save history record, reset.
         
@@ -207,6 +207,7 @@ class Player:
         self.career_history.append({
             "season":       season_name,
             "team":         team_name,
+            "team_id":      team_id,
             "age":          recorded_age,
             "goals":        self.goals,
             "assists":      self.assists,

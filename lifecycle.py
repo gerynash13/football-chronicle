@@ -8,7 +8,7 @@ MIN_PROMOTION_AGE = 17
 MAX_YOUTH_AGE = 20        # Promote or release youth players at this age
 MAX_YOUTH = 24
 
-YOUTH_PA_ANCHOR = 70        # Centre of academy potential for an average club
+YOUTH_PA_ANCHOR = 60        # Centre of academy potential for an average club
 CLUB_WEIGHT = 0.3           # Weight of club culture in youth selection
 YOUTH_FACILITY_POINTS = 12  # youth facilities 100 = +12 potential, 0 = -12 potential
 

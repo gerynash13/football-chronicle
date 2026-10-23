@@ -106,6 +106,7 @@ from save_slot import SaveSlot, ENGINE_VERSION
 from match_model import OFF_MATCH_INJURY_RATE, INJURY_DAYS_PER_MATCH
 import lifecycle
 from facilities import facilities_from_config
+from archive import Archive, build_payload, leaderboard_rows
 
 
 class GameEngine:
@@ -139,6 +140,8 @@ class GameEngine:
         self.managed_team: str | None = None
         self._tier_seasons: dict = {}     # Tracks which seasons each tier has been competed in, for prestige calculations
         self._committed_tiers: dict = {}   # Tracks which tiers the player has committed to, for prestige calculations
+        self.archive = None
+        self._pending_archive = None
         
         # Previous season's results - used by _start_season() to resolve supercup participants.
         # Populated at the end of _finalise_season().
@@ -257,6 +260,8 @@ class GameEngine:
             self.slot.reset() # New Game wipes the slot
             
         rng.seed(f"{self.seed}: setup")
+        self.archive: Archive = Archive(self.slot.path("archive.sqlite"))
+        self.archive.init()
         
         self.record_book = load_records_from_file(self.slot.path("records_data.json"))
         self._tier_seasons, self._committed_tiers, prev = load_world_state(
@@ -334,6 +339,7 @@ class GameEngine:
 
         for cfg in team_configs:
             team = Team(cfg.name, cfg.attack, cfg.midfield, cfg.defense)
+            team.id                     = cfg.id  # the YAML slug
             team.nation_id              = cfg.nation_id
             team.league_nation_id       = cfg.league_nation_id
             team.league_nation_id_year  = cfg.league_nation_id_year
@@ -452,6 +458,7 @@ class GameEngine:
             season_year=self.season_year,
             prestige=league_prestige,
         )
+        self.comp.key = "lhiga_alhika"
         self.comp.generate_fixtures()
         self.current_season.add_competition(self.comp)
         
@@ -463,6 +470,7 @@ class GameEngine:
             season_year=self.season_year,
             prestige=cup_prestige,
         )
+        self.cup.key = "kopa_protonas"
         self.cup.generate_fixtures()
         self.current_season.add_competition(self.cup)
 
@@ -762,6 +770,9 @@ class GameEngine:
             drawn_fixtures = []
 
         recent = active_comp.results[-len(today_fixtures):]
+        for r in recent:
+            r["date"] = today.isoformat()
+            r.setdefault("matchday", matchday_num)
 
         matchday_events = []
         
@@ -1079,6 +1090,26 @@ class GameEngine:
             "top_clean_sheets": _player_rows(top_clean_sheets),
             "top_rated":        _player_rows(top_rated),
         }
+        
+        ids = {t.name: t.id for t in self.teams}
+        runner_up_name = sorted_table[1][0] if len(sorted_table) > 1 else None
+        trophies = [{
+            "season": self.season_year, "competition": self.comp.key or self.comp.name,
+            "winner_id": ids[champion_name], "winner": champion_name,
+            "runner_up_id": ids.get(runner_up_name), "runner_up": runner_up_name,
+        }]
+        if cup_winner_name:
+            trophies.append({
+                "season": self.season_year, "competition": self.cup.key or self.cup.name,
+                "winner_id": ids[cup_winner_name], "winner": cup_winner_name,
+                "runner_up_id": ids.get(cup_runner_up_name), "runner_up": cup_runner_up_name,
+            })
+        self._pending_archive = build_payload(
+            self.season_year, self.calendar.season_end, self.teams, self.competitions,
+            trophies,
+            leaderboard_rows(self.season_year, self.teams, {
+                "goals": top_scorers, "assists": top_assisters,
+                "clean_sheets": top_clean_sheets, "avg_rating": top_rated}))
 
         # End season (rolls stats into career, resets season counters)
         self.current_season.end_season()
@@ -1171,7 +1202,11 @@ class GameEngine:
                 "released": [p.name for p in released],
                 "arrived":  [p.name for p in arrivals],
             })
-            
+        
+        if self._pending_archive is not None:
+            self.archive.write_season(self._pending_archive)
+            self._pending_archive = None
+
         self._save_world()
 
         if self._season_index >= self.num_seasons:
@@ -1252,10 +1287,14 @@ class GameEngine:
 
     def _serialise_standings(self) -> list:
         """Return standings as a list of dicts, sorted, for easy rendering."""
+        ids = {t.name: t.id for t in self.teams}
         return [
-            {"team": name, **stats}
+            {"team": name, "team_id": ids[name], **stats}
             for name, stats in self._sorted_standings()
         ]
+        
+    def team_by_id(self, team_id):
+        return next((t for t in self.teams if t.id == team_id), None)
         
     def get_cup_bracket(self) -> dict:
         cup = next((c for c in getattr(self, 'competitions', [self.comp, self.cup]) if c.type == "cup"), None)

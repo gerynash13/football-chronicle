@@ -98,7 +98,6 @@ def test_data_files_are_consistent():
     assert validate() == []
 
 
-@pytest.mark.xfail(strict=True, reason="Phase 1: retirement lifecycle not built yet")
 def test_retired_player_is_not_selected():
     team = Team("T", 60, 60, 60)
     for pos, n in (("GK", 1), ("DEF", 3), ("MID", 4), ("FWD", 6)):

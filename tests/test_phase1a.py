@@ -6,6 +6,7 @@ from data_manager import save_teams_to_file, load_teams_from_file
 from classes.team import Team
 from classes.player import Player
 from test_phase0 import make_engine, play
+from archive import Archive, build_payload
 
 def _squad(n_gk=1):
     team = Team("T", 60, 60, 60)
@@ -186,3 +187,68 @@ def test_nation_prestige_is_frozen_while_only_one_nation_plays():
     team.nation_id = "myria"
     log = update_nation_prestige(nations, [team], [{"team": "T"}], 7000.0, {}, {})
     assert log == [] and nations["myria"].prestige == before
+    
+def test_team_ids_are_stable_slugs(tmp_path):
+    engine = make_engine(tmp_path)
+    engine.advance()
+    ids = {t.id for t in engine.teams}
+    assert "kluba_sulhavonos" in ids and len(ids) == len(engine.teams)
+
+
+def test_ids_survive_save_and_load(tmp_path):
+    a = make_engine(tmp_path, seasons=2)
+    list(play(a, until=("between_seasons",)))
+    b = make_engine(tmp_path, seasons=2)
+    b.advance(load_save=True)
+    assert [t.id for t in b.teams] == [t.id for t in a.teams]
+
+
+def test_results_standings_and_history_carry_team_ids(tmp_path):
+    engine = make_engine(tmp_path)
+    for state in play(engine, until=("season_end",)):
+        if state["type"] == "matchday":
+            r = state["results"][0]
+            assert r["home_team_id"] and r["away_team_id"]
+        if state["type"] == "season_end":
+            assert all(row["team_id"] for row in state["final_standings"])
+    team = engine.teams[0]
+    assert team.squad[0].career_history[-1]["team_id"] == team.id
+    
+def test_season_archive_records_tables_trophies_and_players(tmp_path):
+    engine = make_engine(tmp_path, seasons=2)
+    list(play(engine))
+    arch = engine.archive
+    champs = arch.champions("lhiga_alhika")
+    assert [c["season"] for c in champs] == ["1896/97", "1897/98"]
+    table = arch.table("1896/97", "lhiga_alhika")
+    assert len(table) == 8 and table[0]["position"] == 1
+    assert table[0]["team_id"] == champs[0]["winner_id"]
+    assert sum(r["wins"] for r in table) == sum(r["losses"] for r in table)
+    assert arch.champions("kopa_protonas")                    # cup winners are recorded too
+    leaders = arch.leaders("goals", 3)
+    assert leaders and leaders[0]["total"] >= leaders[-1]["total"]
+    assert arch.season_matches("1896/97", "lhiga_alhika")[0]["date"]
+
+
+def test_writing_a_season_twice_does_not_duplicate(tmp_path, monkeypatch):
+    from archive import Archive
+    seen = []
+    original = Archive.write_season
+
+    def spy(self, payload):
+        seen.append(payload)
+        return original(self, payload)
+
+    monkeypatch.setattr(Archive, "write_season", spy)
+    engine = make_engine(tmp_path)
+    list(play(engine))
+    engine.archive.write_season(seen[0])                      # the same season again
+    assert len(engine.archive.table("1896/97", "lhiga_alhika")) == 8
+
+
+def test_archive_survives_resume(tmp_path):
+    a = make_engine(tmp_path, seasons=3)
+    list(play(a, until=("between_seasons",)))
+    b = make_engine(tmp_path, seasons=3)
+    b.advance(load_save=True)
+    assert [c["season"] for c in b.archive.champions("lhiga_alhika")] == ["1896/97"]
