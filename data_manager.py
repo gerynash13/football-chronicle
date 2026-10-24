@@ -78,6 +78,7 @@ def save_teams_to_file(teams, filename="teams_data.json"):
         "trophies": t.trophies, "squad":   [player_to_dict(p) for p in t.squad],
         "retired": [player_to_dict(p) for p in t.retired], "facilities": t.facilities,
         "youth": [player_to_dict(p) for p in t.youth], "released": [player_to_dict(p) for p in t.released],
+        "competitions": t.competitions
     } for t in teams]
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
@@ -108,6 +109,7 @@ def load_teams_from_file(file_path):
         team.facilities = {**DEFAULT_FACILITIES, **td.get("facilities", {})}
         team.youth = [player_from_dict(d) for d in td.get("youth", [])]
         team.released = [player_from_dict(d) for d in td.get("released", [])]
+        team.competitions = td.get("competitions", [])
         teams.append(team)
     return teams
 

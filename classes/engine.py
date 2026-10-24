@@ -80,6 +80,8 @@ from data_loader import (
     journalists_for_season,
     get_nation,
     TeamConfig,
+    load_competitions,
+    teams_for_season,
 )
 from news_feed import (
     NewsFeed,
@@ -97,6 +99,7 @@ from newsroom import (
 )
 from records import RecordBook
 from player_refs import find_player
+from name_generator import generate_squad
 from events import Event, Choice
 from game_calendar import GameCalendar, apply_effects, apply_match_morale
 from rules import get_max_subs, get_yellow_threshold, get_match_days, get_card_bucket
@@ -274,8 +277,7 @@ class GameEngine:
         if resuming:
             self.teams = load_teams_from_file(self.slot.path("teams_data.json"))
         else:
-            self.teams = self._bootstrap_teams()
-            self._seed_youth()
+            self.teams = []
             
         self._start_season()
         
@@ -317,53 +319,6 @@ class GameEngine:
             ),
             choices=choices,
         )
-
-    def _bootstrap_teams(self) -> list:
-        """
-        First-launch team generation.
-
-        Reads teams.yaml to find which teams exist at the start year,
-        then checks data/squads/<season_year>.yaml for pre-written squads.
-        Falls back to generate_squad() for any team without a squad file.
-
-        This only runs once — the result is saved to teams_data.json and
-        loaded from there on every subsequent launch.
-        """
-        from name_generator import generate_squad
-
-        season_year = self._season_label(0)
-        team_configs = teams_in_competition("lhiga_alhika", season_year)
-
-        teams = []
-        squad_data = self._load_squad_file(season_year)
-
-        for cfg in team_configs:
-            team = Team(cfg.name, cfg.attack, cfg.midfield, cfg.defense)
-            team.id                     = cfg.id  # the YAML slug
-            team.nation_id              = cfg.nation_id
-            team.league_nation_id       = cfg.league_nation_id
-            team.league_nation_id_year  = cfg.league_nation_id_year
-            team.prestige               = cfg.prestige
-            team.home_region            = cfg.home_region
-            team.budget                 = cfg.budget
-            team.wage_budget            = cfg.wage_budget
-            team.facilities             = facilities_from_config(cfg.facilities)
-
-            if cfg.id in squad_data:
-                team.squad = self._build_squad_from_yaml(squad_data[cfg.id])
-            else:
-                nation = get_nation(cfg.nation_id)
-                team.squad = generate_squad(
-                    cfg.name,
-                    average_ca=cfg.avg_ca,
-                    nation=nation.name,
-                    season_year=season_year,
-                    home_region=cfg.home_region,
-                )
-
-            teams.append(team)
-
-        return teams
 
     def _load_squad_file(self, season_year: str) -> dict:
         """
@@ -437,55 +392,37 @@ class GameEngine:
 
     def _start_season(self):
         """Initialise all per-season objects."""
-        rng.seed(f"{self.seed}:{self._season_index}")
-        self.season_year    = self._season_label(self._season_index)
+        self.season_year = self._season_label(self._season_index)
         self._season_complete = False
-
+        
+        # New clubs get their own dice stream. Then we reshuffle, so the rest of the season
+        # starts from the same place whether or not clubs were just founded. That keeps
+        # a resumed game identical to the original.
+        rng.seed(f"{self.seed}: {self._season_index}:founding")
+        newcomers = self._found_new_clubs(self.season_year)
+        if newcomers:
+            self._seed_youth(newcomers)
+        rng.seed(f"{self.seed}: {self._season_index}")
+        
         self.current_season = Season(self.season_year, self.teams)
         self._journalist_roster = journalists_for_season(self.season_year)
-
-        # Look up competition prestige from config
-        from data_loader import load_competitions
-        comp_configs = load_competitions()
-        league_prestige = comp_configs["lhiga_alhika"].prestige
-        cup_prestige = comp_configs["kopa_protonas"].prestige
-        
-        # League
-        self.comp = Competition(
-            "Lhiga Alhika",
-            self.teams,
-            max_subs=get_max_subs(self.season_year),
-            season_year=self.season_year,
-            prestige=league_prestige,
-        )
-        self.comp.key = "lhiga_alhika"
-        self.comp.generate_fixtures()
-        self.current_season.add_competition(self.comp)
-        
-        # Cup
-        self.cup = CupCompetition(
-            "Kopa Protonas",
-            self.teams,
-            max_subs=get_max_subs(self.season_year),
-            season_year=self.season_year,
-            prestige=cup_prestige,
-        )
-        self.cup.key = "kopa_protonas"
-        self.cup.generate_fixtures()
-        self.current_season.add_competition(self.cup)
-
-        # Registry of competitions for iteration and future generalisation
-        self.competitions = [self.comp, self.cup]
-
         self.calendar = GameCalendar(self.season_year)
         available_days = get_match_days(self.season_year)
-        primary_day = available_days[0]
-        cup_day = available_days[1] if len(available_days) > 1 else primary_day
         
-        self.calendar.schedule_fixtures(self.comp, preferred_day=primary_day)
-        # Schedule the cup towards the end of the season so the final is last
-        self.calendar.schedule_fixtures(self.cup, preferred_day=cup_day)
-
+        # Competitions come from the YAML; leagues are scheduled first
+        configs = sorted(competitions_for_season(self.season_year), key=lambda c: c.type != "league")
+        self.competitions = []
+        for cfg in configs:
+            comp = self._build_competition(cfg)
+            if comp is None:
+                continue
+            self.competitions.append(comp)
+            self.current_season.add_competition(comp)
+            day = available_days[1] if cfg.match_day == "midweek" and len(available_days) > 1 else available_days[0]
+            self.calendar.schedule_fixtures(comp, preferred_day=day)
+            
+        self.comp = next((c for c in self.competitions if c.type == "league"), None)
+        self.cup = next((c for c in self.competitions if c.type == "cup"), None)
         self._last_processed = self.calendar.current_date
         
     # Pre-season supercup helpers
@@ -1062,7 +999,9 @@ class GameEngine:
                         )
 
         # Records
-        self.record_book.finalize_season(self.comp, self.teams, self.season_year)
+        self.record_book.finalize_season(
+            self.comp, [t for t in self.teams if t.name in self.comp.standings], self.season_year
+        )
 
         # Snapshot leaderboard rows BEFORE end_season() resets season stats
         def _player_rows(players):
@@ -1149,9 +1088,9 @@ class GameEngine:
         # Save after season
         
         standings = self._serialise_standings()
-        upset_bonuses = collect_upset_bonuses(self.comp.results, self.teams)
-        prestige_log = update_team_prestige(self.teams, standings, 
-                                            self.comp.prestige, upset_bonuses)
+        league_teams = [t for t in self.teams if t.name in self.comp.standings]
+        upset_bonuses = collect_upset_bonuses(self.comp.results, league_teams)
+        prestige_log = update_team_prestige(league_teams, standings, self.comp.prestige, upset_bonuses)
         
         nation_log = update_nation_prestige(
             self._nations,
@@ -1185,7 +1124,7 @@ class GameEngine:
         completed_label = self._season_label(self._season_index - 1)
         next_label = self._season_label(self._season_index)
         on_date = self.calendar.season_end
-        league_lvl = lifecycle.league_level(self.teams)
+        league_lvl = lifecycle.league_level(self._league_teams())
         retirement_log = []
         for team in self.teams:
             for p in team.youth:
@@ -1261,12 +1200,64 @@ class GameEngine:
             ],
         }
         
-    def _seed_youth(self):
-        label = self._season_label(self._season_index)
-        league_lvl = lifecycle.league_level(self.teams)
-        for team in self.teams:
+    def _make_team(self, cfg, season_year, squad_data):
+        """Build one club from its YAML entry (if there is one)."""
+        team = Team(cfg.name, cfg.attack, cfg.midfield, cfg.defense)
+        team.id =                  cfg.id
+        team.nation_id =           cfg.nation_id
+        team.league_nation_id =    cfg.league_nation_id
+        team.league_nation_id_year = cfg.league_nation_id_year
+        team.prestige =            cfg.prestige
+        team.home_region =         cfg.home_region
+        team.budget =              cfg.budget
+        team.wage_budget =         cfg.wage_budget
+        team.competitions =        cfg.competitions
+        team.facilities =          cfg.facilities
+        if cfg.id in squad_data:
+            team.squad = self._build_squad_from_yaml(squad_data[cfg.id])
+        else:
+            nation = get_nation(cfg.nation_id)
+            team.squad = generate_squad(
+                cfg.name, average_ca=cfg.avg_ca, nation=nation.name,
+                season_year=season_year, home_region=cfg.home_region
+            )
+        return team
+        
+    def _found_new_clubs(self, season_year):
+        """Create every club that exists by this season but isn't in the world yet."""
+        known = {t.id for t in self.teams}
+        squad_data = self._load_squad_file(season_year)
+        configs = sorted(teams_for_season(season_year), key=lambda c: (c.founded_year, c.id))
+        new = [self._make_team(cfg, season_year, squad_data) 
+               for cfg in configs if cfg.id not in known]
+        self.teams.extend(new)
+        return new
+    
+    def _league_teams(self):
+        """Clubs that belong to a league (not just a cup)"""
+        league_ids = {c.id for c in load_competitions().values() if c.type == "league"}
+        return [t for t in self.teams if league_ids & set(t.competitions)]
+    
+    def _seed_youth(self, teams):
+        """Give brand-new clubs an academy of players."""
+        league_lvl = lifecycle.league_level(self._league_teams() or self.teams)
+        for team in teams:
             cfg = self._nations[team.nation_id].to_player_config()
-            lifecycle.seed_youth(team, cfg, league_lvl, label)
+            lifecycle.seed_youth(team, cfg, league_lvl, self.season_year)
+            
+    def _build_competition(self, cfg):
+        """One competition for this season, from its YAML entry and the clubs that belong to it."""
+        if cfg.type not in ("league", "cup"):
+            return None  # Supercup / international tournaments not wired yet
+        members = [t for t in self.teams if cfg.id in t.competitions]
+        if len(members) < 2:
+            return None
+        cls = CupCompetition if cfg.type == "cup" else Competition
+        comp = cls(cfg.name, members, max_subs=get_max_subs(self.season_year),
+                   season_year=self.season_year, prestige=cfg.prestige)
+        comp.key = cfg.id
+        comp.generate_fixtures()
+        return comp
 
     # ── Helpers ───────────────────────────────────────────────────────────────
 
@@ -1306,12 +1297,11 @@ class GameEngine:
         for f in cup.fixtures:
             by_round[f["round"]].append(f)
 
-        num_teams = len(cup.teams)
-
+        total_rounds = cup._total_rounds
+        
         def round_label(rn: int) -> str:
-            remaining = num_teams // (2 ** (rn - 1))
-            return {2: "Final", 4: "Semi-Finals", 8: "Quarter-Finals",
-                    16: "Round of 16", 32: "Round of 32"}.get(remaining, f"Round {rn}")
+            return {1: "Final", 2: "Semi-Finals", 3: "Quarter-Finals",
+                    4: "Round of 16", 5: "Round of 32"}.get(total_rounds - rn + 1, f"Round {rn}")
 
         rounds = []
         for rn in sorted(by_round.keys()):

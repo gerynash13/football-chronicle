@@ -252,3 +252,28 @@ def test_archive_survives_resume(tmp_path):
     b = make_engine(tmp_path, seasons=3)
     b.advance(load_save=True)
     assert [c["season"] for c in b.archive.champions("lhiga_alhika")] == ["1896/97"]
+    
+def test_clubs_join_the_league_in_the_season_they_are_founded(tmp_path):
+    engine = make_engine(tmp_path, seasons=4)
+    sizes = {}
+    for state in play(engine):
+        if state["type"] == "season_end":
+            sizes[state["season"]] = len(state["final_standings"])
+    assert sizes == {"1896/97": 8, "1897/98": 9, "1898/99": 10, "1899/00": 12}
+
+
+def test_cup_only_clubs_appear_and_play_the_cup(tmp_path):
+    engine = make_engine(tmp_path, seasons=12)               # reaches 1907/08
+    list(play(engine))
+    assert len(engine.cup.teams) > len(engine.comp.teams)
+    cup_only = [t for t in engine.teams if engine.comp.key not in t.competitions]
+    assert cup_only and all(t.squad for t in cup_only)
+
+
+def test_new_clubs_are_identical_after_a_resume(tmp_path):
+    a = make_engine(tmp_path, seasons=3)
+    list(play(a, until=("between_seasons",)))      # 1897/98 is about to start: Gedimou is founded
+    b = make_engine(tmp_path, seasons=3)
+    b.advance(load_save=True)
+    assert [t.id for t in a.teams] == [t.id for t in b.teams]
+    assert [p.id for p in a.teams[-1].squad] == [p.id for p in b.teams[-1].squad]

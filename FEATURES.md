@@ -114,7 +114,7 @@
 
 ## YOUTH ACADEMY
 
-- [later]     Academy intake system — replaces generate_squad() for youth
+- [done]     Academy intake system — replaces generate_squad() for youth
 - [later]     Regional scouting for academy (home region first,
               then national, then manager/owner origin region)
 - [later]     Academy actions with diminishing returns
@@ -156,7 +156,7 @@
 
 ## PLAYER SYSTEMS
 
-- [later]     Retirement system — probability increases after age 35 or after severe injury,
+- [done]     Retirement system — probability increases after age 35 or after severe injury,
               triggers is_retired flag (field exists, logic not yet wired)
 - [later]     Player personality traits (professional, temperamental,
               leader, homesick, ambitious, etc.)
@@ -216,7 +216,7 @@ Partially implemented (Event, Choice, Effect classes exist):
 
 ## MATCH ENGINE
 
-- [later]     Home/away form differentiation
+- [done]     Home/away form differentiation
 - [later]     Weather effects on match — heavy rain reduces
               high-passing team effectiveness
 - [later]     Derby / rivalry boost to atmosphere and performance

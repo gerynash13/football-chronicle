@@ -45,7 +45,7 @@ def run(seasons=30, seed=1, start_year=1896):
             elif state["type"] == "season_end":
                 pts = {r["team"]: r["points"] for r in state["final_standings"]}
                 corr = pearson([strength[n] for n in pts], [pts[n] for n in pts])
-                players = [p for t in engine.teams for p in t.squad]
+                players = [p for t in engine._league_teams() for p in t.squad]
                 end = engine.calendar.season_end
                 print(f"{state['season']:8}{goals / matches:8.2f}{100 * home / matches:7.1f}"
                       f"{100 * draw / matches:7.1f}{100 * away / matches:7.1f}{corr:11.2f}"
@@ -61,7 +61,7 @@ def run(seasons=30, seed=1, start_year=1896):
                 min_avail, forfeits = 99, 0
                 strength = {}
             state = engine.advance()
-        titles = Counter(c["winner"] for c in engine.archive.champions("lhiga_alhika"))
+        titles = Counter(c["winner"] for c in engine.archive.champions(engine.comp.key))
         print("Titles:", titles.most_common())
             
 def available(team):

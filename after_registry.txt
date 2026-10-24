@@ -1,0 +1,367 @@
+No records file found. Starting fresh record book.
+No world state file found. Starting with YAML prestige values and empty tier guards.
+season   goals/g  home%  draw%  away% r(str,pts)  avgCA  avgAge   alumni  minSquad minAvail forfeits  youth released   myria       tier
+Saved 8 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1896/97 completed!
+================================================================================
+
+1896/97     3.91   48.2   21.4   30.4       0.53   58.4    24.0        0        13       10        0   25.6        0    1200low-tier   
+Saved 8 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1897/98 completed!
+================================================================================
+
+1897/98     3.11   41.7   29.2   29.2       0.74   59.1    23.4        0        16       14        0   22.8       10    1200low-tier   
+Saved 10 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1898/99 completed!
+================================================================================
+
+1898/99     3.58   45.6   20.0   34.4       0.71   59.9    24.5        4        16       15        0   24.4       31    1200low-tier   
+Saved 11 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1899/00 completed!
+================================================================================
+
+1899/00     3.73   42.4   22.7   34.8       0.60   59.9    25.3        7        16       10        0   25.7       64    1200low-tier   
+Saved 13 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1900/01 completed!
+================================================================================
+
+1900/01     3.63   53.8   18.2   28.0       0.47   60.3    26.0        8        16       15        0   25.8      118    1200low-tier   
+Saved 15 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1901/02 completed!
+================================================================================
+
+1901/02     3.34   39.4   23.5   37.1       0.49   60.8    26.5       19        16       15        0   25.1      183    1200low-tier   
+Saved 17 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1902/03 completed!
+================================================================================
+
+1902/03     3.02   44.7   20.5   34.8       0.05   61.0    27.2       28        16       13        0   24.2      267    1200low-tier   
+Saved 19 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1903/04 completed!
+================================================================================
+
+1903/04     3.36   52.3   21.2   26.5       0.51   60.8    27.8       39        16       13        0   23.8      355    1200low-tier   
+Saved 22 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1904/05 completed!
+================================================================================
+
+1904/05     3.58   44.7   23.5   31.8       0.49   60.6    28.7       49        16       14        0   23.7      450    1200low-tier   
+Saved 25 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1905/06 completed!
+================================================================================
+
+1905/06     3.51   40.2   25.8   34.1       0.59   60.7    28.9       76        20       15        0   23.3      546    1200low-tier   
+Saved 25 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1906/07 completed!
+================================================================================
+
+1906/07     3.41   47.0   24.2   28.8       0.38   60.7    29.2      102        16       14        0   23.6      646    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1907/08 completed!
+================================================================================
+
+1907/08     3.65   47.0   22.0   31.1       0.47   61.1    29.0      128        20       17        0   22.7      768    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1908/09 completed!
+================================================================================
+
+1908/09     3.42   47.0   27.3   25.8       0.45   61.6    28.9      152        20       17        0   23.0      873    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1909/10 completed!
+================================================================================
+
+1909/10     3.55   37.9   30.3   31.8       0.57   61.5    29.4      172        20       15        0   22.5     1004    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1910/11 completed!
+================================================================================
+
+1910/11     3.54   52.3   18.2   29.5       0.40   61.6    29.5      193        20       15        0   21.9     1138    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1911/12 completed!
+================================================================================
+
+1911/12     3.32   45.5   22.7   31.8       0.61   61.6    29.5      219        20       16        0   21.3     1260    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1912/13 completed!
+================================================================================
+
+1912/13     3.64   50.0   19.7   30.3       0.49   61.4    29.4      241        20       14        0   22.0     1357    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1913/14 completed!
+================================================================================
+
+1913/14     3.10   47.0   23.5   29.5       0.33   61.2    29.1      270        20       15        0   21.6     1474    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1914/15 completed!
+================================================================================
+
+1914/15     3.30   50.0   17.4   32.6       0.62   60.6    28.3      300        20       16        0   21.0     1588    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1915/16 completed!
+================================================================================
+
+1915/16     3.44   38.6   26.5   34.8       0.51   61.2    27.3      343        19       16        0   20.6     1694    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1916/17 completed!
+================================================================================
+
+1916/17     3.69   37.1   28.8   34.1       0.57   61.8    26.4      387        18       14        0   20.8     1782    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1917/18 completed!
+================================================================================
+
+1917/18     3.28   43.2   20.5   36.4       0.57   62.6    26.3      416        18       14        0   21.0     1885    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1918/19 completed!
+================================================================================
+
+1918/19     3.74   51.5   18.9   29.5       0.44   63.2    26.4      442        18       16        0   21.3     1993    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1919/20 completed!
+================================================================================
+
+1919/20     3.56   46.2   14.4   39.4       0.43   63.4    26.7      462        19       16        0   21.1     2111    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1920/21 completed!
+================================================================================
+
+1920/21     3.36   33.3   27.3   39.4       0.36   63.7    27.0      491        19       16        0   21.4     2207    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1921/22 completed!
+================================================================================
+
+1921/22     3.29   41.7   25.8   32.6       0.42   64.2    27.5      522        19       16        0   22.1     2298    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1922/23 completed!
+================================================================================
+
+1922/23     3.16   43.2   25.0   31.8       0.79   64.1    27.8      554        20       15        0   21.3     2421    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1923/24 completed!
+================================================================================
+
+1923/24     3.44   45.5   20.5   34.1       0.30   63.8    28.7      585        20       16        0   21.4     2520    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1924/25 completed!
+================================================================================
+
+1924/25     3.33   53.0   14.4   32.6       0.69   63.7    28.9      623        18       15        0   21.5     2621    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1925/26 completed!
+================================================================================
+
+1925/26     3.22   40.9   16.7   42.4      -0.16   63.5    28.9      658        18       15        0   21.6     2716    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1926/27 completed!
+================================================================================
+
+1926/27     3.33   43.2   23.5   33.3       0.45   63.4    28.9      680        19       15        0   21.7     2829    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1927/28 completed!
+================================================================================
+
+1927/28     3.20   47.7   22.0   30.3       0.61   63.1    28.9      706        19       16        0   21.8     2937    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1928/29 completed!
+================================================================================
+
+1928/29     3.33   48.5   18.2   33.3       0.49   62.5    29.3      727        18       16        0   22.1     3045    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1929/30 completed!
+================================================================================
+
+1929/30     3.36   48.5   19.7   31.8       0.39   62.1    29.1      757        18       15        0   22.3     3149    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1930/31 completed!
+================================================================================
+
+1930/31     3.70   47.7   19.7   32.6       0.10   62.1    29.4      783        19       15        0   21.9     3268    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1931/32 completed!
+================================================================================
+
+1931/32     3.34   46.2   20.5   33.3       0.37   61.9    29.4      805        17       15        0   22.0     3383    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1932/33 completed!
+================================================================================
+
+1932/33     3.22   43.2   22.7   34.1       0.59   61.9    29.4      837        17       14        0   22.0     3487    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1933/34 completed!
+================================================================================
+
+1933/34     3.12   41.7   25.0   33.3       0.48   62.1    28.6      872        16       12        0   21.5     3603    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1934/35 completed!
+================================================================================
+
+1934/35     3.67   42.4   21.2   36.4       0.45   62.3    27.8      910        16       13        0   21.1     3717    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+
+================================================================================
+Season 1935/36 completed!
+================================================================================
+
+1935/36     3.77   47.7   20.5   31.8       0.51   62.4    26.9      947        16       14        0   21.4     3812    1200low-tier   
+Saved 27 teams to /tmp/tmpgoejz9zo/calib/teams_data.json
+Saved records to /tmp/tmpgoejz9zo/calib/records_data.json
+Saved world state to /tmp/tmpgoejz9zo/calib/world_state.json
+Titles: [('Kluba Maritima Thesias', 11), ('Kluba Sulhavonos', 9), ('Kluba Sportika Alentumou', 6), ('Mercaria Kluba', 3), ('Kluba Sportika Galvononos', 3), ('Kluba Sportika Soleiu', 2), ('Kluba Sportika Mileiu', 2), ('Kluba Sportika Esalumou', 2), ('Kluba Maritima Metia', 2)]

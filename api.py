@@ -385,7 +385,7 @@ def history_table():
     season = request.args.get("season")
     if not season or _archive() is None:
         return jsonify({"error": "pass ?season=1896/97&competition=lhiga_alhika"}), 400
-    return jsonify(_archive().table(season, request.args.get("competition", "lhiga_alhika")))
+    return jsonify(_archive().table(season, request.args.get("competition", engine.comp.key if engine.comp else "")))
 
 @app.route("/api/history/team/<team_id>", methods=["GET"])
 def history_team(team_id: str):

@@ -27,6 +27,7 @@ class Team:
         self.facilities = dict(DEFAULT_FACILITIES)
         self.youth = []  # Academy players
         self.released = []  # Let go from the academy
+        self.competitions = []  # ids of the competitions this team is in
 
     def add_player(self, player):
         self.squad.append(player)
