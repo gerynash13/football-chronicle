@@ -117,37 +117,32 @@ function renderMatchday(state) {
   setText('meta-season', state.season);
   setText('meta-matchday', `Matchday ${state.matchday_num}`);
   setText('meta-date', formatDate(state.date));
-
-  // Show managed club in the masthead edition line
   if (managedTeam) setText('meta-season', `${state.season} — ${managedTeam}`);
 
   renderStandings(state.standings, managedTeam);
 
-  const isSupercup = state.competition.type === "supercup";
-  const headingLabel = isSupercup
-    ? `<span class="supercup-badge">Supercup</span> ${state.competition}`
-    : `${state.competition} - Matchday ${state.matchday_num}`;
-
   hide('feed-placeholder');
   const feed = document.getElementById('results-feed');
-  feed.innerHTML = `
-    <div class="matchday-block">
-      <div class="matchday-heading">
-        <span>${state.competition} — Matchday ${state.matchday_num}</span>
-        <span class="match-date">${formatDate(state.date)}</span>
-      </div>
-      ${state.results.map(r => renderResultCard(r, managedTeam)).join('')}
-    </div>
-  `;
+  feed.innerHTML = state.competitions.map(block => {
+    const results = state.results.filter(r => r.competition === block.name);
+    const badge = block.type === 'supercup' ? '<span class="supercup-badge">Supercup</span> ' : '';
+    return `
+      <div class="matchday-block">
+        <div class="matchday-heading">
+          <span>${badge}${block.name} — Matchday ${block.matchday_num}</span>
+          <span class="match-date">${formatDate(state.date)}</span>
+        </div>
+        ${results.map(r => renderResultCard(r, managedTeam)).join('')}
+      </div>`;
+  }).join('');
 
   renderNotifications(state.new_injuries || [], state.newly_suspended || []);
 
-  const statusLabel = isSupercup ? `${state.competition} complete.` : `Matchday ${state.matchday_num} complete.`;
-  setStatus(statusLabel);
-  const next = state.next_event_date
-    ? `Next: ${formatDate(state.next_event_date)}`
-    : 'Season ending soon…';
-  setText('footer-next', next);
+  setStatus(state.competitions.length > 1
+    ? 'Matchday complete.'
+    : `${state.competition} matchday ${state.matchday_num} complete.`);
+  setText('footer-next', state.next_event_date
+    ? `Next: ${formatDate(state.next_event_date)}` : 'Season ending soon…');
 }
 
 function renderResultCard(result, yourTeam = null) {
@@ -321,10 +316,9 @@ function renderSeasonEnd(state) {
   document.getElementById('results-feed').innerHTML = '';
 
   // Champion declaration
-  document.getElementById('champion-declaration').innerHTML = `
-    Champions of the ${state.season} season:<br>
-    <strong>${state.champion}</strong>
-  `;
+  document.getElementById('champion-declaration').innerHTML = state.champion
+    ? `Champions of the ${state.season} season:<br><strong>${state.champion}</strong>`
+    : `No league was played in the ${state.season} season.`;
 
   // Cup winner (if any)
   const cupEl = document.getElementById('cup-winner-declaration');
@@ -371,7 +365,7 @@ function renderSeasonEnd(state) {
 
   setText('meta-season', state.season);
   setText('meta-matchday', 'Season Complete');
-  setStatus(`Season ${state.season} complete — Champion: ${state.champion}`);
+  setStatus(`Season ${state.season} complete — Champion: ${state.champion || ''}`);
   setText('footer-next', 'Review the season above, then advance.');
 }
 

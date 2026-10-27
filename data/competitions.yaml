@@ -69,7 +69,7 @@
   name: Lhiga Alhika
   type: league
   nation_id: myria
-  founded_year: 1891
+  founded_year: 1908
   prestige: 7000
   tier: 1
   frequency: 1
@@ -82,7 +82,7 @@
   name: Kopa Protonas
   type: cup
   nation_id: myria
-  founded_year: 1893
+  founded_year: 1896
   prestige: 5000
   tier: null
   frequency: 1
@@ -114,12 +114,12 @@
   participants:
     type: supercup
     slots:
-      - { source: prote_kategorias, role: winner } # slot 0: prote_kategorias winner
-      - { source: protonas_cup,     role: winner } # slot 1: protonas_cup winner
+      - { source: lhiga_alhika,     role: winner } # slot 0: prote_kategorias winner
+      - { source: kopa_protonas,    role: winner } # slot 1: protonas_cup winner
     fallbacks:
       # if the two slots resolve to the same team, try these slots in order
-      - { source: protonas_cup, role: runner_up }
-      - { source: prote_kategorias, role: runner_up }
+      - { source: kopa_protonas, role: runner_up }
+      - { source: lhiga_alhika,  role: runner_up }
   draw_rules:
     extra_time: true
     penalties: true

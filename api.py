@@ -357,7 +357,21 @@ def _find_team(key: str):
 
 @app.route("/api/cup_bracket", methods=["GET"])
 def get_cup_bracket():
-    return jsonify(engine.get_cup_bracket())
+    return jsonify(engine.get_cup_bracket(request.args.get("key")))
+
+@app.route("/api/competitions", methods=["GET"])
+def get_competitions():
+    return jsonify([{"key": c.key, "name": c.name, "type": c.type, "tier": c.tier,
+                     "nation_id": c.nation_id, "clubs": len(c.teams)}
+                    for c in getattr(engine, "competitions", [])])
+    
+@app.route("/api/standings/<key>", methods=["GET"])
+def get_standings(key: str):
+    comp = next((c for c in getattr(engine, "competitions", []) 
+                 if c.key == key and c.type == "league"), None)
+    if comp is None:
+        abort(404)
+    return jsonify(engine._serialise_standings(comp))
 
 @app.route("/api/ping", methods=["GET"])
 def ping():

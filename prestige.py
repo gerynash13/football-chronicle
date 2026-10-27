@@ -97,52 +97,51 @@ def _position_award(position: int, total_teams: int, comp_prestige: float) -> fl
 
 # Team prestige update
 
-def update_team_prestige(
-    teams,
-    standings: list[dict],
-    comp_prestige: float,
-    upset_bonuses: dict[str, float] | None= None,
-) -> list[dict]:
+def update_team_prestige(teams, tables, upset_bonuses=None) -> list[dict]:
     """
-    Zero-sum prestige. Every club pays a tax into a pot; the pot is paid out by
-    league position (plus a slice for upsets). Total prestige never changes, so
-    it cannot inflate: clubs only gain at each other's expense.
+    Zero-sum prestige across every league. Clubs pay a tax into a pot; the pot is split
+    between leagues in proportion to their prestige, then inside each league by position.
+    Total prestige never changes.
 
-    comp_prestige is kept for the call signature. Later it will decide how the
-    pot is split between competitions (league, cup, ...).
+    tables: [(competition_prestige, standings_rows), ...], one entry per league.
     """
-    upset_bonuses   = upset_bonuses or {}
-    position_map    = {row["team"]: i + 1 for i, row in enumerate(standings)}
-    total_teams     = len(standings)
-    total_before    = sum(t.prestige for t in teams)
-    old             = {t.name: t.prestige for t in teams}
-    
+    upset_bonuses = upset_bonuses or {}
+    old = {t.name: t.prestige for t in teams}
+    total_before = sum(old.values())
+
     pot = TEAM_DECAY_RATE * total_before
     total_bonus = sum(upset_bonuses.get(t.name, 0.0) for t in teams)
     upset_pot = pot * UPSET_SHARE if total_bonus > 0 else 0.0
     position_pot = pot - upset_pot
-    total_weight = total_teams * (total_teams + 1) / 2
-    
+
+    live = [(p, rows) for p, rows in tables if rows]
+    total_comp_prestige = sum(p for p, _ in live) or 1.0
+    award, position = {}, {}
+    for comp_prestige, rows in live:
+        n = len(rows)
+        comp_pot = position_pot * comp_prestige / total_comp_prestige
+        weight_sum = n * (n + 1) / 2
+        for i, row in enumerate(rows):
+            award[row["team"]] = comp_pot * (n - i) / weight_sum
+            position[row["team"]] = i + 1
+
     for team in teams:
-        new = team.prestige * (1.0 - TEAM_DECAY_RATE)
-        pos = position_map.get(team.name)
-        if pos is not None:
-            new += position_pot * (total_teams - pos + 1) / total_weight
-        if total_bonus > 0:
+        new = team.prestige * (1.0 - TEAM_DECAY_RATE)          # pay the tax
+        new += award.get(team.name, 0.0)                         # paid out by position
+        if total_bonus > 0:                                      # paid out for upsets
             new += upset_pot * upset_bonuses.get(team.name, 0.0) / total_bonus
         team.prestige = max(new, TEAM_PRESTIGE_FLOOR)
-        
-    # the floor can add a little, so scale everyone to keep the total exactly constant
-    factor = total_before / sum(t.prestige for t in teams)
+
+    factor = total_before / sum(t.prestige for t in teams)       # keep the total exactly constant
     log = []
     for team in teams:
         team.prestige = round(team.prestige * factor, 1)
         log.append({
-            "team": team.name,
+            "team":         team.name,
             "old_prestige": round(old[team.name], 1),
             "new_prestige": team.prestige,
-            "delta": round(team.prestige - old[team.name], 1),
-            "position": position_map.get(team.name),
+            "delta":        round(team.prestige - old[team.name], 1),
+            "position":     position.get(team.name),
         })
     return log
 

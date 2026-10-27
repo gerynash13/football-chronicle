@@ -110,6 +110,7 @@ from match_model import OFF_MATCH_INJURY_RATE, INJURY_DAYS_PER_MATCH
 import lifecycle
 from facilities import facilities_from_config
 from archive import Archive, build_payload, leaderboard_rows
+from collections import Counter
 
 
 class GameEngine:
@@ -127,6 +128,7 @@ class GameEngine:
         self.record_book: RecordBook = RecordBook()
         self.news_feed:   NewsFeed   = NewsFeed()
         self.newsroom:    ArticleStore = ArticleStore()
+        self.competitions = []
 
         # Per-season objects, set in _start_season()
         self.season_year:    str         = ""
@@ -148,10 +150,7 @@ class GameEngine:
         
         # Previous season's results - used by _start_season() to resolve supercup participants.
         # Populated at the end of _finalise_season().
-        self._prev_league_winner:       str | None = None
-        self._prev_league_runner_up:    str | None = None
-        self._prev_cup_winner:          str | None = None
-        self._prev_cup_runner_up:       str | None = None
+        self._prev_results = {}
         
         self._replaying = False
         self._manifest_version = ENGINE_VERSION
@@ -219,6 +218,8 @@ class GameEngine:
             # Resolve name → Team object so the rest of the engine
             # can compare by identity rather than string matching
             self.managed_team = team.name if team else None
+            self.comp = self._focus_league()
+            self.cup = self._focus_cup()
             self._save_world()
             event.resolution = chosen.text
             event.is_read    = True
@@ -269,10 +270,7 @@ class GameEngine:
         self.record_book = load_records_from_file(self.slot.path("records_data.json"))
         self._tier_seasons, self._committed_tiers, prev = load_world_state(
             self._nations, self.slot.path("world_state.json"))
-        self._prev_league_winner = prev.get("league_winner")
-        self._prev_league_runner_up = prev.get("league_runner_up")
-        self._prev_cup_winner = prev.get("cup_winner")
-        self._prev_cup_runner_up = prev.get("cup_runner_up")
+        self._prev_results = prev
         
         if resuming:
             self.teams = load_teams_from_file(self.slot.path("teams_data.json"))
@@ -421,8 +419,8 @@ class GameEngine:
             day = available_days[1] if cfg.match_day == "midweek" and len(available_days) > 1 else available_days[0]
             self.calendar.schedule_fixtures(comp, preferred_day=day)
             
-        self.comp = next((c for c in self.competitions if c.type == "league"), None)
-        self.cup = next((c for c in self.competitions if c.type == "cup"), None)
+        self.comp = self._focus_league()
+        self.cup = self._focus_cup()
         self._last_processed = self.calendar.current_date
         
     # Pre-season supercup helpers
@@ -642,7 +640,9 @@ class GameEngine:
                     state = self._process_matchday()
                     self._last_processed = self.calendar.current_date
                     self.calendar.current_date += datetime.timedelta(days=1)
-                    return state
+                    if state is not None:
+                        return state
+                    continue
 
                 # Non-match blocking event — park it and return
                 self._pending_event = blocking[0]
@@ -659,171 +659,45 @@ class GameEngine:
 
     def _process_matchday(self) -> dict:
         """
-        Simulate all matches for today across all active competitions, 
-        run post-match logic, and return a MATCHDAY state dict.
-
-        This is the largest chunk of logic extracted from main.py.
-        Every side-effect (stat updates, morale, injuries, suspensions,
-        saves) happens here. The returned dict contains all the data the
-        view needs to render results, standings, and notifications.
+        Play every competition with fixtures today. Returns a MATCHDAY state, or None if
+        nothing was due.
         """
         today = self.calendar.current_date
         
-        # Find which competitions have fixtures today
-        active_comp = None
-        today_fixtures = []
-        for comp in getattr(self, 'competitions', [self.comp, self.cup]):
+        due = []
+        for comp in self.competitions:
             fixtures = [f for f in comp.fixtures if f.get("date") == today]
-            if fixtures:
-                active_comp = comp
-                today_fixtures = fixtures
-                break # Only one competition can have fixtures today
+            if fixtures and fixtures[0]["matchday"] not in comp.completed_matchdays:
+                due.append((comp, fixtures))
+        if not due:
+            return None
         
-        if not today_fixtures:
-            return self._advance_calendar()
+        # Who was already banned BEFORE today's matches? Only they serve a match today.
+        playing = {f[side].name for _, fixtures in due for f in fixtures
+                   for side in ("home_team", "away_team")}
+        sitting_out = [p for t in self.teams if t.name in playing for p in t.squad
+                       if p.suspension_matches_left > 0]
 
-        matchday_num = today_fixtures[0]["matchday"]
-        if matchday_num in active_comp.completed_matchdays:
-            return self._advance_calendar()
+        blocks = [self._play_competition_day(comp, fixtures, today) for comp, fixtures in due]
+        all_results = [r for b in blocks for r in b["results"]]
 
-        active_comp.current_matchday = matchday_num
-        
-        # Who was already out before this match? Only they serve a match today
-        playing_names = {f[side].name for f in today_fixtures
-                         for side in ("home_team", "away_team")}
-        sitting_out = [
-            p for t in self.teams if t.name in playing_names for p in t.squad
-            if p.suspension_matches_left > 0
-        ]
-
-        # Simulate
-        if active_comp.type == "cup":
-            drawn_fixtures = active_comp.simulate_cup_round()
-        elif active_comp.type == "supercup":
-            drawn_fixture = active_comp.simulate_supercup()
-            drawn_fixtures = [drawn_fixture] if drawn_fixture else []
-        else:
-            active_comp.simulate_matchday()
-            drawn_fixtures = []
-
-        recent = active_comp.results[-len(today_fixtures):]
-        for r in recent:
-            r["date"] = today.isoformat()
-            r.setdefault("matchday", matchday_num)
-
-        matchday_events = []
-        
-        # Record-book and morale updates
-        for result in recent:
-            self.record_book.process_match(
-                result,
-                self.teams,
-                competition_name=active_comp.name,
-                season_year=self.season_year,
-                match_date=self.calendar.current_date
-            )
-            home_team = next((t for t in self.teams if t.name == result["home_team"]), None)
-            away_team = next((t for t in self.teams if t.name == result["away_team"]), None)
-            if home_team and away_team:
-                apply_match_morale(home_team, away_team, result["home_goals"], result["away_goals"])
-
-            scorers = [
-                {"player_id": e.get("player_id"), "player": e.get("player"), "team": e.get("team"), "minute": e.get("minute")}
-                for e in result.get("events", []) if e.get("type") == "goal"
-            ]
-            # ── News feed: match result ───────────────────────────────────────
-            event = publish_match_result(
-                self.news_feed,
-                competition = active_comp.name,
-                home_team   = result["home_team"],
-                away_team   = result["away_team"],
-                home_goals  = result["home_goals"],
-                away_goals  = result["away_goals"],
-                date        = self.calendar.current_date,
-                season      = self.season_year,
-                home_region = home_team.home_region if home_team else "",
-                away_region = away_team.home_region if away_team else "",
-                matchday    = matchday_num,
-                scorers     = scorers,
-                relevance   = ["local"],
-            )
-            matchday_events.append(event)
-            
-            # ── News feed: hat tricks ─────────────────────────────────────────
-            from collections import Counter
-            goal_events  = [e for e in result.get("events", []) if e["type"] == "goal"]
-            goals_by_pid: Counter = Counter()
-            pid_to_name:  dict    = {}
-            for evt in goal_events:
-                pid = evt.get("player_id") or evt.get("player", "")
-                goals_by_pid[pid] += 1
-                pid_to_name[pid] = evt.get("player", "")
-            for pid, count in goals_by_pid.items():
-                if count >= 3:
-                    ht_event = publish_hat_trick(
-                        self.news_feed,
-                        player      = pid_to_name[pid],
-                        player_id   = pid,
-                        team        = result["home_team"] if any(
-                            e.get("player_id") == pid and e["team"] == result["home_team"]
-                            for e in goal_events
-                        ) else result["away_team"],
-                        goals       = count,
-                        competition = active_comp.name,
-                        match       = (f"{result['home_team']} {result['home_goals']}"
-                                       f"-{result['away_goals']} {result['away_team']}"),
-                        date        = self.calendar.current_date,
-                        season      = self.season_year,
-                        relevance   = ["local", "regional"],
-                    )
-                    matchday_events.append(ht_event)
-                    
-        for event in matchday_events:
-            for journalist in self._journalist_roster:
-                if covers_event(journalist, event, self.teams):
-                    article = write_article(journalist, event, self.season_year)
-                    if article:
-                        self.newsroom.publish(article)
-                    
-        # Cup: schedule replays for draws
-        scheduled_replays = []
-        for drawn in drawn_fixtures:
-            replay_date = self.calendar.schedule_replay(
-                active_comp,
-                drawn,
-                self.calendar.current_date,
-            )
-            if replay_date:
-                scheduled_replays.append({
-                    "home_team": drawn["home_team"].name,
-                    "away_team": drawn["away_team"].name,
-                    "date":      replay_date.isoformat(),
-                })
-
-        # After every cup matchday check if the round is complete and build the next one
-        if active_comp.type == "cup":
-            if active_comp.build_next_round():
-                available_days = get_match_days(self.season_year)
-                cup_day = available_days[1] if len(available_days) > 1 else available_days[0]
-                self.calendar.schedule_cup_next_round(active_comp, preferred_day=cup_day)
-
-        # Yellow card accumulation → suspensions
+        # ── yellow-card accumulation -> suspensions (each competition counts its own) ──
         yellow_threshold = get_yellow_threshold(self.season_year)
-        newly_suspended  = []
-        bucket = get_card_bucket(active_comp.name)
-        for team in self.teams:
-            for player in team.squad:
-                count = player.yellow_cards_by_comp.get(bucket, 0)
-                if count > 0 and count % yellow_threshold == 0 and not player.is_suspended:
-                    player.is_suspended = True
-                    player.suspension_matches_left = 1
-                    player.yellow_cards_by_comp[bucket] = count - yellow_threshold
-                    newly_suspended.append({"player": player.name, "team": team.name})
+        newly_suspended = []
+        for comp, _ in due:
+            bucket = get_card_bucket(comp.name)
+            for team in self.teams:
+                for player in team.squad:
+                    count = player.yellow_cards_by_comp.get(bucket, 0)
+                    if count > 0 and count % yellow_threshold == 0 and not player.is_suspended:
+                        player.is_suspended = True
+                        player.suspension_matches_left = 1
+                        player.yellow_cards_by_comp[bucket] = count - yellow_threshold
+                        newly_suspended.append({"player": player.name, "team": team.name})
 
-        # Suspension and injury countdown
         tick_suspensions(sitting_out)
 
-        # Off-match injury roll
+        # ── off-match injuries ───────────────────────────────────────────────
         new_injuries = []
         for team in self.teams:
             for player in team.squad:
@@ -832,217 +706,265 @@ class GameEngine:
                     player.is_injured          = True
                     player.injury_matches_left = matches_out
                     player.injury_severity     = severity
-                    player.injury_until        = self.calendar.current_date + datetime.timedelta(
-                        days=INJURY_DAYS_PER_MATCH * matches_out
-                    )
+                    player.injury_until        = today + datetime.timedelta(
+                        days=INJURY_DAYS_PER_MATCH * matches_out)
                     player.career_injuries    += 1
-                    self.calendar.schedule_injury_notification(
-                        player, team, self.calendar.current_date
-                    )
-                    new_injuries.append({
-                        "player":   player.name,
-                        "team":     team.name,
-                        "severity": severity,
-                        "matches":  matches_out,
-                    })
+                    self.calendar.schedule_injury_notification(player, team, today)
+                    new_injuries.append({"player": player.name, "team": team.name,
+                                         "severity": severity, "matches": matches_out})
 
-        # In-match injuries
-        for result in recent:
+        # ── in-match injuries ────────────────────────────────────────────────
+        for result in all_results:
             for inj_evt in [e for e in result.get("events", []) if e["type"] == "injury"]:
                 player, team_name = find_player(
-                    self.teams,
-                    player_id=inj_evt.get("player_id"),
-                    name=inj_evt.get("player"),
-                    team_name=inj_evt.get("team"),
-                )
+                    self.teams, player_id=inj_evt.get("player_id"),
+                    name=inj_evt.get("player"), team_name=inj_evt.get("team"))
                 if player:
                     team = next(t for t in self.teams if t.name == team_name)
-                    player_injury_until = self.calendar.current_date + datetime.timedelta(
-                        days=INJURY_DAYS_PER_MATCH * inj_evt["matches_out"]
-                    )
-                    player.injury_until = player_injury_until
-                    self.calendar.schedule_injury_notification(
-                        player, team, self.calendar.current_date
-                    )
+                    player.injury_until = today + datetime.timedelta(
+                        days=INJURY_DAYS_PER_MATCH * inj_evt["matches_out"])
+                    self.calendar.schedule_injury_notification(player, team, today)
 
-        # Low-morale player meetings
+        # ── meetings: only the managed club's unsettled players ─────────────
         for team in self.teams:
             if team.name != self.managed_team:
                 continue
             for player in team.squad:
                 if player.morale < -2.0:
-                    self.calendar.schedule_player_meeting(
-                        player, team, self.calendar.current_date
-                    )
+                    self.calendar.schedule_player_meeting(player, team, today)
 
-        # Newspaper story (probabilistic)
-        self.calendar.generate_newspaper_story(self.teams, active_comp)
+        # ── which competition should the screen focus on? ───────────────────
+        def has_managed(block):
+            return bool(self.managed_team) and any(
+                self.managed_team in (r["home_team"], r["away_team"]) for r in block["results"])
 
-        # Next event date (for the view to display)
-        next_event = self.calendar.get_next_event_date(
-            self.calendar.current_date + datetime.timedelta(days=1)
-        )
+        primary = (next((b for b in blocks if has_managed(b)), None)
+                   or next((b for b in blocks if b["comp"] is self.comp), None)
+                   or blocks[0])
+        others = sorted((b for b in blocks if b is not primary),
+                        key=lambda b: (b["comp"].type != "league", b["comp"].tier or 99, b["comp"].name))
+        ordered = [primary] + others
 
-        # Identify the user's own result this matchday (if any)
+        self.calendar.generate_newspaper_story(self.teams, primary["comp"])
+
+        next_event = self.calendar.get_next_event_date(today + datetime.timedelta(days=1))
         your_result = None
         if self.managed_team:
-            your_result = next(
-                (r for r in recent
-                 if self.managed_team in ([r["home_team"], r["away_team"]])),
-                None,
-            )
+            your_result = next((r for r in all_results
+                                if self.managed_team in (r["home_team"], r["away_team"])), None)
 
+        pc = primary["comp"]
         return {
-            "type":               "matchday",
-            "season":             self.season_year,
-            "date":               self.calendar.current_date.isoformat(),
-            "matchday_num":       matchday_num,
-            "competition":        active_comp.name,
-            "competition_type":   active_comp.type,
-            "results":            recent,
-            "standings":          self._serialise_standings() if active_comp.type == "league" else None,
-            "cup_bracket":        self.get_cup_bracket() if active_comp.type == "cup" else None,
-            "scheduled_replays":  scheduled_replays,
-            "newly_suspended":    newly_suspended,
-            "new_injuries":       new_injuries,
-            "next_event_date":    next_event.isoformat() if next_event else None,
-            "managed_team":       self.managed_team,
-            "your_result":        your_result,
+            "type":              "matchday",
+            "season":            self.season_year,
+            "date":              today.isoformat(),
+            # the focus competition (the managed club's, else the main league)
+            "matchday_num":      primary["matchday_num"],
+            "competition":       pc.name,
+            "competition_type":  pc.type,
+            "standings":         self._serialise_standings(pc) if pc.type == "league" else None,
+            "cup_bracket":       self.get_cup_bracket(pc.key) if pc.type == "cup" else None,
+            "scheduled_replays": primary["scheduled_replays"],
+            # everything played today: results of ALL competitions (each result names its competition)
+            "results":           all_results,
+            "competitions":      [self._competition_block(b) for b in ordered],
+            "newly_suspended":   newly_suspended,
+            "new_injuries":      new_injuries,
+            "next_event_date":   next_event.isoformat() if next_event else None,
+            "managed_team":      self.managed_team,
+            "your_result":       your_result,
         }
+
+    def _competition_block(self, b):
+        comp = b["comp"]
+        return {
+            "key": comp.key, "name": comp.name, "type": comp.type, "tier": comp.tier,
+            "matchday_num": b["matchday_num"],
+            "standings": self._serialise_standings(comp) if comp.type == "league" else None,
+            "cup_bracket": self.get_cup_bracket(comp.key) if comp.type == "cup" else None,
+            "scheduled_replays": b["scheduled_replays"],
+        }
+
+    def _play_competition_day(self, comp, fixtures, today):
+        """Simulate one competition's matches for today, report them, schedule replays and cup rounds."""
+        matchday_num = fixtures[0]["matchday"]
+        comp.current_matchday = matchday_num
+
+        if comp.type == "cup":
+            drawn_fixtures = comp.simulate_cup_round()
+        elif comp.type == "supercup":
+            drawn = comp.simulate_supercup()
+            drawn_fixtures = [drawn] if drawn else []
+        else:
+            comp.simulate_matchday()
+            drawn_fixtures = []
+
+        recent = comp.results[-len(fixtures):]
+        for r in recent:
+            r["date"] = today.isoformat()
+            r.setdefault("matchday", matchday_num)
+        self._record_and_report(comp, recent, matchday_num, today)
+
+        scheduled_replays = []
+        for drawn in drawn_fixtures:
+            replay_date = self.calendar.schedule_replay(comp, drawn, today)
+            if replay_date:
+                scheduled_replays.append({"home_team": drawn["home_team"].name,
+                                          "away_team": drawn["away_team"].name,
+                                          "date": replay_date.isoformat()})
+
+        if comp.type == "cup" and comp.build_next_round():
+            days = get_match_days(self.season_year)
+            self.calendar.schedule_cup_next_round(
+                comp, preferred_day=days[1] if len(days) > 1 else days[0])
+
+        return {"comp": comp, "matchday_num": matchday_num,
+                "results": recent, "scheduled_replays": scheduled_replays}
+
+    def _record_and_report(self, comp, recent, matchday_num, today):
+        """Records, morale, news items and articles for one competition's results."""
+        matchday_events = []
+        for result in recent:
+            self.record_book.process_match(
+                result, self.teams, competition_name=comp.name,
+                season_year=self.season_year, match_date=today)
+            home_team = next((t for t in self.teams if t.name == result["home_team"]), None)
+            away_team = next((t for t in self.teams if t.name == result["away_team"]), None)
+            if home_team and away_team:
+                apply_match_morale(home_team, away_team, result["home_goals"], result["away_goals"])
+
+            scorers = [{"player_id": e.get("player_id"), "player": e.get("player"),
+                        "team": e.get("team"), "minute": e.get("minute")}
+                       for e in result.get("events", []) if e.get("type") == "goal"]
+            matchday_events.append(publish_match_result(
+                self.news_feed, competition=comp.name,
+                home_team=result["home_team"], away_team=result["away_team"],
+                home_goals=result["home_goals"], away_goals=result["away_goals"],
+                date=today, season=self.season_year,
+                home_region=home_team.home_region if home_team else "",
+                away_region=away_team.home_region if away_team else "",
+                matchday=matchday_num, scorers=scorers, relevance=["local"]))
+
+            goal_events = [e for e in result.get("events", []) if e["type"] == "goal"]
+            goals_by_pid, pid_to_name = Counter(), {}
+            for evt in goal_events:
+                pid = evt.get("player_id") or evt.get("player", "")
+                goals_by_pid[pid] += 1
+                pid_to_name[pid] = evt.get("player", "")
+            for pid, count in goals_by_pid.items():
+                if count >= 3:
+                    matchday_events.append(publish_hat_trick(
+                        self.news_feed, player=pid_to_name[pid], player_id=pid,
+                        team=result["home_team"] if any(
+                            e.get("player_id") == pid and e["team"] == result["home_team"]
+                            for e in goal_events) else result["away_team"],
+                        goals=count, competition=comp.name,
+                        match=(f"{result['home_team']} {result['home_goals']}"
+                               f"-{result['away_goals']} {result['away_team']}"),
+                        date=today, season=self.season_year, relevance=["local", "regional"]))
+
+        for event in matchday_events:
+            for journalist in self._journalist_roster:
+                if covers_event(journalist, event, self.teams):
+                    article = write_article(journalist, event, self.season_year)
+                    if article:
+                        self.newsroom.publish(article)
+        
 
     # ── Season end ────────────────────────────────────────────────────────────
 
     def _finalise_season(self) -> dict:
         """
-        Called when the calendar has no more events.
-        Computes final stats, awards the trophy, calls end_season(), and
-        returns a SEASON_END state dict. Does NOT advance to the next season
-        yet — that happens on the next advance() call so the view can show
-        final stats first.
+        Called when the calendar has no more events: works out every competition's
+        winner, awards the trophies, captures the season for the archive, calls end_season().
+        Does NOT start the next season; the view shows the final stats first.
         """
         all_players = [p for t in self.teams for p in t.squad]
-
         top_scorers = sorted(all_players, key=lambda p: p.goals, reverse=True)[:10]
         top_assisters = sorted(all_players, key=lambda p: p.assists, reverse=True)[:10]
         top_clean_sheets = sorted(
             [p for p in all_players if p.position == "GK"],
-            key=lambda p: p.clean_sheets, reverse=True
-        )[:10]
+            key=lambda p: p.clean_sheets, reverse=True)[:10]
         top_rated = sorted(
             [p for p in all_players if p.season_rating_appearances >= 5],
-            key=lambda p: p.season_avg_rating, reverse=True
-        )[:10]
+            key=lambda p: p.season_avg_rating, reverse=True)[:10]
 
-        sorted_table = self._sorted_standings()
-        champion_name = sorted_table[0][0]
-        
-        # Get cup winner (if cup is complete)
-        cup_winner_name = None
-        if self.cup and self.cup.results:
-            max_matchday = max((f["matchday"] for f in self.cup.fixtures), default=0)
-            final_results = [r for r in self.cup.results if r.get("matchday") == max_matchday]
-            if final_results:
-                final_result = final_results[-1]  # Should only be one final
-                if final_result["home_goals"] > final_result["away_goals"]:
-                    cup_winner_name = final_result["home_team"]
-                elif final_result["away_goals"] > final_result["home_goals"]:
-                    cup_winner_name = final_result["away_team"]
-                    
-        # Derive cup runner-up from the final fixture.
-        cup_runner_up_name = None
-        if cup_winner_name and self.cup and self.cup.fixtures:
-            max_matchday = max((f["matchday"] for f in self.cup.fixtures), default=0)
-            final_fixtures = [
-                f for f in self.cup.fixtures
-                if f["matchday"] == max_matchday and not f.get("is_replay")
-            ]
-            if final_fixtures:
-                ff = final_fixtures[-1]
-                home_name = ff["home_team"].name
-                away_name = ff["away_team"].name
-                cup_runner_up_name = away_name if cup_winner_name == home_name else home_name
-                
-        # Store season's results so _start_season() can resolve pre-season supercup
-        # participants for next season.
-        self._prev_league_winner = champion_name
-        self._prev_league_runner_up = sorted_table[1][0] if len(sorted_table) > 1 else None
-        self._prev_cup_winner = cup_winner_name
-        self._prev_cup_runner_up = cup_runner_up_name
+        ids = {t.name: t.id for t in self.teams}
 
-        # Trophy — League
-        for team in self.teams:
-            if team.name == champion_name:
-                team.trophies.append({
-                    "competition": self.comp.name,
-                    "season":      self.season_year,
-                })
-                for player in team.squad:
-                    player._won_trophy_flag = True
-                    player.career_trophies += 1
-                    player.career_trophies_by_comp[self.comp.name] = (
-                        player.career_trophies_by_comp.get(self.comp.name, 0) + 1
-                    )
-        
-        # Trophy — Cup
-        if cup_winner_name:
+        # who won what
+        outcomes = []
+        for comp in self.competitions:
+            if comp.type == "league":
+                table = self._sorted_standings(comp)
+                winner = table[0][0]
+                runner_up = table[1][0] if len(table) > 1 else None
+            elif comp.type == "cup":
+                winner, runner_up = self._cup_result(comp)
+            else:
+                continue
+            outcomes.append({"comp": comp, "winner": winner, "runner_up": runner_up})
+            if winner:
+                self._prev_results[comp.key] = {"winner": winner, "runner_up": runner_up}
+
+        # trophies for clubs and players
+        for o in outcomes:
+            if not o["winner"]:
+                continue
+            comp = o["comp"]
             for team in self.teams:
-                if team.name == cup_winner_name:
-                    team.trophies.append({
-                        "competition": self.cup.name,
-                        "season":      self.season_year,
-                    })
+                if team.name == o["winner"]:
+                    team.trophies.append({"competition": comp.name, "competition_id": comp.key,
+                                          "season": self.season_year})
                     for player in team.squad:
                         player._won_trophy_flag = True
                         player.career_trophies += 1
-                        player.career_trophies_by_comp[self.cup.name] = (
-                            player.career_trophies_by_comp.get(self.cup.name, 0) + 1
-                        )
+                        player.career_trophies_by_comp[comp.name] = (
+                            player.career_trophies_by_comp.get(comp.name, 0) + 1)
 
-        # Records
-        self.record_book.finalize_season(
-            self.comp, [t for t in self.teams if t.name in self.comp.standings], self.season_year
-        )
+        # records (leagues only, and only for the clubs that played in each league)
+        for comp in self.competitions:
+            if comp.type == "league":
+                self.record_book.finalize_season(
+                    comp, [t for t in self.teams if t.name in comp.standings], self.season_year)
 
-        # Snapshot leaderboard rows BEFORE end_season() resets season stats
         def _player_rows(players):
-            return [
-                {
-                    "name":         p.name,
-                    "team":         next(t.name for t in self.teams if p in t.squad),
-                    "goals":        p.goals,
-                    "assists":      p.assists,
-                    "clean_sheets": p.clean_sheets,
-                    "avg_rating":   round(p.season_avg_rating, 2),
-                }
-                for p in players
-            ]
+            return [{
+                "name":         p.name,
+                "team":         next(t.name for t in self.teams if p in t.squad),
+                "goals":        p.goals,
+                "assists":      p.assists,
+                "clean_sheets": p.clean_sheets,
+                "avg_rating":   round(p.season_avg_rating, 2),
+            } for p in players]
+
+        focus = next((o for o in outcomes if o["comp"] is self.comp), None)
+        focus_cup = next((o for o in outcomes if o["comp"] is self.cup), None)
 
         season_end_state = {
             "type":             "season_end",
             "season":           self.season_year,
             "date":             self.calendar.current_date.isoformat(),
-            "champion":         champion_name,
-            "cup_winner":       cup_winner_name,
-            "final_standings":  self._serialise_standings(),
+            "champion":         focus["winner"] if focus else None,
+            "cup_winner":       focus_cup["winner"] if focus_cup else None,
+            "final_standings":  self._serialise_standings(self.comp),
+            "competitions": [{
+                "key": o["comp"].key, "name": o["comp"].name, "type": o["comp"].type,
+                "tier": o["comp"].tier, "winner": o["winner"], "runner_up": o["runner_up"],
+                "final_standings": (self._serialise_standings(o["comp"])
+                                    if o["comp"].type == "league" else None),
+            } for o in outcomes],
             "top_scorers":      _player_rows(top_scorers),
             "top_assisters":    _player_rows(top_assisters),
             "top_clean_sheets": _player_rows(top_clean_sheets),
             "top_rated":        _player_rows(top_rated),
         }
-        
-        ids = {t.name: t.id for t in self.teams}
-        runner_up_name = sorted_table[1][0] if len(sorted_table) > 1 else None
+
+        # capture the season for the archive BEFORE end_season() resets the stats
         trophies = [{
-            "season": self.season_year, "competition": self.comp.key or self.comp.name,
-            "winner_id": ids[champion_name], "winner": champion_name,
-            "runner_up_id": ids.get(runner_up_name), "runner_up": runner_up_name,
-        }]
-        if cup_winner_name:
-            trophies.append({
-                "season": self.season_year, "competition": self.cup.key or self.cup.name,
-                "winner_id": ids[cup_winner_name], "winner": cup_winner_name,
-                "runner_up_id": ids.get(cup_runner_up_name), "runner_up": cup_runner_up_name,
-            })
+            "season": self.season_year, "competition": o["comp"].key or o["comp"].name,
+            "winner_id": ids[o["winner"]], "winner": o["winner"],
+            "runner_up_id": ids.get(o["runner_up"]), "runner_up": o["runner_up"],
+        } for o in outcomes if o["winner"]]
         self._pending_archive = build_payload(
             self.season_year, self.calendar.season_end, self.teams, self.competitions,
             trophies,
@@ -1053,7 +975,6 @@ class GameEngine:
         # End season (rolls stats into career, resets season counters)
         self.current_season.end_season()
         self._season_complete = True
-
         return season_end_state
     
     def _save_world(self):
@@ -1061,12 +982,7 @@ class GameEngine:
         save_records_to_file(self.record_book, self.slot.path("records_data.json"))
         save_world_state(
             self._nations, self._tier_seasons, self._committed_tiers,
-            prev_season_results={
-                "league_winner":    self._prev_league_winner,
-                "league_runner_up": self._prev_league_runner_up,
-                "cup_winner":       self._prev_cup_winner,
-                "cup_runner_up":    self._prev_cup_runner_up,
-            },
+            prev_season_results=self._prev_results,
             filename=self.slot.path("world_state.json"),
         )
         self.slot.write_manifest(
@@ -1087,19 +1003,18 @@ class GameEngine:
         
         # Save after season
         
-        standings = self._serialise_standings()
-        league_teams = [t for t in self.teams if t.name in self.comp.standings]
-        upset_bonuses = collect_upset_bonuses(self.comp.results, league_teams)
-        prestige_log = update_team_prestige(league_teams, standings, self.comp.prestige, upset_bonuses)
-        
-        nation_log = update_nation_prestige(
-            self._nations,
-            self.teams,
-            standings,
-            self.comp.prestige,
-            self._tier_seasons,
-            self._committed_tiers,
-        )
+        leagues = [c for c in self.competitions if c.type == "league"]
+        if leagues:
+            league_teams = [t for t in self.teams if any(t.name in c.standings for c in leagues)]
+            upset_bonuses = collect_upset_bonuses([r for c in leagues for r in c.results], league_teams)
+            tables = [(c.prestige, self._serialise_standings(c)) for c in leagues]
+            prestige_log = update_team_prestige(league_teams, tables, upset_bonuses)
+            nation_log = update_nation_prestige(
+                self._nations, self.teams, self._serialise_standings(self.comp),
+                self.comp.prestige, self._tier_seasons, self._committed_tiers
+            )
+        else:
+            prestige_log, nation_log = [], []
 
         # Player development
         development_log = []
@@ -1266,31 +1181,72 @@ class GameEngine:
     def _season_label(self, index: int) -> str:
         year = self.start_year + index
         return f"{year}/{str(year + 1)[-2:]}"
+    
+    def _focus_league(self):
+        """The league screen focus on: the managed club's, else the top flight"""
+        leagues = [c for c in self.competitions if c.type == "league"]
+        if self.managed_team:
+            for c in leagues:
+                if self.managed_team in c.standings:
+                    return c
+        return min(leagues, key=lambda c: c.tier or 99, default=None)
+    
+    def _focus_cup(self):
+        cups = [c for c in self.competitions if c.type == "cup"]
+        if self.managed_team:
+            for c in cups:
+                if any(t.name == self.managed_team for t in c.teams):
+                    return c
+        return cups[0] if cups else None
+    
+    def _cup_result(self, cup):
+        """(winner_name, runner_up_name) of a finished cup, or None"""
+        if not cup or not cup.results:
+            return None, None
+        final_matchday = max((f["matchday"] for f in cup.fixtures), default=0)
+        finals = [r for r in cup.results if r.get("matchday") == final_matchday]
+        winner = None
+        if finals:
+            last = finals[-1]
+            if last["home_goals"] > last["away_goals"]:
+                winner = last["home_team"]
+            elif last["home_goals"] < last["away_goals"]:
+                winner = last["away_team"]
+        runner_up = None
+        if winner:
+            originals = [f for f in cup.fixtures
+                         if f["matchday"] == final_matchday and not f.get("is_replay")]
+            if originals:
+                home, away = originals[-1]["home_team"].name, originals[-1]["away_team"].name
+                runner_up = away if winner == home else home
+        return winner, runner_up
 
-    def _sorted_standings(self) -> list:
+    def _sorted_standings(self, comp=None) -> list:
+        comp = comp or self.comp
+        if comp is None:
+            return []
         return sorted(
-            self.comp.standings.items(),
-            key=lambda x: (
-                -x[1]["points"],
-                -x[1]["goal_difference"],
-                -x[1]["goals_for"],
-                x[0],
-            ),
+            comp.standings.items(),
+            key=lambda x: (-x[1]["points"], -x[1]["goal_difference"], -x[1]["goals_for"], x[0]),
         )
 
-    def _serialise_standings(self) -> list:
+    def _serialise_standings(self, comp=None) -> list:
         """Return standings as a list of dicts, sorted, for easy rendering."""
+        comp = comp or self.comp
+        if comp is None:
+            return []
         ids = {t.name: t.id for t in self.teams}
         return [
             {"team": name, "team_id": ids[name], **stats}
-            for name, stats in self._sorted_standings()
+            for name, stats in self._sorted_standings(comp)
         ]
         
     def team_by_id(self, team_id):
         return next((t for t in self.teams if t.id == team_id), None)
         
-    def get_cup_bracket(self) -> dict:
-        cup = next((c for c in getattr(self, 'competitions', [self.comp, self.cup]) if c.type == "cup"), None)
+    def get_cup_bracket(self, key=None) -> dict:
+        cup = self.cup if key is None else next(
+            (c for c in self.competitions if c.type == "cup" and c.key == key), None)
         if not cup or not cup.fixtures:
             return {"rounds": []}
 

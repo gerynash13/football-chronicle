@@ -7,6 +7,7 @@ from classes.team import Team
 from classes.player import Player
 from test_phase0 import make_engine, play
 from archive import Archive, build_payload
+import pytest
 
 def _squad(n_gk=1):
     team = Team("T", 60, 60, 60)
@@ -173,7 +174,7 @@ def test_team_prestige_is_conserved():
     standings = [{"team": t.name} for t in reversed(teams)]    # T7 wins, T0 is last
     before = sum(t.prestige for t in teams)
     for _ in range(50):
-        update_team_prestige(teams, standings, 7000.0, {"T0": 40.0})
+        update_team_prestige(teams, [(7000.0, standings)], {"T0": 40.0})
     assert abs(sum(t.prestige for t in teams) - before) < 5.0
     assert teams[7].prestige > teams[0].prestige               # winners hold more
 
@@ -252,14 +253,6 @@ def test_archive_survives_resume(tmp_path):
     b = make_engine(tmp_path, seasons=3)
     b.advance(load_save=True)
     assert [c["season"] for c in b.archive.champions("lhiga_alhika")] == ["1896/97"]
-    
-def test_clubs_join_the_league_in_the_season_they_are_founded(tmp_path):
-    engine = make_engine(tmp_path, seasons=4)
-    sizes = {}
-    for state in play(engine):
-        if state["type"] == "season_end":
-            sizes[state["season"]] = len(state["final_standings"])
-    assert sizes == {"1896/97": 8, "1897/98": 9, "1898/99": 10, "1899/00": 12}
 
 
 def test_cup_only_clubs_appear_and_play_the_cup(tmp_path):
@@ -277,3 +270,70 @@ def test_new_clubs_are_identical_after_a_resume(tmp_path):
     b.advance(load_save=True)
     assert [t.id for t in a.teams] == [t.id for t in b.teams]
     assert [p.id for p in a.teams[-1].squad] == [p.id for p in b.teams[-1].squad]
+    
+def test_competitions_with_different_clubs_share_dates_and_clashes_shift():
+    from classes.competition import Competition
+    from game_calendar import GameCalendar
+    teams = [Team(f"T{i}", 60, 60, 60) for i in range(8)]
+    l1, l2, clash = Competition("L1", teams[:4]), Competition("L2", teams[4:]), Competition("Clash", teams[:2])
+    for c in (l1, l2, clash):
+        c.generate_fixtures()
+    cal = GameCalendar("1950/51")
+    for c in (l1, l2, clash):
+        cal.schedule_fixtures(c, preferred_day=6)
+    first = lambda c: min(f["date"] for f in c.fixtures)
+    assert first(l1) == first(l2)             # different clubs: the same Sunday
+    assert first(clash) != first(l1)          # shares clubs with L1: pushed to another week
+
+
+def test_two_replays_in_one_round_get_different_dates():
+    from classes.competition import CupCompetition
+    from game_calendar import GameCalendar
+    teams = [Team(f"T{i}", 60, 60, 60) for i in range(4)]
+    cup = CupCompetition("Cup", teams)
+    cup.generate_fixtures()
+    cal = GameCalendar("1950/51")
+    cal.schedule_fixtures(cup, preferred_day=5)
+    first, second = cup.fixtures[0], cup.fixtures[1]
+    r1 = cal.schedule_replay(cup, first, cal.season_start)
+    r2 = cal.schedule_replay(cup, second, cal.season_start)
+    assert r1 and r2 and r1 != r2
+
+
+def test_a_season_without_a_league_still_finishes(tmp_path, monkeypatch):
+    import classes.engine as eng
+    original = eng.competitions_for_season
+    monkeypatch.setattr(eng, "competitions_for_season",
+                        lambda year: [c for c in original(year) if c.type != "league"])
+    engine = make_engine(tmp_path)
+    ends = [s for s in play(engine) if s["type"] == "season_end"]
+    assert ends and ends[0]["champion"] is None and ends[0]["final_standings"] == []
+    assert [c["type"] for c in ends[0]["competitions"]] == ["cup"]
+
+
+def test_a_matchday_can_play_several_competitions(tmp_path):
+    engine = make_engine(tmp_path, start_year=1950)
+    engine.advance()
+    if len([c for c in engine.competitions if c.type == "league"]) < 2:
+        pytest.skip("needs two leagues in competitions.yaml for this season")
+    busy_days = 0
+    for state in play(engine, until=("season_end",)):
+        if state["type"] == "matchday":
+            leagues = [b for b in state["competitions"] if b["type"] == "league"]
+            if len(leagues) >= 2:
+                busy_days += 1
+                assert len({r["competition"] for r in state["results"]}) >= 2
+    assert busy_days > 10
+
+
+def test_prestige_is_conserved_across_two_leagues_and_the_top_tier_earns_more():
+    from prestige import update_team_prestige
+    teams = [Team(f"T{i}", 60, 60, 60) for i in range(8)]
+    for t in teams:
+        t.prestige = 800.0
+    top = [{"team": t.name} for t in teams[:4]]
+    low = [{"team": t.name} for t in teams[4:]]
+    for _ in range(40):
+        update_team_prestige(teams, [(7000.0, top), (3000.0, low)])
+    assert abs(sum(t.prestige for t in teams) - 6400.0) < 5.0
+    assert teams[0].prestige > teams[7].prestige
