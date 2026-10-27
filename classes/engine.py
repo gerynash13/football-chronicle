@@ -1256,6 +1256,8 @@ class GameEngine:
         comp = cls(cfg.name, members, max_subs=get_max_subs(self.season_year),
                    season_year=self.season_year, prestige=cfg.prestige)
         comp.key = cfg.id
+        comp.tier = cfg.tier
+        comp.nation_id = cfg.nation_id
         comp.generate_fixtures()
         return comp
 

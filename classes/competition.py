@@ -19,6 +19,8 @@ class Competition:
         self.season_year = season_year
         self.prestige = prestige
         self.key = None
+        self.tier = None # 1 = top flight (leagues only)
+        self.nation_id = None
         
     def initialize_standings(self):
         standings = {}

@@ -2,6 +2,7 @@ from rng import rng
 from datetime import date, datetime, timedelta
 from events import Event, Effect, Choice
 from rules import get_match_days
+from collections import defaultdict
 
 NEWSPAPER_TEMPLATES = {
     "positive": [
@@ -39,6 +40,8 @@ class GameCalendar:
         self.current_date = self.season_start
         self.scheduled_events = []  # List of Event objects
         self.inbox = []  # List of Event objects that have occurred but not yet read by the player
+        self._busy = {}  # date -> names of the clubs that already play that day
+        self._comp_days = {} # competition -> dates it already uses
         
     def _compute_season_dates(self):
         start_year = int(self.season_year.split("/")[0])
@@ -52,50 +55,46 @@ class GameCalendar:
             end -= timedelta(days=1)
         return start, end
     
-    def schedule_fixtures(self, competition, preferred_day: int | None = None, start_from_end: bool = False):
-        # Assign real calendar dates to the fixtures based on the rules for match days
-        # Pass the secondary day for the cup fixtures
-        # Deterministic - safe to call multiple times without changing the schedule
+    def _is_free(self, day, clubs, comp):
+        if day in self._comp_days.get(id(comp), []):
+            return False
+        return not (self._busy.get(day, set()) & clubs)
+    
+    def _claim(self, day, clubs, comp):
+        self._busy.setdefault(day, set()).update(clubs)
+        self._comp_days.setdefault(id(comp), set()).add(day)
+    
+    def schedule_fixtures(self, competition, preferred_day: int | None = None):
+        """
+        Give every matchday of a competition a real date. Competitions whose clubs never meet
+        (two divisions) share dates; a competition that needs a club which already plays that
+        day is pushed to the next free week.
+        """
         available_days = get_match_days(self.season_year)
-        primary_day = preferred_day if preferred_day is not None else available_days[0]
+        day = preferred_day if preferred_day is not None else available_days[0]
         
-        matchdays   = sorted(set(f["matchday"] for f in competition.fixtures))
+        clubs_on = defaultdict(set)
+        for f in competition.fixtures:
+            clubs_on[f["matchday"]].update((f["home_team"].name, f["away_team"].name))
+            
         matchday_dates = {}
-        if not start_from_end:
-            current = self.season_start
-            for matchday_num in matchdays:
-                while current.weekday() != primary_day:
-                    current += timedelta(days=1)
-                # Skip dates taken by another competition
-                occupied = {e.date for e in self.scheduled_events if e.category == "match"}
-                while current in occupied:
-                    current += timedelta(weeks=1)
-                matchday_dates[matchday_num] = current
-                current += timedelta(weeks=1)
-        else:
-            # Schedule matchdays backwards from season end so later rounds
-            # (e.g. cup final) occur at the very end of the season.
-            current = self.season_end
-            for matchday_num in sorted(matchdays, reverse=True):
-                while current.weekday() != primary_day:
-                    current -= timedelta(days=1)
-                occupied = {e.date for e in self.scheduled_events if e.category == "match"}
-                while current in occupied:
-                    current -= timedelta(weeks=1)
-                matchday_dates[matchday_num] = current
-                current -= timedelta(weeks=1)
+        current = self.season_start
+        for matchday_num in sorted(clubs_on):
+            while current.weekday() != day or not self._is_free(current, clubs_on[matchday_num], competition):
+                current += timedelta(days=1)
+            matchday_dates[matchday_num] = current
+            self._claim(current, clubs_on[matchday_num], competition)
+            current += timedelta(days=1)
             
         for fixture in competition.fixtures:
             fixture["date"] = matchday_dates[fixture["matchday"]]
             
-        # Register one blocking match per event day
         for matchday_num, match_date in matchday_dates.items():
-            self._add_event(Event(
-                date=match_date,
-                category="match",
-                blocking=True,
-                title=f"Matchday {matchday_num}",
-                description=f"{len(competition.teams) // 2} matches scheduled for {match_date.strftime('%A, %d %B %Y')}.",
+            self.add_event(Event(
+                date=match_date, category="match", blocking=True,
+                title=f"{competition.name}: Matchday {matchday_num}",
+                description=(f"{len(clubs_on[matchday_num]) // 2} matches scheduled for "
+                             f"{match_date.strftime('%A, %d %B %Y')}.")
             ))
             
     def _add_event(self, event):
@@ -296,79 +295,62 @@ class GameCalendar:
         
     def schedule_replay(self, competition, drawn_fixture, from_date):
         """
-        Find the next available date, register a replay on the competition,
-        and create a blocking calendar event.
-
-        Takes the drawn fixture dict so the competition can link the replay
-        to the correct round. Returns the scheduled date or None.
+        Find the next free date for a replay, register it and create a blocking calendar
+        event.
         """
-        candidate = from_date + timedelta(days=1)
-        match_dates = {e.date for e in self.scheduled_events if e.category == "match"}
-        
-        while candidate <= self.season_end:
-            if candidate not in match_dates:
-                break
+        clubs = {drawn_fixture["home_team"].name, drawn_fixture["away_team"].name}
+        candidate = from_date + timedelta(days=rng.randint(2, 4))
+        while candidate <= self.season_end and not self._is_free(candidate, clubs, competition):
             candidate += timedelta(days=1)
-            
         if candidate > self.season_end:
-            return None # No available date for replay
+            return None
         
         existing = [f["matchday"] for f in competition.fixtures]
         new_matchday = max(existing) + 1 if existing else 1
-        
         competition.add_replay(drawn_fixture, new_matchday)
-        
-        # Assign the date to the newly appended replay fixture
         for f in reversed(competition.fixtures):
             if f.get("matchday") == new_matchday:
                 f["date"] = candidate
                 break
-            
+        self._claim(candidate, clubs, competition)
+        
         home_name = drawn_fixture["home_team"].name
         away_name = drawn_fixture["away_team"].name
         self._add_event(Event(
-            date=candidate,
-            category="match",
-            blocking=True,
+            date=candidate, category="match", blocking=True,
             title=f"Replay: {home_name} vs {away_name}",
-            description=f"Replay scheduled for {candidate.strftime('%a, %b %d')}",
+            description=f"Replay match between {home_name} and {away_name} scheduled for "
+                        f"{candidate.strftime('%a-%b-%d')}"
         ))
-        
         return candidate
     
     def schedule_cup_next_round(self, competition, preferred_day: int | None = None):
-        """
-        Assign calendar dates to fixtures that have no date yet.
-        Called after build_next_round() creates the new round's fixtures.
-        """
+        """Date the fixtures that build_next_round() just created"""
         available_days = get_match_days(self.season_year)
         day = preferred_day if preferred_day is not None else available_days[0]
         
         unscheduled = [f for f in competition.fixtures if not f.get("date")]
         if not unscheduled:
             return
-        
-        new_matchday = unscheduled[0]["matchday"]
-        occupied = {e.date for e in self.scheduled_events if e.category == "match"}
+        clubs = set()
+        for f in unscheduled:
+            clubs.update((f["home_team"].name, f["away_team"].name))
+            
         current = self.current_date + timedelta(days=1)
-        
         while current <= self.season_end:
-            if current.weekday() == day and current not in occupied:
+            if current.weekday() == day and self._is_free(current, clubs, competition):
                 break
             current += timedelta(days=1)
-        
         if current > self.season_end:
             return
         
         for f in unscheduled:
             f["date"] = current
-            
+        self._claim(current, clubs, competition)
         self._add_event(Event(
-            date=current,
-            category="match",
-            blocking=True,
-            title=f"Cup Round {competition.current_round}",
-            description=f"{len(unscheduled)} match(es) scheduled for {current.strftime('%a, %b %d')}.",
+            date=current, category="match", blocking=True,
+            title=f"{competition.name}: Round {competition.current_round}",
+            description=f"{len(unscheduled)} match(es) scheduled for {current.strftime('%a-%b-%d')}"
         ))
         
     def schedule_injury_notification(self, player, team, from_date):
